@@ -1,0 +1,166 @@
+.footer-divider-container{
+    height: 150px;
+    width: 100%;
+    background-color:#fefaf0;
+    /* margin-left: -0.5vw; */
+    /* text-align: center; */
+    overflow: hidden;
+
+}
+
+.footer-divider{
+    background-color:#f3f1c4;
+    height:600px;
+    width: 100%;
+    border-radius: 50% ;
+    transform: scaleX(1.4);
+    /* margin-left: 525px; */
+    /* position: relative; */
+    
+}
+
+.footer-logo-container{
+    height: 80px;
+    background-color:#f3f1c4 ;
+    width: 100%;
+    margin-top: -36px;
+    /* text-align: center; */
+    /* align-items: center; */
+}
+
+.footer-logo-container .footer-logo{
+    height: 55px;
+    width: 86%;
+    padding: 5px;
+    background-color:#f3f1c4;
+    font-family: Fraunces;
+    font-size: 55px;
+    color: rgb(64,63,43);
+    margin-left: 8%;
+    border-top: 1px solid black ;
+
+}
+
+.footer-information{
+    width: 100%;
+    height: 300px;
+    background-color: #f3f1c4;
+    /* margin-left: -0.5vw; */
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 100px;
+}
+
+.footer-information > *{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    gap: 20px;
+}
+
+.footer-information > .footer-address, .footer-menu, .footer-policies, .footer-social{
+    width: 14%;
+    height:100%;
+}
+
+.footer-information > * > *{
+    width: 60%;
+    margin-left: 50px;
+}
+
+.footer-address-title, .footer-menu-title, .footer-policies-title, .footer-social-title{
+    font-family: Fraunces;
+    color: rgb(64,63,43);
+    font-size: 20px;
+    font-weight: 900;
+    margin-top: 40px;
+}
+
+.footer-form-title{
+    font-family: Fraunces;
+    color: rgb(64,63,43);
+    font-size: 30px;
+    font-weight: 1000;
+    margin-top: -2px;
+}
+
+.footer-contact > div > form > div > label{
+    font-family: Helvetica, sans-serif;
+    font-size: 14px;
+    color: rgb(64,63,43);
+    /* margin-top: 20px; */
+}
+
+.footer-menu > div, .footer-policies > div, .footer-social > div{
+    display: flex;
+    flex-direction: column;
+    height: 40%;
+    justify-content:space-between;
+}
+
+
+.footer-information > div > div > a {
+    font-family: Helvetica, sans-serif;
+    text-decoration: none;
+    color: rgb(64,63,43);
+    font-size: 14px;
+    height: 20px;
+}
+
+.footer-information > div > div > a:hover{
+    font-size: 15px;
+}
+
+.footer-information .footer-contact{
+    width: 52%;
+    height:100%;
+
+    background-color:#f3f1c4;
+}
+
+.footer-form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.footer-name-email-container{
+    display: flex;
+    gap: 15px;
+    font-size: 14px;
+    font-family: Helvetica, sans-serif;
+    color: rgb(64,63,43);
+}
+
+.footer-input-name, .footer-input-email, .footer-input-msg{
+    background-color: #f3f1c4;
+    border: 1px solid black;
+}
+
+.footer-submit-button{
+    width: 150px;
+    height: 30px;
+    border-radius: 8px;
+    background-color: #f3f1c4;
+    border: 1px solid black;
+    font-family: Helvetica, sans-serif;
+    color: rgb(64,63,43);
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+.footer-submit-button:hover{
+    background-color: #7b9c42;
+}
+
+.footer-name-email-container{
+    margin-top: -30px;
+}
+
+.footer-msg-container{
+    margin-top: 30px;
+}
+
+

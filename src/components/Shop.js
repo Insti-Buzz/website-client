@@ -1,0 +1,118 @@
+import React, { useEffect, useState } from 'react'
+import "../css/Shop.css";
+import topImg from "../assets/22e53e_ef2ebbf33af24b7fba34e44589f3dc38~mv2.webp"
+import prodImg from "../assets/Screenshot 2024-02-17 033151.png"
+import { Link, useNavigate } from 'react-router-dom';
+// import "../assets/Screenshot"
+
+function Shop() {
+
+    const [products, setProducts] = useState([]);
+
+    const navigate = useNavigate();
+
+    const productPage = (productId) => {
+        navigate(`/app/product/${productId}`)
+    }
+
+    useEffect(() => {
+        getProducts();
+    }, [])
+
+    const getProducts = async () => {
+        let result = await fetch('http://localhost:5000/api/v1/products/get-product', {
+            // headers:{
+
+            // }
+            method: "Get"
+        });
+        result = await result.json();
+        console.log(result)
+        setProducts(result);
+    }
+
+    
+
+    function e(item, index) {
+        const productId = item._id
+        return (
+            <div className='shop-product-card' >
+                <img src={prodImg} alt="Tunga" />
+                {/* <Link className='home-right-product' to="/" >Product Details</Link> */}
+                <div className='shop-product-name'><p>{item.name}</p></div>
+                {/* <h3 className='home-right-product'>{item.details}</h3> */}
+                <div className='shop-product-price'><p>Rs. {item.price}/SET</p></div>
+                {/* <p className='home-right-product'>({item.discount} margin)</p>
+                <h3 className='home-right-product'>{item.colors}</h3> */}
+                <Link className='shop-product-details' to={"/app/product/"+item._id} >Product Details</Link>
+                
+            </div>
+        )
+    }
+
+    return (
+
+        <div class="shop-body-container">
+            <div class="shop-path-display">
+                <span>
+                    <a href="">Home</a>
+                </span>
+                <span>&gt;</span>
+                <span>All Products</span>
+            </div>
+            <div class="shop-main-container">
+                {/* <div class="shop-side-bar">
+                    <div class="shop-browse-by-section">
+                        <h3>Browse by</h3>
+                        <hr />
+                        <a href="">All Products</a>
+                    </div>
+                    <div class="shop-filter-section">
+                        <h3>Filter by</h3>
+                        <hr />
+                        <div class="shop-filters">
+                            <div class="shop-filter-price">
+                                <p>Price</p>
+                            </div>
+                            <hr />
+                            <div class="shop-filter-colour">
+                                <p>Colour</p>
+                            </div>
+                            <hr />
+                            <div class="shop-filter-size">
+                                <p>Size</p>
+                            </div>
+                            <hr />
+                        </div>
+                    </div>
+                </div> */}
+                <div class="shop-display">
+                    <div class="shop-image-container">
+                        <img src={topImg} alt="Design" />
+                    </div>
+                    <div class="shop-products">
+                        <div class="shop-products-title">
+                            <h2>All Products</h2>
+                            <p>This is your category description. It’s a great place to tell customers what this category is
+                                about, connect with your audience and draw attention to your products.</p>
+                        </div>
+                        <div class="shop-products-count">
+                            <p>{Object.keys(products).length} products</p>
+                        </div>
+
+                        <div className='shop-products-display'>
+                            {
+                                products.map(e)
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    )
+}
+
+export default Shop

@@ -1,0 +1,134 @@
+/* * {
+}
+
+body {
+} */
+
+.product-main-container {
+    background-color: #fefaf0;
+    font-family: "Roboto", sans-serif;
+    color: rgba(87, 87, 87, 1);
+    margin: 0;
+    /* margin: 50px; */
+    display: flex;
+    justify-content: center;
+    gap: 42px;
+}
+
+.product-image-container {
+    /* flex: 1; */
+    flex-basis: 500px;
+}
+
+.product-display-img {
+    width: 70%;
+}
+
+.product-all-images {
+    display: flex;
+    gap: 5px;
+    margin-top: 30px;
+    flex-wrap: nowrap;
+}
+
+.product-all-images button {
+    border-radius: 5px;
+    width: 65px;
+    height: 65px;
+    cursor: pointer;
+}
+
+.product-img-button {
+    width: 100%;
+    height: 100%;
+}
+
+.product-product-description {
+    flex-basis: 375px;
+}
+
+.product-product-name h2 {
+    font-size: 26px;
+    margin-top: 0;
+    font-weight: 300;
+    margin-bottom: 23px;
+}
+
+.product-product-price h3 {
+    font-weight: 300;
+    font-size: 20px;
+}
+
+.product-product-quantity input {
+    width: 55px;
+    height: 40px;
+    font-size: 15px;
+    margin-bottom: 32px;
+    padding-left: 14px;
+    background-color: white;
+    border-radius: 0;
+    border-color: rgba(0, 0, 0, 0.626);
+    color: #575757;
+    border: 1px solid #c9c9c9;
+}
+
+.product-product-quantity {
+    margin-top: 20px;
+}
+
+.product-product-quantity p {
+    color: rgba(87, 87, 87, 1);
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.product-btn {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0px;
+    color: #FEFAF0;
+    font-size: 17px;
+    background: #706E5C;
+    padding: 10px 0px 10px 0px;
+    text-decoration: none;
+    border: none;
+    font-weight: 300;
+    transition: background-color .2s ease-in-out, color .2s ease-in-out;
+    width: 100%;
+    cursor: pointer;
+}
+
+.product-btn:hover {
+    background: rgba(112, 110, 92, 0.7);
+    color: rgba(254, 250, 240, 0.7);
+    /* text-decoration: none; */
+}
+
+.product-product-info {
+    margin-top: 24px;
+}
+
+.product-details {
+    padding: 24px 0;
+}
+
+.product-details h3 {
+    font-weight: 300;
+    margin: 0;
+    font-size: 17px;
+}
+
+.product-details p {
+    margin-top: 17px;
+    line-height: 1.6;
+    font-size: 15px;
+    font-weight: 300;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: rgba(173, 172, 167, 0.7);
+    margin: 0;
+}

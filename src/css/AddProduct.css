@@ -1,0 +1,119 @@
+.addproduct-items {
+    margin: 3% 2% 1% 2%;
+}
+
+.addproduct-img {
+    width: 90%;
+    margin: 0 2%;
+    height: 150px;
+    border-radius: 20px;
+    border: 1px black solid;
+    /* border-color: black ; */
+}
+
+.addproduct-name {
+    width: 90%;
+    margin: 0 2%;
+    height: 80px;
+    border-radius: 20px;
+    border: 0;
+    background-color: rgba(243, 243, 243, 0.5)
+        /* border-color: black ; */
+}
+
+.addproduct-details {
+    width: 90%;
+    margin: 0 2%;
+    height: 130px;
+    border-radius: 20px;
+    border: 0;
+    background-color: rgba(243, 243, 243, 0.5)
+        /* border-color: black ; */
+}
+
+.addproduct-colors {
+    width: 90%;
+    margin: 0 2%;
+    height: 130px;
+    border-radius: 20px;
+    border: 0;
+    background-color: rgba(243, 243, 243, 0.5)
+        /* border-color: black ; */
+}
+
+.addproduct-sizes {
+    width: 90%;
+    margin: 0 2%;
+    height: 130px;
+    border-radius: 20px;
+    border: 0;
+    background-color: rgba(243, 243, 243, 0.5)
+        /* border-color: black ; */
+}
+
+.addproduct-last-div {
+    display: flex;
+    flex-direction: row;
+    margin: 3% 2% 1% 2%;
+}
+
+.addproduct-price-div {
+    flex: 0.25;
+}
+
+.addproduct-quantity-div {
+    flex: 0.25;
+}
+
+.addproduct-discount-div {
+    flex: 0.25;
+}
+
+.addproduct-price {
+    width: 80%;
+    margin: 0 2%;
+    height: 50px;
+    border-radius: 20px;
+    border: 0;
+    background-color: rgba(243, 243, 243, 0.5)
+        /* border-color: black ; */
+}
+
+.addproduct-quantity {
+    width: 80%;
+    margin: 0 2%;
+    height: 50px;
+    border-radius: 20px;
+    border: 0;
+    background-color: rgba(243, 243, 243, 0.5)
+        /* border-color: black ; */
+}
+
+.addproduct-discount {
+    width: 80%;
+    margin: 0 2%;
+    height: 50px;
+    border-radius: 20px;
+    border: 0;
+    background-color: rgba(243, 243, 243, 0.5)
+        /* border-color: black ; */
+}
+
+.addproduct-button {
+    margin-top: 3%;
+    flex: 0.15;
+    background-color: #426B1F;
+    padding: 0;
+    color: white;
+    border-radius: 10%;
+    border: 0;
+    /* text-size-adjust: 1000%; */
+    /* height: 100%; */
+    /* width: ; */
+}
+
+.invalid-input{
+    color: red;
+    display: block;
+    margin-left:2%;
+}
