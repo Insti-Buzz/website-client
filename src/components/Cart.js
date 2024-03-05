@@ -14,10 +14,10 @@ function Cart() {
     const [showDetails, setShowDetails] = React.useState(false)
     const [showPayment, setShowPayment] = React.useState(false)
 
-    const [name, setName] = React.useState('')
+    // const [name, setName] = React.useState('')
     const [email, setEmail] = React.useState('')
-    const [phoneNumber, setPhoneNumber] = React.useState('')
-    const [error, setError] = React.useState(false)
+    // const [phoneNumber, setPhoneNumber] = React.useState('')
+    // const [error, setError] = React.useState(false)
 
 
 
@@ -56,19 +56,10 @@ function Cart() {
         
     }, [])
 
-    const proceedDetails=()=>{
-        setShowDetails(true)
-        setShowPayment(false)
-    }
-
     const proceedPayment = () => {
-        if (!name || !email || !phoneNumber) {
-            setError(true)
-            return false
-        }
         const subtotal = calculateSubtotal()
         setTotalAmount(subtotal)
-        setShowDetails(false)
+        // setShowDetails(false)
         setShowPayment(true)
 
     }
@@ -76,19 +67,22 @@ function Cart() {
 
 
     const getProducts = async () => {
-        let result = await fetch('http://localhost:5000/api/v1/products/get-product', {
-            // headers:{
-
-            // }
+        let result = await fetch('http://localhost:5000/api/v1/products/getProductsInCart', {
+            body: JSON.stringify({
+                email,
+            }),
+            headers: {
+                "Content-Type": "application/json",
+            },
             method: "Get"
         });
         result = await result.json();
         console.log(result);
-        for (let i = 0; i < result.length; i++) {
-            const updatedProducts = result.filter(item => item._id === localStorage.getItem(`product${item._id}`));
-            setProducts(updatedProducts);
-        }
-        // setProducts(result);
+        // for (let i = 0; i < result.length; i++) {
+        //     const updatedProducts = result.filter(item => item._id === localStorage.getItem(`product${item._id}`));
+        //     setProducts(updatedProducts);
+        // }
+        setProducts(result);
     }
 
 
@@ -108,13 +102,13 @@ function Cart() {
                 </div>
                 <div class="checkout-product-quantity">
                     <input type="number" name="product-quantity" placeholder={quantity[index]} id="product-quantity" value={quantity[index]}
-                        min="1" max='5' onChange={(e => { handleInputChange(index, e) })} />
+                        min="1" max='1' onChange={(e => { handleInputChange(index, e) })} />
                 </div>
                 <div class="checkout-product-net-price">
                     <h3>{quantity[index] * item.price}</h3>
                 </div>
                 <div class="checkout-product-cancel">
-                    <button onClick={() => removeFromCart(item._id)} type="button">
+                    <button onClick={() => removeFromCart(item.product_id)} type="button">
                         cross
                     </button>
                 </div>
@@ -124,7 +118,21 @@ function Cart() {
     }
 
     const removeFromCart = async (id) => {
-        localStorage.removeItem(`product${id}`)
+        console.log(id)
+        const email=localStorage.getItem(`userEmail`)
+        const productId=id
+        const response = await fetch("http://localhost:5000/api/v1/products/removeFromCart", {
+            method: "PUT",
+            body: JSON.stringify({
+                productId ,
+                email,
+            }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        const result = await response.json();
+        console.log(result);
         window.location.reload();
     }
 
@@ -136,6 +144,7 @@ function Cart() {
         const response = await fetch("http://localhost:5000/api/v1/payment/order", {
             method: "POST",
             body: JSON.stringify({
+                email,
                 amount,
                 currency,
                 receipt: receiptId,
@@ -202,12 +211,11 @@ function Cart() {
     };
 
     const confirmOrder = async () => {
+        const email=localStorage.getItem("userEmail")
         const response = await fetch("http://localhost:5000/api/v1/payment/confirm", {
             method: "POST",
             body: JSON.stringify({
-                name,
                 email,
-                phoneNumber,
                 products,
                 totalAmount
             }),
@@ -220,6 +228,7 @@ function Cart() {
             alert('Failed')
         }else{
             alert('Your order is Placed Successfully')
+        window.location.reload();
         }
     }
 
@@ -248,11 +257,11 @@ function Cart() {
                     <h1>Total</h1>
                     <h1>₹{calculateSubtotal()}</h1>
                 </div>
-                <button class="checkout-btn" onClick={proceedDetails}>Checkout</button>
+                <button class="checkout-btn" onClick={proceedPayment}>Checkout</button>
 
             </div>
             <div>
-                {showDetails && (
+                {/* {showDetails && (
                     <div className="cart-popup">
                         <div className='cart-popup-content'>
                             <div className='cart-popup-content-name'>
@@ -279,7 +288,7 @@ function Cart() {
                             <button className='cart-popup-content-button' onClick={proceedPayment}>Proceed</button>
                         </div>
                     </div>
-                )}
+                )} */}
 
                 {showPayment && (
                     <div className="cart-popup">

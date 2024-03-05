@@ -7,7 +7,7 @@ import imgTwo from "../assets/Godav.png"
 import imgThree from "../assets/Mahanadhi.png"
 import imgFour from "../assets/Sharav.png"
 import imgFive from "../assets/Tapti.png"
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const Product = () => {
 
@@ -18,8 +18,11 @@ const Product = () => {
     const [size, setSize] = React.useState([])
     const [details, setDetails] = React.useState()
     const [quantity, setQuantity] = React.useState('1')
-    const [selectedSize,setselectedSize]=React.useState('L')
+    const [selectedSize, setselectedSize] = React.useState('L')
+    const [isCart, setIsCart] = React.useState()
+    const navigate = useNavigate()
     const params = useParams()
+    const [isLogin, setIsLogin] = React.useState(false)
 
 
     const selectImage = (type) => {
@@ -28,6 +31,10 @@ const Product = () => {
 
     useEffect(() => {
         getProductDetails()
+        const email = localStorage.getItem("userEmail")
+        if (email) setIsLogin(true)
+        // setIsCart(localStorage.getItem(`product${params.id}`))
+        // console.log(localStorage.getItem(`product${params.id}`))
     }, [])
 
     const getProductDetails = async () => {
@@ -41,8 +48,32 @@ const Product = () => {
         setDetails(result.details)
     }
 
-    const addToCart=async()=>{
-        localStorage.setItem(`product${params.id}`,params.id);
+    const addToCart = async () => {
+        let email = localStorage.getItem("userEmail")
+        if (!email) {
+            alert("Please Login")
+            navigate("./login")
+        }
+        let productId = params.id
+        console.log(email)
+        console.log(productId)
+        let result = await fetch('http://localhost:5000/api/v1/products/addToCart', {
+            method: 'POST',
+            body: JSON.stringify({ email, productId }),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        result = await result.json();
+        console.log(result)
+        alert("Product is added to cart Successfully")
+        localStorage.setItem(`product${params.id}`, params.id);
+        // console.log(isCart)
+        window.location.reload();
+    }
+
+    const toLogin=()=>{
+        navigate('/app/login')
     }
 
     return (
@@ -77,7 +108,7 @@ const Product = () => {
                 <div class="product-product-size">
                     <p>Select Size</p>
                 </div>
-                <select id="dropdown" placeholdeer='SelectSize' value={selectedSize} onChange={(e=>{setselectedSize(e.target.value)})}>
+                <select id="dropdown" placeholdeer='SelectSize' value={selectedSize} onChange={(e => { setselectedSize(e.target.value) })}>
                     <option value="">{selectedSize}</option>
                     <option value="option1">Option 1</option>
                     <option value="option2">Option 2</option>
@@ -88,7 +119,19 @@ const Product = () => {
                     <input type="number" name="product-quantity" id="product-quantity" value={quantity}
                         min="1" max='5' onChange={(e => { setQuantity(e.target.value) })} />
                 </div>
-                <button class="product-btn" onClick={addToCart}>Add to Cart</button>
+                {
+                    isLogin ?
+                        isCart ?
+                            <button class="product-btn" >Added to Cart</button>
+                            :
+                            <button class="product-btn" onClick={addToCart}>Add to Cart</button>
+                        
+                        :
+                        <>
+                            <button onClick={toLogin} class="product-btn" >Login to Proceed</button>
+                        </>
+                }
+
                 <div class="product-product-details product-product-info">
                     <h3>PRODUCT INFO</h3>
                     <p> {details}  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dolor eros, tincidunt vitae augue eu,

@@ -11,7 +11,7 @@ function Shop() {
 
     const navigate = useNavigate();
 
-    const productPage = (productId) => {
+    const productPage = async(productId) => {
         navigate(`/app/product/${productId}`)
     }
 
@@ -31,21 +31,23 @@ function Shop() {
         setProducts(result);
     }
 
-    
+
 
     function e(item, index) {
-        const productId = item._id
+        const productId = item.product_id
         return (
             <div className='shop-product-card' >
-                <img src={prodImg} alt="Tunga" />
-                {/* <Link className='home-right-product' to="/" >Product Details</Link> */}
-                <div className='shop-product-name'><p>{item.name}</p></div>
-                {/* <h3 className='home-right-product'>{item.details}</h3> */}
-                <div className='shop-product-price'><p>Rs. {item.price}/SET</p></div>
-                {/* <p className='home-right-product'>({item.discount} margin)</p>
+                <button onClick={() => productPage(item.product_id)}>
+
+                    <img src={prodImg} alt="Tunga" />
+                    {/* <Link className='home-right-product' to="/" >Product Details</Link> */}
+                    <div className='shop-product-name'><p>{item.name}</p></div>
+                    {/* <h3 className='home-right-product'>{item.details}</h3> */}
+                    <div className='shop-product-price'><p>Rs. {item.price}/SET</p></div>
+                    {/* <p className='home-right-product'>({item.discount} margin)</p>
                 <h3 className='home-right-product'>{item.colors}</h3> */}
-                <Link className='shop-product-details' to={"/app/product/"+item._id} >Product Details</Link>
-                
+                    {/* <Link className='shop-product-details' to={"/app/product/" + item.product_id} >Product Details</Link> */}
+                </button>
             </div>
         )
     }

@@ -99,7 +99,9 @@
         /* border-color: black ; */
 }
 
+
 .addproduct-button {
+    cursor: pointer;
     margin-top: 3%;
     flex: 0.15;
     background-color: #426B1F;

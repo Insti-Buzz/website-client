@@ -14,14 +14,15 @@ function AddProduct() {
     const navigate = useNavigate()
 
     const addProduct = async () => {
-        if (!name || !price||!details||sizes) {
+        console.log("j")
+        if (!name || !price||!details) {
             setError(true)
             return false
         }
 
         let result = await fetch('http://localhost:5000/api/v1/products/add-product', {
             method: 'POST',
-            body: JSON.stringify({ name, details, sizes, price, }),
+            body: JSON.stringify({ name, details, price, }),
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -37,7 +38,7 @@ function AddProduct() {
             <p className='addproduct-items'>Add images</p>
             <input className='addproduct-img' type='text' placeholder='Drag and drop image here' />
 
-            <p className='addproduct-items'>Product</p>
+            <p className='addproduct-items'>Product Name</p>
             <input className='addproduct-name' type='text' placeholder='Enter product name' value={name}
                 onChange={(e) => { setName(e.target.value) }} />
             {error && !name && <span className='invalid-input'>Enter valid name</span>}
