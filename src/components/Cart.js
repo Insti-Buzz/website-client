@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../css/Cart.css'
 import TungaImg from '../assets/Tunga.png'
 import TaptiImg from '../assets/Tapti.png'
+import { useNavigate } from 'react-router-dom'
 
 function Cart() {
 
@@ -18,6 +19,7 @@ function Cart() {
     const [email, setEmail] = React.useState('')
     // const [phoneNumber, setPhoneNumber] = React.useState('')
     // const [error, setError] = React.useState(false)
+    const navigate=useNavigate('')
 
 
 
@@ -52,8 +54,8 @@ function Cart() {
     };
 
     useEffect(() => {
+
         getProducts();
-        
     }, [])
 
     const proceedPayment = () => {
@@ -67,14 +69,16 @@ function Cart() {
 
 
     const getProducts = async () => {
+        const email = localStorage.getItem("userEmail")
+        setEmail(email)
         let result = await fetch('http://localhost:5000/api/v1/products/getProductsInCart', {
+            method: "POST",
             body: JSON.stringify({
                 email,
             }),
             headers: {
                 "Content-Type": "application/json",
             },
-            method: "Get"
         });
         result = await result.json();
         console.log(result);
@@ -119,12 +123,12 @@ function Cart() {
 
     const removeFromCart = async (id) => {
         console.log(id)
-        const email=localStorage.getItem(`userEmail`)
-        const productId=id
+        const email = localStorage.getItem(`userEmail`)
+        const productId = id
         const response = await fetch("http://localhost:5000/api/v1/products/removeFromCart", {
-            method: "PUT",
+            method: "POST",
             body: JSON.stringify({
-                productId ,
+                productId,
                 email,
             }),
             headers: {
@@ -211,7 +215,7 @@ function Cart() {
     };
 
     const confirmOrder = async () => {
-        const email=localStorage.getItem("userEmail")
+        const email = localStorage.getItem("userEmail")
         const response = await fetch("http://localhost:5000/api/v1/payment/confirm", {
             method: "POST",
             body: JSON.stringify({
@@ -224,11 +228,12 @@ function Cart() {
             },
         });
         console.log(response)
-        if(response.status==404){
+        if (response.status == 404) {
             alert('Failed')
-        }else{
+        } else {
             alert('Your order is Placed Successfully')
-        window.location.reload();
+            // window.location.reload();
+            navigate('/app/orders')
         }
     }
 
@@ -238,7 +243,10 @@ function Cart() {
                 <h1>My cart</h1>
                 <hr />
                 <div>
-                    {products.map(e)}
+                    {products?
+                    products.map(e):
+                    <h3>Cart is Empty</h3>
+                    }
                 </div>
 
                 <hr />
@@ -292,8 +300,9 @@ function Cart() {
 
                 {showPayment && (
                     <div className="cart-popup">
+                        {/* <i className='fa fa-times' aria-hidden='true' onClick={setShowPayment(false)}></i> */}
+                        <h1>Choose mode of Payment</h1>
                         <div className='cart-popup-content'>
-                            <h1>How You Want to Pay</h1>
                             <button onClick={confirmOrder}>Cash On Delivery</button>
                             <button onClick={paymentHandler}>Pay Now</button>
                         </div>

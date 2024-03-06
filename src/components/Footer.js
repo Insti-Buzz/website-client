@@ -4,7 +4,7 @@ import '../css/Footer.css';
 function Footer() {
   return (
     <>
-      <div className="footer-footer">
+      <div className="footer">
 
         <div className="footer-divider-container">
             <div className="footer-divider"></div>
@@ -15,9 +15,11 @@ function Footer() {
         </div>
         
         <div className="footer-information">
+          <div className="footer-information-left">
+
             <div className="footer-address">
               <p className="footer-address-title">Location</p>
-              <p className="footer-location">IIT Madras, Chennai <br/> 
+              <p className="footer-location">IIT Madras, Chennai <br/> <br/> 
                   Pin 600036 <br/> <br/>
                   instibuzziitm@gmail.com </p>
             </div>
@@ -45,39 +47,43 @@ function Footer() {
             <div className="footer-social">
               <p className="footer-social-title">Social</p>
               <div className="footer-social-links">
-                <a href="" className="footer-instagram">Instagram</a>
-                <a href="" className="footer-linkedin">LinkedIn</a>
-                <a href="" className="footer-mail">E-mail</a>
+                <a href='https://www.instagram.com/insti_buzz?igsh=MW5uN3R6ZzE3cHhwbQ==' className="fa fa-instagram" aria-hidden="true"></a>
+                <a href='https://www.linkedin.com/company/101586554/admin/feed/posts/' className="fa fa-linkedin" aria-hidden="true"></a>
+                <a href='instibuzziitm@gmail.com' className="fa fa-google" aria-hidden="true"></a>
               </div>
             </div>
-            
-            <div className="footer-contact">
-              <p className="footer-form-title">We`d Love to Hear From You !</p>
-              <div className="footer-form-container">
-                <form action="" className="footer-form">
+          
+          </div>
+          
+          {/* <div className="information-right">
+
+            <div className="contact">
+              <p className="contact-title">We`d Love to Hear From You !</p>
+                <form action="" className="form">
                   
-                  <div className="footer-name-email-container">
-                    <div className="footer-name-container">
-                      <label htmlFor="" className="footer-name">Name *</label><br/>
-                      <input type="text" className="footer-input-name" required />
+                  <div className="name-email-container">
+                    <div className="name-container">
+                      <label htmlFor="" className="name">Name *</label><br/>
+                      <input type="text" className="input-name" required />
                     </div>
                     
-                    <div className="footer-email-container">
-                      <label htmlFor="" className="footer-email">Email Address *</label><br/>
-                      <input type="text" className="footer-input-email" required />
+                    <div className="email-container">
+                      <label htmlFor="" className="email">Email Address *</label><br/>
+                      <input type="text" className="input-email" required />
                     </div>
                   </div>
                   
-                  <div className="footer-msg-container">
-                    <label htmlFor="" className="footer-msg">Send us a Message </label><br/>
-                    <textarea type="text" className="footer-input-msg" rows={5} cols={45} maxLength={225}/>
+                  <div className="msg-container">
+                    <label htmlFor="" className="msg">Send us a Message </label><br/>
+                    <textarea type="text" className="input-msg" rows={5} cols={45} maxLength={225}/>
                   </div>
                   
-                  <button type='submit' className='footer-submit-button'>Submit</button>
+                  <button type='submit' className='submit-button'>Submit</button>
                 </form>
-              </div>
               
             </div>
+          </div> */}
+            
         </div>
       
       </div>

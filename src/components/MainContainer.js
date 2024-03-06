@@ -11,7 +11,7 @@ function MainContainer() {
             {/* <Product/> */}
             {<Navbar />}
             <Outlet />
-            {<Footer />}
+            {/* {<Footer />} */}
         </div>
     )
 }
