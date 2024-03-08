@@ -19,10 +19,10 @@ function AddProduct() {
         const token=localStorage.getItem('token')
         if (!email||!token) {
             alert("Please Login")
-            navigate('/app/home')
+            navigate('/')
         }
         if(email!='instibuzz@gmail.com'){
-            navigate('/app/home')
+            navigate('/')
         }
     }, [])
 
@@ -43,7 +43,7 @@ function AddProduct() {
         result = await result.json();
         console.log(result)
         alert("Product is added Successfully")
-        navigate('/app/shop')
+        navigate('/shop')
     }
 
     return (

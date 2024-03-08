@@ -70,7 +70,7 @@ function Cart() {
         const token = localStorage.getItem('token')
         if (!email || !token) {
             alert("Please Login")
-            navigate('/app/home')
+            navigate('/')
         }
         getProducts();
     }, [])
@@ -114,7 +114,7 @@ function Cart() {
         if (result.status == 404) {
             alert(result.message)
             localStorage.removeItem("userEmail")
-            navigate('/app/home')
+            navigate('/')
             window.location.reload();
         } else {
             console.log(result)
@@ -284,7 +284,7 @@ function Cart() {
         } else {
             alert('Your order is Placed Successfully')
             // window.location.reload();
-            navigate('/app/orders')
+            navigate('/orders')
         }
     }
 

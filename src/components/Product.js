@@ -72,11 +72,11 @@ const Product = () => {
         if (result.status == 404) {
             alert(result.message)
             localStorage.removeItem("userEmail")
-            navigate('/app/home')
+            navigate('/')
             window.location.reload();
         } else {
             alert("Product is added to cart Successfully")
-            navigate('/app/cart')
+            navigate('/cart')
             window.location.reload();
         }
 
@@ -86,7 +86,7 @@ const Product = () => {
     }
 
     const toLogin = () => {
-        navigate('/app/login')
+        navigate('/login')
     }
 
     return (

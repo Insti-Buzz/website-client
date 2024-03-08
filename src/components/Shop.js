@@ -14,7 +14,7 @@ function Shop() {
     const navigate = useNavigate();
 
     const productPage = async(productId) => {
-        navigate(`/app/product/${productId}`)
+        navigate(`/product/${productId}`)
     }
 
     useEffect(() => {
@@ -48,7 +48,7 @@ function Shop() {
                     <div className='shop-product-price'><h3>Rs. {item.price}</h3></div>
                     {/* <p className='home-right-product'>({item.discount} margin)</p>
                 <h3 className='home-right-product'>{item.colors}</h3> */}
-                    {/* <Link className='shop-product-details' to={"/app/product/" + item.product_id} >Product Details</Link> */}
+                    {/* <Link className='shop-product-details' to={"/product/" + item.product_id} >Product Details</Link> */}
                 </button>
             </div>
         )

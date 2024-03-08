@@ -14,7 +14,7 @@ function OrderHistory() {
         const token = localStorage.getItem('token')
         if (!email || !token) {
             alert("Please Login")
-            navigate('/app/home')
+            navigate('/')
         }
         if (email == 'instibuzziitm@gmail.com') {
             setIsAdmin(true)
@@ -39,7 +39,7 @@ function OrderHistory() {
         if (result.status == 404) {
             alert(result.message)
             localStorage.removeItem("userEmail")
-            navigate('/app/home')
+            navigate('/')
             window.location.reload();
         } else {
             setOrders(result.products)

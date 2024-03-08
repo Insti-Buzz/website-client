@@ -14,10 +14,10 @@ function AllOrders() {
         const token = localStorage.getItem('token')
         if (!email || !token) {
             alert("Please Login")
-            navigate('/app/home')
+            navigate('/')
         }
         if (email != 'instibuzziitm@gmail.com') {
-            navigate('/app/home')
+            navigate('/')
         } else {
         setIsAdmin(true)
         }
@@ -41,7 +41,7 @@ function AllOrders() {
         if (result.status == 404) {
             alert(result.message)
             localStorage.removeItem("userEmail")
-            navigate('/app/home')
+            navigate('/')
             window.location.reload();
         } else {
             setOrders(result.products)

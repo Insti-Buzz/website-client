@@ -18,10 +18,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='app' element={<MainContainer />}>
+        <Route path='' element={<MainContainer />}>
           <Route path='signup' element={<Signup/>}/>
           <Route path='login' element={<Login/>}/>
-          <Route path='home' element={<Home />} />
+          <Route path='' element={<Home />} />
           <Route path='shop' element={<Shop />} />
           <Route path='product/:id' element={<Product />} />
           <Route path='add' element={<AddProduct />} />

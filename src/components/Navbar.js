@@ -27,37 +27,37 @@ function Navbar() {
         setDropDownHeight('0');
     }
     const homePage = () => {
-        navigate('/app/home')
+        navigate('/')
     }
 
     const shopPage = () => {
-        navigate('/app/shop')
+        navigate('/shop')
     }
 
     const addProductPage = () => {
-        navigate('/app/add')
+        navigate('/add')
     }
 
     const cartPage = () => {
-        navigate('/app/cart')
+        navigate('/cart')
     }
 
     const signupPage = () => {
-        navigate("/app/signup")
+        navigate("/signup")
     }
 
     const ordersPage = () => {
-        navigate("/app/orders")
+        navigate("/orders")
     }
 
     const loginPage = () => {
-        navigate("/app/login")
+        navigate("/login")
     }
 
     const Logout = () => {
         localStorage.removeItem("userEmail")
         localStorage.removeItem("token")
-        navigate('/app/home')
+        navigate('/')
         window.location.reload()
     }
 

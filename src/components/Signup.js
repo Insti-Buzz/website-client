@@ -18,7 +18,7 @@ function Signup() {
         const email = localStorage.getItem('userEmail')
         const token = localStorage.getItem('token')
         if (email && token) {
-            navigate('/app/home')
+            navigate('/')
         }
     }, [])
 
@@ -62,14 +62,14 @@ function Signup() {
         } else {
             alert(result.message)
             // localStorage.setItem("userEmail", email)
-            navigate('/app/login')
+            navigate('/login')
         }
         console.log(result)
 
     }
 
     const toLogin = () => {
-        navigate('/app/login')
+        navigate('/login')
     }
     return (
         <div className='signup-main-container'>
