@@ -21,7 +21,7 @@ function AddProduct() {
             alert("Please Login")
             navigate('/')
         }
-        if(email!='instibuzz@gmail.com'){
+        if(email!='instibuzziitm@gmail.com'){
             navigate('/')
         }
     }, [])
