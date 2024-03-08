@@ -22,7 +22,7 @@ function Shop() {
     }, [])  
 
     const getProducts = async () => {
-        let result = await fetch('http://localhost:5000/api/v1/products/get-product', {
+        let result = await fetch('https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/get-product', {
             // headers:{
 
             // }

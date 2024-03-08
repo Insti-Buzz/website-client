@@ -95,7 +95,7 @@ function Cart() {
         const email = localStorage.getItem("userEmail")
         setEmail(email)
         const token = localStorage.getItem('token')
-        let result = await fetch('http://localhost:5000/api/v1/products/getProductsInCart', {
+        let result = await fetch('https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/getProductsInCart', {
             method: "POST",
             body: JSON.stringify({
                 email,
@@ -171,7 +171,7 @@ function Cart() {
         console.log(id)
         const email = localStorage.getItem(`userEmail`)
         const productId = id
-        const response = await fetch("http://localhost:5000/api/v1/products/removeFromCart", {
+        const response = await fetch("https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/removeFromCart", {
             method: "POST",
             body: JSON.stringify({
                 productId,
@@ -191,7 +191,7 @@ function Cart() {
     const receiptId = "qwsaq1";
     const paymentHandler = async (e) => {
         setShowPayment(false)
-        const response = await fetch("http://localhost:5000/api/v1/payment/order", {
+        const response = await fetch("https://mollusk-thankful-externally.ngrok-free.app/api/v1/payment/order", {
             method: "POST",
             body: JSON.stringify({
                 email,
@@ -221,7 +221,7 @@ function Cart() {
                 };
 
                 const validateRes = await fetch(
-                    "http://localhost:5000/api/v1/payment/order/validate",
+                    "https://mollusk-thankful-externally.ngrok-free.app/api/v1/payment/order/validate",
                     {
                         method: "POST",
                         body: JSON.stringify(body),
@@ -264,7 +264,7 @@ function Cart() {
 
         const email = localStorage.getItem("userEmail")
         const token = localStorage.getItem("token")
-        const response = await fetch("http://localhost:5000/api/v1/payment/confirm", {
+        const response = await fetch("https://mollusk-thankful-externally.ngrok-free.app/api/v1/payment/confirm", {
             method: "POST",
             body: JSON.stringify({
                 email,
