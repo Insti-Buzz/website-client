@@ -50,6 +50,8 @@ const Product = () => {
 
     const addToCart = async () => {
         let email = localStorage.getItem("userEmail")
+        let token = localStorage.getItem("token")
+        console.log(token)
         if (!email) {
             alert("Please Login")
             navigate("./login")
@@ -61,18 +63,29 @@ const Product = () => {
             method: 'POST',
             body: JSON.stringify({ email, productId }),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${token}`
             },
         })
         result = await result.json();
         console.log(result)
-        alert("Product is added to cart Successfully")
-        localStorage.setItem(`product${params.id}`, params.id);
+        if (result.status == 404) {
+            alert(result.message)
+            localStorage.removeItem("userEmail")
+            navigate('/app/home')
+            window.location.reload();
+        } else {
+            alert("Product is added to cart Successfully")
+            navigate('/app/cart')
+            window.location.reload();
+        }
+
+
         // console.log(isCart)
-        window.location.reload();
+
     }
 
-    const toLogin=()=>{
+    const toLogin = () => {
         navigate('/app/login')
     }
 
@@ -105,27 +118,31 @@ const Product = () => {
                 <div class="product-product-price">
                     <h3>₹{price}</h3>
                 </div>
-                <div class="product-product-size">
+                {/* <div class="product-product-size">
                     <p>Select Size</p>
                 </div>
                 <select id="dropdown" placeholdeer='SelectSize' value={selectedSize} onChange={(e => { setselectedSize(e.target.value) })}>
                     <option value="">{selectedSize}</option>
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
-                </select>
-                <div class="product-product-quantity">
+                    <option value="XS">XS</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                    <option value="XXL">XXL</option>
+                    <option value="XXXL">XXXL</option>
+                </select> */}
+                {/* <div class="product-product-quantity">
                     <p>Quantity</p>
                     <input type="number" name="product-quantity" id="product-quantity" value={quantity}
                         min="1" max='5' onChange={(e => { setQuantity(e.target.value) })} />
-                </div>
+                </div> */}
                 {
                     isLogin ?
                         isCart ?
                             <button class="product-btn" >Added to Cart</button>
                             :
                             <button class="product-btn" onClick={addToCart}>Add to Cart</button>
-                        
+
                         :
                         <>
                             <button onClick={toLogin} class="product-btn" >Login to Proceed</button>

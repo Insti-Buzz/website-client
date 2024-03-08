@@ -10,6 +10,8 @@ import Payment from './components/Payment';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import OrderHistory from './components/OrderHistory';
+import Ticket from './components/Ticket';
+import AllOrders from './components/AllOrders';
 // import GetDetails from './components/GetDetails'
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
           <Route path='cart' element={<Cart />} />
           <Route path='confirm' element={<Payment />} />
           <Route path='orders' element={<OrderHistory />} />
+          <Route path='allOrders' element={<AllOrders />} />
+          <Route path='ticket' element={<Ticket />} />
         </Route>
       </Routes>
     </BrowserRouter>

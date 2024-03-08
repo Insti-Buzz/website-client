@@ -1,0 +1,227 @@
+body {
+    
+    /* height: 100vh; */
+}
+
+.ticket-main-container {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50vh 50vh;
+    /* row-gap: 60px; */
+    height: 100%;
+}
+
+
+.ticket-title {
+    padding: 24px 180px 36px 80px;
+    text-align: left;
+    /* max-width: 700px; */
+    /* grid-column-start: 1;
+    grid-column-end: 3; */
+    justify-self: center;
+    background-color: #f8e559;
+}
+
+.ticket-title h1 {
+    font-size: 56px;
+    font-weight: 600;
+    margin-bottom: 18px;
+    margin-top: 0;
+    color: #40210b;
+}
+
+.ticket-title h2 {
+    /* font-weight: 400; */
+    font-size: 24px;
+    color: #40210b;
+}
+
+.ticket-title h2 span {
+    /* font-weight: 600; */
+    color: #76411b;
+}
+
+.ticket-title p {
+    font-size: 18px;
+    line-height: 1.6;
+    font-weight: 200;
+    margin: 0;
+}
+
+.ticket-img-container {
+    /* display: none; */
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    overflow: hidden;
+}
+
+.ticket-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ticket-form {
+    padding: 60px 180px 0 180px;
+    /* background-color: rgb(255, 241, 206); */
+    font-size: 16px;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+.ticket-form p {
+    margin-top: 0;
+    margin-bottom: 36px;
+}
+
+.ticket-input-parameter input {
+    margin-top: 4px;
+    margin-bottom: 22px;
+    padding: 12px 12px;
+    background-color: transparent;
+    border: 1px solid #8b8b8b;
+    border-radius: 5px;
+    outline: none;
+    flex: auto;
+    font-size: 16px;
+    width: -webkit-fill-available;
+}
+
+::placeholder {
+    color: #9f9f9f;
+}
+
+textarea {
+    font-family: "Poppins", sans-serif;
+    margin-top: 5px;
+    margin-bottom: 16px;
+    padding: 12px 12px;
+    background-color: transparent;
+    border: 1px solid #8b8b8b;
+    border-radius: 5px;
+    outline: none;
+    flex: auto;
+    font-size: 16px;
+    resize: none;
+    width: -webkit-fill-available;
+}
+
+.ticket-submit-form {
+    margin-top: 16px;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 5px;
+    color: #FEFAF0;
+    font-size: 16px;
+    background: #a6602d;
+    padding: 10px 0px 10px 0px;
+    text-decoration: none;
+    border: 1px solid #a6602d;
+    font-weight: 300;
+    transition: background-color .2s ease-in-out, color .2s ease-in-out;
+    width: 170px;
+    cursor: pointer;
+}
+
+.ticket-submit-form:hover {
+    border: 1px solid #a6602d;
+    background: transparent;
+    color: #a6602d;
+}
+
+@media (max-width: 770px) and (min-width: 440px) {
+    .ticket-main-container {
+        margin-top: 24px;
+        margin-bottom: 0;
+    }
+
+    .ticket-img-container {
+        display: none;
+    }
+
+    .ticket-form {
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+
+    .ticket-title h1 {
+        font-size: 36px;
+    }
+
+    .ticket-title p {
+        font-size: 16px;
+    }
+
+    .ticket-form {
+        font-size: 14px;
+        padding: 26px 25px;
+    }
+
+    .ticket-form p {
+        margin-bottom: 28px;
+    }
+
+    .ticket-input-parameter input {
+        font-size: 14px;
+    }
+
+    textarea {
+        font-size: 14px;
+    }
+
+    .ticket-submit-form {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 440px) {
+    .ticket-main-container {
+        margin-top: 8px;
+        margin-bottom: 0;
+        row-gap: 36px;
+    }
+
+    .ticket-img-container {
+        display: none;
+    }
+
+    .ticket-form {
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+
+    .ticket-title h1 {
+        font-size: 32px;
+    }
+
+    .ticket-title p {
+        font-size: 14px;
+    }
+
+    .ticket-form {
+        font-size: 14px;
+        padding: 26px 25px;
+    }
+
+    .ticket-form p {
+        margin-bottom: 24px;
+    }
+
+    .ticket-input-parameter input {
+        font-size: 14px;
+    }
+
+    textarea {
+        font-size: 14px;
+    }
+
+    .ticket-submit-form {
+        align-self: center;
+        font-size: 14px;
+    }
+}

@@ -6,9 +6,9 @@ function Footer() {
     <>
       <div className="footer">
 
-        <div className="footer-divider-container">
+        {/* <div className="footer-divider-container">
             <div className="footer-divider"></div>
-        </div>
+        </div> */}
 
         <div className="footer-logo-container">
           <h1 className="footer-logo">InstiBuzz</h1>
@@ -24,7 +24,7 @@ function Footer() {
                   instibuzziitm@gmail.com </p>
             </div>
 
-            <div className="footer-menu">
+            {/* <div className="footer-menu">
               <p className="footer-menu-title">Menu</p>
               <div className="footer-menu-links">
                 <a href="" className="footer-home">Home</a>
@@ -32,7 +32,7 @@ function Footer() {
                 <a href="" className="footer-blog">Blog</a>
                 <a href="" className="footer-about">About</a>
               </div>
-            </div>
+            </div> */}
             
             <div className="footer-policies">
               <p className="footer-policies-title">Policies</p>
@@ -50,39 +50,33 @@ function Footer() {
                 <a href='https://www.instagram.com/insti_buzz?igsh=MW5uN3R6ZzE3cHhwbQ==' className="fa fa-instagram" aria-hidden="true"></a>
                 <a href='https://www.linkedin.com/company/101586554/admin/feed/posts/' className="fa fa-linkedin" aria-hidden="true"></a>
                 <a href='instibuzziitm@gmail.com' className="fa fa-google" aria-hidden="true"></a>
+                <div className="nothing"></div>
+                <div className="nothing"></div>
               </div>
             </div>
           
           </div>
-          
-          {/* <div className="information-right">
 
-            <div className="contact">
-              <p className="contact-title">We`d Love to Hear From You !</p>
-                <form action="" className="form">
-                  
-                  <div className="name-email-container">
-                    <div className="name-container">
-                      <label htmlFor="" className="name">Name *</label><br/>
-                      <input type="text" className="input-name" required />
-                    </div>
-                    
-                    <div className="email-container">
-                      <label htmlFor="" className="email">Email Address *</label><br/>
-                      <input type="text" className="input-email" required />
-                    </div>
-                  </div>
-                  
-                  <div className="msg-container">
-                    <label htmlFor="" className="msg">Send us a Message </label><br/>
-                    <textarea type="text" className="input-msg" rows={5} cols={45} maxLength={225}/>
-                  </div>
-                  
-                  <button type='submit' className='submit-button'>Submit</button>
-                </form>
-              
+          {/* <div className="footer-information-right">
+            <h2 className="footer-information-right-title">Get A Demo</h2>
+            <div className="form-container">
+              <form action="" className="form">
+                
+                <div className="email">
+                  <label htmlFor="" className="email-label">Email Address*</label>
+                  <input type="text" className="email-input" />
+                </div>
+                
+                <div className="name">
+                  <label htmlFor="" className="name-label">Name*</label>
+                  <input type="text" className="name-input" />
+                </div>
+
+                <button className="submit-form">Submit</button>
+              </form>
             </div>
           </div> */}
+          
             
         </div>
       

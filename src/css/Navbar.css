@@ -78,6 +78,7 @@
 }
 
 .nav-navbar .nav-center .nav-center-content > *:hover{
+    cursor: pointer;
     font-size: 17px;
 }
 

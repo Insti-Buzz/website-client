@@ -3,6 +3,8 @@ import '../css/Cart.css'
 import TungaImg from '../assets/Tunga.png'
 import TaptiImg from '../assets/Tapti.png'
 import { useNavigate } from 'react-router-dom'
+import { IconButton } from '@mui/material'
+import CloseIcon from '@mui/icons-material/Close';
 
 function Cart() {
 
@@ -10,7 +12,9 @@ function Cart() {
 
     // const [quantity, setQuantity] = useState(Array(products.length).fill(''));  
     // const [quantity, setQuantity] = useState(Array.from({ length: products.length }, () => 1));
-    const [quantity, setQuantity] = useState(Array(products.length).fill(1));
+    // const [quantity, setQuantity] = useState(Array(products.length).fill(1));
+    const [quantity, setQuantity] = useState('1');
+    const [selectedSize, setSelectedSize] = useState(Array(products.length).fill('L'));
     const [totalAmount, setTotalAmount] = React.useState()
     const [showDetails, setShowDetails] = React.useState(false)
     const [showPayment, setShowPayment] = React.useState(false)
@@ -19,7 +23,7 @@ function Cart() {
     const [email, setEmail] = React.useState('')
     // const [phoneNumber, setPhoneNumber] = React.useState('')
     // const [error, setError] = React.useState(false)
-    const navigate=useNavigate('')
+    const navigate = useNavigate('')
 
 
 
@@ -36,13 +40,21 @@ function Cart() {
         setQuantity(newValues);
     };
 
+    const handleSizeChange = (index, event) => {
+        const inputSize = event.target.value
+        const newSizes = [...selectedSize]
+        newSizes[index] = inputSize
+        setSelectedSize(newSizes)
+    }
+
     const calculateSubtotal = () => {
         let subtotal = 0;
 
         // Iterate through the products array
         products.forEach((item, index) => {
             // Convert quantity to a number
-            const quantityValue = parseInt(quantity[index]);
+            // const quantityValue = parseInt(quantity[index]);
+            const quantityValue = 1
 
             // Check if quantity is a valid number
             if (!isNaN(quantityValue)) {
@@ -54,14 +66,25 @@ function Cart() {
     };
 
     useEffect(() => {
-
+        const email = localStorage.getItem('userEmail')
+        const token = localStorage.getItem('token')
+        if (!email || !token) {
+            alert("Please Login")
+            navigate('/app/home')
+        }
         getProducts();
     }, [])
 
     const proceedPayment = () => {
+        console.log(quantity)
+        console.log(selectedSize)
         const subtotal = calculateSubtotal()
         setTotalAmount(subtotal)
         // setShowDetails(false)
+        if (subtotal == 0) {
+            alert("Pls add products in cart")
+            return
+        }
         setShowPayment(true)
 
     }
@@ -71,6 +94,7 @@ function Cart() {
     const getProducts = async () => {
         const email = localStorage.getItem("userEmail")
         setEmail(email)
+        const token = localStorage.getItem('token')
         let result = await fetch('http://localhost:5000/api/v1/products/getProductsInCart', {
             method: "POST",
             body: JSON.stringify({
@@ -78,6 +102,7 @@ function Cart() {
             }),
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
             },
         });
         result = await result.json();
@@ -86,10 +111,20 @@ function Cart() {
         //     const updatedProducts = result.filter(item => item._id === localStorage.getItem(`product${item._id}`));
         //     setProducts(updatedProducts);
         // }
-        setProducts(result);
+        if (result.status == 404) {
+            alert(result.message)
+            localStorage.removeItem("userEmail")
+            navigate('/app/home')
+            window.location.reload();
+        } else {
+            console.log(result)
+            setProducts(result.products);
+        }
     }
 
-
+    const closePayment=()=>{
+        setShowPayment(false)
+    }
     function e(item, index) {
         return (
             <div class="checkout-product-card">
@@ -104,17 +139,28 @@ function Cart() {
                         <h3>₹{item.price}</h3>
                     </div>
                 </div>
-                <div class="checkout-product-quantity">
+                {/* <div class="checkout-product-quantity">
                     <input type="number" name="product-quantity" placeholder={quantity[index]} id="product-quantity" value={quantity[index]}
-                        min="1" max='1' onChange={(e => { handleInputChange(index, e) })} />
+                        min="1" max='5' onChange={(e => { handleInputChange(index, e) })} />
+                </div> */}
+                <div>
+                    <select id="dropdown" placeholdeer={selectedSize[index]} value={selectedSize[index]} onChange={(e => { handleSizeChange(index, e) })}>
+                        <option value="">{selectedSize}</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                        <option value="XXL">XXL</option>
+                    </select>
                 </div>
                 <div class="checkout-product-net-price">
-                    <h3>{quantity[index] * item.price}</h3>
+                    <h3>{quantity[index] * item.price || item.price}</h3>
                 </div>
                 <div class="checkout-product-cancel">
-                    <button onClick={() => removeFromCart(item.product_id)} type="button">
+                    <IconButton onClick={() => removeFromCart(item.product_id)}><CloseIcon /></IconButton>
+                    {/* <button onClick={() => removeFromCart(item.product_id)} type="button">
                         cross
-                    </button>
+                    </button> */}
                 </div>
                 <hr />
             </div>
@@ -215,16 +261,21 @@ function Cart() {
     };
 
     const confirmOrder = async () => {
+
         const email = localStorage.getItem("userEmail")
+        const token = localStorage.getItem("token")
         const response = await fetch("http://localhost:5000/api/v1/payment/confirm", {
             method: "POST",
             body: JSON.stringify({
                 email,
                 products,
-                totalAmount
+                totalAmount,
+                // quantity,
+                selectedSize
             }),
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
             },
         });
         console.log(response)
@@ -243,9 +294,9 @@ function Cart() {
                 <h1>My cart</h1>
                 <hr />
                 <div>
-                    {products?
-                    products.map(e):
-                    <h3>Cart is Empty</h3>
+                    {products ?
+                        products.map(e) :
+                        <h3>Cart is Empty</h3>
                     }
                 </div>
 
@@ -301,10 +352,11 @@ function Cart() {
                 {showPayment && (
                     <div className="cart-popup">
                         {/* <i className='fa fa-times' aria-hidden='true' onClick={setShowPayment(false)}></i> */}
-                        <h1>Choose mode of Payment</h1>
+                        <IconButton onClick={() => closePayment()}><CloseIcon /></IconButton>
+                        <h1>Confirm Your Order?</h1>
                         <div className='cart-popup-content'>
                             <button onClick={confirmOrder}>Cash On Delivery</button>
-                            <button onClick={paymentHandler}>Pay Now</button>
+                            {/* <button onClick={paymentHandler}>Pay Now</button> */}
                         </div>
                     </div>
                 )}

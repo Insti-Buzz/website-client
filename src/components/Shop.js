@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import "../css/Shop.css";
-import topImg from "../assets/22e53e_ef2ebbf33af24b7fba34e44589f3dc38~mv2.webp"
+// import topImg from "../assets/22e53e_ef2ebbf33af24b7fba34e44589f3dc38~mv2.webp"
+import topImg from "../assets/Untitled design.png"
 import prodImg from "../assets/Screenshot 2024-02-17 033151.png"
 import { Link, useNavigate } from 'react-router-dom';
+import CloseIcon from '@mui/icons-material/Close';
 // import "../assets/Screenshot"
 
 function Shop() {
@@ -36,14 +38,14 @@ function Shop() {
     function e(item, index) {
         const productId = item.product_id
         return (
-            <div className='shop-product-card' >
-                <button onClick={() => productPage(item.product_id)}>
+            <div className='shop-product-div' >
+                <button className='shop-product-card' onClick={() => productPage(item.product_id)}>
 
                     <img src={prodImg} alt="Tunga" />
                     {/* <Link className='home-right-product' to="/" >Product Details</Link> */}
-                    <div className='shop-product-name'><p>{item.name}</p></div>
+                    <div className='shop-product-name'><h2>{item.name}</h2></div>
                     {/* <h3 className='home-right-product'>{item.details}</h3> */}
-                    <div className='shop-product-price'><p>Rs. {item.price}/SET</p></div>
+                    <div className='shop-product-price'><h3>Rs. {item.price}</h3></div>
                     {/* <p className='home-right-product'>({item.discount} margin)</p>
                 <h3 className='home-right-product'>{item.colors}</h3> */}
                     {/* <Link className='shop-product-details' to={"/app/product/" + item.product_id} >Product Details</Link> */}
@@ -55,13 +57,13 @@ function Shop() {
     return (
 
         <div class="shop-body-container">
-            <div class="shop-path-display">
+            {/* <div class="shop-path-display">
                 <span>
                     <a href="">Home</a>
                 </span>
                 <span>&gt;</span>
                 <span>All Products</span>
-            </div>
+            </div> */}
             <div class="shop-main-container">
                 {/* <div class="shop-side-bar">
                     <div class="shop-browse-by-section">

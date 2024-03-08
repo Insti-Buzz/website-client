@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import '../css/AddProduct.css'
 import { useNavigate } from 'react-router-dom';
 
@@ -13,18 +13,31 @@ function AddProduct() {
     const [error, setError] = React.useState(false)
     const navigate = useNavigate()
 
+
+    useEffect(() => {
+        const email = localStorage.getItem('userEmail')
+        const token=localStorage.getItem('token')
+        if (!email||!token) {
+            alert("Please Login")
+            navigate('/app/home')
+        }
+        if(email!='instibuzz@gmail.com'){
+            navigate('/app/home')
+        }
+    }, [])
+
     const addProduct = async () => {
-        console.log("j")
-        if (!name || !price||!details) {
+        if (!name || !price || !details) {
             setError(true)
             return false
         }
-
+        const token = localStorage.getItem("token");
         let result = await fetch('http://localhost:5000/api/v1/products/add-product', {
             method: 'POST',
             body: JSON.stringify({ name, details, price, }),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${token}`
             },
         })
         result = await result.json();
@@ -71,7 +84,7 @@ function AddProduct() {
                     <p className='addproduct-items'>Quantity</p>
                     <input className='addproduct-quantity' type='text' placeholder='Enter product name' value={quantity}
                         onChange={(e) => { setQuantity(e.target.value) }} />
-                        
+
                 </div>
 
                 <div className='addproduct-discount-div'>

@@ -6,21 +6,26 @@ import React, { useEffect, useState } from 'react';
 
 function Navbar() {
     const [dropDownHeight, setDropDownHeight] = useState('0');
+
+    const navigate = useNavigate();
+    const [isLogin, setIsLogin] = React.useState(false)
+    const [isAdmin, setIsAdmin] = React.useState(false)
+
+    useEffect(() => {
+        const email = localStorage.getItem("userEmail")
+        // console.log(email+"jknjbh b")
+        if (email) setIsLogin(true)
+        if (email == 'instibuzziitm@gmail.com') {
+            setIsAdmin(true)
+        }
+    }, [])
+
     function dropDownOpen() {
         setDropDownHeight('480px');
     }
     function dropDownClose() {
         setDropDownHeight('0');
     }
-
-    const navigate = useNavigate();
-    const [isLogin, setIsLogin] = React.useState(false)
-
-    useEffect(() => {
-        const email = localStorage.getItem("userEmail")
-        if (email) setIsLogin(true)
-    }, [])
-
     const homePage = () => {
         navigate('/app/home')
     }
@@ -51,7 +56,7 @@ function Navbar() {
 
     const Logout = () => {
         localStorage.removeItem("userEmail")
-        localStorage.removeItem("accessToken")
+        localStorage.removeItem("token")
         navigate('/app/home')
         window.location.reload()
     }
@@ -68,8 +73,11 @@ function Navbar() {
                 <div className="nav-center">
                     <div className="nav-center-content">
                         <a className='nav-home' onClick={homePage}>Home</a>
-                        <a className='nav-shop' onClick={shopPage}>Shop</a>
-                        <a className='nav-blog' onClick={addProductPage}>Add</a>
+                        <a className='nav-shop' onClick={shopPage}>Shop</a> 
+                        {isAdmin ?
+                            <a className='nav-blog' onClick={addProductPage}>Add</a> :
+                            <></>
+                        }
                         {
                             isLogin ?
                                 <a className='nav-about' onClick={ordersPage}>Orders</a>
@@ -87,10 +95,10 @@ function Navbar() {
                                 <a className="fa fa-bars" aria-hidden="true" onClick={dropDownOpen}></a></>
                             :
                             <>
-                            
-                            <a className='nav-about' onClick={loginPage}>Login</a>
-                            <a className="fa fa-bars" aria-hidden="true" onClick={dropDownOpen}></a></>
-                            
+
+                                <a className='nav-about' onClick={loginPage}>Login</a>
+                                <a className="fa fa-bars" aria-hidden="true" onClick={dropDownOpen}></a></>
+
                     }
 
 

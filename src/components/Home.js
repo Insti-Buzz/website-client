@@ -1,9 +1,14 @@
 import '../css/Home.css';
 import CoverImg from '../assets/Cover Image 2.jpg';
 import Image2 from '../assets/Image.jpg';
+import { useNavigate } from 'react-router-dom';
 // import Carousel from 'react-bootstrap/Carousel';
 
 function Home() {
+  const navigate=useNavigate()
+  const toShop=()=>{
+    navigate('/app/shop')
+  }
   return (
     <>
     <div className="home-content home-content-one">
@@ -21,7 +26,7 @@ function Home() {
                     represent your campus spirit. Our amazing service and selection make browsing a <br />
                     pleasure. Explore our latest collections and remember, we are here to help if you have any <br />
                       questions.</p>
-            <a className='home-discover-button' href=''>Discover</a>
+            <button className='home-discover-button' onClick={toShop}>Shop</button>
         </div>
     </div>
     
@@ -30,7 +35,7 @@ function Home() {
       </div>
     
       
-      <div className="home-content home-content-two">
+      {/* <div className="home-content home-content-two">
         
         <h1 className='home-title'>Latest Arrivals</h1>
         
@@ -67,9 +72,9 @@ function Home() {
 
 
         </div>
-    </div>
+    </div> */}
 
-      <div className="home-content home-content-three">
+      {/* <div className="home-content home-content-three">
         <div className="home-about-container">
           <h1 className="home-heading">About InstiBuzz</h1>
           <h2 className="home-about-text">At InstiBuzz, we celebrate the vibrant campus life by offering an exclusive<br />
@@ -88,7 +93,7 @@ function Home() {
           <a className='home-learn-more-button' href=''>Learn More</a>
           <img src={Image2} alt="Some Image" className="home-image-two" />
         </div>
-      </div>
+      </div> */}
     </>
   )
 }

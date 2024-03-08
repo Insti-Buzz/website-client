@@ -193,10 +193,11 @@
 }
 
 .home-content-three .home-about-container .home-about-text{
-    font-family: Fraunces;
+    font-family: Helvetica;
     color: rgb(64,63,43);
-    font-size: 32px;
-    margin-left: 8px;
+    font-size: 25px;
+    /* margin-left: 8px; */
+    font-weight: 100;
 }
 
 .home-content-three .home-about-two-container{

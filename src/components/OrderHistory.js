@@ -2,46 +2,69 @@ import React, { useEffect } from 'react'
 import TungaImg from '../assets/Tunga.png'
 import TaptiImg from '../assets/Tapti.png'
 import "../css/OrderHistory.css"
+import { useNavigate } from 'react-router-dom'
 
 function OrderHistory() {
     const [orders, setOrders] = React.useState([])
-
+    const [isAdmin, setIsAdmin] = React.useState(false)
+    const navigate = useNavigate()
 
     useEffect(() => {
+        const email = localStorage.getItem('userEmail')
+        const token = localStorage.getItem('token')
+        if (!email || !token) {
+            alert("Please Login")
+            navigate('/app/home')
+        }
+        if (email == 'instibuzziitm@gmail.com') {
+            setIsAdmin(true)
+        }
         getProducts();
     }, [])
 
     const getProducts = async () => {
         const email = localStorage.getItem("userEmail")
+        const token = localStorage.getItem("token")
         console.log(email)
         let result = await fetch('http://localhost:5000/api/v1/products/orders', {
             method: 'POST',
             body: JSON.stringify({ email }),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${token}`
             },
         })
         result = await result.json();
         console.log(result)
-        setOrders(result)
+        if (result.status == 404) {
+            alert(result.message)
+            localStorage.removeItem("userEmail")
+            navigate('/app/home')
+            window.location.reload();
+        } else {
+            setOrders(result.products)
+        }
     }
 
 
     function e(item, index) {
         const orderId = item.order_id
 
-        const deliveryDone = async () => {
-            let result = await fetch('http://localhost:5000/api/v1/products/delivered', {
-                method: 'POST',
-                body: JSON.stringify({ orderId }),
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            })
-            result = await result.json();
-            console.log(result)
-            window.location.reload()
-        }
+        // const deliveryDone = async () => {
+        //     const token = localStorage.getItem("token")
+        //     let result = await fetch('http://localhost:5000/api/v1/products/delivered', {
+        //         method: 'POST',
+        //         body: JSON.stringify({ orderId }),
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //             "Authorization": `Bearer ${token}`
+        //         },
+        //     })
+        //     result = await result.json();
+        //     console.log(result)
+
+        //     window.location.reload()
+        // }
 
         return (
             <div className='orders-div'>
@@ -58,13 +81,11 @@ function OrderHistory() {
                             <p>Coming Soon</p>
                     }
                 </div>
-                <div>
+                <div><p>Sizes: 
                     {
-                        item.isDelivered ?
-                            <></>
-                            :
-                            <button onClick={deliveryDone}>Mark as deliverd</button>
+                        item.size
                     }
+                    </p>
                 </div>
             </div>
         )
@@ -97,8 +118,9 @@ function OrderHistory() {
         <div >
             <h1>Order History</h1>
 
-            {
-                orders.map(e)
+            {orders?
+                orders.map(e):
+                <h1>No Orders</h1>
             }
         </div>
     )

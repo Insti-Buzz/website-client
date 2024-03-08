@@ -1,6 +1,7 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Navbar from './Navbar'
+import Home2 from './Homes'
 import Footer from './Footer'
 
 function MainContainer() {
@@ -10,6 +11,7 @@ function MainContainer() {
             {/* <Shop /> */}
             {/* <Product/> */}
             {<Navbar />}
+            {/* <Home2/>     */}
             <Outlet />
             {/* {<Footer />} */}
         </div>
