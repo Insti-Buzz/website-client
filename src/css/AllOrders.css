@@ -1,6 +1,3 @@
-* {
-    
-}
 
 .order-main-container {
     background-color: #ffffff;
@@ -49,8 +46,6 @@ hr {
     text-align: right;
 }
 
-.order-product-img-container {
-    }
 
 .order-product-img-container img {
     height: 100%;
