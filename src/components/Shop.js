@@ -65,7 +65,7 @@ function Shop() {
             <div className='shop-product-div' >
                 <button className='shop-product-card' onClick={() => productPage(item.product_id,index)}>
 
-                    <img src={images[index]} alt="Tunga" />
+                    <img src={images[index]} alt="Image " />
                     {/* <Link className='home-right-product' to="/" >Product Details</Link> */}
                     <div className='shop-product-name'><h2>{item.name}</h2></div>
                     {/* <h3 className='home-right-product'>{item.details}</h3> */}

@@ -21,16 +21,18 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 const Product = () => {
 
-    const images = [Img1, Img2, Img3, Img4, Img5, Img6, Img7, Img8,]
+    const images = [Img1, Img2, Img3, Img4, ]
+    const images2=[Img5, Img6, Img7, Img8]
     const [index, setIndex] = React.useState()
-    const [index2,setIndex2]=React.useState()
+    // const [index2,setIndex2]=React.useState()
     useEffect(() => {
         getProductDetails()
         const email = localStorage.getItem("userEmail")
         if (email) setIsLogin(true)
         const index = localStorage.getItem('index')
         setIndex(index)
-        setIndex2(index+4)
+        // setIndex2(index+4)
+        // console.log(index2)
         setSelectedImage(images[index])
         // console.log(index)
         // setIsCart(localStorage.getItem(`product${params.id}`))
@@ -118,12 +120,12 @@ const Product = () => {
             <div class="product-image-container">
                 <img src={selectedImage} alt="Tunga jersey" class="product-display-img" />
                 <div class="product-all-images">
-                    <button onClick={() => selectImage(imgOne)}>
+                    <button onClick={() => selectImage(images[index])}>
                         <img src={images[index]} alt="Tunga jersey" class="product-img-button" />
                     </button>
-                    {/* <button onClick={() => selectImage(imgTwo)}>
-                        <img src={images[index2]} alt="Cauvery jersey" class="product-img-button" />
-                    </button> */}
+                    <button onClick={() => selectImage(images2[index])}>
+                        <img src={images2[index]} alt="Cauvery jersey" class="product-img-button" />
+                    </button>
                     {/* <button onClick={() => selectImage(imgThree)}>
                         <img src={imgThree} alt="Godavari jersey" class="product-img-button" />
                     </button>
@@ -179,18 +181,20 @@ const Product = () => {
                 </div>
                 <hr />
                 <div class="product-product-details product-return-refund-policy">
-                    <h3>RETURN & REFUND POLICY</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dolor eros, tincidunt vitae augue eu,
-                        molestie accumsan nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget maximus
-                        tortor, quis mattis lorem. Ut tempus odio at elit porttitor aliquet.</p>
+                    <h3>10 Days replacement policy</h3>
+                    <p>Our products undergo thorough checks to ensure it is damage free. <br/>
+                        However, any damaged product shall be replaced free of cost.<br/>
+                        The product should be handed over to us in the original packaging with all the tags and labels intact.
+                        
+                    </p>
                 </div>
                 <hr />
-                <div class="product-product-details product-shipping-info">
+                {/* <div class="product-product-details product-shipping-info">
                     <h3>SHIPPING INFO </h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dolor eros, tincidunt vitae augue eu,
                         molestie accumsan nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget maximus
                         tortor, quis mattis lorem. Ut tempus odio at elit porttitor aliquet.</p>
-                </div>
+                </div> */}
             </div>
         </div>
     )
