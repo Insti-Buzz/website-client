@@ -292,6 +292,10 @@ function Cart() {
         }
     }
 
+    const cancelOrder=()=>{
+        setShowPayment(false)
+    }
+
     return (
         <div class="checkout-main-container">
             <div class="checkout-my-cart">
@@ -359,7 +363,8 @@ function Cart() {
                         <IconButton onClick={() => closePayment()}><CloseIcon /></IconButton>
                         <h1>Confirm Your Order?</h1>
                         <div className='cart-popup-content'>
-                            <button onClick={confirmOrder}>Cash On Delivery</button>
+                            <button onClick={confirmOrder}>Yes</button>
+                            <button onClick={cancelOrder}>No</button>
                             {/* <button onClick={paymentHandler}>Pay Now</button> */}
                         </div>
                     </div>

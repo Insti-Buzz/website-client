@@ -112,7 +112,7 @@ function Signup() {
                             <div className="signup-popup">
                                 <div className='signup-popup-content'>
                                     <div className='signup-popup-content-name'>
-                                        <p>Otp</p>
+                                        <p>Enter Otp sent on your email</p>
                                         <input type='text' className='signup-popup-content' placeholder='Enter recieved Otp' value={otp}
                                             onChange={(e) => { setOtp(e.target.value) }} />
                                         {error && !otp && <span className='invalid-input'>Enter valid otp</span>}

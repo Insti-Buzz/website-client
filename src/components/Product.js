@@ -8,31 +8,29 @@ import imgThree from "../assets/Mahanadhi.png"
 import imgFour from "../assets/Sharav.png"
 import imgFive from "../assets/Tapti.png"
 
-import Img1 from "../assets/Tapti.png"
-import Img2 from "../assets/Tunga.png"
-import Img3 from "../assets/Cauvery.png"
-import Img4 from "../assets/Tapti.png"
-import Img5 from "../assets/Tapti.png"
-import Img6 from "../assets/Tapti.png"
-import Img7 from "../assets/Tapti.png"
-import Img8 from "../assets/Tapti.png"
-import Img9 from "../assets/Tapti.png"
-import Img10 from "../assets/Tapti.png"
-import Img11 from "../assets/Tapti.png"
-import Img12 from "../assets/Tapti.png"
+import Img1 from "../assets/BossBaby1.png"
+import Img3 from "../assets/Green1.jpg"
+import Img2 from "../assets/TakeLite1.jpg"
+import Img4 from "../assets/White1.jpg"
+import Img5 from "../assets/BossBaby2.png"
+import Img7 from "../assets/Green2.jpg"
+import Img6 from "../assets/TakeLite2.jpg"
+import Img8 from "../assets/White2 (2).jpg"
 
 import { useNavigate, useParams } from 'react-router-dom'
 
 const Product = () => {
 
-    const images = [Img1, Img2, Img3, Img4, Img5, Img6, Img7, Img8, Img9, Img10, Img11, Img12]
+    const images = [Img1, Img2, Img3, Img4, Img5, Img6, Img7, Img8,]
     const [index, setIndex] = React.useState()
+    const [index2,setIndex2]=React.useState()
     useEffect(() => {
         getProductDetails()
         const email = localStorage.getItem("userEmail")
         if (email) setIsLogin(true)
         const index = localStorage.getItem('index')
         setIndex(index)
+        setIndex2(index+4)
         setSelectedImage(images[index])
         // console.log(index)
         // setIsCart(localStorage.getItem(`product${params.id}`))
@@ -123,9 +121,9 @@ const Product = () => {
                     <button onClick={() => selectImage(imgOne)}>
                         <img src={images[index]} alt="Tunga jersey" class="product-img-button" />
                     </button>
-                    <button onClick={() => selectImage(imgTwo)}>
-                        <img src={imgTwo} alt="Cauvery jersey" class="product-img-button" />
-                    </button>
+                    {/* <button onClick={() => selectImage(imgTwo)}>
+                        <img src={images[index2]} alt="Cauvery jersey" class="product-img-button" />
+                    </button> */}
                     {/* <button onClick={() => selectImage(imgThree)}>
                         <img src={imgThree} alt="Godavari jersey" class="product-img-button" />
                     </button>
@@ -177,9 +175,7 @@ const Product = () => {
 
                 <div class="product-product-details product-product-info">
                     <h3>PRODUCT INFO</h3>
-                    <p> {details}  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dolor eros, tincidunt vitae augue eu,
-                        molestie accumsan nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget maximus
-                        tortor, quis mattis lorem. Ut tempus odio at elit porttitor aliquet.</p>
+                    <p> {details} </p>
                 </div>
                 <hr />
                 <div class="product-product-details product-return-refund-policy">
