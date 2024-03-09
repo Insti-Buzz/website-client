@@ -14,7 +14,7 @@ function Cart() {
     // const [quantity, setQuantity] = useState(Array.from({ length: products.length }, () => 1));
     // const [quantity, setQuantity] = useState(Array(products.length).fill(1));
     const [quantity, setQuantity] = useState('1');
-    const [selectedSize, setSelectedSize] = useState(Array(products.length).fill('L'));
+    const [selectedSize, setSelectedSize] = useState(Array(products.length).fill());
     const [totalAmount, setTotalAmount] = React.useState()
     const [showDetails, setShowDetails] = React.useState(false)
     const [showPayment, setShowPayment] = React.useState(false)
@@ -85,6 +85,10 @@ function Cart() {
             alert("Pls add products in cart")
             return
         }
+        if(!selectedSize){
+            alert("Please Select Size")
+            return
+        }
         setShowPayment(true)
 
     }
@@ -128,9 +132,9 @@ function Cart() {
     function e(item, index) {
         return (
             <div class="checkout-product-card">
-                <div class="checkout-product-img-container">
+                {/* <div class="checkout-product-img-container">
                     <img src={TungaImg} alt="Tunga jersey" />
-                </div>
+                </div> */}
                 <div class="checkout-product-details">
                     <div class="checkout-product-name">
                         <h2>{item.name}</h2>
@@ -143,7 +147,7 @@ function Cart() {
                     <input type="number" name="product-quantity" placeholder={quantity[index]} id="product-quantity" value={quantity[index]}
                         min="1" max='5' onChange={(e => { handleInputChange(index, e) })} />
                 </div> */}
-                <div>
+                <div class="checkout-product-size">
                     <select id="dropdown" placeholdeer={selectedSize[index]} value={selectedSize[index]} onChange={(e => { handleSizeChange(index, e) })}>
                         <option value="">{selectedSize}</option>
                         <option value="S">S</option>

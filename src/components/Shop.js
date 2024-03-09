@@ -3,6 +3,20 @@ import "../css/Shop.css";
 // import topImg from "../assets/22e53e_ef2ebbf33af24b7fba34e44589f3dc38~mv2.webp"
 import topImg from "../assets/Untitled design.png"
 import prodImg from "../assets/Screenshot 2024-02-17 033151.png"
+
+import Img1 from "../assets/Tapti.png"
+import Img2 from "../assets/Tunga.png"
+import Img3 from "../assets/Cauvery.png"
+import Img4 from "../assets/Tapti.png"
+import Img5 from "../assets/Tapti.png"
+import Img6 from "../assets/Tapti.png"
+import Img7 from "../assets/Tapti.png"
+import Img8 from "../assets/Tapti.png"
+import Img9 from "../assets/Tapti.png"
+import Img10 from "../assets/Tapti.png"
+import Img11 from "../assets/Tapti.png"
+import Img12 from "../assets/Tapti.png"
+
 import { Link, useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 // import "../assets/Screenshot"
@@ -10,27 +24,37 @@ import CloseIcon from '@mui/icons-material/Close';
 function Shop() {
 
     const [products, setProducts] = useState([]);
+    const images=[Img1,Img2,Img3,Img4,Img5,Img6,Img7,Img8,Img9,Img10,Img11,Img12]
 
     const navigate = useNavigate();
 
-    const productPage = async(productId) => {
+    const productPage = async (productId,index) => {
+        localStorage.setItem('index',index)
         navigate(`/product/${productId}`)
     }
 
     useEffect(() => {
+        // console.log("object")
         getProducts();
-    }, [])  
+    }, [])
 
     const getProducts = async () => {
-        let result = await fetch('https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/get-product', {
-            // headers:{
+        console.log("object")
+        try {
+            let result = await fetch('https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/get-product', {
+                // headers:{
 
-            // }
-            method: "Get"
-        });
-        result = await result.json();
-        console.log(result)
-        setProducts(result);
+                // }
+                method: "POST"
+            });
+            // console.log(result)
+            console.log(result)
+            result = await result.json();
+            console.log(result)
+            setProducts(result);
+        } catch (error) {
+            console.log(error)
+        }
     }
 
 
@@ -39,16 +63,16 @@ function Shop() {
         const productId = item.product_id
         return (
             <div className='shop-product-div' >
-                <button className='shop-product-card' onClick={() => productPage(item.product_id)}>
+                <button className='shop-product-card' onClick={() => productPage(item.product_id,index)}>
 
-                    <img src={prodImg} alt="Tunga" />
+                    <img src={images[index]} alt="Tunga" />
                     {/* <Link className='home-right-product' to="/" >Product Details</Link> */}
                     <div className='shop-product-name'><h2>{item.name}</h2></div>
                     {/* <h3 className='home-right-product'>{item.details}</h3> */}
                     <div className='shop-product-price'><h3>Rs. {item.price}</h3></div>
                     {/* <p className='home-right-product'>({item.discount} margin)</p>
                 <h3 className='home-right-product'>{item.colors}</h3> */}
-                    {/* <Link className='shop-product-details' to={"/product/" + item.product_id} >Product Details</Link> */}
+                    {/* <Link className='shop-product-details' to={"/app/product/" + item.product_id} >Product Details</Link> */}
                 </button>
             </div>
         )
@@ -101,7 +125,7 @@ function Shop() {
                                 about, connect with your audience and draw attention to your products.</p>
                         </div>
                         <div class="shop-products-count">
-                            <p>{Object.keys(products).length} products</p>
+                            <h2>{Object.keys(products).length} products</h2>
                         </div>
 
                         <div className='shop-products-display'>

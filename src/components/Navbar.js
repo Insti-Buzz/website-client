@@ -21,36 +21,43 @@ function Navbar() {
     }, [])
 
     function dropDownOpen() {
-        setDropDownHeight('480px');
+        setDropDownHeight('max-content');
     }
     function dropDownClose() {
         setDropDownHeight('0');
     }
     const homePage = () => {
+        dropDownClose()
         navigate('/')
     }
 
     const shopPage = () => {
+        dropDownClose()
         navigate('/shop')
     }
 
     const addProductPage = () => {
+        dropDownClose()
         navigate('/add')
     }
 
     const cartPage = () => {
+        dropDownClose()
         navigate('/cart')
     }
 
     const signupPage = () => {
+        dropDownClose()
         navigate("/signup")
     }
 
     const ordersPage = () => {
+        dropDownClose()
         navigate("/orders")
     }
 
     const loginPage = () => {
+        dropDownClose()
         navigate("/login")
     }
 
@@ -73,7 +80,7 @@ function Navbar() {
                 <div className="nav-center">
                     <div className="nav-center-content">
                         <a className='nav-home' onClick={homePage}>Home</a>
-                        <a className='nav-shop' onClick={shopPage}>Shop</a> 
+                        <a className='nav-shop' onClick={shopPage}>Shop</a>
                         {isAdmin ?
                             <a className='nav-blog' onClick={addProductPage}>Add</a> :
                             <></>
@@ -92,7 +99,7 @@ function Navbar() {
                         isLogin ?
                             <><a className="fa fa-shopping-bag" aria-hidden="true" onClick={cartPage}></a>
                                 <button className="nav-contact-button" onClick={Logout}>Logout</button>
-                                <a className="fa fa-bars" aria-hidden="true" onClick={dropDownOpen}></a></>
+                                <a className="fa fa-bars nav-cart-logo" aria-hidden="true" onClick={dropDownOpen}></a></>
                             :
                             <>
 
@@ -109,14 +116,20 @@ function Navbar() {
                     <div className="nav-center-content">
                         <a className='nav-home' onClick={homePage}>Home</a>
                         <a className='nav-shop' onClick={shopPage}>Shop</a>
-                        <a className='nav-blog' onClick={addProductPage}>Add</a>
+                        {/* <a className='nav-blog' onClick={addProductPage}>Add</a> */}
                         {
                             isLogin ?
                                 <a className='nav-about' onClick={ordersPage}>Orders</a>
-                                :
-                                <a className='nav-about' onClick={signupPage}>Signup</a>
+                                : <></>
                         }
-                        <button className="nav-contact-button">Login/Signup</button>
+                        {
+                            isLogin?
+                            <a className='nav-about' onClick={Logout}>Logout</a>
+                    
+                            :
+                            <a className='nav-about' onClick={loginPage}>Login</a>
+                        }
+                        {/* <button className="nav-contact-button">Login/Signup</button> */}
                     </div>
                 </div>
             </div>

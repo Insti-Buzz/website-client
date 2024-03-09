@@ -284,11 +284,18 @@ hr {
     .checkout-product-card { 
         padding: 18px 0; 
         display: grid; 
-        grid-template-columns: min-content auto auto; 
+        grid-template-columns: auto auto auto; 
         grid-template-rows: 15px 50px auto; 
         height: auto; 
         column-gap: 20px; 
     } 
+
+    .checkout-product-size {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 2;
+        grid-row-end: 3;
+    }
  
     .checkout-order-summary { 
         max-width: none; 
@@ -337,8 +344,8 @@ hr {
  
     .checkout-product-net-price { 
         text-align: left; 
-        grid-row-start: 2; 
-        grid-row-end: 4; 
+        grid-row-start: 1; 
+        grid-row-end: 2; 
         grid-column-start: 2; 
         grid-column-end: 3; 
     } 

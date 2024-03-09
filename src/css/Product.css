@@ -89,10 +89,10 @@ body {
     border-radius: 0px; 
     color: #FEFAF0; 
     font-size: 17px; 
-    background: #706E5C; 
+    background: #a6602d; 
     padding: 10px 0px 10px 0px; 
     text-decoration: none; 
-    border: none; 
+    border: 1px solid #a6602d; 
     font-weight: 300; 
     transition: background-color .2s ease-in-out, color .2s ease-in-out; 
     width: 100%; 
@@ -100,8 +100,8 @@ body {
 } 
  
 .product-btn:hover { 
-    background: rgba(112, 110, 92, 0.7); 
-    color: rgba(254, 250, 240, 0.7); 
+    background: transparent;
+    color: #a6602d;  
     /* text-decoration: none; */ 
 } 
  

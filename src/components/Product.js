@@ -7,11 +7,39 @@ import imgTwo from "../assets/Godav.png"
 import imgThree from "../assets/Mahanadhi.png"
 import imgFour from "../assets/Sharav.png"
 import imgFive from "../assets/Tapti.png"
+
+import Img1 from "../assets/Tapti.png"
+import Img2 from "../assets/Tunga.png"
+import Img3 from "../assets/Cauvery.png"
+import Img4 from "../assets/Tapti.png"
+import Img5 from "../assets/Tapti.png"
+import Img6 from "../assets/Tapti.png"
+import Img7 from "../assets/Tapti.png"
+import Img8 from "../assets/Tapti.png"
+import Img9 from "../assets/Tapti.png"
+import Img10 from "../assets/Tapti.png"
+import Img11 from "../assets/Tapti.png"
+import Img12 from "../assets/Tapti.png"
+
 import { useNavigate, useParams } from 'react-router-dom'
 
 const Product = () => {
 
-    const [selectedImage, setSelectedImage] = React.useState(prodImg)
+    const images = [Img1, Img2, Img3, Img4, Img5, Img6, Img7, Img8, Img9, Img10, Img11, Img12]
+    const [index, setIndex] = React.useState()
+    useEffect(() => {
+        getProductDetails()
+        const email = localStorage.getItem("userEmail")
+        if (email) setIsLogin(true)
+        const index = localStorage.getItem('index')
+        setIndex(index)
+        setSelectedImage(images[index])
+        // console.log(index)
+        // setIsCart(localStorage.getItem(`product${params.id}`))
+        // console.log(localStorage.getItem(`product${params.id}`))
+    }, [])
+
+    const [selectedImage, setSelectedImage] = React.useState(images[index])
     // const [id, setId] = React.useState()
     const [name, setName] = React.useState()
     const [price, setPrice] = React.useState()
@@ -25,21 +53,19 @@ const Product = () => {
     const [isLogin, setIsLogin] = React.useState(false)
 
 
+
+
     const selectImage = (type) => {
         setSelectedImage(type)
     }
 
-    useEffect(() => {
-        getProductDetails()
-        const email = localStorage.getItem("userEmail")
-        if (email) setIsLogin(true)
-        // setIsCart(localStorage.getItem(`product${params.id}`))
-        // console.log(localStorage.getItem(`product${params.id}`))
-    }, [])
+
 
     const getProductDetails = async () => {
         console.log(params)
-        let result = await fetch(`https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/get-product-details/${params.id}`)
+        let result = await fetch(`https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/get-product-details/${params.id}`, {
+            method: "POST"
+        })
         result = await result.json()
         console.log(result)
         setName(result.name)
@@ -95,12 +121,12 @@ const Product = () => {
                 <img src={selectedImage} alt="Tunga jersey" class="product-display-img" />
                 <div class="product-all-images">
                     <button onClick={() => selectImage(imgOne)}>
-                        <img src={imgOne} alt="Tunga jersey" class="product-img-button" />
+                        <img src={images[index]} alt="Tunga jersey" class="product-img-button" />
                     </button>
                     <button onClick={() => selectImage(imgTwo)}>
                         <img src={imgTwo} alt="Cauvery jersey" class="product-img-button" />
                     </button>
-                    <button onClick={() => selectImage(imgThree)}>
+                    {/* <button onClick={() => selectImage(imgThree)}>
                         <img src={imgThree} alt="Godavari jersey" class="product-img-button" />
                     </button>
                     <button onClick={() => selectImage(imgFour)}>
@@ -108,7 +134,7 @@ const Product = () => {
                     </button>
                     <button onClick={() => selectImage(imgFive)}>
                         <img src={imgFive} alt="Tapti jersey" class="product-img-button" />
-                    </button>
+                    </button> */}
                 </div>
             </div>
             <div class="product-product-description">

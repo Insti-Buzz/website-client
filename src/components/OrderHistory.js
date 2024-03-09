@@ -94,15 +94,15 @@ function OrderHistory() {
     function e1(item, index) {
         return (
             <div>
-                <div class="checkout-product-card">
-                    <div class="checkout-product-img-container">
+                <div class="orders-product-card">
+                    {/* <div class="checkout-product-img-container">
                         <img src={TungaImg} alt="Tunga jersey" />
-                    </div>
-                    <div class="checkout-product-details">
+                    </div> */}
+                    <div class="orders-product-details">
                         <div class="checkout-product-name">
                             <h2>{item.name}</h2>
                         </div>
-                        <div class="checkout-product-price">
+                        <div class="orders-product-price">
                             <h3>₹{item.price}</h3>
                         </div>
                     </div>

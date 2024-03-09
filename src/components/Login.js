@@ -62,9 +62,9 @@ function Login() {
                     <input className='login-input' type='password' placeholder='Enter Password' value={password}
                         onChange={(e) => { setPassword(e.target.value) }} />
                     {error && !password && <span className='invalid-input'>Enter valid password</span>}
-                    <div class="forgot-password">
+                    {/* <div class="forgot-password">
                         <a href="">Forgot password?</a> <br />
-                    </div>
+                    </div> */}
                     <div class="login-btn-container">
                         <button className='login-btn' onClick={Login}>Login</button>
                     </div>

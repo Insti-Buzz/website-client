@@ -19,7 +19,7 @@ body {
 }
 
 .signup-form {
-    padding: 0px 80px 0 80px;
+    padding: 0px 40px;
     /* text-align: center; */
 }
 
@@ -98,7 +98,7 @@ body {
     border: 1px solid #a6602d;
     font-weight: 300;
     transition: background .2s ease-in-out, color.2s ease-in-out;
-    width: 420px;
+    width: 100%;
     cursor: pointer;
 }
 
@@ -164,4 +164,10 @@ body {
 
 .sinup-popup-content-button:hover {
     background-color: #45a049;
+}
+
+@media (max-width:940px){
+    .signup-img-container{
+        display: none;
+    }
 }
