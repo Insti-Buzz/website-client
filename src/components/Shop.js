@@ -1,85 +1,90 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import "../css/Shop.css";
 // import topImg from "../assets/22e53e_ef2ebbf33af24b7fba34e44589f3dc38~mv2.webp"
-import topImg from "../assets/Untitled design.png"
-import prodImg from "../assets/Screenshot 2024-02-17 033151.png"
+import topImg from "../assets/Untitled design.png";
+import prodImg from "../assets/Screenshot 2024-02-17 033151.png";
 
-import Img1 from "../assets/BossBaby1.png"
-import Img2 from "../assets/TakeLite1.jpg"
-import Img3 from "../assets/Green1.jpg"
-import Img4 from "../assets/White1.jpg"
-import Img5 from "../assets/BossBaby2.png"
-import Img7 from "../assets/Green2.jpg"
-import Img6 from "../assets/TakeLite2.jpg"
-import Img8 from "../assets/White2 (2).jpg"
+import Img1 from "../assets/BossBaby1.png";
+import Img2 from "../assets/TakeLite1.jpg";
+import Img3 from "../assets/Green1.jpg";
+import Img4 from "../assets/White1.jpg";
+import Img5 from "../assets/BossBaby2.png";
+import Img7 from "../assets/Green2.jpg";
+import Img6 from "../assets/TakeLite2.jpg";
+import Img8 from "../assets/White2 (2).jpg";
 // import Img9 from "../assets/Tapti.png"
 // import Img10 from "../assets/Tapti.png"
 // import Img11 from "../assets/Tapti.png"
 // import Img12 from "../assets/Tapti.png"
 
-import { Link, useNavigate } from 'react-router-dom';
-import CloseIcon from '@mui/icons-material/Close';
+import { Link, useNavigate } from "react-router-dom";
+import CloseIcon from "@mui/icons-material/Close";
 // import "../assets/Screenshot"
 
 function Shop() {
-
     const [products, setProducts] = useState([]);
-    const images=[Img1,Img2,Img3,Img4,Img5,Img6,Img7,Img8]
+    const images = [Img1, Img2, Img3, Img4, Img5, Img6, Img7, Img8];
 
     const navigate = useNavigate();
 
-    const productPage = async (productId,index) => {
-        localStorage.setItem('index',index)
-        navigate(`/product/${productId}`)
-    }
+    const productPage = async (productId, index) => {
+        localStorage.setItem("index", index);
+        navigate(`/product/${productId}`);
+    };
 
     useEffect(() => {
         // console.log("object")
         getProducts();
-    }, [])
+    }, []);
 
     const getProducts = async () => {
-        console.log("object")
+        console.log("object");
         try {
-            let result = await fetch('https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/get-product', {
-                // headers:{
+            let result = await fetch(
+                "https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/get-product",
+                {
+                    // headers:{
 
-                // }
-                method: "POST"
-            });
+                    // }
+                    method: "POST",
+                }
+            );
             // console.log(result)
-            console.log(result)
+            console.log(result);
             result = await result.json();
-            console.log(result)
+            console.log(result);
             setProducts(result);
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
-    }
-
-
+    };
 
     function e(item, index) {
-        const productId = item.product_id
+        const productId = item.product_id;
         return (
-            <div className='shop-product-div' >
-                <button className='shop-product-card' onClick={() => productPage(item.product_id,index)}>
-
+            <div className="shop-product-div">
+                <button
+                    className="shop-product-card"
+                    onClick={() => productPage(item.product_id, index)}
+                >
                     <img src={images[index]} alt="Image " />
                     {/* <Link className='home-right-product' to="/" >Product Details</Link> */}
-                    <div className='shop-product-name'><h2>{item.name}</h2></div>
+                    <div className="shop-product-name">
+                        <h2>{item.name}</h2>
+                    </div>
                     {/* <h3 className='home-right-product'>{item.details}</h3> */}
-                    <div className='shop-product-price'><h3>Rs. {item.price}</h3></div>
+                    <div className="shop-product-price">
+                        <h3>Rs. {item.price}</h3>
+                    </div>
                     {/* <p className='home-right-product'>({item.discount} margin)</p>
                 <h3 className='home-right-product'>{item.colors}</h3> */}
                     {/* <Link className='shop-product-details' to={"/app/product/" + item.product_id} >Product Details</Link> */}
                 </button>
             </div>
-        )
+        );
     }
 
     return (
-
         <div class="shop-body-container">
             {/* <div class="shop-path-display">
                 <span>
@@ -121,26 +126,22 @@ function Shop() {
                     <div class="shop-products">
                         <div class="shop-products-title">
                             <h2>All Products</h2>
-                            <p>This is your category description. It’s a great place to tell customers what this category is
-                                about, connect with your audience and draw attention to your products.</p>
+                            <p>
+                                This is your category description. It’s a great place to tell
+                                customers what this category is about, connect with your
+                                audience and draw attention to your products.
+                            </p>
                         </div>
                         <div class="shop-products-count">
                             <h2>{Object.keys(products).length} products</h2>
                         </div>
 
-                        <div className='shop-products-display'>
-                            {
-                                products.map(e)
-                            }
-                        </div>
-
+                        <div className="shop-products-display">{products.map(e)}</div>
                     </div>
                 </div>
             </div>
         </div>
-
-
-    )
+    );
 }
 
-export default Shop
+export default Shop;

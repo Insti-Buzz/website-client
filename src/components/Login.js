@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import img from "../assets/photo1709765317.jpeg"
 import { useNavigate } from 'react-router-dom'
 import "../css/Login.css"
-import img2 from "../assets/photo1709768748.jpeg"
+import img2 from "../assets/Horizontal Logo Transparent.png"
 
 function Login() {
     const [email, setEmail] = React.useState()
@@ -44,8 +44,8 @@ function Login() {
         }
     }
 
-    const toSignup=()=>{
-      navigate('/signup')
+    const toSignup = () => {
+        navigate('/signup')
     }
     return (
         <div class="login-main-container">
@@ -56,10 +56,10 @@ function Login() {
                     </div>
                     <h1>The All-in-One Campus Fashion Brand</h1>
                     <h4>Please Login to your Account</h4>
-                    <input className='login-input' type='text' placeholder='Enter your email' value={email}
+                    <input className='login-input' type='text' placeholder='Email address' value={email}
                         onChange={(e) => { setEmail(e.target.value) }} />
                     {error && !email && <span className='invalid-input'>Enter valid email</span>}
-                    <input className='login-input' type='password' placeholder='Enter Password' value={password}
+                    <input className='login-input' type='password' placeholder='Password' value={password}
                         onChange={(e) => { setPassword(e.target.value) }} />
                     {error && !password && <span className='invalid-input'>Enter valid password</span>}
                     {/* <div class="forgot-password">
@@ -68,7 +68,6 @@ function Login() {
                     <div class="login-btn-container">
                         <button className='login-btn' onClick={Login}>Login</button>
                     </div>
-
                     <h2>OR</h2>
                     <div class="signup-btn-container">
                         <button type="button" class="signup-btn" onClick={toSignup}>Sign Up</button>

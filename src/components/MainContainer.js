@@ -13,7 +13,7 @@ function MainContainer() {
             {<Navbar />}
             {/* <Home2/>     */}
             <Outlet />
-            {/* {<Footer />} */}
+            {<Footer />}
         </div>
     )
 }

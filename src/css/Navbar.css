@@ -2,9 +2,11 @@
     background-color: #fefaf0;
     display: inline-flex;
     width: 96%;
-    height: 50px;
-    margin-left: 2%;
-    margin-top: 15px;
+    height: 9vh;
+    padding: 0 2%;
+    /* margin-top: 15px; */
+    position: fixed;
+    z-index: 1;
 }
 
 .nav-navbar .nav-top-left {
