@@ -24,7 +24,7 @@ function Login() {
             setError(true)
             return false
         }
-        let result = await fetch('https://mollusk-thankful-externally.ngrok-free.app/api/v1/auth/login', {
+        let result = await fetch('http://13.49.225.235/api/v1/auth/login', {
             method: 'POST',
             body: JSON.stringify({ email, password }),
             headers: {

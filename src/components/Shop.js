@@ -24,12 +24,13 @@ import CloseIcon from '@mui/icons-material/Close';
 function Shop() {
 
     const [products, setProducts] = useState([]);
-    const images=[Img1,Img2,Img3,Img4,Img5,Img6,Img7,Img8]
+    const [loading, setLoading] = React.useState(false)
+    const images = [Img1, Img2, Img3, Img4, Img5, Img6, Img7, Img8]
 
     const navigate = useNavigate();
 
-    const productPage = async (productId,index) => {
-        localStorage.setItem('index',index)
+    const productPage = async (productId, index) => {
+        localStorage.setItem('index', index)
         navigate(`/product/${productId}`)
     }
 
@@ -39,9 +40,10 @@ function Shop() {
     }, [])
 
     const getProducts = async () => {
+        setLoading(true)
         console.log("object")
         try {
-            let result = await fetch('https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/get-product', {
+            let result = await fetch('http://13.49.225.235/api/v1/products/get-product', {
                 // headers:{
 
                 // }
@@ -55,6 +57,7 @@ function Shop() {
         } catch (error) {
             console.log(error)
         }
+        setLoading(false)
     }
 
 
@@ -63,7 +66,7 @@ function Shop() {
         const productId = item.product_id
         return (
             <div className='shop-product-div' >
-                <button className='shop-product-card' onClick={() => productPage(item.product_id,index)}>
+                <button className='shop-product-card' onClick={() => productPage(item.product_id, index)}>
 
                     <img src={images[index]} alt="Image " />
                     {/* <Link className='home-right-product' to="/" >Product Details</Link> */}
