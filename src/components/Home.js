@@ -35,7 +35,7 @@ function Home() {
       </div>
     
       
-      {/* <div className="home-content home-content-two">
+      <div className="home-content home-content-two">
         
         <h1 className='home-title'>Latest Arrivals</h1>
         
@@ -72,15 +72,15 @@ function Home() {
 
 
         </div>
-    </div> */}
+    </div>
 
-      {/* <div className="home-content home-content-three">
+      <div className="home-content home-content-three">
         <div className="home-about-container">
           <h1 className="home-heading">About InstiBuzz</h1>
           <h2 className="home-about-text">At InstiBuzz, we celebrate the vibrant campus life by offering an exclusive<br />
                       collection of T-shirts that feature Insti slang, taglines, and campus spirit <br />
                       designs. We carefully select each piece in our collections, making sure that it<br />
-                      meets our high standards. Our T-shirts feel exceptional because they are:<br />
+                      meets our high standards. Our T-shirts feel exceptional because they are<br />
                       expertly crafted to fit well, last long and look great. Shop today and experience<br />
                       the campus spirit.</h2>
         </div>
@@ -91,9 +91,9 @@ function Home() {
             <br /> committed to bringing you the latest trends and styles that capture your campus spirit.
           </p>
           <a className='home-learn-more-button' href=''>Learn More</a>
-          <img src={Image2} alt="Some Image" className="home-image-two" />
+          {/* <img src={Image2} alt="Some Image" className="home-image-two" /> */}
         </div>
-      </div> */}
+      </div>
     </>
   )
 }

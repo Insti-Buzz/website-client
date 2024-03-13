@@ -1,26 +1,26 @@
-import React, { useEffect } from 'react'
-import "../css/Signup.css"
-import img from "../assets/973300f3-c585-48d9-9e8c-601a3ae24121.png"
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect } from "react";
+import "../css/Signup.css";
+import img from "../assets/973300f3-c585-48d9-9e8c-601a3ae24121.png";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
-    const navigate = useNavigate()
-    const [name, setName] = React.useState('')
-    const [email, setEmail] = React.useState('')
-    const [password, setPassword] = React.useState('')
-    const [phoneNumber, setPhoneNumber] = React.useState()
-    const [error, setError] = React.useState(false)
+  const navigate = useNavigate();
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [phoneNumber, setPhoneNumber] = React.useState();
+  const [error, setError] = React.useState(false);
 
-    const [showOtp, setShowOtp] = React.useState(false)
-    const [otp, setOtp] = React.useState()
+  const [showOtp, setShowOtp] = React.useState(false);
+  const [otp, setOtp] = React.useState();
 
-    useEffect(() => {
-        const email = localStorage.getItem('userEmail')
-        const token = localStorage.getItem('token')
-        if (email && token) {
-            navigate('/')
-        }
-    }, [])
+  useEffect(() => {
+    const email = localStorage.getItem("userEmail");
+    const token = localStorage.getItem("token");
+    if (email && token) {
+      navigate("/");
+    }
+  }, []);
 
     const Signup = async () => {
         if (!name || !email || !password||!phoneNumber) {
@@ -130,4 +130,4 @@ function Signup() {
     )
 }
 
-export default Signup
+export default Signup;

@@ -1,13 +1,8 @@
-
-
-body {
+.signup-main-container {
     font-family: "Poppins", sans-serif;
     margin: 0;
     /* padding: 0; */
-    height: 100vh;
-}
-
-.signup-main-container {
+    height: 90vh;
     display: flex;
 }
 
@@ -26,7 +21,7 @@ body {
 .signup-img-container {
     flex: 1;
     display: flex;
-    height: 100vh;
+    height: 100%;
     overflow: hidden;
     background-color: #F8E9AE;
     align-items: center;
@@ -79,7 +74,7 @@ body {
     cursor: pointer;
 }
 
-.signup-btn-container {
+.signup-form .signup-btn-container {
     margin-top: 16px;
     text-align: center;
 }
@@ -162,7 +157,12 @@ body {
     font-size: 16px;
 }
 
-.sinup-popup-content-button:hover {
+.login-link {
+    color: blue;
+    text-decoration: underline;
+}
+
+.signup-popup-content-button:hover {
     background-color: #b97f28;
 }
 
