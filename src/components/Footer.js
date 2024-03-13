@@ -23,7 +23,7 @@ function Footer() {
                 <a href="#">Contact Us</a>
               </li>
               <li>
-                <a href="#">Terms</a>
+                <a href="#">Terms & Conditions</a>
               </li>
             </ul>
           </div>
@@ -39,9 +39,8 @@ function Footer() {
             </div>
             <div class="social">
               <a href="#"><i class="fa fa-instagram"></i></a>
-              <a href="#"><i class="fa fa-snapchat"></i></a>
-              <a href="#"><i class="fa fa-twitter"></i></a>
-              <a href="#"><i class="fa fa-facebook-f"></i></a>
+              <a href="#"><i class="fa fa-linkedin"></i></a>
+              <a href="#"><i class="fa fa-google"></i></a>
             </div>
           </div>
         </div>
