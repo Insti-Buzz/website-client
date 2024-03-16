@@ -2,67 +2,100 @@ import React, { useEffect } from "react";
 import "../css/Signup.css";
 import img from "../assets/973300f3-c585-48d9-9e8c-601a3ae24121.png";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function Signup() {
-  const navigate = useNavigate();
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [phoneNumber, setPhoneNumber] = React.useState();
-  const [error, setError] = React.useState(false);
+    const navigate = useNavigate();
+    const [name, setName] = React.useState("");
+    const [email, setEmail] = React.useState("");
+    const [password, setPassword] = React.useState("");
+    const [phoneNumber, setPhoneNumber] = React.useState();
+    const [error, setError] = React.useState(false);
 
-  const [showOtp, setShowOtp] = React.useState(false);
-  const [otp, setOtp] = React.useState();
+    const [showOtp, setShowOtp] = React.useState(false);
+    const [otp, setOtp] = React.useState();
+    const [isEnabled, setIsEnabled] = React.useState(true);
 
-  useEffect(() => {
-    const email = localStorage.getItem("userEmail");
-    const token = localStorage.getItem("token");
-    if (email && token) {
-      navigate("/");
-    }
-  }, []);
+    useEffect(() => {
+        const email = localStorage.getItem("userEmail");
+        const token = localStorage.getItem("token");
+        if (email && token) {
+            navigate("/");
+        }
+    }, []);
 
     const Signup = async () => {
-        if (!name || !email || !password||!phoneNumber) {
+        setIsEnabled(false)
+        if (!name || !email || !password || !phoneNumber) {
             setError(true)
             return false
         }
-        let result = await fetch('http://13.49.225.235/api/v1/auth/register', {
+
+        let result = await fetch('http://localhost:5000/api/v1/auth/register', {
             method: 'POST',
-            body: JSON.stringify({ name, email, password,phoneNumber }),
+            body: JSON.stringify({ name, email, password, phoneNumber }),
             headers: {
                 'Content-Type': 'application/json'
             },
         })
         result = await result.json();
+        setIsEnabled(true)
         console.log(result)
         if (result.status != 200) {
-            alert(result.message)
-            return;
+            console.log(result.message);
+            // alert(result.message)
+            throw new Error(result.message)
         }
         // localStorage.setItem('userEmail', email)
         setShowOtp(true)
+        return result
     }
+
+    const signUpToast = () => toast.promise(Signup(), {
+        loading: 'Sending OTP',
+        success: (result) => {
+            return result.message;
+        },
+        error: (result) => {
+            return result.message
+        },
+    });
+
+    const otpToast = () => toast.promise(otpVerify(), {
+        loading: 'Verifying OTP',
+        success: (result) => {
+            return result.message;
+        },
+        error: (result) => {
+            return result.message
+        },
+    },
+    {
+        id:'otpVerifyToast'
+    })
+
 
     const otpVerify = async () => {
         if (!otp) {
             setError(true)
             return false
         }
-        let result = await fetch('http://13.49.225.235/api/v1/auth/verifyOtp', {
+        let result = await fetch('http://localhost:5000/api/v1/auth/verifyOtp', {
             method: 'POST',
-            body: JSON.stringify({ name, email, password,phoneNumber, otp }),
+            body: JSON.stringify({ name, email, password, phoneNumber, otp }),
             headers: {
                 'Content-Type': 'application/json'
             },
         })
         result = await result.json();
         if (result.status == 404) {
-            alert(result.error)
+            // alert(result.error)
+            throw new Error(result.error);
         } else {
-            alert(result.message)
+            // alert(result.message)
             // localStorage.setItem("userEmail", email)
             navigate('/login')
+            return result
         }
         console.log(result)
 
@@ -89,7 +122,7 @@ function Signup() {
                     {error && !email && <span className='invalid-input'>Enter valid email</span>}
                     <br />
                     <input type="text" placeholder="Enter your number" className="signup-input" value={phoneNumber}
-                    onChange={(e)=>setPhoneNumber(e.target.value)}/>
+                        onChange={(e) => setPhoneNumber(e.target.value)} />
                     {error && !phoneNumber && <span className='invalid-input'>Enter valid Phone Number</span>}
                     <br />
                     <input className='signup-input' type='password' placeholder='Enter Password' value={password}
@@ -105,7 +138,7 @@ function Signup() {
                     </div>
 
                     <div class="signup-btn-container">
-                        <button onClick={Signup} value="Sign Up" class="signup-btn" >Signup</button>
+                        <button onClick={signUpToast} value="Sign Up" class="signup-btn" disabled={!isEnabled}>Signup</button>
                     </div>
                     <div>
                         {showOtp && (
@@ -117,7 +150,7 @@ function Signup() {
                                             onChange={(e) => { setOtp(e.target.value) }} />
                                         {error && !otp && <span className='invalid-input'>Enter valid otp</span>}
                                     </div>
-                                    <button className='sinup-popup-content-button' onClick={otpVerify}>Proceed</button>
+                                    <button className='sinup-popup-content-button' onClick={otpToast}>Proceed</button>
                                 </div>
                             </div>
                         )}

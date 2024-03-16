@@ -41,7 +41,7 @@ function Shop() {
         console.log("object");
         try {
             let result = await fetch(
-                "http://13.49.225.235/api/v1/products/get-product",
+                "http://localhost:5000/api/v1/products/get-product",
                 {
                     // headers:{
 

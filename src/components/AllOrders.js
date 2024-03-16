@@ -28,7 +28,7 @@ function AllOrders() {
         const email = localStorage.getItem("userEmail")
         const token = localStorage.getItem("token")
         console.log(email)
-        let result = await fetch('http://13.49.225.235/api/v1/products/allOrders', {
+        let result = await fetch('http://localhost:5000/api/v1/products/allOrders', {
             method: 'POST',
             body: JSON.stringify({ email }),
             headers: {
@@ -55,7 +55,7 @@ function AllOrders() {
 
         const deliveryDone = async () => {
             const token = localStorage.getItem("token")
-            let result = await fetch('http://13.49.225.235/api/v1/products/delivered', {
+            let result = await fetch('http://localhost:5000/api/v1/products/delivered', {
                 method: 'POST',
                 body: JSON.stringify({ orderId }),
                 headers: {

@@ -32,7 +32,7 @@ function AddProduct() {
             return false
         }
         const token = localStorage.getItem("token");
-        let result = await fetch('http://13.49.225.235/api/v1/products/add-product', {
+        let result = await fetch('http://localhost:5000/api/v1/products/add-product', {
             method: 'POST',
             body: JSON.stringify({ name, details, price, }),
             headers: {
