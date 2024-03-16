@@ -32,7 +32,7 @@ function AddProduct() {
             return false
         }
         const token = localStorage.getItem("token");
-        let result = await fetch('http://localhost:5000/api/v1/products/add-product', {
+        let result = await fetch('https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/add-product', {
             method: 'POST',
             body: JSON.stringify({ name, details, price, }),
             headers: {
