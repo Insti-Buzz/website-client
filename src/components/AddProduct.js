@@ -6,7 +6,7 @@ function AddProduct() {
     const [name, setName] = React.useState('');
     const [details, setDetails] = React.useState('');
     const [colors, setColors] = React.useState('');
-    const [sizes, setSizes] = React.useState([]);
+    const [sizeQuantities, setSizeQuantities] = React.useState([{ size: '', quantity: '' }]);
     const [price, setPrice] = React.useState('');
     const [quantity, setQuantity] = React.useState('');
     const [discount, setDiscout] = React.useState('');
@@ -16,15 +16,34 @@ function AddProduct() {
 
     useEffect(() => {
         const email = localStorage.getItem('userEmail')
-        const token=localStorage.getItem('token')
-        if (!email||!token) {
+        const token = localStorage.getItem('token')
+        if (!email || !token) {
             alert("Please Login")
             navigate('/')
         }
-        if(email!='instibuzziitm@gmail.com'){
+        if (email != 'instibuzziitm@gmail.com') {
             navigate('/')
         }
     }, [])
+
+
+    const sizeInputChange = (index, event) => {
+        const { name, value } = event.target;
+        const newInputs = [...sizeQuantities];
+        newInputs[index][name] = value;
+        setSizeQuantities(newInputs);
+      };
+    
+      const addSizeInputs = () => {
+        setSizeQuantities([...sizeQuantities, { size: '', quantity: '' }]);
+        console.log(sizeQuantities)
+      };
+    
+      const sizeDeleteRow = (index) => {
+        const newInputs = [...sizeQuantities];
+        newInputs.splice(index, 1);
+        setSizeQuantities(newInputs);
+      };
 
     const addProduct = async () => {
         if (!name || !price || !details) {
@@ -34,7 +53,7 @@ function AddProduct() {
         const token = localStorage.getItem("token");
         let result = await fetch('https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/add-product', {
             method: 'POST',
-            body: JSON.stringify({ name, details, price, }),
+            body: JSON.stringify({ name, details, price, sizeQuantities }),
             headers: {
                 'Content-Type': 'application/json',
                 "Authorization": `Bearer ${token}`
@@ -66,10 +85,34 @@ function AddProduct() {
             <input className='addproduct-colors' type='text' placeholder='Enter product colors' value={colors}
                 onChange={(e) => { setColors(e.target.value) }} />
 
-            <p className='addproduct-items'>Sizes</p>
-            <input className='addproduct-sizes' type='text' placeholder='Enter product sizes' value={sizes}
+
+            <p className='addproduct-items'>Sizes& Quantity</p>
+            <div className='addproduct-sizes'>
+                {sizeQuantities.map((sizeQuantity, index) => (
+                    <div key={index}>
+                        <input
+                            type="text"
+                            placeholder="Size"
+                            name="size"
+                            value={sizeQuantity.size}
+                            onChange={(e) => sizeInputChange(index, e)}
+                        />
+                        <input
+                            type="number"
+                            placeholder="Quantity"
+                            name="quantity"
+                            value={sizeQuantity.quantity}
+                            onChange={(e) => sizeInputChange(index, e)}
+                        />
+                        <button onClick={() => sizeDeleteRow(index)}>Delete</button>
+                    </div>
+                ))}
+                <button onClick={addSizeInputs}>Add More Sizes</button>
+            </div>
+
+            {/* <input className='addproduct-sizes' type='text' placeholder='Enter product sizes' value={sizes}
                 onChange={(e) => { setSizes(e.target.value) }} />
-            {error && !name && <span className='invalid-input'>Enter valid sizes</span>}
+            {error && !name && <span className='invalid-input'>Enter valid sizes</span>} */}
 
             <div className='addproduct-last-div'>
                 <div className='addproduct-price-div'>
