@@ -14,86 +14,23 @@ function Cart() {
     // const [quantity, setQuantity] = useState(Array.from({ length: products.length }, () => 1));
     // const [quantity, setQuantity] = useState(Array(products.length).fill(1));
     const [quantity, setQuantity] = useState('1');
-    const [selectedSize, setSelectedSize] = useState(Array(products.length).fill());
+    // const [selectedSize, setSelectedSize] = useState(Array(products.length).fill());
     const [totalAmount, setTotalAmount] = React.useState()
-    const [showDetails, setShowDetails] = React.useState(false)
+    // const [showDetails, setShowDetails] = React.useState(false)
     const [showPayment, setShowPayment] = React.useState(false)
-
-    // const [name, setName] = React.useState('')
     const [email, setEmail] = React.useState('')
-    // const [phoneNumber, setPhoneNumber] = React.useState('')
-    // const [error, setError] = React.useState(false)
     const navigate = useNavigate('')
-
-
-
-    const handleInputChange = (index, event) => {
-        const inputValue = event.target.value;
-
-        // Allow only numbers by using a regular expression
-        const sanitizedValue = inputValue.replace(/[^0-9]/g, '');
-
-        // Create a new array with the updated value at the specified index
-        const newValues = [...quantity];
-        newValues[index] = sanitizedValue;
-
-        setQuantity(newValues);
-    };
-
-    const handleSizeChange = (index, event) => {
-        const inputSize = event.target.value
-        const newSizes = [...selectedSize]
-        newSizes[index] = inputSize
-        setSelectedSize(newSizes)
-    }
-
-    const calculateSubtotal = () => {
-        let subtotal = 0;
-
-        // Iterate through the products array
-        products.forEach((item, index) => {
-            // Convert quantity to a number
-            // const quantityValue = parseInt(quantity[index]);
-            const quantityValue = 1
-
-            // Check if quantity is a valid number
-            if (!isNaN(quantityValue)) {
-                // Calculate the subtotal for the current product and add it to the total
-                subtotal += quantityValue * item.price;
-            }
-        });
-        return subtotal;
-    };
 
     useEffect(() => {
         const email = localStorage.getItem('userEmail')
         const token = localStorage.getItem('token')
+        setEmail(email)
         if (!email || !token) {
             alert("Please Login")
             navigate('/')
         }
         getProducts();
     }, [])
-
-    const proceedPayment = () => {
-        console.log(quantity)
-        console.log(selectedSize)
-        const subtotal = calculateSubtotal()
-        setTotalAmount(subtotal)
-        // setShowDetails(false)
-        if (subtotal == 0) {
-            alert("Pls add products in cart")
-            return
-        }
-        if(!selectedSize){
-            alert("Please Select Size")
-            return
-        }
-        setShowPayment(true)
-
-    }
-
-
 
     const getProducts = async () => {
         const email = localStorage.getItem("userEmail")
@@ -126,9 +63,106 @@ function Cart() {
         }
     }
 
-    const closePayment=()=>{
+    // const handleInputChange = (index, event) => {
+    //     const inputValue = event.target.value;
+
+    //     // Allow only numbers by using a regular expression
+    //     const sanitizedValue = inputValue.replace(/[^0-9]/g, '');
+
+    //     // Create a new array with the updated value at the specified index
+    //     const newValues = [...quantity];
+    //     newValues[index] = sanitizedValue;
+
+    //     setQuantity(newValues);
+    // };
+
+    const updateSize = async (id, e) => {
+        const email = localStorage.getItem(`userEmail`)
+        const token = localStorage.getItem('token')
+        const updatedSize = e.target.value
+        const orderItem_id = id
+        const response = await fetch("https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/changeSizeInCart", {
+            method: "POST",
+            body: JSON.stringify({
+                orderItem_id,
+                updatedSize,
+                email,
+            }),
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+        });
+        const result = await response.json();
+        console.log(result);
+        window.location.reload();
+    }
+
+    const updateQuantity = async (id, e) => {
+        const email = localStorage.getItem(`userEmail`)
+        const token = localStorage.getItem('token')
+        const updatedQuantity = e.target.value
+        const orderItem_id = id
+        const response = await fetch("https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/changeQuantityInCart", {
+            method: "POST",
+            body: JSON.stringify({
+                orderItem_id,
+                updatedQuantity,
+                email,
+            }),
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+        });
+        const result = await response.json();
+        console.log(result);
+        window.location.reload();
+    }
+
+    const calculateSubtotal = () => {
+        let subtotal = 0;
+
+        // Iterate through the products array
+        products.forEach((item, index) => {
+            // Convert quantity to a number
+            // const quantityValue = parseInt(quantity[index]);
+            const quantityValue = item.quantity
+
+            // Check if quantity is a valid number
+            if (!isNaN(quantityValue)) {
+                // Calculate the subtotal for the current product and add it to the total
+                subtotal += quantityValue * item.price;
+            }
+        });
+        return subtotal;
+    };
+
+
+
+    const proceedPayment = () => {
+        console.log(quantity)
+        // console.log(selectedSize)
+        const subtotal = calculateSubtotal()
+        setTotalAmount(subtotal)
+        // setShowDetails(false)
+        if (subtotal == 0) {
+            alert("Pls add products in cart")
+            return
+        }
+        // if (!selectedSize) {
+        //     alert("Please Select Size")
+        //     return
+        // }
+        setShowPayment(true)
+
+    }
+
+
+    const closePayment = () => {
         setShowPayment(false)
     }
+
     function e(item, index) {
         return (
             <div class="checkout-product-card">
@@ -137,19 +171,21 @@ function Cart() {
                 </div> */}
                 <div class="checkout-product-details">
                     <div class="checkout-product-name">
-                        <h2>{item.name}</h2>
+                        <h2>{item.product.name}</h2>
                     </div>
                     <div class="checkout-product-price">
-                        <h3>₹{item.price}</h3>
+                        <h3>₹{item.product.price}</h3>
                     </div>
                 </div>
-                {/* <div class="checkout-product-quantity">
-                    <input type="number" name="product-quantity" placeholder={quantity[index]} id="product-quantity" value={quantity[index]}
-                        min="1" max='5' onChange={(e => { handleInputChange(index, e) })} />
-                </div> */}
+                <div class="checkout-product-quantity">
+                    {/* <input type="number" name="product-quantity" placeholder={quantity[index]} id="product-quantity" value={quantity[index]} */}
+                    <input type="number" name="product-quantity" id="product-quantity" value={item.quantity}
+                        min="1" max='5' onChange={(e => { updateQuantity(item.orderItem_id, e) })} />
+                </div>
                 <div class="checkout-product-size">
-                    <select id="dropdown" placeholdeer={selectedSize[index]} value={selectedSize[index]} onChange={(e => { handleSizeChange(index, e) })}>
-                        <option value="">{selectedSize}</option>
+                    {/* <select id="dropdown" value={selectedSize[index]} onChange={(e => { handleSizeChange(index, e) })}> */}
+                    <select id="dropdown" value={item.size} onChange={(e) => updateSize(item.orderItem_id, e)}>
+                        {/* <option value="">{selectedSize}</option> */}
                         <option value="S">S</option>
                         <option value="M">M</option>
                         <option value="L">L</option>
@@ -158,10 +194,10 @@ function Cart() {
                     </select>
                 </div>
                 <div class="checkout-product-net-price">
-                    <h3>{quantity[index] * item.price || item.price}</h3>
+                    <h3>{item.quantity* item.product.price || item.product.price}</h3>
                 </div>
                 <div class="checkout-product-cancel">
-                    <IconButton onClick={() => removeFromCart(item.product_id)}><CloseIcon /></IconButton>
+                    <IconButton onClick={() => removeFromCart(item.product.product_id)}><CloseIcon /></IconButton>
                     {/* <button onClick={() => removeFromCart(item.product_id)} type="button">
                         cross
                     </button> */}
@@ -173,6 +209,7 @@ function Cart() {
 
     const removeFromCart = async (id) => {
         console.log(id)
+        const token = localStorage.getItem('token')
         const email = localStorage.getItem(`userEmail`)
         const productId = id
         const response = await fetch("https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/removeFromCart", {
@@ -183,6 +220,7 @@ function Cart() {
             }),
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
             },
         });
         const result = await response.json();
@@ -275,7 +313,7 @@ function Cart() {
                 products,
                 totalAmount,
                 // quantity,
-                selectedSize
+                // selectedSize
             }),
             headers: {
                 "Content-Type": "application/json",
@@ -292,7 +330,7 @@ function Cart() {
         }
     }
 
-    const cancelOrder=()=>{
+    const cancelOrder = () => {
         setShowPayment(false)
     }
 

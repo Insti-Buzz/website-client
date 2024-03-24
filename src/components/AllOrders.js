@@ -19,7 +19,7 @@ function AllOrders() {
         if (email != 'instibuzziitm@gmail.com') {
             navigate('/')
         } else {
-        setIsAdmin(true)
+            setIsAdmin(true)
         }
         getProducts();
     }, [])
@@ -69,21 +69,31 @@ function AllOrders() {
             window.location.reload()
         }
 
+        const now = parseInt(item.date) // Get the current timestamp in milliseconds
+        const date = new Date(now);
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear();
+
         return (
             <div className='orders-div'>
                 <div>
-                    <div className='order-id'>OrderId : 
+                    <div className='order-id'>OrderId :
                         {
                             item.order_id
                         }
                     </div>
+                    <p>Date: {day + "-" + month + "-" + year}</p>
                     <p>
-                    {
-                        item.user.name
-                    }</p>
+                        {
+                            item.user.name
+                        }</p>
                     {
                         item.productsOrdered.map(e1)
                     }
+                </div>
+                <div>
+                    SubTotal:{item.subTotal}
                 </div>
                 <div>
                     {
@@ -110,7 +120,7 @@ function AllOrders() {
             <div className='order-my-order'>
                 <div class="order-card">
                     <div class="order-date">
-                        <p>22 April, 2023</p>
+                        {/* <p>22 April, 2023</p> */}
                     </div>
                     <hr />
                     <div class="order-product-img-container">
@@ -118,13 +128,13 @@ function AllOrders() {
                     </div>
                     <div class="order-product-details">
                         <div class="order-product-name">
-                            <h2>{item.name}</h2>
+                            <h2>{item.product.name}</h2>
                         </div>
                         <div class="order-product-size">
-                            Size: M
+                            Size: {item.size}
                         </div>
                         <div class="order-product-quantity">
-                            Qty: 1
+                            Qty: {item.quantity}
                         </div>
                     </div>
                 </div>

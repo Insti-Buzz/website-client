@@ -21,8 +21,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 const Product = () => {
 
-    const images = [Img1, Img2, Img3, Img4, ]
-    const images2=[Img5, Img6, Img7, Img8]
+    const images = [Img1, Img2, Img3, Img4,]
+    const images2 = [Img5, Img6, Img7, Img8]
     const [index, setIndex] = React.useState()
     // const [index2,setIndex2]=React.useState()
     useEffect(() => {
@@ -43,10 +43,10 @@ const Product = () => {
     // const [id, setId] = React.useState()
     const [name, setName] = React.useState()
     const [price, setPrice] = React.useState()
-    const [size, setSize] = React.useState([])
+    // const [size, setSize] = React.useState([])
     const [details, setDetails] = React.useState()
     const [quantity, setQuantity] = React.useState('1')
-    const [selectedSize, setselectedSize] = React.useState('L')
+    const [selectedSize, setselectedSize] = React.useState('S')
     const [isCart, setIsCart] = React.useState()
     const navigate = useNavigate()
     const params = useParams()
@@ -70,7 +70,7 @@ const Product = () => {
         console.log(result)
         setName(result.name)
         setPrice(result.price)
-        setSize(result.sizes)
+        // setSize(result.sizes)
         setDetails(result.details)
     }
 
@@ -87,7 +87,7 @@ const Product = () => {
         console.log(productId)
         let result = await fetch('https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/addToCart', {
             method: 'POST',
-            body: JSON.stringify({ email, productId }),
+            body: JSON.stringify({ email, productId,quantity ,selectedSize}),
             headers: {
                 'Content-Type': 'application/json',
                 "Authorization": `Bearer ${token}`
@@ -105,10 +105,6 @@ const Product = () => {
             navigate('/cart')
             window.location.reload();
         }
-
-
-        // console.log(isCart)
-
     }
 
     const toLogin = () => {
@@ -144,24 +140,22 @@ const Product = () => {
                 <div class="product-product-price">
                     <h3>₹{price}</h3>
                 </div>
-                {/* <div class="product-product-size">
+                <div class="product-product-size">
                     <p>Select Size</p>
                 </div>
                 <select id="dropdown" placeholdeer='SelectSize' value={selectedSize} onChange={(e => { setselectedSize(e.target.value) })}>
-                    <option value="">{selectedSize}</option>
-                    <option value="XS">XS</option>
+                    {/* <option value="">{selectedSize}</option> */}
                     <option value="S">S</option>
                     <option value="M">M</option>
                     <option value="L">L</option>
                     <option value="XL">XL</option>
                     <option value="XXL">XXL</option>
-                    <option value="XXXL">XXXL</option>
-                </select> */}
-                {/* <div class="product-product-quantity">
+                </select>
+                <div class="product-product-quantity">
                     <p>Quantity</p>
                     <input type="number" name="product-quantity" id="product-quantity" value={quantity}
                         min="1" max='5' onChange={(e => { setQuantity(e.target.value) })} />
-                </div> */}
+                </div>
                 {
                     isLogin ?
                         isCart ?
@@ -182,10 +176,10 @@ const Product = () => {
                 <hr />
                 <div class="product-product-details product-return-refund-policy">
                     <h3>10 Days replacement policy</h3>
-                    <p>Our products undergo thorough checks to ensure it is damage free. <br/>
-                        However, any damaged product shall be replaced free of cost.<br/>
+                    <p>Our products undergo thorough checks to ensure it is damage free. <br />
+                        However, any damaged product shall be replaced free of cost.<br />
                         The product should be handed over to us in the original packaging with all the tags and labels intact.
-                        
+
                     </p>
                 </div>
                 <hr />

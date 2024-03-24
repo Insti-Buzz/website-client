@@ -65,12 +65,25 @@ function OrderHistory() {
 
         //     window.location.reload()
         // }
+    const now = parseInt(item.date) // Get the current timestamp in milliseconds
+    const date = new Date(now);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
 
         return (
             <div className='orders-div'>
                 <div>
+                    <h3>Order Id: {item.order_id}</h3>
+                </div>
+                <div>
                     {
                         item.productsOrdered.map(e1)
+                    } 
+                </div>
+                <div>
+                    Subtotal:{
+                        item.subTotal
                     }
                 </div>
                 <div>
@@ -81,9 +94,9 @@ function OrderHistory() {
                             <p>Coming Soon</p>
                     }
                 </div>
-                <div><p>Sizes: 
+                <div><p>Date: 
                     {
-                        item.size
+                        day+"-"+month+"-"+ year
                     }
                     </p>
                 </div>
@@ -98,12 +111,21 @@ function OrderHistory() {
                     {/* <div class="checkout-product-img-container">
                         <img src={TungaImg} alt="Tunga jersey" />
                     </div> */}
+                    <div>
+                        {/* <h3>{item.orderItem_id}</h3> */}
+                    </div>
                     <div class="orders-product-details">
                         <div class="checkout-product-name">
-                            <h2>{item.name}</h2>
+                            <h2>{item.product.name}</h2>
                         </div>
                         <div class="orders-product-price">
-                            <h3>₹{item.price}</h3>
+                            <>₹{item.price}</>
+                        </div>
+                        <div>
+                           Quantity: {item.quantity}
+                        </div>
+                        <div>
+                        Size: { item.size}
                         </div>
                     </div>
                     <hr />
