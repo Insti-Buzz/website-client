@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react'
 import '../css/AddProduct.css'
 import { useNavigate } from 'react-router-dom';
+import { storage } from '../firebase';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { v4 } from 'uuid';
 
 function AddProduct() {
     const [name, setName] = React.useState('');
@@ -11,6 +14,7 @@ function AddProduct() {
     const [quantity, setQuantity] = React.useState('');
     const [discount, setDiscout] = React.useState('');
     const [error, setError] = React.useState(false)
+    const [imageUpload, setImageUpload] = React.useState([]);
     const navigate = useNavigate()
 
 
@@ -32,28 +36,42 @@ function AddProduct() {
         const newInputs = [...sizeQuantities];
         newInputs[index][name] = value;
         setSizeQuantities(newInputs);
-      };
-    
-      const addSizeInputs = () => {
+    };
+
+    const addSizeInputs = () => {
         setSizeQuantities([...sizeQuantities, { size: '', quantity: '' }]);
         console.log(sizeQuantities)
-      };
-    
-      const sizeDeleteRow = (index) => {
+    };
+
+    const sizeDeleteRow = (index) => {
         const newInputs = [...sizeQuantities];
         newInputs.splice(index, 1);
         setSizeQuantities(newInputs);
-      };
+    };
 
     const addProduct = async () => {
-        if (!name || !price || !details) {
+        var imageUrl = [];
+
+        if (!name || !price || !details || !imageUpload) {
             setError(true)
             return false
         }
+
+        for (var i = 0; i < imageUpload.length; i++) {
+            const imageRef = ref(storage, `images/${imageUpload[i].name + v4()}`);
+
+            await uploadBytes(imageRef, imageUpload[i]).then(() => {
+                getDownloadURL(imageRef).then((url) => {
+                    console.log('saada',url);
+                    imageUrl.push(url);
+                });
+            });
+        }
+        
         const token = localStorage.getItem("token");
         let result = await fetch('https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/add-product', {
             method: 'POST',
-            body: JSON.stringify({ name, details, price, sizeQuantities }),
+            body: JSON.stringify({ name, details, price, sizeQuantities, imageUrl}),
             headers: {
                 'Content-Type': 'application/json',
                 "Authorization": `Bearer ${token}`
@@ -67,8 +85,10 @@ function AddProduct() {
 
     return (
         <div>
-            <p className='addproduct-items'>Add images</p>
-            <input className='addproduct-img' type='text' placeholder='Drag and drop image here' />
+            <p className='addproduct-items'>Add image</p>
+            <input className='addproduct-img' type='file' multiple placeholder='Drag and drop image here'
+                onChange={(event) => { setImageUpload(event.target.files) }} />
+                
 
             <p className='addproduct-items'>Product Name</p>
             <input className='addproduct-name' type='text' placeholder='Enter product name' value={name}
@@ -78,7 +98,7 @@ function AddProduct() {
             <p className='addproduct-items'>Product Details</p>
             <input className='addproduct-details' type='text' placeholder='Enter your Product Details' value={details}
                 onChange={(e) => { setDetails(e.target.value) }} />
-            {error && !name && <span className='invalid-input'>Enter valid details</span>}
+            {error && !details && <span className='invalid-input'>Enter valid details</span>}
 
 
             <p className='addproduct-items'>Colors</p>
