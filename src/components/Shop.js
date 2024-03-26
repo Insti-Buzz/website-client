@@ -41,7 +41,7 @@ function Shop() {
         console.log("object");
         try {
             let result = await fetch(
-                "https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/get-product",
+                "http://3.110.81.106/api/v1/products/get-product",
                 {
                     // headers:{
 

@@ -68,8 +68,10 @@ function AddProduct() {
             });
         }
         
+        console.log('array wala url', imageUrl);
+        
         const token = localStorage.getItem("token");
-        let result = await fetch('https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/add-product', {
+        let result = await fetch('http://3.110.81.106/api/v1/products/add-product', {
             method: 'POST',
             body: JSON.stringify({ name, details, price, sizeQuantities, imageUrl}),
             headers: {
