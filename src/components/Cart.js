@@ -36,7 +36,7 @@ function Cart() {
         const email = localStorage.getItem("userEmail")
         setEmail(email)
         const token = localStorage.getItem('token')
-        let result = await fetch('http://localhost:5000/api/v1/products/getProductsInCart', {
+        let result = await fetch('https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/getProductsInCart', {
             method: "POST",
             body: JSON.stringify({
                 email,
@@ -81,7 +81,7 @@ function Cart() {
         const token = localStorage.getItem('token')
         const updatedSize = e.target.value
         const orderItem_id = id
-        const response = await fetch("http://localhost:5000/api/v1/products/changeSizeInCart", {
+        const response = await fetch("https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/changeSizeInCart", {
             method: "POST",
             body: JSON.stringify({
                 orderItem_id,
@@ -103,7 +103,7 @@ function Cart() {
         const token = localStorage.getItem('token')
         const updatedQuantity = e.target.value
         const orderItem_id = id
-        const response = await fetch("http://localhost:5000/api/v1/products/changeQuantityInCart", {
+        const response = await fetch("https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/changeQuantityInCart", {
             method: "POST",
             body: JSON.stringify({
                 orderItem_id,
@@ -197,7 +197,7 @@ function Cart() {
                     <h3>{item.quantity* item.product.price || item.product.price}</h3>
                 </div>
                 <div class="checkout-product-cancel">
-                    <IconButton onClick={() => removeFromCart(item.product.product_id)}><CloseIcon /></IconButton>
+                    <IconButton onClick={() => removeFromCart(item.product.product_id,item.orderItem_id)}><CloseIcon /></IconButton>
                     {/* <button onClick={() => removeFromCart(item.product_id)} type="button">
                         cross
                     </button> */}
@@ -207,14 +207,14 @@ function Cart() {
         )
     }
 
-    const removeFromCart = async (id) => {
-        console.log(id)
+    const removeFromCart = async (product_id,order_id) => {
         const token = localStorage.getItem('token')
         const email = localStorage.getItem(`userEmail`)
         const productId = id
-        const response = await fetch("http://localhost:5000/api/v1/products/removeFromCart", {
+        const response = await fetch("https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/removeFromCart", {
             method: "POST",
             body: JSON.stringify({
+                orderItem_id,
                 productId,
                 email,
             }),
@@ -233,7 +233,7 @@ function Cart() {
     const receiptId = "qwsaq1";
     const paymentHandler = async (e) => {
         setShowPayment(false)
-        const response = await fetch("http://localhost:5000/api/v1/payment/order", {
+        const response = await fetch("https://mollusk-thankful-externally.ngrok-free.app/api/v1/payment/order", {
             method: "POST",
             body: JSON.stringify({
                 email,
@@ -263,7 +263,7 @@ function Cart() {
                 };
 
                 const validateRes = await fetch(
-                    "http://localhost:5000/api/v1/payment/order/validate",
+                    "https://mollusk-thankful-externally.ngrok-free.app/api/v1/payment/order/validate",
                     {
                         method: "POST",
                         body: JSON.stringify(body),
@@ -306,7 +306,7 @@ function Cart() {
 
         const email = localStorage.getItem("userEmail")
         const token = localStorage.getItem("token")
-        const response = await fetch("http://localhost:5000/api/v1/payment/confirm", {
+        const response = await fetch("https://mollusk-thankful-externally.ngrok-free.app/api/v1/payment/confirm", {
             method: "POST",
             body: JSON.stringify({
                 email,
