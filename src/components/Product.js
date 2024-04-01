@@ -1,69 +1,41 @@
 import React, { useEffect } from 'react'
 import "../css/Product.css"
-import prodImg from "../assets/Screenshot 2024-02-17 033151.png"
-import otherImg from "../assets/22e53e_ef2ebbf33af24b7fba34e44589f3dc38~mv2.webp"
-import imgOne from "../assets/Cauvery.png"
-import imgTwo from "../assets/Godav.png"
-import imgThree from "../assets/Mahanadhi.png"
-import imgFour from "../assets/Sharav.png"
-import imgFive from "../assets/Tapti.png"
-
-import Img1 from "../assets/BossBaby1.png"
-import Img3 from "../assets/Green1.jpg"
-import Img2 from "../assets/TakeLite1.jpg"
-import Img4 from "../assets/White1.jpg"
-import Img5 from "../assets/BossBaby2.png"
-import Img7 from "../assets/Green2.jpg"
-import Img6 from "../assets/TakeLite2.jpg"
-import Img8 from "../assets/White2 (2).jpg"
 
 import { useNavigate, useParams } from 'react-router-dom'
 
 const Product = () => {
+    const [imageUrl, setImageUrl] = React.useState([])
+    const [selectedImage, setSelectedImage] = React.useState(imageUrl[0])
 
-    const images = [Img1, Img2, Img3, Img4,]
-    const images2 = [Img5, Img6, Img7, Img8]
-    const [index, setIndex] = React.useState()
-    // const [index2,setIndex2]=React.useState()
     useEffect(() => {
         getProductDetails()
         const email = localStorage.getItem("userEmail")
         if (email) setIsLogin(true)
-        const index = localStorage.getItem('index')
-        setIndex(index)
-        // setIndex2(index+4)
-        // console.log(index2)
-        setSelectedImage(images[index])
-        // console.log(index)
-        // setIsCart(localStorage.getItem(`product${params.id}`))
-        // console.log(localStorage.getItem(`product${params.id}`))
     }, [])
 
-    const [selectedImage, setSelectedImage] = React.useState(images[index])
-    // const [id, setId] = React.useState()
+    useEffect(() => {
+        if (imageUrl.length > 0) {
+            setSelectedImage(imageUrl[0]);
+        }
+    }, [imageUrl]);
+
     const [name, setName] = React.useState()
     const [price, setPrice] = React.useState()
-    // const [size, setSize] = React.useState([])
     const [details, setDetails] = React.useState()
     const [quantity, setQuantity] = React.useState('1')
     const [selectedSize, setselectedSize] = React.useState('S')
     const [isCart, setIsCart] = React.useState()
     const navigate = useNavigate()
-    const params = useParams()
-    const [isLogin, setIsLogin] = React.useState(false)
-
-
-
+    const params = useParams();
+    const [isLogin, setIsLogin] = React.useState(false);
 
     const selectImage = (type) => {
         setSelectedImage(type)
     }
 
-
-
     const getProductDetails = async () => {
         console.log(params)
-        let result = await fetch(`https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/get-product-details/${params.id}`, {
+        let result = await fetch(`http://localhost:5000/api/v1/products/get-product-details/${params.id}`, {
             method: "POST"
         })
         result = await result.json()
@@ -71,6 +43,7 @@ const Product = () => {
         setName(result.name)
         setPrice(result.price)
         // setSize(result.sizes)
+        setImageUrl(result.imageUrl)
         setDetails(result.details)
     }
 
@@ -85,9 +58,9 @@ const Product = () => {
         let productId = params.id
         console.log(email)
         console.log(productId)
-        let result = await fetch('https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/addToCart', {
+        let result = await fetch('http://localhost:5000/api/v1/products/addToCart', {
             method: 'POST',
-            body: JSON.stringify({ email, productId,quantity ,selectedSize}),
+            body: JSON.stringify({ email, productId, quantity, selectedSize }),
             headers: {
                 'Content-Type': 'application/json',
                 "Authorization": `Bearer ${token}`
@@ -101,14 +74,24 @@ const Product = () => {
             navigate('/')
             window.location.reload();
         } else {
-            alert("Product is added to cart Successfully")
-            navigate('/cart')
-            window.location.reload();
+            // alert("Product is added to cart Successfully")
+            // navigate('/cart')
+            // window.location.reload();
         }
+        setIsCart(true);
     }
 
     const toLogin = () => {
         navigate('/login')
+    }
+
+    function e(item, index) {
+        console.log(item)
+        return (
+            <button onClick={() =>  selectImage(item)}>
+                <img src={item} alt="Tunga jersey" class="product-img-button" />
+            </button>
+        )
     }
 
     return (
@@ -116,21 +99,9 @@ const Product = () => {
             <div class="product-image-container">
                 <img src={selectedImage} alt="Tunga jersey" class="product-display-img" />
                 <div class="product-all-images">
-                    <button onClick={() => selectImage(images[index])}>
-                        <img src={images[index]} alt="Tunga jersey" class="product-img-button" />
-                    </button>
-                    <button onClick={() => selectImage(images2[index])}>
-                        <img src={images2[index]} alt="Cauvery jersey" class="product-img-button" />
-                    </button>
-                    {/* <button onClick={() => selectImage(imgThree)}>
-                        <img src={imgThree} alt="Godavari jersey" class="product-img-button" />
-                    </button>
-                    <button onClick={() => selectImage(imgFour)}>
-                        <img src={imgFour} alt="Sharavati jersey" class="product-img-button" />
-                    </button>
-                    <button onClick={() => selectImage(imgFive)}>
-                        <img src={imgFive} alt="Tapti jersey" class="product-img-button" />
-                    </button> */}
+                    {
+                        imageUrl.map(e)
+                    }
                 </div>
             </div>
             <div class="product-product-description">
@@ -144,12 +115,11 @@ const Product = () => {
                     <p>Select Size</p>
                 </div>
                 <select id="dropdown" placeholdeer='SelectSize' value={selectedSize} onChange={(e => { setselectedSize(e.target.value) })}>
-                    {/* <option value="">{selectedSize}</option> */}
                     <option value="S">S</option>
                     <option value="M">M</option>
                     <option value="L">L</option>
                     <option value="XL">XL</option>
-                    <option value="XXL">XXL</option>
+                    <option value="2XL">2XL</option>
                 </select>
                 <div class="product-product-quantity">
                     <p>Quantity</p>

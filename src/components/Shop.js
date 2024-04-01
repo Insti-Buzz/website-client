@@ -41,7 +41,7 @@ function Shop() {
         console.log("object");
         try {
             let result = await fetch(
-                "https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/get-product",
+                "http://localhost:5000/api/v1/products/get-product",
                 {
                     // headers:{
 
@@ -67,7 +67,7 @@ function Shop() {
                     className="shop-product-card"
                     onClick={() => productPage(item.product_id, index)}
                 >
-                    <img src={images[index]} alt="Image " />
+                    <img src={item.imageUrl[0]} alt="Image " />
                     {/* <Link className='home-right-product' to="/" >Product Details</Link> */}
                     <div className="shop-product-name">
                         <h2>{item.name}</h2>

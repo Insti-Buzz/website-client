@@ -52,6 +52,8 @@ function AddProduct() {
     const addProduct = async () => {
         var imageUrl = [];
 
+        console.log("imageUpload", imageUpload);
+
         if (!name || !price || !details || !imageUpload) {
             setError(true)
             return false
@@ -60,23 +62,24 @@ function AddProduct() {
         for (var i = 0; i < imageUpload.length; i++) {
             const imageRef = ref(storage, `images/${imageUpload[i].name + v4()}`);
 
-            await uploadBytes(imageRef, imageUpload[i]).then(() => {
-                getDownloadURL(imageRef).then((url) => {
-                    console.log('saada',url);
+            await uploadBytes(imageRef, imageUpload[i]).then(async () => {
+                await getDownloadURL(imageRef).then((url) => {
+                    console.log('saada', url);
                     imageUrl.push(url);
                 });
             });
         }
-        
+
         const token = localStorage.getItem("token");
-        let result = await fetch('https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/add-product', {
+        let result = await fetch('http://localhost:5000/api/v1/products/add-product', {
             method: 'POST',
-            body: JSON.stringify({ name, details, price, sizeQuantities, imageUrl}),
+            body: JSON.stringify({ name, details, price, sizeQuantities, imageUrl }),
             headers: {
+
                 'Content-Type': 'application/json',
                 "Authorization": `Bearer ${token}`
             },
-        })
+        });
         result = await result.json();
         console.log(result)
         alert("Product is added Successfully")
@@ -88,7 +91,7 @@ function AddProduct() {
             <p className='addproduct-items'>Add image</p>
             <input className='addproduct-img' type='file' multiple placeholder='Drag and drop image here'
                 onChange={(event) => { setImageUpload(event.target.files) }} />
-                
+
 
             <p className='addproduct-items'>Product Name</p>
             <input className='addproduct-name' type='text' placeholder='Enter product name' value={name}
