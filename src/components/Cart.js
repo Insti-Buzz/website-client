@@ -207,10 +207,10 @@ function Cart() {
         )
     }
 
-    const removeFromCart = async (product_id,order_id) => {
+    const removeFromCart = async (product_id,orderItem_id) => {
         const token = localStorage.getItem('token')
         const email = localStorage.getItem(`userEmail`)
-        const productId = id
+        const productId = product_id
         const response = await fetch("https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/removeFromCart", {
             method: "POST",
             body: JSON.stringify({
