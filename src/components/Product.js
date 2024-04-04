@@ -35,7 +35,7 @@ const Product = () => {
 
     const getProductDetails = async () => {
         console.log(params)
-        let result = await fetch(`https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/get-product-details/${params.id}`, {
+        let result = await fetch(`https://website-server-ijbv.onrender.com/api/v1/products/get-product-details/${params.id}`, {
             method: "POST"
         })
         result = await result.json()
@@ -58,7 +58,7 @@ const Product = () => {
         let productId = params.id
         console.log(email)
         console.log(productId)
-        let result = await fetch('https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/addToCart', {
+        let result = await fetch('https://website-server-ijbv.onrender.com/api/v1/products/addToCart', {
             method: 'POST',
             body: JSON.stringify({ email, productId, quantity, selectedSize }),
             headers: {

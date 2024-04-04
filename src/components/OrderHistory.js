@@ -26,7 +26,7 @@ function OrderHistory() {
         const email = localStorage.getItem("userEmail")
         const token = localStorage.getItem("token")
         console.log(email)
-        let result = await fetch('https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/orders', {
+        let result = await fetch('https://website-server-ijbv.onrender.com/api/v1/products/orders', {
             method: 'POST',
             body: JSON.stringify({ email }),
             headers: {
@@ -52,7 +52,7 @@ function OrderHistory() {
 
         // const deliveryDone = async () => {
         //     const token = localStorage.getItem("token")
-        //     let result = await fetch('https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/delivered', {
+        //     let result = await fetch('https://website-server-ijbv.onrender.com/api/v1/products/delivered', {
         //         method: 'POST',
         //         body: JSON.stringify({ orderId }),
         //         headers: {
