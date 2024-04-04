@@ -13,7 +13,6 @@ function Navbar() {
 
     useEffect(() => {
         const email = localStorage.getItem("userEmail")
-        // console.log(email+"jknjbh b")
         if (email) setIsLogin(true)
         if (email == 'instibuzziitm@gmail.com') {
             setIsAdmin(true)

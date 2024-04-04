@@ -2,20 +2,6 @@ import React, { useEffect, useState } from "react";
 import "../css/Shop.css";
 // import topImg from "../assets/22e53e_ef2ebbf33af24b7fba34e44589f3dc38~mv2.webp"
 import topImg from "../assets/Untitled design.png";
-import prodImg from "../assets/Screenshot 2024-02-17 033151.png";
-
-import Img1 from "../assets/BossBaby1.png";
-import Img2 from "../assets/TakeLite1.jpg";
-import Img3 from "../assets/Green1.jpg";
-import Img4 from "../assets/White1.jpg";
-import Img5 from "../assets/BossBaby2.png";
-import Img7 from "../assets/Green2.jpg";
-import Img6 from "../assets/TakeLite2.jpg";
-import Img8 from "../assets/White2 (2).jpg";
-// import Img9 from "../assets/Tapti.png"
-// import Img10 from "../assets/Tapti.png"
-// import Img11 from "../assets/Tapti.png"
-// import Img12 from "../assets/Tapti.png"
 
 import { Link, useNavigate } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
@@ -23,7 +9,6 @@ import CloseIcon from "@mui/icons-material/Close";
 
 function Shop() {
     const [products, setProducts] = useState([]);
-    const images = [Img1, Img2, Img3, Img4, Img5, Img6, Img7, Img8];
 
     const navigate = useNavigate();
 
@@ -41,7 +26,7 @@ function Shop() {
         console.log("object");
         try {
             let result = await fetch(
-                "https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/get-product",
+                "http://localhost:5000/api/v1/products/get-product",
                 {
                     // headers:{
 

@@ -35,11 +35,11 @@ const Product = () => {
 
     const getProductDetails = async () => {
         console.log(params)
-        let result = await fetch(`https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/get-product-details/${params.id}`, {
+        let result = await fetch(`http://localhost:5000/api/v1/products/get-product-details/${params.id}`, {
             method: "POST"
         })
         result = await result.json()
-        console.log(result)
+        // console.log(result)
         setName(result.name)
         setPrice(result.price)
         // setSize(result.sizes)
@@ -58,7 +58,7 @@ const Product = () => {
         let productId = params.id
         console.log(email)
         console.log(productId)
-        let result = await fetch('https://mollusk-thankful-externally.ngrok-free.app/api/v1/products/addToCart', {
+        let result = await fetch('http://localhost:5000/api/v1/products/addToCart', {
             method: 'POST',
             body: JSON.stringify({ email, productId, quantity, selectedSize }),
             headers: {
@@ -85,11 +85,11 @@ const Product = () => {
         navigate('/login')
     }
 
-    function e(item, index) {
-        console.log(item)
+    function imageButton(item, index) {
+        // console.log(item)
         return (
             <button onClick={() =>  selectImage(item)}>
-                <img src={item} alt="Tunga jersey" class="product-img-button" />
+                <img src={item} alt="Product image" class="product-img-button" />
             </button>
         )
     }
@@ -100,7 +100,7 @@ const Product = () => {
                 <img src={selectedImage} alt="Tunga jersey" class="product-display-img" />
                 <div class="product-all-images">
                     {
-                        imageUrl.map(e)
+                        imageUrl.map(imageButton)
                     }
                 </div>
             </div>
