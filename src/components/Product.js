@@ -28,6 +28,7 @@ const Product = () => {
     const navigate = useNavigate()
     const params = useParams();
     const [isLogin, setIsLogin] = React.useState(false);
+    const [sizesAvailable, setSizesAvailable] = React.useState([]);
 
     const selectImage = (type) => {
         setSelectedImage(type)
@@ -39,12 +40,15 @@ const Product = () => {
             method: "POST"
         })
         result = await result.json()
-        // console.log(result)
+        console.log(result)
+        console.log(result.sizeQuantities)
         setName(result.name)
         setPrice(result.price)
         // setSize(result.sizes)
         setImageUrl(result.imageUrl)
         setDetails(result.details)
+        setSizesAvailable(result.sizeQuantities)
+        // console.log(sizesAvailable);
     }
 
     const addToCart = async () => {
@@ -88,9 +92,15 @@ const Product = () => {
     function imageButton(item, index) {
         // console.log(item)
         return (
-            <button onClick={() =>  selectImage(item)}>
+            <button onClick={() => selectImage(item)}>
                 <img src={item} alt="Product image" class="product-img-button" />
             </button>
+        )
+    }
+
+    function sizeAvailable(item, index) {
+        return (
+            <option value={item.size}>{item.size}</option>
         )
     }
 
@@ -114,12 +124,10 @@ const Product = () => {
                 <div class="product-product-size">
                     <p>Select Size</p>
                 </div>
-                <select id="dropdown" placeholdeer='SelectSize' value={selectedSize} onChange={(e => { setselectedSize(e.target.value) })}>
-                    <option value="S">S</option>
-                    <option value="M">M</option>
-                    <option value="L">L</option>
-                    <option value="XL">XL</option>
-                    <option value="2XL">2XL</option>
+                <select id="dropdown" placeholder='SelectSize' value={selectedSize} onChange={(e => { setselectedSize(e.target.value) })}>
+                    {
+                        sizesAvailable.map(sizeAvailable)
+                    }
                 </select>
                 <div class="product-product-quantity">
                     <p>Quantity</p>

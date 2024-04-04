@@ -3,6 +3,7 @@ import '../css/Cart.css'
 import { useNavigate } from 'react-router-dom'
 import { IconButton } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close';
+import TaptiImg from '../assets/Tapti.png';
 
 function Cart() {
 
