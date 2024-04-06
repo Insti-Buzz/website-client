@@ -28,6 +28,7 @@ function Signup() {
         setIsEnabled(false)
         if (!name || !email || !password || !phoneNumber) {
             setError(true)
+            throw new Error("Enter Details")
             return false
         }
 

@@ -5,6 +5,7 @@ import TaptiImg from '../assets/Tapti.png'
 import { useNavigate } from 'react-router-dom'
 import { IconButton } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close';
+import LoadingPage from './LoadingPage'
 
 function Cart() {
 
@@ -20,6 +21,7 @@ function Cart() {
     const [showPayment, setShowPayment] = React.useState(false)
     const [email, setEmail] = React.useState('')
     const navigate = useNavigate('')
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         const email = localStorage.getItem('userEmail')
@@ -33,6 +35,7 @@ function Cart() {
     }, [])
 
     const getProducts = async () => {
+        setLoading(true)
         const email = localStorage.getItem("userEmail")
         setEmail(email)
         const token = localStorage.getItem('token')
@@ -52,6 +55,7 @@ function Cart() {
         //     const updatedProducts = result.filter(item => item._id === localStorage.getItem(`product${item._id}`));
         //     setProducts(updatedProducts);
         // }
+        setLoading(false)
         if (result.status == 404) {
             alert(result.message)
             localStorage.removeItem("userEmail")
@@ -63,20 +67,8 @@ function Cart() {
         }
     }
 
-    // const handleInputChange = (index, event) => {
-    //     const inputValue = event.target.value;
-
-    //     // Allow only numbers by using a regular expression
-    //     const sanitizedValue = inputValue.replace(/[^0-9]/g, '');
-
-    //     // Create a new array with the updated value at the specified index
-    //     const newValues = [...quantity];
-    //     newValues[index] = sanitizedValue;
-
-    //     setQuantity(newValues);
-    // };
-
     const updateSize = async (id, e) => {
+        setLoading(true)
         const email = localStorage.getItem(`userEmail`)
         const token = localStorage.getItem('token')
         const updatedSize = e.target.value
@@ -96,9 +88,11 @@ function Cart() {
         const result = await response.json();
         // console.log(result);
         window.location.reload();
+        // setLoading(false)
     }
 
     const updateQuantity = async (id, e) => {
+        setLoading(true)
         const email = localStorage.getItem(`userEmail`)
         const token = localStorage.getItem('token')
         const updatedQuantity = e.target.value
@@ -118,6 +112,8 @@ function Cart() {
         const result = await response.json();
         // console.log(result);
         window.location.reload();
+        // setLoading(true)
+
     }
 
     const calculateSubtotal = () => {
@@ -166,6 +162,7 @@ function Cart() {
     function e(item, index) {
         return (
             <div class="checkout-product-card">
+
                 <div class="checkout-product-img-container">
                     <img src={item.product.imageUrl[0]} alt='Product image' />
                 </div>
@@ -194,10 +191,10 @@ function Cart() {
                     </select>
                 </div>
                 <div class="checkout-product-net-price">
-                    <h3>{item.quantity* item.product.price || item.product.price}</h3>
+                    <h3>{item.quantity * item.product.price || item.product.price}</h3>
                 </div>
                 <div class="checkout-product-cancel">
-                    <IconButton onClick={() => removeFromCart(item.product.product_id,item.orderItem_id)}><CloseIcon /></IconButton>
+                    <IconButton onClick={() => removeFromCart(item.product.product_id, item.orderItem_id)}><CloseIcon /></IconButton>
                     {/* <button onClick={() => removeFromCart(item.product_id)} type="button">
                         cross
                     </button> */}
@@ -207,7 +204,8 @@ function Cart() {
         )
     }
 
-    const removeFromCart = async (product_id,orderItem_id) => {
+    const removeFromCart = async (product_id, orderItem_id) => {
+        setLoading(true)
         const token = localStorage.getItem('token')
         const email = localStorage.getItem(`userEmail`)
         const productId = product_id
@@ -225,6 +223,7 @@ function Cart() {
         });
         const result = await response.json();
         // console.log(result);
+        // setLoading(false)
         window.location.reload();
     }
 
@@ -303,7 +302,7 @@ function Cart() {
     };
 
     const confirmOrder = async () => {
-
+        setLoading(true)
         const email = localStorage.getItem("userEmail")
         const token = localStorage.getItem("token")
         const response = await fetch("https://website-server-ijbv.onrender.com/api/v1/payment/confirm", {
@@ -321,6 +320,7 @@ function Cart() {
             },
         });
         // console.log(response.body);
+        setLoading(false)
         if (response.status == 404) {
             alert('Failed')
         } else {
@@ -335,38 +335,40 @@ function Cart() {
     }
 
     return (
-        <div class="checkout-main-container">
-            <div class="checkout-my-cart">
-                <h1>My cart</h1>
-                <hr />
-                <div>
-                    {products ?
-                        products.map(e) :
-                        <h3>Cart is Empty</h3>
-                    }
-                </div>
+        <div>
+            {loading ? <LoadingPage /> :
+                <div class="checkout-main-container">
+                    <div class="checkout-my-cart">
+                        <h1>My cart</h1>
+                        <hr />
+                        <div>
+                            {products ?
+                                products.map(e) :
+                                <h3>Cart is Empty</h3>
+                            }
+                        </div>
 
-                <hr />
-            </div>
-            <div class="checkout-order-summary">
-                <h1>Order summary</h1>
-                <hr />
-                <div class="checkout-order-price-details">
-                    <h2>Subtotal</h2>
-                    <h2>₹{calculateSubtotal()}</h2>
-                    <h2>Delivery charges</h2>
-                    <h2><strike>₹70</strike>₹0</h2>
-                    <div class="line-break">
                         <hr />
                     </div>
-                    <h1>Total</h1>
-                    <h1>₹{calculateSubtotal()}</h1>
-                </div>
-                <button class="checkout-btn" onClick={proceedPayment}>Checkout</button>
+                    <div class="checkout-order-summary">
+                        <h1>Order summary</h1>
+                        <hr />
+                        <div class="checkout-order-price-details">
+                            <h2>Subtotal</h2>
+                            <h2>₹{calculateSubtotal()}</h2>
+                            <h2>Delivery charges</h2>
+                            <h2><strike>₹70</strike>₹0</h2>
+                            <div class="line-break">
+                                <hr />
+                            </div>
+                            <h1>Total</h1>
+                            <h1>₹{calculateSubtotal()}</h1>
+                        </div>
+                        <button class="checkout-btn" onClick={proceedPayment}>Checkout</button>
 
-            </div>
-            <div>
-                {/* {showDetails && (
+                    </div>
+                    <div>
+                        {/* {showDetails && (
                     <div className="cart-popup">
                         <div className='cart-popup-content'>
                             <div className='cart-popup-content-name'>
@@ -395,19 +397,21 @@ function Cart() {
                     </div>
                 )} */}
 
-                {showPayment && (
-                    <div className="cart-popup">
-                        {/* <i className='fa fa-times' aria-hidden='true' onClick={setShowPayment(false)}></i> */}
-                        <IconButton onClick={() => closePayment()}><CloseIcon /></IconButton>
-                        <h1>Confirm Your Order?</h1>
-                        <div className='cart-popup-content'>
-                            <button onClick={confirmOrder}>Yes</button>
-                            <button onClick={cancelOrder}>No</button>
-                            {/* <button onClick={paymentHandler}>Pay Now</button> */}
-                        </div>
+                        {showPayment && (
+                            <div className="cart-popup">
+                                {/* <i className='fa fa-times' aria-hidden='true' onClick={setShowPayment(false)}></i> */}
+                                <IconButton onClick={() => closePayment()}><CloseIcon /></IconButton>
+                                <h1>Confirm Your Order?</h1>
+                                <div className='cart-popup-content'>
+                                    <button onClick={confirmOrder}>Yes</button>
+                                    <button onClick={cancelOrder}>No</button>
+                                    {/* <button onClick={paymentHandler}>Pay Now</button> */}
+                                </div>
+                            </div>
+                        )}
                     </div>
-                )}
-            </div>
+                </div>
+            }
         </div>
     )
 }

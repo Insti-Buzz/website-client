@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import TungaImg from '../assets/Tunga.png'
 import TaptiImg from '../assets/Tapti.png'
 import "../css/OrderHistory.css"
 import { useNavigate } from 'react-router-dom'
+import LoadingPage from './LoadingPage'
 
 function OrderHistory() {
     const [orders, setOrders] = React.useState([])
     const [isAdmin, setIsAdmin] = React.useState(false)
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -23,6 +25,7 @@ function OrderHistory() {
     }, [])
 
     const getProducts = async () => {
+        setLoading(true)
         const email = localStorage.getItem("userEmail")
         const token = localStorage.getItem("token")
         // console.log(email)
@@ -36,6 +39,7 @@ function OrderHistory() {
         })
         result = await result.json();
         // console.log(result)
+        setLoading(false)
         if (result.status == 404) {
             alert(result.message)
             localStorage.removeItem("userEmail")
@@ -65,13 +69,14 @@ function OrderHistory() {
 
         //     window.location.reload()
         // }
-    const now = parseInt(item.date) // Get the current timestamp in milliseconds
-    const date = new Date(now);
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const year = date.getFullYear();
+        const now = parseInt(item.date) // Get the current timestamp in milliseconds
+        const date = new Date(now);
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear();
 
         return (
+
             <div className='orders-div'>
                 <div>
                     <h3>Order Id: {item.order_id}</h3>
@@ -79,7 +84,7 @@ function OrderHistory() {
                 <div>
                     {
                         item.productsOrdered.map(e1)
-                    } 
+                    }
                 </div>
                 <div>
                     Subtotal:{
@@ -94,11 +99,11 @@ function OrderHistory() {
                             <p>Coming Soon</p>
                     }
                 </div>
-                <div><p>Date: 
+                <div><p>Date:
                     {
-                        day+"-"+month+"-"+ year
+                        day + "-" + month + "-" + year
                     }
-                    </p>
+                </p>
                 </div>
             </div>
         )
@@ -122,10 +127,10 @@ function OrderHistory() {
                             <>₹{item.price}</>
                         </div>
                         <div>
-                           Quantity: {item.quantity}
+                            Quantity: {item.quantity}
                         </div>
                         <div>
-                        Size: { item.size}
+                            Size: {item.size}
                         </div>
                     </div>
                     <hr />
@@ -136,13 +141,17 @@ function OrderHistory() {
     }
 
     return (
+        <div>
+            {loading ? <LoadingPage /> :
 
-        <div >
-            <h1>Order History</h1>
+                <div >
+                    <h1>Order History</h1>
 
-            {orders?
-                orders.map(e):
-                <h1>No Orders</h1>
+                    {orders ?
+                        orders.map(e) :
+                        <h1>No Orders</h1>
+                    }
+                </div>
             }
         </div>
     )
