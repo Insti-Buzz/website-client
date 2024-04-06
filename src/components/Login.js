@@ -32,7 +32,7 @@ function Login() {
             },
         })
         result = await result.json();
-        console.log(result)
+        // console.log(result)
         if (result.status == 404) {
             alert(result.error)
         } else {

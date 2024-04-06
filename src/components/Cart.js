@@ -47,7 +47,7 @@ function Cart() {
             },
         });
         result = await result.json();
-        console.log(result);
+        // console.log(result);
         // for (let i = 0; i < result.length; i++) {
         //     const updatedProducts = result.filter(item => item._id === localStorage.getItem(`product${item._id}`));
         //     setProducts(updatedProducts);
@@ -58,7 +58,7 @@ function Cart() {
             navigate('/')
             window.location.reload();
         } else {
-            console.log(result)
+            // console.log(result)
             setProducts(result.products);
         }
     }
@@ -94,7 +94,7 @@ function Cart() {
             },
         });
         const result = await response.json();
-        console.log(result);
+        // console.log(result);
         window.location.reload();
     }
 
@@ -116,7 +116,7 @@ function Cart() {
             },
         });
         const result = await response.json();
-        console.log(result);
+        // console.log(result);
         window.location.reload();
     }
 
@@ -141,7 +141,7 @@ function Cart() {
 
 
     const proceedPayment = () => {
-        console.log(quantity)
+        // console.log(quantity)
         // console.log(selectedSize)
         const subtotal = calculateSubtotal()
         setTotalAmount(subtotal)
@@ -224,7 +224,7 @@ function Cart() {
             },
         });
         const result = await response.json();
-        console.log(result);
+        // console.log(result);
         window.location.reload();
     }
 
@@ -246,7 +246,7 @@ function Cart() {
             },
         });
         const order = await response.json();
-        console.log(order);
+        // console.log(order);
 
         var options = {
             key: "rzp_test_DMvAPM0GH3nThd", // Enter the Key ID generated from the Dashboard
@@ -273,7 +273,7 @@ function Cart() {
                     }
                 );
                 const jsonRes = await validateRes.json();
-                console.log(jsonRes);
+                // console.log(jsonRes);
             },
             prefill: {
                 //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
@@ -320,7 +320,7 @@ function Cart() {
                 "Authorization": `Bearer ${token}`
             },
         });
-        console.log(response.body);
+        // console.log(response.body);
         if (response.status == 404) {
             alert('Failed')
         } else {

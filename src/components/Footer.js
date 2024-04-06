@@ -14,7 +14,7 @@ function Footer() {
             <ul class="list">
               <h3>Useful Links</h3>
               <li>
-                <a href="#">Home</a>
+                <a href="/">Home</a>
               </li>
               <li>
                 <a href="#">About Us</a>
@@ -38,8 +38,8 @@ function Footer() {
               +91 99444 87273 / +91 62966 71347
             </div>
             <div class="social">
-              <a href="#"><i class="fa fa-instagram"></i></a>
-              <a href="#"><i class="fa fa-linkedin"></i></a>
+              <a href="https://www.instagram.com/insti_buzz/"><i class="fa fa-instagram"></i></a>
+              <a href="https://in.linkedin.com/company/insti-buzz"><i class="fa fa-linkedin"></i></a>
               <a href="#"><i class="fa fa-google"></i></a>
             </div>
           </div>

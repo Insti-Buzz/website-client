@@ -25,7 +25,7 @@ function OrderHistory() {
     const getProducts = async () => {
         const email = localStorage.getItem("userEmail")
         const token = localStorage.getItem("token")
-        console.log(email)
+        // console.log(email)
         let result = await fetch('https://website-server-ijbv.onrender.com/api/v1/products/orders', {
             method: 'POST',
             body: JSON.stringify({ email }),
@@ -35,7 +35,7 @@ function OrderHistory() {
             },
         })
         result = await result.json();
-        console.log(result)
+        // console.log(result)
         if (result.status == 404) {
             alert(result.message)
             localStorage.removeItem("userEmail")

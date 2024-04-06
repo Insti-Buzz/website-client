@@ -35,7 +35,7 @@ function Home() {
       </div>
     
       
-      <div className="home-content home-content-two">
+      {/* <div className="home-content home-content-two">
         
         <h1 className='home-title'>Latest Arrivals</h1>
         
@@ -72,7 +72,7 @@ function Home() {
 
 
         </div>
-    </div>
+    </div> */}
 
       <div className="home-content home-content-three">
         <div className="home-about-container">

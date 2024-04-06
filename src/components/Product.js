@@ -34,12 +34,12 @@ const Product = () => {
     }
 
     const getProductDetails = async () => {
-        console.log(params)
+        // console.log(params)
         let result = await fetch(`https://website-server-ijbv.onrender.com/api/v1/products/get-product-details/${params.id}`, {
             method: "POST"
         })
         result = await result.json()
-        console.log(result)
+        // console.log(result)
         setName(result.name)
         setPrice(result.price)
         // setSize(result.sizes)
@@ -50,14 +50,14 @@ const Product = () => {
     const addToCart = async () => {
         let email = localStorage.getItem("userEmail")
         let token = localStorage.getItem("token")
-        console.log(token)
+        // console.log(token)
         if (!email) {
             alert("Please Login")
             navigate("./login")
         }
         let productId = params.id
-        console.log(email)
-        console.log(productId)
+        // console.log(email)
+        // console.log(productId)
         let result = await fetch('https://website-server-ijbv.onrender.com/api/v1/products/addToCart', {
             method: 'POST',
             body: JSON.stringify({ email, productId, quantity, selectedSize }),
@@ -67,7 +67,7 @@ const Product = () => {
             },
         })
         result = await result.json();
-        console.log(result)
+        // console.log(result)
         if (result.status == 404) {
             alert(result.message)
             localStorage.removeItem("userEmail")
@@ -86,7 +86,7 @@ const Product = () => {
     }
 
     function e(item, index) {
-        console.log(item)
+        // console.log(item)
         return (
             <button onClick={() =>  selectImage(item)}>
                 <img src={item} alt="Tunga jersey" class="product-img-button" />

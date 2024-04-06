@@ -30,41 +30,41 @@ function Home() {
       
       
       <div className="bottom">
-        <div className="card-one">
-          <h1 className="card-one-title">Latest Arrivals</h1>
-          <div className="product-container">
+        {/* <div className="card-one"> */}
+          {/* <h1 className="card-one-title">Latest Arrivals</h1> */}
+          {/* <div className="product-container"> */}
             
-            <div className="product">
+            {/* <div className="product">
               <div className="product-image">
                 <img src={Cauvery} alt="product image" className="product-image-detail" />
               </div>
               <div className="product-title">Cauvery Jersey</div>
               <div className="product-price">Price: 400 /-</div>
-            </div>
-            <div className="product">
+            </div> */}
+            {/* <div className="product">
               <div className="product-image">
                 <img src={Cauvery} alt="product image" className="product-image-detail" />
               </div>
               <div className="product-title">Cauvery Jersey</div>
               <div className="product-price">Price: 400 /-</div>
-            </div>
-            <div className="product">
+            </div> */}
+            {/* <div className="product">
               <div className="product-image">
                 <img src={Cauvery} alt="product image" className="product-image-detail" />
               </div>
               <div className="product-title">Cauvery Jersey</div>
               <div className="product-price">Price: 400 /-</div>
-            </div>
+            </div> */}
           
-            <div className="product">
+            {/* <div className="product">
               <div className="product-image">
                 <img src={Cauvery} alt="product image" className="product-image-detail" />
               </div>
               <div className="product-title">Cauvery Jersey</div>
               <div className="product-price">Price: 400 /-</div>
-            </div>
-          </div>
-        </div>
+            </div> */}
+          {/* </div> */}
+        {/* </div> */}
         
         <div className="card-two">
           <div className="card-two-left">

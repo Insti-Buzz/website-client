@@ -38,7 +38,7 @@ function Shop() {
     }, []);
 
     const getProducts = async () => {
-        console.log("object");
+        // console.log("object");
         try {
             let result = await fetch(
                 "https://website-server-ijbv.onrender.com/api/v1/products/get-product",
@@ -50,12 +50,12 @@ function Shop() {
                 }
             );
             // console.log(result)
-            console.log(result);
+            // console.log(result);
             result = await result.json();
-            console.log(result);
+            // console.log(result);
             setProducts(result);
         } catch (error) {
-            console.log(error);
+            // console.log(error);
         }
     };
 

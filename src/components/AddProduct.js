@@ -40,7 +40,7 @@ function AddProduct() {
 
     const addSizeInputs = () => {
         setSizeQuantities([...sizeQuantities, { size: '', quantity: '' }]);
-        console.log(sizeQuantities)
+        // console.log(sizeQuantities)
     };
 
     const sizeDeleteRow = (index) => {
@@ -52,7 +52,7 @@ function AddProduct() {
     const addProduct = async () => {
         var imageUrl = [];
 
-        console.log("imageUpload", imageUpload);
+        // console.log("imageUpload", imageUpload);
 
         if (!name || !price || !details || !imageUpload) {
             setError(true)
@@ -64,7 +64,7 @@ function AddProduct() {
 
             await uploadBytes(imageRef, imageUpload[i]).then(async () => {
                 await getDownloadURL(imageRef).then((url) => {
-                    console.log('saada', url);
+                    // console.log('saada', url);
                     imageUrl.push(url);
                 });
             });
@@ -81,7 +81,7 @@ function AddProduct() {
             },
         });
         result = await result.json();
-        console.log(result)
+        // console.log(result)
         alert("Product is added Successfully")
         navigate('/shop')
     }

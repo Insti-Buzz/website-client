@@ -27,7 +27,6 @@ function AllOrders() {
     const getProducts = async () => {
         const email = localStorage.getItem("userEmail")
         const token = localStorage.getItem("token")
-        console.log(email)
         let result = await fetch('https://website-server-ijbv.onrender.com/api/v1/products/allOrders', {
             method: 'POST',
             body: JSON.stringify({ email }),
@@ -37,7 +36,6 @@ function AllOrders() {
             },
         })
         result = await result.json();
-        console.log(result)
         if (result.status == 404) {
             alert(result.message)
             localStorage.removeItem("userEmail")
@@ -45,7 +43,6 @@ function AllOrders() {
             window.location.reload();
         } else {
             setOrders(result.products)
-            console.log(result.products)
         }
     }
 
@@ -64,7 +61,6 @@ function AllOrders() {
                 },
             })
             result = await result.json();
-            console.log(result)
 
             window.location.reload()
         }
@@ -124,7 +120,7 @@ function AllOrders() {
                     </div>
                     <hr />
                     <div class="order-product-img-container">
-                        <img src={img} alt="Product image" />
+                        <img src={item.product.imageUrl[0]} alt="Product image" />
                     </div>
                     <div class="order-product-details">
                         <div class="order-product-name">

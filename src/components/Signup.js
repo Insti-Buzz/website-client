@@ -40,9 +40,9 @@ function Signup() {
         })
         result = await result.json();
         setIsEnabled(true)
-        console.log(result)
+        // console.log(result)
         if (result.status != 200) {
-            console.log(result.message);
+            // console.log(result.message);
             // alert(result.message)
             throw new Error(result.message)
         }
@@ -97,7 +97,7 @@ function Signup() {
             navigate('/login')
             return result
         }
-        console.log(result)
+        // console.log(result)
 
     }
 
