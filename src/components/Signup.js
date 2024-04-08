@@ -31,7 +31,7 @@ function Signup() {
             return false
         }
 
-        let result = await fetch('http://localhost:5000/api/v1/auth/register', {
+        let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/auth/register`, {
             method: 'POST',
             body: JSON.stringify({ name, email, password, phoneNumber }),
             headers: {
@@ -80,7 +80,7 @@ function Signup() {
             setError(true)
             return false
         }
-        let result = await fetch('http://localhost:5000/api/v1/auth/verifyOtp', {
+        let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/auth/verifyOtp`, {
             method: 'POST',
             body: JSON.stringify({ name, email, password, phoneNumber, otp }),
             headers: {

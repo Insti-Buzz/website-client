@@ -35,12 +35,12 @@ function Footer() {
             </div>
             <hr></hr>
             <div class="phone">
-              +91 99444 87273 / +91 62966 71347
+              +91 99444 87273
             </div>
             <div class="social">
-              <a href="#"><i class="fa fa-instagram"></i></a>
-              <a href="#"><i class="fa fa-linkedin"></i></a>
-              <a href="#"><i class="fa fa-google"></i></a>
+              <a href="https://www.instagram.com/insti_buzz/" target="_blank"><i class="fa fa-instagram"></i></a>
+              <a href="https://www.linkedin.com/company/insti-buzz/" target="_blank"><i class="fa fa-linkedin"></i></a>
+              <a href="mailto:instibuzziitm@gmail.com"><i class="fa fa-google"></i></a>
             </div>
           </div>
         </div>

@@ -24,7 +24,7 @@ function Login() {
             setError(true)
             return false
         }
-        let result = await fetch('http://localhost:5000/api/v1/auth/login', {
+        let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/auth/login`, {
             method: 'POST',
             body: JSON.stringify({ email, password }),
             headers: {

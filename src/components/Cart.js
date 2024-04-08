@@ -1,14 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, CSSProperties } from 'react'
 import '../css/Cart.css'
 import { useNavigate } from 'react-router-dom'
 import { IconButton } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close';
 import TaptiImg from '../assets/Tapti.png';
+import ClipLoader from "react-spinners/ClipLoader";
+
+const override = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "black",
+};
 
 function Cart() {
-
     const [products, setProducts] = React.useState([])
-
+    const [loading, setLoading] = useState(false);
     // const [quantity, setQuantity] = useState(Array(products.length).fill(''));  
     // const [quantity, setQuantity] = useState(Array.from({ length: products.length }, () => 1));
     // const [quantity, setQuantity] = useState(Array(products.length).fill(1));
@@ -35,7 +41,7 @@ function Cart() {
         const email = localStorage.getItem("userEmail")
         setEmail(email)
         const token = localStorage.getItem('token')
-        let result = await fetch('http://localhost:5000/api/v1/products/getProductsInCart', {
+        let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/getProductsInCart`, {
             method: "POST",
             body: JSON.stringify({
                 email,
@@ -76,11 +82,12 @@ function Cart() {
     // };
 
     const updateSize = async (id, e) => {
+        setLoading(true);
         const email = localStorage.getItem(`userEmail`)
         const token = localStorage.getItem('token')
         const updatedSize = e.target.value
         const orderItem_id = id
-        const response = await fetch("http://localhost:5000/api/v1/products/changeSizeInCart", {
+        const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/changeSizeInCart`, {
             method: "POST",
             body: JSON.stringify({
                 orderItem_id,
@@ -93,8 +100,9 @@ function Cart() {
             },
         });
         const result = await response.json();
+        setLoading(false);
         console.log(result);
-        window.location.reload();
+        // window.location.reload();
     }
 
     const updateQuantity = async (id, e) => {
@@ -102,7 +110,7 @@ function Cart() {
         const token = localStorage.getItem('token')
         const updatedQuantity = e.target.value
         const orderItem_id = id
-        const response = await fetch("http://localhost:5000/api/v1/products/changeQuantityInCart", {
+        const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/changeQuantityInCart`, {
             method: "POST",
             body: JSON.stringify({
                 orderItem_id,
@@ -193,10 +201,10 @@ function Cart() {
                     </select>
                 </div>
                 <div class="checkout-product-net-price">
-                    <h3>{item.quantity* item.product.price || item.product.price}</h3>
+                    <h3>{item.quantity * item.product.price || item.product.price}</h3>
                 </div>
                 <div class="checkout-product-cancel">
-                    <IconButton onClick={() => removeFromCart(item.product.product_id,item.orderItem_id)}><CloseIcon /></IconButton>
+                    <IconButton onClick={() => removeFromCart(item.product.product_id, item.orderItem_id)}><CloseIcon /></IconButton>
                     {/* <button onClick={() => removeFromCart(item.product_id)} type="button">
                         cross
                     </button> */}
@@ -206,11 +214,11 @@ function Cart() {
         )
     }
 
-    const removeFromCart = async (product_id,orderItem_id) => {
+    const removeFromCart = async (product_id, orderItem_id) => {
         const token = localStorage.getItem('token')
         const email = localStorage.getItem(`userEmail`)
         const productId = product_id
-        const response = await fetch("http://localhost:5000/api/v1/products/removeFromCart", {
+        const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/removeFromCart`, {
             method: "POST",
             body: JSON.stringify({
                 orderItem_id,
@@ -232,7 +240,7 @@ function Cart() {
     const receiptId = "qwsaq1";
     const paymentHandler = async (e) => {
         setShowPayment(false)
-        const response = await fetch("http://localhost:5000/api/v1/payment/order", {
+        const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/payment/order`, {
             method: "POST",
             body: JSON.stringify({
                 email,
@@ -262,7 +270,7 @@ function Cart() {
                 };
 
                 const validateRes = await fetch(
-                    "http://localhost:5000/api/v1/payment/order/validate",
+                    `${process.env.REACT_APP_server_url}/api/v1/payment/order/validate`,
                     {
                         method: "POST",
                         body: JSON.stringify(body),
@@ -305,7 +313,7 @@ function Cart() {
 
         const email = localStorage.getItem("userEmail")
         const token = localStorage.getItem("token")
-        const response = await fetch("http://localhost:5000/api/v1/payment/confirm", {
+        const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/payment/confirm`, {
             method: "POST",
             body: JSON.stringify({
                 email,
@@ -344,7 +352,14 @@ function Cart() {
                         <h3>Cart is Empty</h3>
                     }
                 </div>
-
+                <ClipLoader
+                    color="#ffffff"
+                    loading={loading}
+                    cssOverride={override}
+                    size={150}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                />
                 <hr />
             </div>
             <div class="checkout-order-summary">

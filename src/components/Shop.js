@@ -26,7 +26,7 @@ function Shop() {
         console.log("object");
         try {
             let result = await fetch(
-                "http://localhost:5000/api/v1/products/get-product",
+                `${process.env.REACT_APP_server_url}/api/v1/products/get-product`,
                 {
                     // headers:{
 
