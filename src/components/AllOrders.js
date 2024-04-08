@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom'
 import { X } from '@mui/icons-material'
 function AllOrders() {
     const [orders, setOrders] = React.useState([])
-    const [isAdmin, setIsAdmin] = React.useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -16,11 +15,7 @@ function AllOrders() {
             alert("Please Login")
             navigate('/')
         }
-        if (email != 'instibuzziitm@gmail.com') {
-            navigate('/')
-        } else {
-            setIsAdmin(true)
-        }
+
         getProducts();
     }, [])
 

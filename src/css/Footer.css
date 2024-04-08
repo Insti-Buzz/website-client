@@ -1,8 +1,9 @@
 .footer {
     padding: 40px 0;
-    background-color: #F8E9AE;
+    background-color: #f8efae;;
     /* align-items: center; */
     font-family: Helvetica, sans-serif;
+    color: black;
 }
 
 .footer-content {
@@ -19,23 +20,29 @@
     font-size: 24px;
 }
 
-.footer .contact {
+.footer .footer-contact {
     text-align: left;
-    padding-bottom: 25px;
-    color: #4b4c4d;
+    /* padding-bottom: 25px; */
+    /* color: #4b4c4d; */
+    padding: 25px;
 }
 
-.footer .logo {
+.footer-useful-links{
+    padding: 25px;
+}
+
+.footer .footer-logo {
     align-self: center;
+    padding: 25px;
 }
 
-.footer .logo img {
+.footer .footer-logo img {
     height: 180px;
 }
 
-.footer .contact a {
+.footer .footer-contact a {
     font-size: 24px;
-    color: inherit;
+    color: inherit;  
     border: 1px solid #ccc;
     width: 40px;
     height: 40px;
@@ -47,7 +54,7 @@
     opacity: 0.75;
 }
 
-.footer .contact a:hover {
+.footer .footer-contact a:hover {
     opacity: 0.9;
 }
 
@@ -83,4 +90,81 @@
     text-align: center;
     font-size: 13px;
     color: #aaa;
+}
+
+@media screen and (max-width:724px) {
+    .footer-content{
+        display: inline-flex;
+        /* background-color: red; */
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        /* align-items: center; */
+    }
+
+    .footer-logo{
+        /* background-color: green; */
+        width: 100%;
+        display: inline-flex;
+        justify-content: center;
+    }
+
+    .footer-useful-links{
+        /* background-color: orange; */
+        width: 42%;
+    }
+
+    .footer-contact{
+        /* background-color: maroon; */
+        width: 42%;
+    }
+}
+
+@media screen and (max-width:625px) {
+    .footer-content{
+        display: inline-flex;
+        /* background-color: red; */
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        /* align-items: center; */
+    }
+
+    .footer-logo{
+        /* background-color: green; */
+        width: 100%;
+        display: inline-flex;
+        justify-content: center;
+    }
+
+    .footer-useful-links{
+        /* background-color: orange; */
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .footer-useful-links .list{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-contact{
+        /* background-color: maroon; */
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        /* flex-shrink: 0; */
+        gap: 0;
+        /* justify-content: center; */
+        align-items: center;
+        
+    }
+    .footer-contact hr{
+        /* text-align: center; */
+        width: 80%;
+    }
 }

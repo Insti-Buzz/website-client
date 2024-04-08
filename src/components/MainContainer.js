@@ -1,21 +1,21 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import Navbar from './Navbar'
 import Home2 from './Homes'
 import Footer from './Footer'
 
 function MainContainer() {
+    const auth=localStorage.getItem('userEmail')
+    const token=localStorage.getItem('token')
+    const { pathname } = useLocation();
+    const showFooter = !(pathname === '/signup' || pathname === '/login');
     return (
         <div className='all-container'>
             <Toaster/>
-            {/* <h2>hj</h2> */}
-            {/* <Shop /> */}
-            {/* <Product/> */}
             {<Navbar />}
-            {/* <Home2/>     */}
             <Outlet />
-            {<Footer />}
+            {showFooter&&<Footer />}
         </div>
     )
 }

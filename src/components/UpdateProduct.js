@@ -1,22 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import "../css/Product.css"
-
 import { useNavigate, useParams } from 'react-router-dom'
+import "../css/Product.css"
 import LoadingPage from './LoadingPage'
 
-const Product = () => {
+function UpdateProduct() {
     const [imageUrl, setImageUrl] = React.useState([])
     const [selectedImage, setSelectedImage] = React.useState(imageUrl[0])
     const [loading, setLoading] = useState(false)
-    const[isAdmin,setIsAdmin]=useState(false)
 
     useEffect(() => {
         getProductDetails()
         const email = localStorage.getItem("userEmail")
-        if (email) setIsLogin(true)
-        if(email=='instibuzziitm@gmail.com'){
-            setIsAdmin(true)
-        }
     }, [])
 
     useEffect(() => {
@@ -28,12 +22,9 @@ const Product = () => {
     const [name, setName] = React.useState()
     const [price, setPrice] = React.useState()
     const [details, setDetails] = React.useState()
-    const [quantity, setQuantity] = React.useState('1')
-    const [selectedSize, setselectedSize] = React.useState('S')
-    const [isCart, setIsCart] = React.useState()
+    const [sizeQuantities, setSizeQuantities] = React.useState([{size_id:'', size: 'S', quantity: '1' }]);
     const navigate = useNavigate()
     const params = useParams();
-    const [isLogin, setIsLogin] = React.useState(false);
 
     const selectImage = (type) => {
         setSelectedImage(type)
@@ -46,16 +37,34 @@ const Product = () => {
             method: "POST"
         })
         result = await result.json()
-        // console.log(result)
+        console.log(result)
         setName(result.name)
         setPrice(result.price)
-        // setSize(result.sizes)
+        setSizeQuantities(result.sizeQuantities)
         setImageUrl(result.imageUrl)
         setDetails(result.details)
         setLoading(false)
     }
 
-    const addToCart = async () => {
+    const sizeInputChange = (index, event) => {
+        const { name, value } = event.target;
+        const newInputs = [...sizeQuantities];
+        newInputs[index][name] = value;
+        setSizeQuantities(newInputs);
+    };
+
+    const addSizeInputs = () => {
+        setSizeQuantities([...sizeQuantities, { size: '', quantity: '' }]);
+        // console.log(sizeQuantities)
+    };
+
+    const sizeDeleteRow = (index) => {
+        const newInputs = [...sizeQuantities];
+        newInputs.splice(index, 1);
+        setSizeQuantities(newInputs);
+    };
+
+    const updateProduct = async () => {
         let email = localStorage.getItem("userEmail")
         let token = localStorage.getItem("token")
         // console.log(token)
@@ -67,9 +76,9 @@ const Product = () => {
         let productId = params.id
         // console.log(email)
         // console.log(productId)
-        let result = await fetch('https://website-server-ijbv.onrender.com/api/v1/products/addToCart', {
+        let result = await fetch(`https://website-server-ijbv.onrender.com/api/v1/products/update-product-details/${params.id}`, {
             method: 'POST',
-            body: JSON.stringify({ email, productId, quantity, selectedSize }),
+            body: JSON.stringify({ productId, name, price,sizeQuantities, details }),
             headers: {
                 'Content-Type': 'application/json',
                 "Authorization": `Bearer ${token}`
@@ -84,26 +93,18 @@ const Product = () => {
             navigate('/')
             window.location.reload();
         } else {
+            alert("updated Successfully")
             // alert("Product is added to cart Successfully")
             // navigate('/cart')
             // window.location.reload();
         }
-        setIsCart(true);
     }
 
-    const toLogin = () => {
-        navigate('/login')
-    }
-
-    const toUpdate = () => {
-        navigate(`/updateProduct/${params.id}`)
-    }
 
     function e(item, index) {
-        // console.log(item)
         return (
             <button onClick={() => selectImage(item)}>
-                <img src={item} alt="Tunga jersey" class="product-img-button" />
+                <img src={item} alt="Jersey" class="product-img-button" />
             </button>
         )
     }
@@ -122,49 +123,52 @@ const Product = () => {
                     </div>
                     <div class="product-product-description">
                         <div class="product-product-name">
-                            <h2>{name}</h2>
+                            <input type='text' placeholder='Enter product name' className='inputBox'
+                                value={name} onChange={(e) => { setName(e.target.value) }}
+                            />
                         </div>
                         <div class="product-product-price">
-                            <h3>₹{price}</h3>
+                            <input type='text' placeholder='Enter product price' className='inputBox'
+                                value={price} onChange={(e) => { setPrice(e.target.value) }}
+                            />
                         </div>
+
                         <div class="product-product-size">
-                            <p>Select Size</p>
+                            <p>Edit Size &Quantity</p>
                         </div>
-                        <select id="dropdown" placeholdeer='SelectSize' value={selectedSize} onChange={(e => { setselectedSize(e.target.value) })}>
-                            <option value="S">S</option>
-                            <option value="M">M</option>
-                            <option value="L">L</option>
-                            <option value="XL">XL</option>
-                            <option value="2XL">2XL</option>
-                        </select>
                         <div class="product-product-quantity">
-                            <p>Quantity</p>
-                            <input type="number" name="product-quantity" id="product-quantity" value={quantity}
-                                min="1" max='5' onChange={(e => { setQuantity(e.target.value) })} />
+                            <div className=''>
+                                {sizeQuantities.map((sizeQuantity, index) => (
+                                    <div key={index}>
+                                        <input
+                                            type="text"
+                                            placeholder="Size"
+                                            name="size"
+                                            value={sizeQuantity.size}
+                                            onChange={(e) => sizeInputChange(index, e)}
+                                        />
+                                        <input
+                                            type="number"
+                                            placeholder="Quantity"
+                                            name="quantity"
+                                            value={sizeQuantity.quantity}
+                                            onChange={(e) => sizeInputChange(index, e)}
+                                        />
+                                        <button onClick={() => sizeDeleteRow(index)}>Delete</button>
+                                    </div>
+                                ))}
+                                <button onClick={addSizeInputs}>Add More Sizes</button>
+                            </div>
                         </div>
                         {
-                            isLogin ?
-                                isCart ?
-                                    <button class="product-btn" >Added to Cart</button>
-                                    :
-                                    <button class="product-btn" onClick={addToCart}>Add to Cart</button>
-
-                                :
-                                <>
-                                    <button onClick={toLogin} class="product-btn" >Login to Proceed</button>
-                                </>
-                        }
-
-                        {
-                            isAdmin?
-                            <button onClick={toUpdate} class="product-btn" >Update product</button>
-                            :
-                            <></>
+                            <button class="product-btn" onClick={updateProduct}>Update Details</button>
                         }
 
                         <div class="product-product-details product-product-info">
-                            <h3>PRODUCT INFO</h3>
-                            <p> {details} </p>
+                            <h3>PRODUCT INFO (Product Details)</h3>
+                            <input type='text' placeholder='Enter product price' className='inputBox'
+                                value={details} onChange={(e) => { setDetails(e.target.value) }}
+                            />
                         </div>
                         <hr />
                         <div class="product-product-details product-return-refund-policy">
@@ -187,6 +191,7 @@ const Product = () => {
             }
         </div>
     )
+
 }
 
-export default Product
+export default UpdateProduct

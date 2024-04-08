@@ -7,7 +7,6 @@ import LoadingPage from './LoadingPage'
 
 function OrderHistory() {
     const [orders, setOrders] = React.useState([])
-    const [isAdmin, setIsAdmin] = React.useState(false)
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
@@ -17,9 +16,6 @@ function OrderHistory() {
         if (!email || !token) {
             alert("Please Login")
             navigate('/')
-        }
-        if (email == 'instibuzziitm@gmail.com') {
-            setIsAdmin(true)
         }
         getProducts();
     }, [])
