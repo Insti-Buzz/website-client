@@ -44,7 +44,7 @@ function Shop() {
         setLoading(true)
         try {
             let result = await fetch(
-                "https://website-server-ijbv.onrender.com/api/v1/products/get-product",
+                `${process.env.REACT_APP_server_url}/api/v1/products/get-product`,
                 {
                     // headers:{
 

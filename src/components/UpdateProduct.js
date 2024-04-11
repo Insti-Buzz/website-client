@@ -33,7 +33,7 @@ function UpdateProduct() {
     const getProductDetails = async () => {
         setLoading(true)
         // console.log(params)
-        let result = await fetch(`https://website-server-ijbv.onrender.com/api/v1/products/get-product-details/${params.id}`, {
+        let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/get-product-details/${params.id}`, {
             method: "POST"
         })
         result = await result.json()
@@ -76,7 +76,7 @@ function UpdateProduct() {
         let productId = params.id
         // console.log(email)
         // console.log(productId)
-        let result = await fetch(`https://website-server-ijbv.onrender.com/api/v1/products/update-product-details/${params.id}`, {
+        let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/update-product-details/${params.id}`, {
             method: 'POST',
             body: JSON.stringify({ productId, name, price,sizeQuantities, details }),
             headers: {

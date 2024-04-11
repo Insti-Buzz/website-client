@@ -68,7 +68,7 @@ function AddProduct() {
         }
         
         const token = localStorage.getItem("token");
-        let result = await fetch('https://website-server-ijbv.onrender.com/api/v1/products/add-product', {
+        let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/add-produc`, {
             method: 'POST',
             body: JSON.stringify({ name, details, price, sizeQuantities, imageUrl }),
             headers: {

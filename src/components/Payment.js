@@ -11,7 +11,7 @@
 //     }, [])
 
 //     const getProducts = async () => {
-//         let result = await fetch('https://website-server-ijbv.onrender.com/api/v1/products/get-product', {
+//         let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/get-product`, {
 //             // headers:{
 
 //             // }
@@ -27,7 +27,7 @@
 //     }
 
 //     const confirmOrder = async () => {
-//         const response = await fetch("https://website-server-ijbv.onrender.com/api/v1/payment/confirm", {
+//         const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/payment/confirm`, {
 //             method: "POST",
 //             body: JSON.stringify({
 //                 products,

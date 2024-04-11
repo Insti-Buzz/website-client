@@ -34,7 +34,7 @@ function Login() {
             return false
         }
         
-        let result = await fetch('https://website-server-ijbv.onrender.com/api/v1/auth/login', {
+        let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/auth/login`, {
             method: 'POST',
             body: JSON.stringify({ email, password }),
             headers: {
