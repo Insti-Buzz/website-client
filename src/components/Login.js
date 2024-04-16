@@ -56,7 +56,7 @@ function Login() {
                     </div>
                     <h1>The All-in-One Campus Fashion Brand</h1>
                     <h4>Please Login to your Account</h4>
-                    <input className='login-input' type='text' placeholder='Email address' value={email}
+                    <input className='login-input' type='email' placeholder='Email address' value={email}
                         onChange={(e) => { setEmail(e.target.value) }} />
                     {error && !email && <span className='invalid-input'>Enter valid email</span>}
                     <input className='login-input' type='password' placeholder='Password' value={password}

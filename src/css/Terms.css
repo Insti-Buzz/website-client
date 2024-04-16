@@ -1,0 +1,34 @@
+.terms-title {
+    height: 10vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+}
+
+.terms-title h1 {
+    font-size: 3.854vw;
+    font-weight: 400;
+}
+
+.terms-main-container {
+    padding: 5vw 15vw;
+}
+
+.terms-container {
+    margin-bottom: 3.21vw;
+}
+
+.terms-container h2 {
+    font-size: 2.65625vw;
+    margin: 0;
+    margin-bottom: 1.56vw;
+    font-weight: 100;
+}
+
+.terms-container p {
+    font-size: 16px;
+    margin: 0;
+    line-height: 1.58;
+    font-weight: 100;
+}
