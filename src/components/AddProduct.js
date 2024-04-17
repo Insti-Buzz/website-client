@@ -72,7 +72,6 @@ function AddProduct() {
             method: 'POST',
             body: JSON.stringify({ name, details, price, sizeQuantities, imageUrl }),
             headers: {
-
                 'Content-Type': 'application/json',
                 "Authorization": `Bearer ${token}`
             },
@@ -106,7 +105,7 @@ function AddProduct() {
                 onChange={(e) => { setColors(e.target.value) }} />
 
 
-            <p className='addproduct-items'>Sizes& Quantity</p>
+            <p className='addproduct-items'>Sizes & Quantity</p>
             <div className='addproduct-sizes'>
                 {sizeQuantities.map((sizeQuantity, index) => (
                     <div key={index}>

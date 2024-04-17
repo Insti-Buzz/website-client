@@ -11,7 +11,7 @@
     justify-content: space-around;
 }
 
-.footer-content .phone {
+.footer-content .footer-phone {
     margin: 15px 0;
 }
 
@@ -85,7 +85,7 @@
     opacity: 1;
 }
 
-.footer .copyright {
+.footer .footer-copyright {
     margin-top: 15px;
     text-align: center;
     font-size: 13px;
