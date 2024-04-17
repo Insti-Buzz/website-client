@@ -40,7 +40,7 @@ function App() {
           <Route path='confirm' element={<Payment />} />
           <Route path='orders' element={<OrderHistory />} />
           <Route path='ticket' element={<Ticket />} />
-          <Route path="about" element={<AboutUs />} />
+          {/* <Route path="about" element={<AboutUs />} /> */}
           <Route path="terms-conditions" element={<Terms />} />
           <Route path="return-refund" element={<ReturnRefund />} />
           <Route path="shipping" element={<Shipping />} />
