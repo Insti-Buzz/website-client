@@ -1,0 +1,202 @@
+.about-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    height: 23.5vw;
+}
+
+.about-title h1 {
+    font-size: 3.854125vw;
+    color: #2f2b36;
+}
+
+.about-our-story {
+    display: flex;
+    padding: 5vw;
+}
+
+.about-our-story-image-container {
+    flex: 1;
+}
+
+.about-our-story-image-container img {
+    width: 100%;
+}
+
+.about-our-story-text {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.about-our-story-text h2 {
+    font-size: 3.90625vw;
+}
+
+.about-our-story-text p {
+    font-size: 16px;
+}
+
+.about-our-story-title {
+    width: 59.13%;
+}
+
+.about-our-story-content {
+    width: 59.13%;
+}
+
+.about-creating-impact {
+    text-align: center;
+    padding: 0 4.6875vw;
+}
+
+.about-creating-impact-card-container {
+    display: inline-flex;
+    gap: 2.16vw;
+}
+
+.about-creating-impact-card h3 {
+    font-size: 2.34375vw;
+}
+
+.about-creating-impact-card p {
+    font-size: 16px;
+}
+
+.about-creating-impact h2 {
+    font-size: 2.65625vw;
+}
+
+.about-separator {
+    margin-top: 100px;
+    background-color: #f0f0f0;
+    height: 23.5vw;
+}
+
+.about-in-numbers {
+    padding: 5vw 5vw 0;
+}
+
+.about-in-numbers h2 {
+    font-size: 2.65625vw;
+}
+
+.about-in-numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr) 110px;
+    height: 38.54vw;
+}
+
+.about-in-numbers-card {
+    height: 14.27vw;
+    text-align: center;
+    justify-self: center;
+}
+
+.about-in-numbers-card img {
+    height: 65%;
+}
+
+.happy-customer-card img {
+    height: 95%;
+}
+
+.about-in-numbers-card h3 {
+    font-size: 3.90625vw;
+    margin: 0;
+}
+
+.about-in-numbers-card p {
+    font-size: 16px;
+    margin: 0;
+}
+
+.happy-customer-card {
+    grid-row-start: 1;
+    grid-row-end: 3;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.items-shipped-card {
+    grid-row-start: 2;
+    grid-row-end: 4;
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+.team-card {
+    grid-row-start: 2;
+    grid-row-end: 4;
+    grid-column-start: 3;
+    grid-column-end: 4;
+}
+
+.about-testimonials {
+    padding: 0 5vw;
+}
+
+.about-testimonials h2 {
+    font-size: 2.65625vw;
+    text-align: center;
+}
+
+.about-our-team {
+    padding: 0 5vw 5vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.about-our-team-title h2 {
+    font-size: 2.65625vw;
+}
+
+.about-our-team-content p {
+    font-size: 16px;
+    width: 50%;
+    align-self: end;
+}
+
+.about-team-grid {
+    align-self: end;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 70vw;
+    column-gap: 1.5625vw;
+    row-gap: 5vw;
+    margin-top: 65px;
+}
+
+.about-team-member-card {
+    position: relative;
+    background-color: #eeeeee;
+    aspect-ratio: 0.56;
+    padding: 1.5566vw 1.499vw;
+}
+
+.about-team-member-card h2 {
+    margin: 0;
+    font-size: 2.1875vw;
+
+}
+
+.about-team-member-card h3 {
+    margin: 0;
+    /* margin-top: 5px; */
+    font-size: 1.40625vw;
+}
+
+.about-team-member-card p {
+    font-size: 16px;        
+}
+
+.about-team-member-card img {
+    position: absolute;
+    bottom: 1.5566vw;
+    right: 1.499vw;
+    width: 12.43vw;
+}

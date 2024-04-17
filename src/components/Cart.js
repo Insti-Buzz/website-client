@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, CSSProperties } from 'react'
 import '../css/Cart.css'
-import TungaImg from '../assets/Tunga.png'
-import TaptiImg from '../assets/Tapti.png'
 import { useNavigate } from 'react-router-dom'
 import { IconButton } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close';
-import LoadingPage from './LoadingPage'
+import TaptiImg from '../assets/Tapti.png';
+import ClipLoader from "react-spinners/ClipLoader";
+
+const override = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "black",
+};
 
 function Cart() {
-
     const [products, setProducts] = React.useState([])
-
     // const [quantity, setQuantity] = useState(Array(products.length).fill(''));  
     // const [quantity, setQuantity] = useState(Array.from({ length: products.length }, () => 1));
     // const [quantity, setQuantity] = useState(Array(products.length).fill(1));
@@ -39,7 +42,7 @@ function Cart() {
         const email = localStorage.getItem("userEmail")
         setEmail(email)
         const token = localStorage.getItem('token')
-        let result = await fetch('https://website-server-ijbv.onrender.com/api/v1/products/getProductsInCart', {
+        let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/getProductsInCart`, {
             method: "POST",
             body: JSON.stringify({
                 email,
@@ -68,12 +71,12 @@ function Cart() {
     }
 
     const updateSize = async (id, e) => {
-        setLoading(true)
+        setLoading(true);
         const email = localStorage.getItem(`userEmail`)
         const token = localStorage.getItem('token')
         const updatedSize = e.target.value
         const orderItem_id = id
-        const response = await fetch("https://website-server-ijbv.onrender.com/api/v1/products/changeSizeInCart", {
+        const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/changeSizeInCart`, {
             method: "POST",
             body: JSON.stringify({
                 orderItem_id,
@@ -86,9 +89,9 @@ function Cart() {
             },
         });
         const result = await response.json();
-        // console.log(result);
-        window.location.reload();
-        // setLoading(false)
+        setLoading(false);
+        console.log(result);
+        // window.location.reload();
     }
 
     const updateQuantity = async (id, e) => {
@@ -97,7 +100,7 @@ function Cart() {
         const token = localStorage.getItem('token')
         const updatedQuantity = e.target.value
         const orderItem_id = id
-        const response = await fetch("https://website-server-ijbv.onrender.com/api/v1/products/changeQuantityInCart", {
+        const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/changeQuantityInCart`, {
             method: "POST",
             body: JSON.stringify({
                 orderItem_id,
@@ -205,11 +208,10 @@ function Cart() {
     }
 
     const removeFromCart = async (product_id, orderItem_id) => {
-        setLoading(true)
         const token = localStorage.getItem('token')
         const email = localStorage.getItem(`userEmail`)
         const productId = product_id
-        const response = await fetch("https://website-server-ijbv.onrender.com/api/v1/products/removeFromCart", {
+        const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/removeFromCart`, {
             method: "POST",
             body: JSON.stringify({
                 orderItem_id,
@@ -232,7 +234,7 @@ function Cart() {
     const receiptId = "qwsaq1";
     const paymentHandler = async (e) => {
         setShowPayment(false)
-        const response = await fetch("https://website-server-ijbv.onrender.com/api/v1/payment/order", {
+        const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/payment/order`, {
             method: "POST",
             body: JSON.stringify({
                 email,
@@ -262,7 +264,7 @@ function Cart() {
                 };
 
                 const validateRes = await fetch(
-                    "https://website-server-ijbv.onrender.com/api/v1/payment/order/validate",
+                    `${process.env.REACT_APP_server_url}/api/v1/payment/order/validate`,
                     {
                         method: "POST",
                         body: JSON.stringify(body),
@@ -305,7 +307,7 @@ function Cart() {
         setLoading(true)
         const email = localStorage.getItem("userEmail")
         const token = localStorage.getItem("token")
-        const response = await fetch("https://website-server-ijbv.onrender.com/api/v1/payment/confirm", {
+        const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/payment/confirm`, {
             method: "POST",
             body: JSON.stringify({
                 email,
@@ -335,36 +337,41 @@ function Cart() {
     }
 
     return (
-        <div>
-            {loading ? <LoadingPage /> :
-                <div class="checkout-main-container">
-                    <div class="checkout-my-cart">
-                        <h1>My cart</h1>
-                        <hr />
-                        <div>
-                            {products ?
-                                products.map(e) :
-                                <h3>Cart is Empty</h3>
-                            }
-                        </div>
-
+        <div class="checkout-main-container">
+            <div class="checkout-my-cart">
+                <h1>My cart</h1>
+                <hr />
+                <div>
+                    {products ?
+                        products.map(e) :
+                        <h3>Cart is Empty</h3>
+                    }
+                </div>
+                <ClipLoader
+                    color="#ffffff"
+                    loading={loading}
+                    cssOverride={override}
+                    size={150}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                />
+                <hr />
+            </div>
+            <div class="checkout-order-summary">
+                <h1>Order summary</h1>
+                <hr />
+                <div class="checkout-order-price-details">
+                    <h2>Subtotal</h2>
+                    <h2>₹{calculateSubtotal()}</h2>
+                    <h2>Delivery charges</h2>
+                    <h2><strike>₹70</strike>₹0</h2>
+                    <div class="line-break">
                         <hr />
                     </div>
-                    <div class="checkout-order-summary">
-                        <h1>Order summary</h1>
-                        <hr />
-                        <div class="checkout-order-price-details">
-                            <h2>Subtotal</h2>
-                            <h2>₹{calculateSubtotal()}</h2>
-                            <h2>Delivery charges</h2>
-                            <h2><strike>₹70</strike>₹0</h2>
-                            <div class="line-break">
-                                <hr />
-                            </div>
-                            <h1>Total</h1>
-                            <h1>₹{calculateSubtotal()}</h1>
-                        </div>
-                        <button class="checkout-btn" onClick={proceedPayment}>Checkout</button>
+                    <h1>Total</h1>
+                    <h1>₹{calculateSubtotal()}</h1>
+                </div>
+                <button class="checkout-btn" onClick={proceedPayment}>Checkout</button>
 
                     </div>
                     <div>
@@ -397,21 +404,19 @@ function Cart() {
                     </div>
                 )} */}
 
-                        {showPayment && (
-                            <div className="cart-popup">
-                                {/* <i className='fa fa-times' aria-hidden='true' onClick={setShowPayment(false)}></i> */}
-                                <IconButton onClick={() => closePayment()}><CloseIcon /></IconButton>
-                                <h1>Confirm Your Order?</h1>
-                                <div className='cart-popup-content'>
-                                    <button onClick={confirmOrder}>Yes</button>
-                                    <button onClick={cancelOrder}>No</button>
-                                    {/* <button onClick={paymentHandler}>Pay Now</button> */}
-                                </div>
-                            </div>
-                        )}
+                {showPayment && (
+                    <div className="cart-popup">
+                        {/* <i className='fa fa-times' aria-hidden='true' onClick={setShowPayment(false)}></i> */}
+                        <IconButton onClick={() => closePayment()}><CloseIcon /></IconButton>
+                        <h1>Confirm Your Order?</h1>
+                        <div className='cart-popup-content'>
+                            <button onClick={confirmOrder}>Yes</button>
+                            <button onClick={cancelOrder}>No</button>
+                            {/* <button onClick={paymentHandler}>Pay Now</button> */}
+                        </div>
                     </div>
-                </div>
-            }
+                )}
+            </div>
         </div>
     )
 }

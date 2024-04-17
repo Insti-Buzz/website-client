@@ -71,11 +71,10 @@ function AddProduct() {
         }
         
         const token = localStorage.getItem("token");
-        let result = await fetch('https://website-server-ijbv.onrender.com/api/v1/products/add-product', {
+        let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/add-product`, {
             method: 'POST',
             body: JSON.stringify({ name, details, price, sizeQuantities, imageUrl }),
             headers: {
-
                 'Content-Type': 'application/json',
                 "Authorization": `Bearer ${token}`
             },
@@ -109,7 +108,7 @@ function AddProduct() {
                 onChange={(e) => { setColors(e.target.value) }} />
 
 
-            <p className='addproduct-items'>Sizes& Quantity</p>
+            <p className='addproduct-items'>Sizes & Quantity</p>
             <div className='addproduct-sizes'>
                 {sizeQuantities.map((sizeQuantity, index) => (
                     <div key={index}>

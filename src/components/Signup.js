@@ -32,7 +32,7 @@ function Signup() {
             return false
         }
 
-        let result = await fetch('https://website-server-ijbv.onrender.com/api/v1/auth/register', {
+        let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/auth/register`, {
             method: 'POST',
             body: JSON.stringify({ name, email, password, phoneNumber }),
             headers: {
@@ -81,7 +81,7 @@ function Signup() {
             setError(true)
             return false
         }
-        let result = await fetch('https://website-server-ijbv.onrender.com/api/v1/auth/verifyOtp', {
+        let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/auth/verifyOtp`, {
             method: 'POST',
             body: JSON.stringify({ name, email, password, phoneNumber, otp }),
             headers: {
@@ -118,11 +118,11 @@ function Signup() {
                         onChange={(e) => { setName(e.target.value) }} />
                     {error && !name && <span className='invalid-input'>Enter valid name</span>}
                     <br />
-                    <input className='signup-input' type='text' placeholder='Enter your email' value={email}
+                    <input className='signup-input' type='email' placeholder='Enter your email' value={email}
                         onChange={(e) => { setEmail(e.target.value) }} />
                     {error && !email && <span className='invalid-input'>Enter valid email</span>}
                     <br />
-                    <input type="text" placeholder="Enter your number" className="signup-input" value={phoneNumber}
+                    <input type="number" placeholder="Enter your number" className="signup-input" value={phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value)} />
                     {error && !phoneNumber && <span className='invalid-input'>Enter valid Phone Number</span>}
                     <br />

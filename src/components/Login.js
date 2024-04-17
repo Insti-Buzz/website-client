@@ -33,8 +33,7 @@ function Login() {
             throw new Error("Enter Details")
             return false
         }
-        
-        let result = await fetch('https://website-server-ijbv.onrender.com/api/v1/auth/login', {
+        let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/auth/login`, {
             method: 'POST',
             body: JSON.stringify({ email, password }),
             headers: {
@@ -84,7 +83,7 @@ function Login() {
                     </div>
                     <h1>The All-in-One Campus Fashion Brand</h1>
                     <h4>Please Login to your Account</h4>
-                    <input className='login-input' type='text' placeholder='Email address' value={email}
+                    <input className='login-input' type='email' placeholder='Email address' value={email}
                         onChange={(e) => { setEmail(e.target.value) }} />
                     {error && !email && <span className='invalid-input'>Enter valid email</span>}
                     <input className='login-input' type='password' placeholder='Password' value={password}
