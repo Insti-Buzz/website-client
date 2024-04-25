@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../css/Cart.css'
 import TungaImg from '../assets/Tunga.png'
 import TaptiImg from '../assets/Tapti.png'
+import InstiBuzzLogo from '../assets/Horizontal Logo Transparent.png';
 import { useNavigate } from 'react-router-dom'
 import { IconButton } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close';
@@ -19,14 +20,20 @@ function Cart() {
     const [totalAmount, setTotalAmount] = React.useState();
     // const [showDetails, setShowDetails] = React.useState(false)
     const [showPayment, setShowPayment] = React.useState(false)
+    const [name, setName] = React.useState('')
+    const [phone, setPhone] = React.useState('')
     const [email, setEmail] = React.useState('')
     const navigate = useNavigate('')
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
+        const name = localStorage.getItem('userName')
+        const phone = localStorage.getItem('userPhone')
         const email = localStorage.getItem('userEmail')
         const token = localStorage.getItem('token')
         setEmail(email)
+        setName(name)
+        setPhone(phone)
         if (!email || !token) {
             alert("Please Login")
             navigate('/')
@@ -87,6 +94,11 @@ function Cart() {
         });
         const result = await response.json();
         // console.log(result);
+        if (result.status == 404) {
+            alert(result.message)
+            localStorage.removeItem("userEmail")
+            navigate('/')
+        } 
         window.location.reload();
         // setLoading(false)
     }
@@ -111,6 +123,12 @@ function Cart() {
         });
         const result = await response.json();
         // console.log(result);
+        if (result.status == 404) {
+            alert(result.message)
+            localStorage.removeItem("userEmail")
+            navigate('/')
+            window.location.reload();
+        }
         window.location.reload();
         // setLoading(true)
 
@@ -222,6 +240,12 @@ function Cart() {
             },
         });
         const result = await response.json();
+        if (result.status == 404) {
+            alert(result.message)
+            localStorage.removeItem("userEmail")
+            navigate('/')
+            window.location.reload();
+        } 
         // console.log(result);
         // setLoading(false)
         window.location.reload();
@@ -231,8 +255,10 @@ function Cart() {
     const currency = "INR";
     const receiptId = "qwsaq1";
     const paymentHandler = async (e) => {
+        const token = localStorage.getItem('token')
         setShowPayment(false)
         const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/payment/order`, {
+            
             method: "POST",
             body: JSON.stringify({
                 email,
@@ -245,20 +271,28 @@ function Cart() {
             },
         });
         const order = await response.json();
+        if (order.status == 404) {
+            alert(order.message)
+            localStorage.removeItem("userEmail")
+            navigate('/')
+            window.location.reload();
+        } 
         // console.log(order);
 
         var options = {
-            key: "rzp_test_DMvAPM0GH3nThd", // Enter the Key ID generated from the Dashboard
+            key: "rzp_live_4KDT1L43T3GoOI", // Enter the Key ID generated from the Dashboard
             amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
             currency,
             name: "InstiBuzz", //your business name
-            description: "Test Transaction",
-            image: TaptiImg,
+            description: "Transaction",
+            image: InstiBuzzLogo,
             order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
             callback_url: "https://eneqd3r9zrjok.x.pipedream.net/",
             handler: async function (response) {
                 const body = {
                     ...response,
+                    email,
+                    totalAmount
                 };
 
                 const validateRes = await fetch(
@@ -273,12 +307,23 @@ function Cart() {
                 );
                 const jsonRes = await validateRes.json();
                 // console.log(jsonRes);
+                // console.log(jsonRes.status);
+                // console.log(jsonRes.msg);
+                // console.log(jsonRes.razorpay_order_id);
+                // console.log(jsonRes.razorpay_payment_id);
+                if (jsonRes.status == 404) {
+                    alert('Failed')
+                } else {
+                    alert('Your order is Placed Successfully')
+                    // window.location.reload();
+                    navigate('/orders')
+                }
             },
             prefill: {
                 //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
-                name: "Web Dev Matrix", //your customer's name
-                email: "webdevmatrix@example.com",
-                contact: "9646071964", //Provide the customer's phone number for better conversion rates
+                name: name, //your customer's name
+                email: email,
+                contact: phone, //Provide the customer's phone number for better conversion rates
             },
             notes: {
                 address: "Razorpay Corporate Office",
@@ -289,13 +334,13 @@ function Cart() {
         };
         var rzp1 = new window.Razorpay(options);
         rzp1.on("payment.failed", function (response) {
-            alert(response.error.code);
+            // alert(response.error.code);
             alert(response.error.description);
-            alert(response.error.source);
-            alert(response.error.step);
+            // alert(response.error.source);
+            // alert(response.error.step);
             alert(response.error.reason);
-            alert(response.error.metadata.order_id);
-            alert(response.error.metadata.payment_id);
+            // alert(response.error.metadata.order_id);
+            // alert(response.error.metadata.payment_id);
         });
         rzp1.open();
         e.preventDefault();
@@ -322,7 +367,10 @@ function Cart() {
         // console.log(response.body);
         setLoading(false)
         if (response.status == 404) {
-            alert('Failed')
+            alert(response.message)
+            localStorage.removeItem("userEmail")
+            navigate('/')
+            window.location.reload();
         } else {
             alert('Your order is Placed Successfully')
             // window.location.reload();
@@ -403,9 +451,9 @@ function Cart() {
                                 <IconButton onClick={() => closePayment()}><CloseIcon /></IconButton>
                                 <h1>Confirm Your Order?</h1>
                                 <div className='cart-popup-content'>
-                                    <button onClick={confirmOrder}>Yes</button>
-                                    <button onClick={cancelOrder}>No</button>
-                                    {/* <button onClick={paymentHandler}>Pay Now</button> */}
+                                    <button onClick={confirmOrder}>Cash on Delivery</button>
+                                    {/* <button onClick={cancelOrder}>No</button> */}
+                                    <button onClick={paymentHandler}>Pay Now</button>
                                 </div>
                             </div>
                         )}

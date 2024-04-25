@@ -34,7 +34,7 @@ function OrderHistory() {
             },
         })
         result = await result.json();
-        // console.log(result)
+        console.log(result)
         setLoading(false)
         if (result.status == 404) {
             alert(result.message)
@@ -76,6 +76,13 @@ function OrderHistory() {
             <div className='orders-div'>
                 <div>
                     <h3>Order Id: {item.order_id}</h3>
+                </div>
+                <div>
+                    {item.razorpayPaymentId ? 
+                        <p>Payment Id: {item.razorpayPaymentId}</p>
+                        :
+                        <p>Cash On delivery</p>
+                    }
                 </div>
                 <div>
                     {

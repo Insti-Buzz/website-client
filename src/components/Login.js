@@ -42,16 +42,15 @@ function Login() {
             },
         })
         result = await result.json();
-        // setLoading(false)
-        // setIsEnabled(true)
-        // console.log(result)
         if (result.status == 404) {
             // alert(result.error)
             throw new Error(result.error)
         } else {
-            // alert(result.message)
+            // alert(result.userName)
             localStorage.setItem("token", result.accessToken)
             localStorage.setItem("userEmail", email)
+            localStorage.setItem("userName", result.userName)
+            localStorage.setItem("userPhone", result.userPhone)
             navigate('/')
             window.location.reload()    
             return(result)

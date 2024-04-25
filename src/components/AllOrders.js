@@ -74,6 +74,13 @@ function AllOrders() {
                             item.order_id
                         }
                     </div>
+                    <div>
+                        {item.razorpayPaymentId ?
+                            <p>Payment Id: {item.razorpayPaymentId}</p>
+                            :
+                            <p>Cash On delivery</p>
+                        }
+                    </div>
                     <p>Date: {day + "-" + month + "-" + year}</p>
                     <p>
                         {
