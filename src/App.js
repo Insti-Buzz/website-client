@@ -19,6 +19,7 @@ import Shipping from "./components/Shipping";
 import Privacy from "./components/Privacy";
 import Private from './components/Private';
 import UpdateProduct from './components/UpdateProduct';
+import  Shop2  from './components/Shop2'
 
 function App() {
   return (

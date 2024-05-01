@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import TungaImg from '../assets/Tunga.png'
-import TaptiImg from '../assets/Tapti.png'
 import "../css/OrderHistory.css"
+
 import { useNavigate } from 'react-router-dom'
 import LoadingPage from './LoadingPage'
 
@@ -52,7 +51,7 @@ function OrderHistory() {
 
         // const deliveryDone = async () => {
         //     const token = localStorage.getItem("token")
-        //     let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/delivered`, {
+        //     let result = await fetch(`${import.meta.env.VITE_server_url}/api/v1/products/delivered`, {
         //         method: 'POST',
         //         body: JSON.stringify({ orderId }),
         //         headers: {
@@ -75,38 +74,45 @@ function OrderHistory() {
 
             <div className='orders-div'>
                 <div>
-                    <h3>Order Id: {item.order_id}</h3>
-                </div>
-                <div>
-                    {item.razorpayPaymentId ? 
-                        <p>Payment Id: {item.razorpayPaymentId}</p>
-                        :
-                        <p>Cash On delivery</p>
-                    }
-                </div>
-                <div>
-                    {
-                        item.productsOrdered.map(e1)
-                    }
-                </div>
-                <div>
-                    Subtotal:{
-                        item.subTotal
-                    }
-                </div>
-                <div>
-                    {
-                        item.isDelivered ?
-                            <p><strong>Deliverd Successfully</strong></p>
+                    
+                    <div className='order-id'>OrderId :
+                        {
+                            item.order_id
+                        }
+                    </div>
+                    <div>
+                        {item.razorpayPaymentId ?
+                            <p>Payment Id: {item.razorpayPaymentId}</p>
                             :
-                            <p>Coming Soon</p>
-                    }
-                </div>
-                <div><p>Date:
-                    {
-                        day + "-" + month + "-" + year
-                    }
-                </p>
+                            <p>Cash On delivery</p>
+                        }
+                    </div>
+                    <p>Date: {day + "-" + month + "-" + year}</p>
+                    <div>
+                        {
+                            item.productsOrdered.map(e1)
+                        }
+                    </div>
+                    <hr/>
+                    <div>
+                        Subtotal:{
+                            item.subTotal
+                        }
+                    </div>
+                    <div>
+                        {
+                            item.isDelivered ?
+                                <p><strong>Deliverd Successfully</strong></p>
+                                :
+                                <p>Coming Soon</p>
+                        }
+                    </div>
+                    <div><p>Date:
+                        {
+                            day + "-" + month + "-" + year
+                        }
+                    </p>
+                    </div>
                 </div>
             </div>
         )
@@ -114,41 +120,44 @@ function OrderHistory() {
 
     function e1(item, index) {
         return (
-            <div>
-                <div class="orders-product-card">
-                    {/* <div class="checkout-product-img-container">
-                        <img src={TungaImg} alt="Tunga jersey" />
-                    </div> */}
-                    <div>
-                        {/* <h3>{item.orderItem_id}</h3> */}
-                    </div>
-                    <div class="orders-product-details">
-                        <div class="checkout-product-name">
-                            <h2>{item.product.name}</h2>
-                        </div>
-                        <div class="orders-product-price">
-                            <>₹{item.price}</>
-                        </div>
-                        <div>
-                            Quantity: {item.quantity}
-                        </div>
-                        <div>
-                            Size: {item.size}
-                        </div>
-                    </div>
-                    <hr />
+            <div className='order-my-order'>
+            <div class="order-card">
+                <div class="order-date">
+                    {/* <p>22 April, 2023</p> */}
                 </div>
+                <hr />
+                <div class="order-product-img-container">
+                    <img src={item.product.imageUrl[0]} alt="Product image" />
+                </div>
+                <div class="order-product-details">
+                    <div class="order-product-name">
+                        <h2>{item.product.name}</h2>
+                    </div>
+                    <div class="order-product-size">
+                        Size: {item.size}
+                    </div>
+                    <div class="order-product-quantity">
+                        Qty: {item.quantity}
+                    </div>
+                    <div class="order-product-quantity">
+                        Price: {item.price}/-
+                    </div>  
+
+                </div>
+                {/* <hr/> */}
             </div>
+        </div>
 
         )
     }
 
     return (
-        <div>
+        <div class="order-main-container">
             {loading ? <LoadingPage /> :
 
-                <div >
-                    <h1>Order History</h1>
+                <div  class="order-my-order">
+                    <h1>My Orders</h1>
+                    <hr/>
 
                     {orders ?
                         orders.map(e) :

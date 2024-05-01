@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { storage } from '../firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { v4 } from 'uuid';
+import { styled } from '@mui/material';
 
 function AddProduct() {
     const [name, setName] = React.useState('');
@@ -11,7 +12,7 @@ function AddProduct() {
     const [colors, setColors] = React.useState('');
     const [sizeQuantities, setSizeQuantities] = React.useState([{ size: '', quantity: '' }]);
     const [price, setPrice] = React.useState('');
-    const [quantity, setQuantity] = React.useState('');
+    const [style, setStyle] = React.useState('');
     const [discount, setDiscout] = React.useState('');
     const [error, setError] = React.useState(false)
     const [imageUpload, setImageUpload] = React.useState([]);
@@ -51,7 +52,7 @@ function AddProduct() {
 
         // console.log("imageUpload", imageUpload);
 
-        if (!name || !price || !details || !imageUpload) {
+        if (!name || !price || !details || !imageUpload||!styled) {
             setError(true)
             return false
         }
@@ -70,7 +71,7 @@ function AddProduct() {
         const token = localStorage.getItem("token");
         let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/add-product`, {
             method: 'POST',
-            body: JSON.stringify({ name, details, price, sizeQuantities, imageUrl }),
+            body: JSON.stringify({ name, details, price, sizeQuantities, imageUrl,style }),
             headers: {
                 'Content-Type': 'application/json',
                 "Authorization": `Bearer ${token}`
@@ -143,9 +144,10 @@ function AddProduct() {
                 </div>
 
                 <div className='addproduct-quantity-div'>
-                    <p className='addproduct-items'>Quantity</p>
-                    <input className='addproduct-quantity' type='text' placeholder='Enter product name' value={quantity}
-                        onChange={(e) => { setQuantity(e.target.value) }} />
+                    <p className='addproduct-items'>Style</p>
+                    <input className='addproduct-quantity' type='text' placeholder='regular/oversized' value={style}
+                        onChange={(e) => { setStyle(e.target.value) }} />
+                    {error && !style && <span className='invalid-input'>Enter valid Style</span>}
 
                 </div>
 
