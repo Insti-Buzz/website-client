@@ -1,0 +1,80 @@
+.services-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    height: 25vw;
+}
+
+.services-title h1 {
+    font-size: max(3.854125vw, 42px);
+    color: #2f2b36;
+    font-weight: 100;
+}
+
+.services-divider {
+    margin: 0 0 3vw 0;
+}
+
+.services-intro {
+    font-size: max(1.1vw, 12px);
+    padding: 5vw 5vw 3vw 5vw;
+    font-weight: 200;
+}
+
+.services-our-service {
+    padding: 0 5vw 3vw 5vw;
+}
+
+.services-our-service h3 {
+    font-size: 1.4vw;
+    font-weight: 400;
+    margin: 0 0 2.64vw 0;
+}
+
+.services-our-service h2 {
+    font-size: max(3.2vw, 32px);
+    font-weight: 400;
+    margin: 0;
+}
+
+.services-our-service-container {
+    display: flex;
+    margin-top: 3vw;
+    gap: 40px;  
+}
+
+.services-our-service-image-container {
+    flex: 1;
+}
+
+.services-our-service-image-container img {
+    width: 100%;
+    height: 30vw;
+    object-fit: cover;
+    border-radius: 0.78vw;
+}
+
+.services-our-service-content {
+    flex: 1.25;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 200;
+}
+
+.service-design .services-our-service-content {
+    justify-content: left;
+}
+
+.services-our-service-content p {
+    margin: 0;
+}
+
+.services-our-service-text {
+    width: 85%;
+}
+
+.services-our-service-text p {
+    font-size: max(1.1vw, 12px);
+}

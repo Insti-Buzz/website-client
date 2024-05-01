@@ -14,12 +14,12 @@ import Ticket from "./components/Ticket";
 import AllOrders from "./components/AllOrders";
 import AboutUs from "./components/AboutUs";
 import Terms from "./components/Terms";
-import ReturnRefund from "./components/ReturnRefund";
+import ReturnRefund from "./components/Exchange";
 import Shipping from "./components/Shipping";
 import Privacy from "./components/Privacy";
 import Private from './components/Private';
 import UpdateProduct from './components/UpdateProduct';
-import  Shop2  from './components/Shop2'
+import OurServices from "./components/OurServices";
 
 function App() {
   return (
@@ -40,12 +40,13 @@ function App() {
           <Route path='cart' element={<Cart />} />
           <Route path='confirm' element={<Payment />} />
           <Route path='orders' element={<OrderHistory />} />
-          <Route path='ticket' element={<Ticket />} />
-          {/* <Route path="about" element={<AboutUs />} /> */}
+          {/* <Route path='ticket' element={<Ticket />} /> */}
+          <Route path="about" element={<AboutUs />} />
           <Route path="terms-conditions" element={<Terms />} />
-          <Route path="return-refund" element={<ReturnRefund />} />
+          <Route path="exchange" element={<ReturnRefund />} />
           <Route path="shipping" element={<Shipping />} />
           <Route path="privacy" element={<Privacy />} />
+          <Route path="ourServices" element={<OurServices />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -1,5 +1,5 @@
 .privacy-title {
-    height: 10vw;
+    height: 25vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -7,8 +7,8 @@
 }
 
 .privacy-title h1 {
-    font-size: 3.854vw;
-    font-weight: 400;
+    font-size: max(3.854125vw, 42px);
+    font-weight: 300;
 }
 
 .privacy-main-container {
@@ -23,12 +23,12 @@
     font-size: 2.65625vw;
     margin: 0;
     margin-bottom: 1.56vw;
-    font-weight: 100;
+    font-weight: 300;
 }
 
 .privacy-container p {
     font-size: 16px;
     margin: 0;
     line-height: 1.58;
-    font-weight: 100;
+    font-weight: 200;
 }

@@ -1,11 +1,31 @@
-import '../css/Navbar.css';
-import InstiBuzzLogo from '../assets/Horizontal Logo Transparent.png';
+
+import React from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Signup from './Signup';
-import React, { useEffect, useState } from 'react';
+
+// import toast, { Toaster } from 'react-hot-toast';
+import '../css/Navbar.css';
+import InstiBuzzLogo from '../assets/973300f3-c585-48d9-9e8c-601a3ae24121.png';
+// import { resolveConfig } from 'vite';
 
 function Navbar() {
     const [dropDownHeight, setDropDownHeight] = useState('0');
+    // const [navbarDisplay, setNavbarDisplay] = useState('inline-flex');
+    const [navbarHeight, setNavbarHeight] = useState('');
+    const [prevPos, setPrevPos] = useState(0);
+
+    useEffect(() => {
+        const uponScroll = () => {
+            const currentPos = window.scrollY;
+            setNavbarHeight(currentPos > prevPos ? '0' : '');
+            setPrevPos(currentPos);
+        }
+
+        window.addEventListener('scroll', uponScroll);
+
+        return () => window.removeEventListener('scroll', uponScroll);
+    }, [prevPos]);
+
 
     const navigate = useNavigate();
     const [isLogin, setIsLogin] = React.useState(false)
@@ -20,11 +40,14 @@ function Navbar() {
     }, [])
 
     function dropDownOpen() {
-        setDropDownHeight('max-content');
+        setDropDownHeight('480px');
     }
+
     function dropDownClose() {
         setDropDownHeight('0');
     }
+
+
     const homePage = () => {
         dropDownClose()
         navigate('/')
@@ -60,6 +83,11 @@ function Navbar() {
         navigate("/login")
     }
 
+    const ourServicesPage=()=>{
+        dropDownClose()
+        navigate("/ourServices")
+    }
+
     const Logout = () => {
         localStorage.removeItem("userEmail")
         localStorage.removeItem("token")
@@ -69,27 +97,29 @@ function Navbar() {
 
     return (
         <>
-            <div className="nav-navbar">
+            <div className="nav-navbar" style={{ height: navbarHeight }}>
 
                 <div className="nav-top-left">
-                    <img src={InstiBuzzLogo} onClick={homePage} alt="InstiBuzz's official logo" className="nav-instibuzz-logo" />
-                    {/* <p>LOGO HERE</p> */}
+                    <img src={InstiBuzzLogo} alt="" className="nav-instibuzz-logo" />
+                    <p className="nav-instibuzz-title">InstiBuzz</p>
                 </div>
 
                 <div className="nav-center">
                     <div className="nav-center-content">
                         <a className='nav-home' onClick={homePage}>Home</a>
                         <a className='nav-shop' onClick={shopPage}>Shop</a>
-                        {isAdmin ?
+                        {/* {isAdmin ?
                             <a className='nav-blog' onClick={addProductPage}>Add</a> :
                             <></>
-                        }
+                        } */}
                         {
                             isLogin ?
-                                <a className='nav-about' onClick={ordersPage}>Orders</a>
+                                <a className='nav-orders' onClick={ordersPage}>Orders</a>
                                 :
-                                <a className='nav-about' onClick={signupPage}>Signup</a>
+                                <></>
+
                         }
+                        <a className='nav-ourServices' onClick={ourServicesPage}>Services</a>
                     </div>
                 </div>
 
@@ -102,13 +132,11 @@ function Navbar() {
                             :
                             <>
 
-                                <a className='nav-about' onClick={loginPage}>Login</a>
+                                <a className='nav-contact-button' onClick={loginPage}>Login/Signup</a>
                                 <a className="fa fa-bars" aria-hidden="true" onClick={dropDownOpen}></a></>
-
                     }
-
-
                 </div>
+
 
                 <div className="nav-dropdown" style={{ height: dropDownHeight }}>
                     <a className="fa fa-times" aria-hidden="true" onClick={dropDownClose}></a>
@@ -122,15 +150,17 @@ function Navbar() {
                                 : <></>
                         }
                         {
-                            isLogin?
-                            <a className='nav-about' onClick={Logout}>Logout</a>
-                    
-                            :
-                            <a className='nav-about' onClick={loginPage}>Login</a>
+                            isLogin ?
+                                <a className='nav-contact-button' onClick={Logout}>Logout</a>
+
+                                :
+                                <a className='nav-contact-button' onClick={loginPage}>Login</a>
                         }
                         {/* <button className="nav-contact-button">Login/Signup</button> */}
                     </div>
                 </div>
+           
+
             </div>
 
 

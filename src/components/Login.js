@@ -42,15 +42,16 @@ function Login() {
             },
         })
         result = await result.json();
+        // setLoading(false)
+        // setIsEnabled(true)
+        // console.log(result)
         if (result.status == 404) {
             // alert(result.error)
             throw new Error(result.error)
         } else {
-            // alert(result.userName)
+            // alert(result.message)
             localStorage.setItem("token", result.accessToken)
             localStorage.setItem("userEmail", email)
-            localStorage.setItem("userName", result.userName)
-            localStorage.setItem("userPhone", result.userPhone)
             navigate('/')
             window.location.reload()    
             return(result)
@@ -83,19 +84,17 @@ function Login() {
                     </div>
                     <h1>The All-in-One Campus Fashion Brand</h1>
                     <h4>Please Login to your Account</h4>
-                    <input className='login-input' type='email' placeholder='Email address' value={email}
+                    <input className='login-input' id={error && !email && "input-error"} type='email' placeholder='Email address' value={email}
                         onChange={(e) => { setEmail(e.target.value) }} />
-                    {error && !email && <span className='invalid-input'>Enter valid email</span>}
-                    <input className='login-input' type='password' placeholder='Password' value={password}
+                    <input className='login-input' id={error && !password && "input-error"} type='password' placeholder='Password' value={password}
                         onChange={(e) => { setPassword(e.target.value) }} />
-                    {error && !password && <span className='invalid-input'>Enter valid password</span>}
                     {/* <div class="forgot-password">
                         <a href="">Forgot password?</a> <br />
                     </div> */}
                     <div class="login-btn-container">
                         <button className='login-btn' onClick={LoginToast} >Login</button>
                     </div>
-                    <h2>OR</h2>
+                    <h5>OR</h5>
                     <div class="signup-btn-container">
                         <button type="button" class="signup-btn" onClick={toSignup} >Sign Up</button>
                     </div>

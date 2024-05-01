@@ -113,22 +113,18 @@ function Signup() {
             <div class="signup-content">
                 <div class="signup-form">
                     <h1>Welcome to InstiBuzz!</h1>
-                    <h3>Signup to continue</h3>
-                    <input className='signup-input' type='text' placeholder='Enter your name' value={name}
+                    <h4>Signup to continue</h4>
+                    <input className='signup-input' id={error && !name && "input-error"} type='text' placeholder='Name' value={name}
                         onChange={(e) => { setName(e.target.value) }} />
-                    {error && !name && <span className='invalid-input'>Enter valid name</span>}
                     <br />
-                    <input className='signup-input' type='email' placeholder='Enter your email' value={email}
+                    <input className='signup-input' id={error && !email && "input-error"} type='email' placeholder='Email' value={email}
                         onChange={(e) => { setEmail(e.target.value) }} />
-                    {error && !email && <span className='invalid-input'>Enter valid email</span>}
                     <br />
-                    <input type="number" placeholder="Enter your number" className="signup-input" value={phoneNumber}
+                    <input type="tel" placeholder="Mobile Number" className="signup-input" id={error && !phoneNumber && "input-error"} value={phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value)} />
-                    {error && !phoneNumber && <span className='invalid-input'>Enter valid Phone Number</span>}
                     <br />
-                    <input className='signup-input' type='password' placeholder='Enter Password' value={password}
+                    <input className='signup-input' type='password' placeholder='Password' id={error && !password && "input-error"} value={password}
                         onChange={(e) => { setPassword(e.target.value) }} />
-                    {error && !password && <span className='invalid-input'>Enter valid password</span>}
                     <br />
 
                     {/* <input type="password" placeholder="Confirm password" class="signup-input" />

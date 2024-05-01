@@ -1,9 +1,4 @@
-body {
-    /* height: 100vh; */
-}
-
 .login-main-container {
-    font-family: "Poppins", sans-serif;
     margin: 0;
     display: flex;
     height: 90vh;   
@@ -14,7 +9,7 @@ body {
 }
 
 .login-form {
-    padding: 20px 80px 0 80px;
+    padding: 1.5625vw 6.25vw 1.5625vw;
     /* text-align: center; */
 }
 
@@ -31,7 +26,7 @@ body {
 }
 
 .login-logo-container {
-    height: 100px;
+    height: 12.3vh;
     text-align: center;
 }
 
@@ -40,94 +35,91 @@ body {
 }
 
 .login-form h1 {
-    font-size: 42px;
-    font-weight: 600;
+    font-size: max(2.6525vw, 26px);
+    font-weight: 400;
     line-height: 1.3;
-    margin-top: 18px;
+    margin-top: 1.40625vw;
 }
 
 .login-form h4 {
     font-weight: 300;
-    font-size: 14px;
+    font-size: max(1.05vw, 12px);
 }
 
 .login-input {
-    margin-top: 4px;
-    margin-bottom: 22px;
+    margin-bottom: 1.4vw;
     padding: 12px 24px;
     background-color: rgb(243, 243, 243);
     border: none;
     border-radius: 21px;
     outline: none;
     flex: auto;
-    font-weight: 500;
-    font-size: 14px;
+    font-weight: 400;
+    font-size: max(1.05vw, 12px);
     width: -webkit-fill-available;
+    font-family: 'Poppins', sans-serif;
 }
 
 .login-form ::placeholder {
     color: black;
-    font-weight: 500;
+    font-weight: 300;
 }
 
 .forgot-password {
     text-align: right;
-    font-size: 14px;
+    font-size: max(1.05vw, 12px);
 }
 
 .login-btn {
-    margin-top: 28px;
-    margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 22px;
+    margin-bottom: 12px;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 5px;
     color: #FEFAF0;
-    font-size: 16px;
+    font-size: max(1.1vw, 14px);
     background: #a6602d;
-    padding: 10px 0;
+    padding: 8px 0;
     text-decoration: none;
     border: 1px solid #a6602d;
-    font-weight: 300;
-    transition: padding .2s ease-in-out, margin-top .2s ease-in-out, margin-bottom .2s ease-in-out, width .2s ease-in-out;
+    font-weight: 400;
+    transition: 200ms;
     width: 360px;
     cursor: pointer;
 }
 
 .login-btn:hover {
-    padding: 12px 0;
-    margin-top: 26px;
-    margin-bottom: 12px;
-    width: 364px
+    scale: 1.02;
 }
 
-.login-form h2 {
+.login-form h5 {
     text-align: center;
-    font-weight: 400;
-    font-size: 18px;
+    font-weight: 300;
+    font-size: max(1.25vw, 12px);
     margin: 0;
 }
 
 .login-main-container .signup-btn {
-    margin-top: 20px;
+    margin-top: 12px;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
+    font-family: 'Poppins', sans-serif;
     border-radius: 5px;
     color: #a6602d;
-    font-size: 16px;
+    font-size: max(1.1vw, 14px);
     background: transparent;
-    padding: 10px 0;
+    padding: 8px 0;
     text-decoration: none;
     border: 1px solid #a6602d;
-    font-weight: 300;
-    transition: padding .2s ease-in-out, margin-top .2s ease-in-out, margin-bottom .2s ease-in-out, width .2s ease-in-out;
+    font-weight: 400;
+    transition: 200ms;
     width: 360px;
     cursor: pointer;
 }
 
 .login-main-container .signup-btn:hover {
-    padding: 12px 0;
-    margin-top: 12px;
-    width: 364px
+    scale: 1.02;
 }
 
 .login-btn-container {
@@ -145,9 +137,6 @@ body {
 }
 
 @media (max-width: 450px) {
-    .login-form {
-        padding: 20px 20px;
-    }
 
     .login-main-container .signup-btn {
         width: 250px;

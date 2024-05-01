@@ -1,51 +1,52 @@
-import React, { useEffect, useState } from 'react'
-import '../css/Cart.css'
-import TungaImg from '../assets/Tunga.png'
-import TaptiImg from '../assets/Tapti.png'
+import React, { useEffect, useState, CSSProperties } from "react";
+import "../css/Cart.css";
+import { useNavigate } from "react-router-dom";
+import { IconButton } from "@mui/material";
 import InstiBuzzLogo from '../assets/Horizontal Logo Transparent.png';
-import { useNavigate } from 'react-router-dom'
-import { IconButton } from '@mui/material'
-import CloseIcon from '@mui/icons-material/Close';
-import LoadingPage from './LoadingPage'
+
+import CloseIcon from "@mui/icons-material/Close";
+import TaptiImg from "../assets/Tapti.png";
+import LoadingPage from "./LoadingPage";
 
 function Cart() {
-
-    const [products, setProducts] = React.useState([])
-
-    // const [quantity, setQuantity] = useState(Array(products.length).fill(''));  
+    const [products, setProducts] = React.useState([]);
+    // const [quantity, setQuantity] = useState(Array(products.length).fill(''));
     // const [quantity, setQuantity] = useState(Array.from({ length: products.length }, () => 1));
     // const [quantity, setQuantity] = useState(Array(products.length).fill(1));
-    const [quantity, setQuantity] = useState('1');
+    const [quantity, setQuantity] = useState("1");
     // const [selectedSize, setSelectedSize] = useState(Array(products.length).fill());
     const [totalAmount, setTotalAmount] = React.useState();
     // const [showDetails, setShowDetails] = React.useState(false)
-    const [showPayment, setShowPayment] = React.useState(false)
+    const [showPayment, setShowPayment] = React.useState(false);
     const [name, setName] = React.useState('')
     const [phone, setPhone] = React.useState('')
-    const [email, setEmail] = React.useState('')
-    const navigate = useNavigate('')
-    const [loading, setLoading] = useState(false)
+    const [email, setEmail] = React.useState("");
+    const navigate = useNavigate("");
+    const [loading, setLoading] = useState(false);
+    const [delivery, setDelivery] = useState("pickup");
 
     useEffect(() => {
         const name = localStorage.getItem('userName')
         const phone = localStorage.getItem('userPhone')
-        const email = localStorage.getItem('userEmail')
-        const token = localStorage.getItem('token')
+        const email = localStorage.getItem("userEmail");
+        const token = localStorage.getItem("token");
         setEmail(email)
         setName(name)
         setPhone(phone)
         if (!email || !token) {
-            alert("Please Login")
-            navigate('/')
+            alert("Please Login");
+            navigate("/");
         }
         getProducts();
-    }, [])
+    }, []);
+
+
 
     const getProducts = async () => {
-        setLoading(true)
-        const email = localStorage.getItem("userEmail")
-        setEmail(email)
-        const token = localStorage.getItem('token')
+        setLoading(true);
+        const email = localStorage.getItem("userEmail");
+        setEmail(email);
+        const token = localStorage.getItem("token");
         let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/getProductsInCart`, {
             method: "POST",
             body: JSON.stringify({
@@ -53,33 +54,33 @@ function Cart() {
             }),
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
+                Authorization: `Bearer ${token}`,
             },
-        });
+        }
+        );
         result = await result.json();
         // console.log(result);
         // for (let i = 0; i < result.length; i++) {
         //     const updatedProducts = result.filter(item => item._id === localStorage.getItem(`product${item._id}`));
         //     setProducts(updatedProducts);
         // }
-        setLoading(false)
+        setLoading(false);
         if (result.status == 404) {
-            alert(result.message)
-            localStorage.removeItem("userEmail")
-            navigate('/')
+            alert(result.message);
+            localStorage.removeItem("userEmail");
+            navigate("/");
             window.location.reload();
         } else {
-            // console.log(result)
             setProducts(result.products);
         }
-    }
+    };
 
     const updateSize = async (id, e) => {
-        setLoading(true)
-        const email = localStorage.getItem(`userEmail`)
-        const token = localStorage.getItem('token')
-        const updatedSize = e.target.value
-        const orderItem_id = id
+        setLoading(true);
+        const email = localStorage.getItem(`userEmail`);
+        const token = localStorage.getItem("token");
+        const updatedSize = e.target.value;
+        const orderItem_id = id;
         const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/changeSizeInCart`, {
             method: "POST",
             body: JSON.stringify({
@@ -89,26 +90,25 @@ function Cart() {
             }),
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
+                Authorization: `Bearer ${token}`,
             },
         });
         const result = await response.json();
-        // console.log(result);
+        setLoading(false);
         if (result.status == 404) {
             alert(result.message)
             localStorage.removeItem("userEmail")
             navigate('/')
-        } 
+        }
         window.location.reload();
-        // setLoading(false)
-    }
+    };
 
     const updateQuantity = async (id, e) => {
-        setLoading(true)
-        const email = localStorage.getItem(`userEmail`)
-        const token = localStorage.getItem('token')
-        const updatedQuantity = e.target.value
-        const orderItem_id = id
+        setLoading(true);
+        const email = localStorage.getItem(`userEmail`);
+        const token = localStorage.getItem("token");
+        const updatedQuantity = e.target.value;
+        const orderItem_id = id;
         const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/changeQuantityInCart`, {
             method: "POST",
             body: JSON.stringify({
@@ -118,7 +118,7 @@ function Cart() {
             }),
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
+                Authorization: `Bearer ${token}`,
             },
         });
         const result = await response.json();
@@ -131,102 +131,157 @@ function Cart() {
         }
         window.location.reload();
         // setLoading(true)
+    };
 
-    }
-
-    const calculateSubtotal = () => {
-        let subtotal = 0;
+    const calculateMrp = () => {
+        let total = 0;
 
         // Iterate through the products array
         products.forEach((item, index) => {
             // Convert quantity to a number
             // const quantityValue = parseInt(quantity[index]);
-            const quantityValue = item.quantity
+            const quantityValue = item.quantity;
 
             // Check if quantity is a valid number
             if (!isNaN(quantityValue)) {
                 // Calculate the subtotal for the current product and add it to the total
-                subtotal += quantityValue * item.price;
+                total += quantityValue * item.price;
             }
         });
-        return subtotal;
+
+        return total;
     };
 
+    const calculateSubtotal = () => {
+        let subtotal = calculateMrp();
 
+        if (delivery == "delivery") subtotal += 19;
+
+        return subtotal;
+    };
 
     const proceedPayment = () => {
         // console.log(quantity)
         // console.log(selectedSize)
-        const subtotal = calculateSubtotal()
-        setTotalAmount(subtotal)
+        const subtotal = calculateSubtotal();
+        setTotalAmount(subtotal);
         // setShowDetails(false)
         if (subtotal == 0) {
-            alert("Pls add products in cart")
-            return
+            alert("Pls add products in cart");
+            return;
         }
         // if (!selectedSize) {
         //     alert("Please Select Size")
         //     return
         // }
-        setShowPayment(true)
-
-    }
-
+        setShowPayment(true);
+    };
 
     const closePayment = () => {
-        setShowPayment(false)
+        setShowPayment(false);
+    };
+
+    function isSizeDisabled(size, sizesAvailable) {
+        const foundSize = sizesAvailable.find((s) => s.size === size);
+        return foundSize ? foundSize.quantity === 0 : true;
     }
 
     function e(item, index) {
+        const sizesAvailable = item.product.sizeQuantities;
+
         return (
             <div class="checkout-product-card">
-
-                <div class="checkout-product-img-container">
-                    <img src={item.product.imageUrl[0]} alt='Product image' />
-                </div>
                 <div class="checkout-product-details">
-                    <div class="checkout-product-name">
-                        <h2>{item.product.name}</h2>
+                    <div class="checkout-product-img-container">
+                        <img src={item.product.imageUrl[0]} alt="" />
                     </div>
-                    <div class="checkout-product-price">
-                        <h3>₹{item.product.price}</h3>
+                    <div class="checkout-product-info">
+                        <h3>{item.product.name}</h3>
+                        {/* <p>{item.product.details}</p> */}
+                        <div class="checkout-product-input">
+                            <div class="checkout-product-size">
+                                <h5>Size:</h5>
+                                {/* <select id="dropdown" value={selectedSize[index]} onChange={(e => { handleSizeChange(index, e) })}> */}
+                                <select
+                                    id="size-dropdown"
+                                    value={item.size}
+                                    onChange={(e) => updateSize(item.orderItem_id, e)}
+                                >
+                                    {/* <option value="">{selectedSize}</option> */}
+                                    <option
+                                        value="S"
+                                        disabled={isSizeDisabled("S", sizesAvailable)}
+                                    >
+                                        S
+                                    </option>
+                                    <option
+                                        value="M"
+                                        id="M"
+                                        disabled={isSizeDisabled("M", sizesAvailable)}
+                                    >
+                                        M
+                                    </option>
+                                    <option
+                                        value="L"
+                                        id="L"
+                                        disabled={isSizeDisabled("L", sizesAvailable)}
+                                    >
+                                        L
+                                    </option>
+                                    <option
+                                        value="XL"
+                                        id="XL"
+                                        disabled={isSizeDisabled("XL", sizesAvailable)}
+                                    >
+                                        XL
+                                    </option>
+                                    <option
+                                        value="2XL"
+                                        id="2XL"
+                                        disabled={isSizeDisabled("2XL", sizesAvailable)}
+                                    >
+                                        2XL
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="checkout-product-quantity">
+                                <h5>Qty:</h5>
+                                <select
+                                    class="dropdown"
+                                    id="quantity-dropdown"
+                                    value={item.quantity}
+                                    onChange={(e) => updateQuantity(item.orderItem_id, e)}
+                                >
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="checkout-product-price">
+                            <p>₹{item.quantity * item.product.price}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="checkout-product-quantity">
-                    {/* <input type="number" name="product-quantity" placeholder={quantity[index]} id="product-quantity" value={quantity[index]} */}
-                    <input type="number" name="product-quantity" id="product-quantity" value={item.quantity}
-                        min="1" max='5' onChange={(e => { updateQuantity(item.orderItem_id, e) })} />
-                </div>
-                <div class="checkout-product-size">
-                    {/* <select id="dropdown" value={selectedSize[index]} onChange={(e => { handleSizeChange(index, e) })}> */}
-                    <select id="dropdown" value={item.size} onChange={(e) => updateSize(item.orderItem_id, e)}>
-                        {/* <option value="">{selectedSize}</option> */}
-                        <option value="S">S</option>
-                        <option value="M">M</option>
-                        <option value="L">L</option>
-                        <option value="XL">XL</option>
-                        <option value="XXL">XXL</option>
-                    </select>
-                </div>
-                <div class="checkout-product-net-price">
-                    <h3>{item.quantity * item.product.price || item.product.price}</h3>
                 </div>
                 <div class="checkout-product-cancel">
-                    <IconButton onClick={() => removeFromCart(item.product.product_id, item.orderItem_id)}><CloseIcon /></IconButton>
-                    {/* <button onClick={() => removeFromCart(item.product_id)} type="button">
-                        cross
-                    </button> */}
+                    <IconButton
+                        onClick={() =>
+                            removeFromCart(item.product.product_id, item.orderItem_id)
+                        }
+                    >
+                        <CloseIcon />
+                    </IconButton>
                 </div>
-                <hr />
             </div>
-        )
+        );
     }
 
     const removeFromCart = async (product_id, orderItem_id) => {
-        setLoading(true)
-        const token = localStorage.getItem('token')
-        const email = localStorage.getItem(`userEmail`)
-        const productId = product_id
+        const token = localStorage.getItem("token");
+        const email = localStorage.getItem(`userEmail`);
+        const productId = product_id;
         const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/removeFromCart`, {
             method: "POST",
             body: JSON.stringify({
@@ -236,7 +291,7 @@ function Cart() {
             }),
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
+                Authorization: `Bearer ${token}`,
             },
         });
         const result = await response.json();
@@ -245,11 +300,11 @@ function Cart() {
             localStorage.removeItem("userEmail")
             navigate('/')
             window.location.reload();
-        } 
+        }
         // console.log(result);
         // setLoading(false)
         window.location.reload();
-    }
+    };
 
     const amount = calculateSubtotal() * 100;
     const currency = "INR";
@@ -258,7 +313,7 @@ function Cart() {
         const token = localStorage.getItem('token')
         setShowPayment(false)
         const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/payment/order`, {
-            
+
             method: "POST",
             body: JSON.stringify({
                 email,
@@ -276,7 +331,7 @@ function Cart() {
             localStorage.removeItem("userEmail")
             navigate('/')
             window.location.reload();
-        } 
+        }
         // console.log(order);
 
         var options = {
@@ -347,25 +402,30 @@ function Cart() {
     };
 
     const confirmOrder = async () => {
-        setLoading(true)
-        const email = localStorage.getItem("userEmail")
-        const token = localStorage.getItem("token")
-        const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/payment/confirm`, {
-            method: "POST",
-            body: JSON.stringify({
-                email,
-                products,
-                totalAmount,
-                // quantity,
-                // selectedSize
-            }),
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            },
-        });
+        setLoading(true);
+        const email = localStorage.getItem("userEmail");
+        const token = localStorage.getItem("token");
+        const isHomeDelivery = delivery == "delivery" ? true : false;
+        const response = await fetch(
+            `${process.env.REACT_APP_server_url}/api/v1/payment/confirm`,
+            {
+                method: "POST",
+                body: JSON.stringify({
+                    email,
+                    products,
+                    totalAmount,
+                    isHomeDelivery,
+                    // quantity,
+                    // selectedSize
+                }),
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
         // console.log(response.body);
-        setLoading(false)
+        setLoading(false);
         if (response.status == 404) {
             alert(response.message)
             localStorage.removeItem("userEmail")
@@ -376,92 +436,113 @@ function Cart() {
             // window.location.reload();
             navigate('/orders')
         }
-    }
+    };
 
     const cancelOrder = () => {
-        setShowPayment(false)
+        setShowPayment(false);
+    };
+
+    function RadioButtonGroup(props) {
+        return (
+            <div class="checkout-select-delivery">
+                <label>
+                    <p>Deliver to your hostel for just ₹19.</p>
+                    <input
+                        type="radio"
+                        value="delivery"
+                        checked={props.selectedOption === "delivery"}
+                        onChange={props.handleChange}
+                    />
+                </label>
+                <label>
+                    <p>Pickup from Cauvery.</p>
+                    <input
+                        type="radio"
+                        value="pickup"
+                        checked={props.selectedOption === "pickup"}
+                        onChange={props.handleChange}
+                    />
+                </label>
+            </div>
+        );
+    }
+
+    function handleChange(event) {
+        setDelivery(event.target.value);
     }
 
     return (
         <div>
-            {loading ? <LoadingPage /> :
-                <div class="checkout-main-container">
-                    <div class="checkout-my-cart">
-                        <h1>My cart</h1>
-                        <hr />
-                        <div>
-                            {products ?
-                                products.map(e) :
-                                <h3>Cart is Empty</h3>
-                            }
-                        </div>
+            {
+                loading ? <LoadingPage /> : <div>
+                    {products.length != 0 ? <div class="checkout-main-container">
 
-                        <hr />
-                    </div>
-                    <div class="checkout-order-summary">
-                        <h1>Order summary</h1>
-                        <hr />
-                        <div class="checkout-order-price-details">
-                            <h2>Subtotal</h2>
-                            <h2>₹{calculateSubtotal()}</h2>
-                            <h2>Delivery charges</h2>
-                            <h2><strike>₹70</strike>₹0</h2>
-                            <div class="line-break">
+
+
+                        <div class="checkout-my-cart">
+                            {products.map(e)}
+
+                        </div>
+                        <div class="checkout-order-summary">
+                            <div class="checkout-delivery-method">
+                                <h3>DELIVERY METHOD</h3>
+                                <RadioButtonGroup
+                                    selectedOption={delivery}
+                                    handleChange={handleChange}
+                                />
+                            </div>
+                            <hr />
+                            <div class="checkout-price-details">
+                                <h3>
+                                    PRICE DETAILS ({products.length}{" "}
+                                    {products.length == 1 ? "item" : "items"})
+                                </h3>
+                                <div class="checkout-price-details">
+                                    <div class="checkout-summary-details">
+                                        <p>Total MRP</p>
+                                        <p>₹{calculateMrp()}</p>
+                                    </div>
+                                    <div class="checkout-summary-details">
+                                        <p>Platform Fee</p>
+                                        <p>FREE</p>
+                                    </div>
+                                    <div class="checkout-summary-details">
+                                        <p>Delivery Charges</p>
+                                        <p>{delivery === "pickup" ? "FREE" : "₹19"}</p>
+                                    </div>
+                                </div>
                                 <hr />
+                                <div class="checkout-total-amount">
+                                    <p>Total Amount</p>
+                                    <p>₹{calculateSubtotal()}</p>
+                                </div>
                             </div>
-                            <h1>Total</h1>
-                            <h1>₹{calculateSubtotal()}</h1>
+                            <button class="cart-order-btn" onClick={proceedPayment}>
+                                PLACE ORDER
+                            </button>
                         </div>
-                        <button class="checkout-btn" onClick={proceedPayment}>Checkout</button>
-
-                    </div>
-                    <div>
-                        {/* {showDetails && (
-                    <div className="cart-popup">
-                        <div className='cart-popup-content'>
-                            <div className='cart-popup-content-name'>
-                                <p>Name</p>
-                                <input type='text' className='cart-popup-content-name' placeholder='Enter Your name' value={name}
-                                    onChange={(e) => { setName(e.target.value) }} />
-                                {error && !name && <span className='invalid-input'>Enter valid name</span>}
-                            </div>
-                            <div className='cart-popup-content-email'>
-                                <p>Email</p>
-                                <input type='text' placeholder='Enter Your email' value={email}
-
-                                    onChange={(e) => { setEmail(e.target.value) }} />
-                                {error && !email && <span className='invalid-input'>Enter valid email</span>}
-                            </div>
-                            <div className='cart-popup-content-phone'>
-                                <p>Phone Number</p>
-                                <input type='text' placeholder='Enter Your phoneNumber' value={phoneNumber}
-
-                                    onChange={(e) => { setPhoneNumber(e.target.value) }} />
-                                {error && !phoneNumber && <span className='invalid-input'>Enter valid phoneNumber</span>}
-                            </div>
-
-                            <button className='cart-popup-content-button' onClick={proceedPayment}>Proceed</button>
-                        </div>
-                    </div>
-                )} */}
 
                         {showPayment && (
                             <div className="cart-popup">
                                 {/* <i className='fa fa-times' aria-hidden='true' onClick={setShowPayment(false)}></i> */}
-                                <IconButton onClick={() => closePayment()}><CloseIcon /></IconButton>
+                                <IconButton onClick={() => closePayment()}>
+                                    <CloseIcon />
+                                </IconButton>
                                 <h1>Confirm Your Order?</h1>
-                                <div className='cart-popup-content'>
-                                    <button onClick={confirmOrder}>Cash on Delivery</button>
+                                <div className="cart-popup-content">
+                                    <button onClick={confirmOrder}>Cash On Delivery</button>
                                     {/* <button onClick={cancelOrder}>No</button> */}
                                     <button onClick={paymentHandler}>Pay Now</button>
                                 </div>
                             </div>
                         )}
-                    </div>
+
+                    </div> : <div class="checkout-title"><h3>Seems like your cart is empty...</h3></div>}
                 </div>
             }
         </div>
-    )
+
+    );
 }
 
-export default Cart
+export default Cart;

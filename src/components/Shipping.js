@@ -30,12 +30,8 @@ function Shipping() {
               </li>
             </ul>
             <br />
-            In case of return of a product, all the charges including the
-            Shipping fees will be repaid to the customer. For accounts whose
-            return behavior does not adhere to our fair usage policy, platform
-            fees will be non-refundable irrespective of order value. The final
-            shipping fee is calculated post application of any 'coupon benefit'
-            and offers. The shipping fees might change according to the
+            The final shipping fee is calculated post application of any 'coupon
+            benefit' and offers. The shipping fees might change according to the
             geographic location. The standard shipping time is 14 Days.
           </p>
         </div>

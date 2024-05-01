@@ -31,7 +31,7 @@ function Footer() {
                 <a href='/about'>About Us</a>
               </li> */}
               <li>
-                <a href='/return-refund'>Return & Refund Policy</a>
+                <a href='/exchange'>Exchange Policy</a>
               </li>
               <li>
                 <a href="/terms-conditions">Terms & Conditions</a>
@@ -41,6 +41,9 @@ function Footer() {
               </li>
               <li>
                 <a href="/privacy">Privacy Policy</a>
+              </li>
+              <li>
+                <a href="/about">About Us</a>
               </li>
             </ul>
           </div>
@@ -59,6 +62,7 @@ function Footer() {
               <a href="https://www.linkedin.com/company/insti-buzz/" target="_blank"><i class="fa fa-linkedin"></i></a>
               <a href="mailto:instibuzziitm@gmail.com"><i class="fa fa-google"></i></a>
             </div>
+            
           </div>
         </div>
         <p class="footer-copyright">InstiBuzz @ 2024</p>
