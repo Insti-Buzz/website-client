@@ -3,7 +3,18 @@ import "../css/OurServices.css";
 import image from "../assets/Image by Javier Allegue Barros.webp";
 
 function OurServices() {
+  useEffect(()=>{
+    window.scrollTo({
+      top:0,
+      behavior:'smooth'
+    })
+    // const scrollToTop = () => {
+    // }
+  },[]);
+
+  
   return (
+  
     <div class="services-main-container">
       <div class="services-title">
         <h1>Our Services</h1>

@@ -140,7 +140,7 @@ const Product = () => {
       <div className="product-image-container">
         <img
           src={selectedImage}
-          alt="Tunga jersey"
+          alt="Image"
           className="product-display-img"
         />
         <div className="product-all-images">{imageUrl.map(imageButton)}</div>
@@ -214,7 +214,7 @@ const Product = () => {
             <></>
         }
         <div className="product-product-details product-product-info">
-          <h4>PRODUCT INFO</h4>
+          <h4>PRODUCT DESCRIPTION</h4>
           <p>{details}</p>
         </div>
         <hr />

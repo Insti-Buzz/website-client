@@ -169,6 +169,7 @@ function Home() {
         </div> */}
 
         <div className="home-bottom-container-three">
+        <h1 className="home-bottom-container-four-title">Our Services</h1>
           <div className="home-container-three-top">
             <div className="home-service-one">
               <h1 className='home-service-one-title'>Manufacturing</h1>
