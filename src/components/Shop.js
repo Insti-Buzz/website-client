@@ -117,7 +117,7 @@ function Shop() {
                         </div>
                         <div className="shop-navigation-container">
                             <div className="shop-navigation">
-                                <p className='shop-path'>Shop / <span style={{ color: 'black' }}>Our Products</span></p>
+                                {/* <p className='shop-path'>Shop / <span style={{ color: 'black' }}>Our Products</span></p> */}
                                 {/* <br /> */}
                                 <p className='shop-count'><span style={{ color: 'black' }}>Our Products</span> - {activeProducts.length}</p>
                             </div>

@@ -60,8 +60,8 @@ function Footer() {
             <div class="footer-social">
               <a href="https://www.instagram.com/insti_buzz/" target="_blank"><i class="fa fa-instagram"></i></a>
               <a href="https://www.linkedin.com/company/insti-buzz/" target="_blank"><i class="fa fa-linkedin"></i></a>
-              <a href="mailto:instibuzziitm@gmail.com"><i class="fa fa-google"></i></a>
-            </div>
+              <a href="mailto:instibuzziitm@gmail.com"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
+             </div>
             
           </div>
         </div>

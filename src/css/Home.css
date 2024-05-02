@@ -298,7 +298,7 @@
     margin: 2% 0 2% 0;
     color: rgb(47,43,54);
     /* color: rgb(255,226,128); */
-    font-weight: 100;
+    /* font-weight: 100; */
 }
 
 .home-service-three-text{
@@ -321,10 +321,10 @@
     /* justify-self: center; */
     align-items: center;
     justify-content: center;
-    background-color: black;
+    background-color: rgb(47, 43, 54);
     transition: 300ms;
-    color: rgb(255,226,128);;
-    font-weight: 900;
+    color: rgb(255,226,128);
+    /* font-weight: 900; */
     cursor:pointer;
 }
 .home-service-three-button:hover{
@@ -455,7 +455,7 @@
     width:90%;
     min-height: 10%;
     display: inline-flex;
-    /* flex-wrap: wrap; */
+    flex-wrap: wrap;
     align-items: center;
     justify-content:center ;
     padding: 2%;
@@ -474,6 +474,8 @@
     text-align: center;
     /* justify-content: center; */
     align-items: center;
+    display: flex;
+    flex-direction: column;
     margin: 1%;
     padding: 1%;
     /* flex-shrink: 0; */
@@ -484,11 +486,11 @@
 }
 
 .home-fccc-card-title{
-    /* width: 90%; */
+    width: 90%;
     /* flex: 1; */
     /* justify-self: center; */
     border-bottom: 1px solid gray;
-    margin: 12% 0% 8% 0;
+    padding: 12% 0% 8% 0;
     font-size: calc(2.5vh + 5px);
     font-weight: 100;
 
@@ -496,13 +498,13 @@
 
 .home-fccc-card-body{
     width: 90%;
-    flex: 2;
     margin:0;
     font-size: calc(1.5vh + 2px);
     margin: 0% 0 10% 0;
     font-weight: lighter;
     font-family: Tenor Sans;
     line-height: 1.5;
+    height: 240px;
 }
 
 .home-fccc-card-desc{
@@ -537,7 +539,7 @@
 
 .home-fccc-card-button{
     width: 90%;
-    flex: 0.5;
+    aspect-ratio: 6/1;
     border-radius: 8px;
     display: flex;
     justify-content: center;
@@ -597,7 +599,7 @@
     .home-service-three-button{
         background-color: rgb(47,43,54);
         color: rgb(255,226,128);
-        font-weight: 100;
+        /* font-weight: 100; */
         width: 85%;
     }
 

@@ -47,7 +47,7 @@ function OurServices() {
         {/* <h3>DESIGN</h3> */}
         <h2>Design</h2>
         <div class="services-our-service-container">
-        <div class="services-our-service-image-container">
+          <div class="services-our-service-image-container">
             <img src={image} alt="" />
           </div>
           <div class="services-our-service-content">
@@ -91,6 +91,29 @@ function OurServices() {
                 wide range of ideas and designs. Every click brings together a
                 multitude of voices, each contributing to the rich and colorful
                 fabric of campus life.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="services-our-service service-visibility">
+        <hr class="services-divider" />
+        {/* <h3>DESIGN</h3> */}
+        <h2>Visibility</h2>
+        <div class="services-our-service-container">
+          <div class="services-our-service-image-container">
+            <img src={image} alt="" />
+          </div>
+          <div class="services-our-service-content">
+            <div class="services-our-service-text">
+              <p>
+                Lastly comes Visibility. We actively support Insti clubs and
+                societies by helping them market their events. This involves
+                leveraging our website and social media platforms to boost
+                visibility and engagement. By highlighting these events and our
+                partnerships with them to our broad audience within the
+                institution, we amplify the exposure of their events, thus
+                expanding their outreach within our communities.
               </p>
             </div>
           </div>

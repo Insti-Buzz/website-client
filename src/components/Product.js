@@ -215,7 +215,7 @@ const Product = () => {
         }
         <div className="product-product-details product-product-info">
           <h4>PRODUCT INFO</h4>
-          <p> {details} </p>
+          <p>{details}</p>
         </div>
         <hr />
         <div className="product-product-details product-shipping-policy">

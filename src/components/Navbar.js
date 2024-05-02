@@ -88,6 +88,11 @@ function Navbar() {
         navigate("/ourServices")
     }
 
+    const aboutPage = () => {
+        dropDownClose();
+        navigate("/about");
+    }
+
     const Logout = () => {
         localStorage.removeItem("userEmail")
         localStorage.removeItem("token")
@@ -119,7 +124,8 @@ function Navbar() {
                                 <></>
 
                         }
-                        <a className='nav-ourServices' onClick={ourServicesPage}>Services</a>
+                        <a className='nav-ourServices' onClick={ourServicesPage}>Our Services</a>
+                        <a className='nav-aboutUs' onClick={aboutPage}>About Us</a>
                     </div>
                 </div>
 
@@ -149,7 +155,9 @@ function Navbar() {
                                 <a className='nav-about' onClick={ordersPage}>Orders</a>
                                 : <></>
                         }
-                        <a className='nav-ourServices' onClick={ourServicesPage}>Services</a>
+                        <a className='nav-ourServices' onClick={ourServicesPage}>Our Services</a>
+                        <a className='nav-aboutUs' onClick={aboutPage}>About Us</a>
+
                         {
                             isLogin ?
                                 <a className='nav-contact-button' onClick={Logout}>Logout</a>

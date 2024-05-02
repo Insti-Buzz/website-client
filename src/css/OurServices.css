@@ -48,6 +48,10 @@
     flex-direction: row-reverse;
 }
 
+.service-visibility .services-our-service-container {
+    flex-direction: row-reverse;
+}
+
 .services-our-service-image-container {
     flex: 1;
 }
@@ -68,6 +72,10 @@
 }
 
 .service-design .services-our-service-content {
+    justify-content: left;
+}
+
+.service-visibility .services-our-service-content {
     justify-content: left;
 }
 
