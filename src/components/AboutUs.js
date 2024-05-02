@@ -19,10 +19,10 @@ function AboutUs() {
       <div class="about-title">
         <h1>About Us</h1>
       </div>
-      {/* <div class="about-intro">
+      <div class="about-intro">
         Welcome to the ‘About Us’ page. Thank you for taking out your valuable
         time and trying to learn about our journey.
-      </div> */}
+      </div>
       <div class="about-our-story">
         <hr class="about-divider" />
         {/* <div class="about-our-story-title">
@@ -73,8 +73,10 @@ function AboutUs() {
         <h2>Building a One-Stop-Solution</h2>
         <div class="about-creating-impact-card-container">
           <div class="about-creating-impact-card">
-            <img src={impact} alt="" />
-            <h3>Integrated <br/> Solution</h3>
+            {/* <img src={impact} alt="" /> */}
+            <h3>
+              Integrated <br /> Solution
+            </h3>
             <p>
               We're developing a one-stop online platform where we oversee the
               entire process, from product design and manufacturing to sales and
@@ -82,7 +84,7 @@ function AboutUs() {
             </p>
           </div>
           <div class="about-creating-impact-card">
-            <img src={impact} alt="" />
+            {/* <img src={impact} alt="" /> */}
             <h3>Build Fashion Communities</h3>
             <p>
               Our goal is to cultivate a vibrant community that celebrates
@@ -92,12 +94,21 @@ function AboutUs() {
             </p>
           </div>
           <div class="about-creating-impact-card">
-            <img src={impact} alt="" />
+            {/* <img src={impact} alt="" /> */}
             <h3>Fostering Campus Community</h3>
             <p>
               Building an environment where every student feels a sense of
               belonging to their college and treasures the memories made during
               their collegiate experience.
+            </p>
+          </div>
+          <div class="about-creating-impact-card">
+            {/* <img src={impact} alt="" /> */}
+            <h3>Enhancing Visiblity</h3>
+            <p>
+              Collaborating with various college clubs, festivals, and events,
+              showcasing them on our website to boost their footfall and drive
+              their sales.
             </p>
           </div>
         </div>
@@ -111,6 +122,10 @@ function AboutUs() {
             <h3>Founded</h3>
             <h2>2024</h2>
           </div>
+          <div class="team about-in-numbers-card">
+            <h3>Team</h3>
+            <h2>25+</h2>
+          </div>
           <div class="items-shipped about-in-numbers-card">
             <h3>Items Shipped</h3>
             <h2>2500+</h2>
@@ -118,14 +133,10 @@ function AboutUs() {
           <div class="img-container">
             <img src={inNumbers} alt=""></img>
           </div>
-          <div class="happy-customers about-in-numbers-card">
+          {/* <div class="happy-customers about-in-numbers-card">
             <h3>Happy Customers</h3>
             <h2>1000+</h2>
-          </div>
-          <div class="team about-in-numbers-card">
-            <h3>Team</h3>
-            <h2>25+</h2>
-          </div>
+          </div> */}
         </div>
       </div>
       {/* <div class="about-testimonials">
@@ -148,14 +159,9 @@ function AboutUs() {
         </div>
         <div class="about-team-grid">
           <div class="about-team-member-card">
-            <img src={anshu} alt="" />
-            <h2>Anshu Patel</h2>
-            <h3>Operations Head </h3>
-          </div>
-          <div class="about-team-member-card">
-            <img src={yashika} alt="" />
-            <h2>Yashika Sahu</h2>
-            <h3>Design Head</h3>
+            <img src={parth} alt="" />
+            <h2>Parth Bajpai</h2>
+            <h3>Chief Executive Officer</h3>
           </div>
           <div class="about-team-member-card">
             <img src={radha} alt="" />
@@ -163,19 +169,9 @@ function AboutUs() {
             <h3>Chief Strategy Officer</h3>
           </div>
           <div class="about-team-member-card">
-            <img src={parth} alt="" />
-            <h2>Parth Bajpai</h2>
-            <h3>Chief Executive Officer</h3>
-          </div>
-          <div class="about-team-member-card">
             <img src={piyush} alt="" />
             <h2>Piyush Dalmia</h2>
             <h3>Chief Operations Officer</h3>
-          </div>
-          <div class="about-team-member-card">
-            <img src={anantu} alt="" />
-            <h2>Anantu S Pai</h2>
-            <h3>Technical Head</h3>
           </div>
           <div class="about-team-member-card">
             <img src={dikshant} alt="" />
@@ -186,6 +182,21 @@ function AboutUs() {
             <img src={aayush} alt="" />
             <h2>Aayush Chodhary</h2>
             <h3>Chief Marketing Officer</h3>
+          </div>
+          <div class="about-team-member-card">
+            <img src={anshu} alt="" />
+            <h2>Anshu Patel</h2>
+            <h3>Operations Head </h3>
+          </div>
+          <div class="about-team-member-card">
+            <img src={yashika} alt="" />
+            <h2>Yashika Sahu</h2>
+            <h3>Design Head</h3>
+          </div>
+          <div class="about-team-member-card">
+            <img src={anantu} alt="" />
+            <h2>Anantu S Pai</h2>
+            <h3>Technical Head</h3>
           </div>
           <div class="about-team-member-card">
             <img src={jujhar} alt="" />

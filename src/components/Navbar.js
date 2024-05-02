@@ -149,12 +149,13 @@ function Navbar() {
                                 <a className='nav-about' onClick={ordersPage}>Orders</a>
                                 : <></>
                         }
+                        <a className='nav-ourServices' onClick={ourServicesPage}>Services</a>
                         {
                             isLogin ?
                                 <a className='nav-contact-button' onClick={Logout}>Logout</a>
 
                                 :
-                                <a className='nav-contact-button' onClick={loginPage}>Login</a>
+                                <a className='nav-contact-button' onClick={loginPage}>Login/Signup</a>
                         }
                         {/* <button className="nav-contact-button">Login/Signup</button> */}
                     </div>

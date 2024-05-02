@@ -27,11 +27,11 @@ function Ticket() {
                 </div>
                 <div class="ticket-input-parameter">
                     <label for="ph-number">Mobile number</label> <br />
-                    <input type="text" id="ph-number" name="ph-number" placeholder="+91 99444 87273" required /> <br />
+                    <input type="tel" id="ph-number" name="ph-number" placeholder="+91 99444 87273" required /> <br />
                 </div>
                 <div class="ticket-input-parameter">
                     <label for="requirement">Requirement</label> <br />
-                    <textarea name="requirement" id="requirement" rows="6"
+                    <textarea name="requirement" id="requirement" rows="3"
                         placeholder="Tell us your wildest t-shirt dreams and the quantity to make them a reality!"
                         required></textarea>
                     <br />

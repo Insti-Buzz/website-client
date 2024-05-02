@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     background-color: #f0f0f0;
-    height: 25vw;
+    height: max(25vw, 240px);
 }
 
 .services-title h1 {
@@ -41,7 +41,11 @@
 .services-our-service-container {
     display: flex;
     margin-top: 3vw;
-    gap: 40px;  
+    gap: 40px;
+}
+
+.service-design .services-our-service-container {
+    flex-direction: row-reverse;
 }
 
 .services-our-service-image-container {
@@ -77,4 +81,18 @@
 
 .services-our-service-text p {
     font-size: max(1.1vw, 12px);
+}
+
+@media (max-width: 768px) {
+    .services-our-service-container {
+        display: inline-block;
+    }
+
+    .services-our-service-image-container {
+        display: none;
+    }
+
+    .services-our-service-content {
+        justify-content: left;
+    }
 }

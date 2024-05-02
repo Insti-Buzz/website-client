@@ -47,6 +47,9 @@ function OurServices() {
         {/* <h3>DESIGN</h3> */}
         <h2>Design</h2>
         <div class="services-our-service-container">
+        <div class="services-our-service-image-container">
+            <img src={image} alt="" />
+          </div>
           <div class="services-our-service-content">
             <div class="services-our-service-text">
               <p>
@@ -63,9 +66,6 @@ function OurServices() {
                 of student life.
               </p>
             </div>
-          </div>
-          <div class="services-our-service-image-container">
-            <img src={image} alt="" />
           </div>
         </div>
       </div>

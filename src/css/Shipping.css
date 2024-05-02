@@ -1,5 +1,5 @@
 .shipping-title {
-    height: 25vw;
+    height: max(25vw, 240px);
     display: flex;
     justify-content: center;
     align-items: center;

@@ -1,5 +1,5 @@
 .terms-title {
-    height: 25vw;
+    height: max(25vw, 240px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -7,6 +7,7 @@
 }
 
 .terms-title h1 {
+    text-align: center;
     font-size: max(3.854125vw, 42px);
     font-weight: 300;
 }
@@ -20,7 +21,7 @@
 }
 
 .terms-container h2 {
-    font-size: 2.1vw;
+    font-size: max(2.1vw, 24px);
     margin: 0;
     margin-bottom: 0.6vw;
     font-weight: 300;

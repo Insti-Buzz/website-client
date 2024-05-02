@@ -2,8 +2,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f0f0f0;
-    height: 25vw;
+    background-color: rgba(255, 226, 128, 1);
+    height: max(25vw, 240px);
 }
 
 .about-title h1 {
@@ -13,17 +13,17 @@
 }
 
 .about-divider {
-    margin: 8vw 0 3vw 0;
+    margin: 3vw 0 3vw 0;
 }
 
 .about-intro {
-    font-size: 1.25vw;
+    font-size: max(1.2vw, 12px);
     padding: 5vw 5vw 0 5vw;
     font-weight: 200;
 }
 
 .about-our-story {
-    padding: 0 5vw 8vw 5vw;
+    padding: 0 5vw 3vw 5vw;
 }
 
 .about-our-story h3 {
@@ -273,7 +273,16 @@
 }
 
 @media (max-width: 768px) {
+    .about-team-member-card img {
+        height: 120px;
+        width: 120px;
+    }
+
     .about-our-story-image-container {
+        display: none;
+    }
+
+    .about-creating-impact {
         display: none;
     }
 
@@ -336,6 +345,6 @@
     }
 
     .about-team-grid {
-        gap: 10p    x;
+        gap: 10px;
     }
 }

@@ -96,7 +96,7 @@ function AddProduct() {
             {error && !name && <span className='invalid-input'>Enter valid name</span>}
 
             <p className='addproduct-items'>Product Details</p>
-            <input className='addproduct-details' type='text' placeholder='Enter your Product Details' value={details}
+            <textarea className='addproduct-details' type='text' placeholder='Enter your Product Details' value={details}
                 onChange={(e) => { setDetails(e.target.value) }} />
             {error && !details && <span className='invalid-input'>Enter valid details</span>}
 
