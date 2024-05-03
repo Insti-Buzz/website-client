@@ -58,7 +58,7 @@ const Product = () => {
   }
 
   const getProductDetails = async () => {
-    console.log(params)
+    // console.log(params)
     setLoading(true)
     // let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/get-product-details/${params.id}`, {
     // console.log(params)
@@ -126,6 +126,10 @@ const Product = () => {
 
   const toUpdate = () => {
     navigate(`/updateProduct/${params.id}`)
+  }
+
+  const toCart=()=>{
+    navigate('/cart')
   }
 
   function imageButton(item, index) {
@@ -201,7 +205,7 @@ const Product = () => {
         </div>
         {isLogin ? (
           isCart ? (
-            <button className="product-btn">Added to Cart</button>
+            <button onClick={toCart} className="product-btn">Go to Cart</button>
           ) : (
             <button className="product-btn" onClick={addToCart}>
               Add to Cart

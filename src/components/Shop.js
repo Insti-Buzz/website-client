@@ -1,12 +1,20 @@
 import React from 'react'
 import '../css/Shop.css'
-import productImage from '../assets/Image.jpg'
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoadingPage from './LoadingPage';
-import Banner from '../assets/Shop-Banner.png'
+import Banner from '../assets/Shop-Banner.jpg'
+import mobileBanner from '../assets/Shop-mobile-banner.jpg'
 
 function Shop() {
+    useEffect(() => {
+        window.scrollTo({
+          top: 0,
+          behavior: "instant",
+        });
+        // const scrollToTop = () => {
+        // }
+      }, []);
     const [ourProducts, setOurProducts] = useState([]);
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
@@ -30,7 +38,7 @@ function Shop() {
             );
             result = await result.json();
             setOurProducts(result);
-            console.log(result)
+            // console.log(result)
         } catch (error) { }
         setLoading(false)
     };
@@ -54,11 +62,11 @@ function Shop() {
         if (filterBy === "size") {
             setSizeFilter(value);
             if (styleFilter === "") {
-                console.log("style is empty");
+                // console.log("style is empty");
                 filteredProducts = activeFilteredProducts.filter((prod) => prod.sizeQuantities[0].size == value);
                 setActiveProducts(filteredProducts);
             } else {
-                console.log("style:", styleFilter);
+                // console.log("style:", styleFilter);
                 filteredProducts = activeFilteredProducts.filter((prod) => {
                     return prod.inventory[value] > 0 && (prod.style).toLowerCase() === styleFilter.toLowerCase();
                 });
@@ -66,7 +74,7 @@ function Shop() {
             }
         } else if (filterBy === "style") {
             setStyleFilter(value);
-            console.log(value);
+            // console.log(value);
             if (sizeFilter === "") {
                 filteredProducts = activeFilteredProducts.filter((prod) => (prod.style) === value);
                 setActiveProducts(filteredProducts);
@@ -113,6 +121,9 @@ function Shop() {
                         <div className="shop-page-info">
                             <div className="shop-page-banner">
                                 <img src={Banner}/>
+                            </div>
+                            <div className="shop-page-banner-mobile">
+                                <img src={mobileBanner}/>
                             </div>
                         </div>
                         <div className="shop-navigation-container">

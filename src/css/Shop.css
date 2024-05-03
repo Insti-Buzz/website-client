@@ -14,13 +14,25 @@
 }
 
 .shop-page-banner{
-    width: 100%;
+    width: 95%;
     height: 280px;
-    background-color: rgb(113, 113, 253);
     margin: 20px 0 20px 0px;
 }
 
 .shop-page-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.shop-page-banner-mobile {
+    display: none;
+    width: 95%;
+    height: 280px;
+    margin: 20px 0 20px 0px;
+}
+
+.shop-page-banner-mobile img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -268,8 +280,12 @@
 }
 
 @media (max-width: 780px) {
-    .shop-page-info {
+    .shop-page-banner {
         display: none;
+    }
+
+    .shop-page-banner-mobile {
+        display: block;
     }
 
     .shop-products-display {

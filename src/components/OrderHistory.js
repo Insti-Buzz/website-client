@@ -33,7 +33,7 @@ function OrderHistory() {
             },
         })
         result = await result.json();
-        console.log(result)
+        // console.log(result)
         setLoading(false)
         if (result.status == 404) {
             alert(result.message)
@@ -159,9 +159,12 @@ function OrderHistory() {
                     <h1>My Orders</h1>
                     <hr/>
 
-                    {orders ?
+                    {orders.length != 0 ?
                         orders.map(e) :
-                        <h1>No Orders</h1>
+                        <div class="order-content">
+                        <h1>Seems like you are new here...<br/>
+                        Visit our shop page and order now</h1>
+                        </div>
                     }
                 </div>
             }

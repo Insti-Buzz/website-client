@@ -5,7 +5,6 @@ import { IconButton } from "@mui/material";
 import InstiBuzzLogo from '../assets/Horizontal Logo Transparent.png';
 
 import CloseIcon from "@mui/icons-material/Close";
-import TaptiImg from "../assets/Tapti.png";
 import LoadingPage from "./LoadingPage";
 
 function Cart() {

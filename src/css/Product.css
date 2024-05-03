@@ -10,6 +10,7 @@ body {
     display: flex;
     justify-content: center;
     gap: 42px;
+    padding: 40px 0;
 }
 
 .product-image-container {

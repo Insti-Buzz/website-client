@@ -1,7 +1,6 @@
 import '../css/Home.css'
 // import LatestArrivals from './LatestArrivals';
 import { useRef, useEffect, useState } from 'react';
-import Video from '../assets/mylivewallpapers.com-City-Night-Lights.mp4'
 
 // import '../css/Carousel.css';
 import CoverImg1 from '../assets/red wall intense-min-min.jpg';
@@ -24,7 +23,8 @@ import Green_IITM_2 from '../assets/boy back green iitm-min-min.jpg';
 import Entre_Flame_1 from '../assets/boy back-min-min.jpg';
 import Entre_Flame_2 from '../assets/girl front-min-min.jpg';
 
-import Banner from '../assets/Home-Banner.png'
+import Banner from '../assets/Home-Banner.jpg'
+import mobileBanner from '../assets/Home-mobile-banner.jpg';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -90,13 +90,13 @@ function Home() {
   useEffect(() => {
     const interval_2 = setInterval(() => {
       setClassicCountOne(prevCount => (prevCount + 1) % normalProducts.length);
-      console.log("The interval 2 count is", classicCountOne);
+      // console.log("The interval 2 count is", classicCountOne);
     }, 4109);
 
 
     const interval_1 = setInterval(() => {
       setOverSizedCount(prevCount => (prevCount + 1) % overSizedProducts.length);
-      console.log("The interval 1 count is", overSizedCount);
+      // console.log("The interval 1 count is", overSizedCount);
     }, 5931);
 
     return () => {
@@ -161,6 +161,9 @@ function Home() {
 
         <div className="home-banner">
           <img src={Banner} alt='Banner for Home page'/>
+        </div>
+        <div class="home-banner-mobile">
+          <img src={mobileBanner} alt='Banner for Home page'/>
         </div>
 
         {/* <div className="home-bottom-container-two">

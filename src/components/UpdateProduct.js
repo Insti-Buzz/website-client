@@ -37,7 +37,7 @@ function UpdateProduct() {
             method: "POST"
         })
         result = await result.json()
-        console.log(result)
+        // console.log(result)
         setName(result.name)
         setPrice(result.price)
         setSizeQuantities(result.sizeQuantities)

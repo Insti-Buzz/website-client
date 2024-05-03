@@ -11,9 +11,22 @@ import aayush from "../assets/aayush.jpg";
 import piyush from "../assets/piyush.jpg";
 import jujhar from "../assets/jujhar.jpg";
 import parth from "../assets/parth.jpg";
-import impact from "../assets/973300f3-c585-48d9-9e8c-601a3ae24121.png";
+
+import cultureImg from'../assets/Culture.jpg'
+import integrationImg from'../assets/Culture.jpg'
+import visibilityImg from'../assets/Visibility.jpg'
+import communityImg from'../assets/Community.jpg'
 
 function AboutUs() {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "instant",
+    });
+    // const scrollToTop = () => {
+    // }
+  }, []);
+  
   return (
     <div class="about-main-container">
       <div class="about-title">
@@ -73,7 +86,7 @@ function AboutUs() {
         <h2>Why Us?</h2>
         <div class="about-creating-impact-card-container">
           <div class="about-creating-impact-card">
-            {/* <img src={impact} alt="" /> */}
+            <img src={integrationImg} alt="" />
             <h3>
               Integrated <br /> Solution
             </h3>
@@ -84,7 +97,7 @@ function AboutUs() {
             </p>
           </div>
           <div class="about-creating-impact-card">
-            {/* <img src={impact} alt="" /> */}
+            <img src={communityImg} alt="" />
             <h3>Build Fashion Communities</h3>
             <p>
               Our goal is to cultivate a vibrant community that celebrates
@@ -94,8 +107,8 @@ function AboutUs() {
             </p>
           </div>
           <div class="about-creating-impact-card">
-            {/* <img src={impact} alt="" /> */}
-            <h3>Fostering Campus Community</h3>
+            <img src={cultureImg} alt="" />
+            <h3>Fostering Campus Culture</h3>
             <p>
               Building an environment where every student feels a sense of
               belonging to their college and treasures the memories made during
@@ -103,7 +116,7 @@ function AboutUs() {
             </p>
           </div>
           <div class="about-creating-impact-card">
-            {/* <img src={impact} alt="" /> */}
+            <img src={visibilityImg} alt="" />
             <h3>Enhancing Visiblity</h3>
             <p>
               Collaborating with various college clubs, festivals, and events,

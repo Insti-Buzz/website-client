@@ -2,7 +2,10 @@
 import React, { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import "../css/OurServices.css";
-import image from "../assets/Image by Javier Allegue Barros.webp";
+// import image from "../assets/Image by Javier Allegue Barros.webp";
+import designImg from "../assets/Desigining.jpg"
+import manufactureImg from "../assets/Manufacturer.jpg"
+import videoImg from "../assets/Videographers.jpg"
 
 function Collab() {
   useEffect(() => {
@@ -36,7 +39,7 @@ We are always looking for people to join us in this fun and creative journey of 
         <h2 id="services-manufacturing">Designers</h2>
         <div class="services-our-service-container">
           <div class="services-our-service-image-container">
-            <img src={image} alt="" />
+            <img src={designImg} alt="" />
           </div>
           <div class="services-our-service-content">
             <div class="services-our-service-text">
@@ -60,7 +63,7 @@ We are always looking for people to join us in this fun and creative journey of 
         <h2 id="services-design">Manufacturers</h2>
         <div class="services-our-service-container">
           <div class="services-our-service-image-container">
-            <img src={image} alt="" />
+            <img src={manufactureImg} alt="" />
           </div>
           <div class="services-our-service-content">
             <div class="services-our-service-text">
@@ -84,7 +87,7 @@ We are always looking for people to join us in this fun and creative journey of 
         <h2 id="services-sales">Videographers</h2>
         <div class="services-our-service-container">
           <div class="services-our-service-image-container">
-            <img src={image} alt="" />
+            <img src={videoImg} alt="" />
           </div>
           <div class="services-our-service-content">
             <div class="services-our-service-text">

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "../css/Ticket.css";
-import img from "../assets/shop-clothing-clothes-shop-hanger-modern-shop-boutique_1150-8886.avif";
 import toast from "react-hot-toast";
 
 
@@ -43,11 +42,11 @@ function Ticket() {
 
 
   const Submit = async () => {
-    console.log(name);
-    console.log(email);
-    console.log(number);
-    console.log(serviceNeeded);
-    console.log(comment);
+    // console.log(name);
+    // console.log(email);
+    // console.log(number);
+    // console.log(serviceNeeded);
+    // console.log(comment);
 
     if (!name || !email || !number) {
       setError(true);

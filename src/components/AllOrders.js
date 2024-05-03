@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import "../css/AllOrders.css"
-import img from "../assets/Tunga.png"
 
 import { useNavigate } from 'react-router-dom'
 import { X } from '@mui/icons-material'

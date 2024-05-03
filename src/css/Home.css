@@ -89,10 +89,30 @@
     /* overflow: hidden; */
 }
 
+.home-banner-mobile {
+    display: none;
+    width:96%;
+    /* height: calc(80px + 3vw); */
+    height: fit-content;
+    /* background-color: rgb(255,226,128); */
+    padding: 2%;
+    margin: 1.5vh 0 0 0 ;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 44px;
+    font-weight:500;
+}
+
 .home-banner img{
     width: 96vw;
     /* overflow: hidden; */
     /* background-color: red; */
+}
+
+.home-banner-mobile img {
+    width: 96vw;
+    display: none;
 }
 .home-bottom-container-two{
     width: 100%;
@@ -427,7 +447,7 @@
 }
 
 .home-bar-collab-text, .home-bar-collab-text-one{
-    width: 10%;
+    width: 25%;
     height: 100%;
     font-size: 20px;
     display: flex;
@@ -846,6 +866,14 @@
         display: none;
     }
 
+    .home-banner-mobile {
+        display: block;
+    }
+
+    .home-banner-mobile img{
+        display: block;
+    }
+    
     .home-container-one-card-one,.home-container-one-card-two,.home-container-one-card-three{
         width: 90%;
         height: 90vw;

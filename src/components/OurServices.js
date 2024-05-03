@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import "../css/OurServices.css";
-import image from "../assets/Image by Javier Allegue Barros.webp";
+import manufactureImg from '../assets/Manufacturer.jpg'
+import designImg from '../assets/Desigining.jpg'
+import salesImg from '../assets/Sales.jpg'
+import visibilityImg from '../assets/Visibility.jpg'
 
 function OurServices() {
   useEffect(() => {
@@ -36,7 +39,7 @@ function OurServices() {
         <h2 id="services-manufacturing">Manufacturing</h2>
         <div class="services-our-service-container">
           <div class="services-our-service-image-container">
-            <img src={image} alt="" />
+            <img src={manufactureImg} alt="" />
           </div>
           <div class="services-our-service-content">
             <div class="services-our-service-text">
@@ -65,7 +68,7 @@ function OurServices() {
         <h2 id="services-design">Design</h2>
         <div class="services-our-service-container">
           <div class="services-our-service-image-container">
-            <img src={image} alt="" />
+            <img src={designImg} alt="" />
           </div>
           <div class="services-our-service-content">
             <div class="services-our-service-text">
@@ -92,7 +95,7 @@ function OurServices() {
         <h2 id="services-sales">Sales</h2>
         <div class="services-our-service-container">
           <div class="services-our-service-image-container">
-            <img src={image} alt="" />
+            <img src={salesImg} alt="" />
           </div>
           <div class="services-our-service-content">
             <div class="services-our-service-text">
@@ -119,7 +122,7 @@ function OurServices() {
         <h2 id="services-visibility">Visibility</h2>
         <div class="services-our-service-container">
           <div class="services-our-service-image-container">
-            <img src={image} alt="" />
+            <img src={visibilityImg} alt="" />
           </div>
           <div class="services-our-service-content">
             <div class="services-our-service-text">

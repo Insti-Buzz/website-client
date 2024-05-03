@@ -58,8 +58,8 @@
 
 .services-our-service-image-container img {
     width: 100%;
-    height: 30vw;
-    object-fit: cover;
+    height: 20vw;
+    object-fit: contain;
     border-radius: 0.78vw;
 }
 

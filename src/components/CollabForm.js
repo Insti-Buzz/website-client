@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "../css/Ticket.css";
-import img from "../assets/shop-clothing-clothes-shop-hanger-modern-shop-boutique_1150-8886.avif";
 import toast from "react-hot-toast";
 
 
@@ -44,11 +43,11 @@ function CollabForm() {
 
 
   const Submit = async () => {
-    console.log(name);
-    console.log(email);
-    console.log(number);
-    console.log(serviceNeeded);
-    console.log(comment);
+    // console.log(name);
+    // console.log(email);
+    // console.log(number);
+    // console.log(serviceNeeded);
+    // console.log(comment);
 
     if (!name || !email || !number) {
       setError(true);
@@ -133,7 +132,7 @@ function CollabForm() {
           <br />
         </div>
         <div class="ticket-input-parameter">
-          <label for="cv-link">Resume</label> <br />
+          <label for="cv-link">Portfolio</label> <br />
           <input
             type="text"
             id="cv-link"
@@ -186,7 +185,7 @@ function CollabForm() {
             name="requirement"
             id="requirement"
             rows="3"
-            placeholder="Let us know your requirement in detail"
+            placeholder="Motivation to apply"
             onChange={(e) => setComment(e.target.value)}
             required
           ></textarea>

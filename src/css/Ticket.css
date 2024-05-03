@@ -9,22 +9,22 @@
     margin: 0;
     display: flex;
     align-items: center;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 45vh 45vh;
+    /* grid-template-columns: 50% 50%;
+    grid-template-rows: 45vh 45vh; */
     /* row-gap: 60px; */
 }
 
 
 .ticket-title {
     padding: 24px 180px 36px 80px;
-    height: 88.6vh;
+    height: 100vh;
     text-align: left;
     /* max-width: 700px; */
     /* grid-row-start: 1;
     grid-row-end: 3; */
     flex: 1;
     justify-self: center;
-    background-color: #f8e559;
+    background-color: rgba(255, 226, 128, 1);
 }
 
 .ticket-title h1 {
