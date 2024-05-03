@@ -20,6 +20,7 @@ function OurServices() {
   const navigate = useNavigate();
 
   return (
+  
     <div class="services-main-container">
       <div class="services-title">
         <h1>Our Services</h1>

@@ -70,7 +70,7 @@ function AboutUs() {
       <div class="about-creating-impact">
         <hr class="about-divider" />
         <h3>CREATING IMPACT</h3>
-        <h2>Building a One-Stop-Solution</h2>
+        <h2>Why Us?</h2>
         <div class="about-creating-impact-card-container">
           <div class="about-creating-impact-card">
             {/* <img src={impact} alt="" /> */}
