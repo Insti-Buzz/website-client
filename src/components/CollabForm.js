@@ -152,7 +152,7 @@ function CollabForm() {
                 type="checkbox"
                 id="manufacturing"
                 name="service"
-                value="manufacturing"
+                value="designer"
                 onChange={handleChange}
               />
               <label for="service">Designers</label> <br />
@@ -162,7 +162,7 @@ function CollabForm() {
                 type="checkbox"
                 id="design"
                 name="service"
-                value="design"
+                value="manufacturer"
                 onChange={handleChange}
               />
               <label for="service">Manufacturers</label> <br />
@@ -172,7 +172,7 @@ function CollabForm() {
                 type="checkbox"
                 id="sales"
                 name="service"
-                value="sales"
+                value="videographer"
                 onChange={handleChange}
               />
               <label for="service">Videographers</label> <br />

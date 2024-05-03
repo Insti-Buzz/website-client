@@ -72,15 +72,15 @@ function Home() {
 
   // for Latest Arrivals
   const overSizedProducts = [
-    { productName: "Average IITian", image: [Avg_IITian_1, Avg_IITian_2], link: "#" },
-    { productName: "Take Lite", image: [Take_Lite_1, Take_Lite_2], link: "#" },
-    { productName: "Boss Baby", image: [Boss_Baby_1, Boss_Baby_2], link: "#" },
+    { productName: "Average IITian", image: [Avg_IITian_1, Avg_IITian_2], link: "/shop" },
+    { productName: "Take Lite", image: [Take_Lite_1, Take_Lite_2], link: "/shop" },
+    { productName: "Boss Baby", image: [Boss_Baby_1, Boss_Baby_2], link: "/shop" },
   ];
 
   const normalProducts = [
-    { productName: "White IIT M", image: [White_IITM_1, White_IITM_2], link: "#" },
-    { productName: "Green IIT M", image: [Green_IITM_1, Green_IITM_2], link: "#" },
-    { productName: "Entreprenurial Flame", image: [Entre_Flame_1, Entre_Flame_2], link: "#" },
+    { productName: "White IIT M", image: [White_IITM_1, White_IITM_2], link: "/shop" },
+    { productName: "Green IIT M", image: [Green_IITM_1, Green_IITM_2], link: "/shop" },
+    { productName: "Entreprenurial Flame", image: [Entre_Flame_1, Entre_Flame_2], link: "/shop" },
   ];
 
   const [overSizedCount, setOverSizedCount] = useState(0);
