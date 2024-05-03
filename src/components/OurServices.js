@@ -1,8 +1,24 @@
 import React, { useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import "../css/OurServices.css";
 import image from "../assets/Image by Javier Allegue Barros.webp";
 
 function OurServices() {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "instant",
+    });
+    // const scrollToTop = () => {
+    // }
+  }, []);
+
+  // const contact = () => {
+  //   navi
+  // }
+
+  const navigate = useNavigate();
+
   return (
     <div class="services-main-container">
       <div class="services-title">
@@ -16,7 +32,7 @@ function OurServices() {
       <div class="services-our-service service-manufacturing">
         <hr class="services-divider" />
         {/* <h3>MANUFACTURING</h3> */}
-        <h2>Manufacturing</h2>
+        <h2 id="services-manufacturing">Manufacturing</h2>
         <div class="services-our-service-container">
           <div class="services-our-service-image-container">
             <img src={image} alt="" />
@@ -45,7 +61,7 @@ function OurServices() {
       <div class="services-our-service service-design">
         <hr class="services-divider" />
         {/* <h3>DESIGN</h3> */}
-        <h2>Design</h2>
+        <h2 id="services-design">Design</h2>
         <div class="services-our-service-container">
           <div class="services-our-service-image-container">
             <img src={image} alt="" />
@@ -72,7 +88,7 @@ function OurServices() {
       <div class="services-our-service service-sales">
         <hr class="services-divider" />
         {/* <h3>SALES</h3> */}
-        <h2>Sales</h2>
+        <h2 id="services-sales">Sales</h2>
         <div class="services-our-service-container">
           <div class="services-our-service-image-container">
             <img src={image} alt="" />
@@ -99,7 +115,7 @@ function OurServices() {
       <div class="services-our-service service-visibility">
         <hr class="services-divider" />
         {/* <h3>DESIGN</h3> */}
-        <h2>Visibility</h2>
+        <h2 id="services-visibility">Visibility</h2>
         <div class="services-our-service-container">
           <div class="services-our-service-image-container">
             <img src={image} alt="" />
@@ -118,6 +134,9 @@ function OurServices() {
             </div>
           </div>
         </div>
+      </div>
+      <div class="services-contact-btn-container">
+        <button className="contact-btn" onClick={() => {navigate('/ticket')}}>Contact Us</button>
       </div>
     </div>
   );

@@ -104,8 +104,8 @@ function Navbar() {
         <>
             <div className="nav-navbar" style={{ height: navbarHeight }}>
 
-                <div className="nav-top-left">
-                    <img src={InstiBuzzLogo} alt="" className="nav-instibuzz-logo" />
+                <div className="nav-top-left" onClick={() => navigate('/')}>
+                    <img src={InstiBuzzLogo} alt="" className="nav-instibuzz-logo"/>
                     <p className="nav-instibuzz-title">InstiBuzz</p>
                 </div>
 

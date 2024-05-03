@@ -45,6 +45,9 @@ function Footer() {
               <li>
                 <a href="/ticket">Contact Us</a>
               </li>
+              <li>
+                <a href="/collabForm">Collab with us</a>
+              </li>
             </ul>
           </div>
           <div class="footer-contact">
@@ -58,6 +61,7 @@ function Footer() {
               +91 99444 87273
             </div>
             <div class="footer-social">
+              <a href="https://wa.me/9944487273" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
               <a href="https://www.instagram.com/insti_buzz/" target="_blank"><i class="fa fa-instagram"></i></a>
               <a href="https://www.linkedin.com/company/insti-buzz/" target="_blank"><i class="fa fa-linkedin"></i></a>
               <a href="mailto:instibuzziitm@gmail.com"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>

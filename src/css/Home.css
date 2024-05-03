@@ -76,19 +76,23 @@
 
 .home-banner{
     width:96%;
-    height: calc(80px + 3vw);
+    /* height: calc(80px + 3vw); */
+    height: fit-content;
     /* background-color: rgb(255,226,128); */
     padding: 2%;
-    margin: 12vh 0 0 0 ;
+    margin: 1.5vh 0 0 0 ;
     display: inline-flex;
     justify-content: center;
     align-items: center;
     font-size: 44px;
     font-weight:500;
+    /* overflow: hidden; */
 }
 
 .home-banner img{
     width: 96vw;
+    /* overflow: hidden; */
+    /* background-color: red; */
 }
 .home-bottom-container-two{
     width: 100%;
@@ -121,7 +125,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 12vh 0 2vh 0;
+    margin: 1.2vh 0 2vh 0;
 }
 
 .home-container-three-top{
@@ -153,7 +157,8 @@
 }
 
 .home-service-one-title{
-    margin: 2% 0 2% 7%;
+    margin: 2% 0 2% 6%;
+    font-size: calc(2vh + 1vh);
 }
 
 .home-service-one-text, .home-service-two-text{
@@ -238,7 +243,8 @@
 }
 
 .home-service-two-title{
-    margin: 2.5% 0 3% 9%;
+    margin: 2.5% 0 3% 12%;
+    font-size: calc(2vh + 1vh);
 }
 
 .home-service-two-button-container{
@@ -277,6 +283,7 @@
     /* padding: 0.5vw 0 1vw 0; */
     align-items: start;
     margin-top: 1.5vh;
+    /* height: fit-content; */
 }
 
 .home-service-three{
@@ -295,8 +302,9 @@
 }
 
 .home-service-three-title{
-    margin: 2% 0 2% 0;
+    margin: 2% 0 2% 1%;
     color: rgb(47,43,54);
+    font-size: calc(2vh + 1vh);
     /* color: rgb(255,226,128); */
     /* font-weight: 100; */
 }
@@ -309,13 +317,15 @@
     margin-top: 5%;
     margin-bottom: 5%;
     height: 5vh;
+    /* display: none; */
+    /* overflow: hidden; */
     /* width: 50%; */
 }
 
 .home-service-three-button{
     height: 100%;
-    width: calc(10vh + 6vw + 10px);
-    margin-left: 20%;
+    /* width: 100%; */
+    /* margin-left: 20%; */
     border-radius: 22px 22px 22px 0;
     display: flex;
     /* justify-self: center; */
@@ -350,6 +360,7 @@
 
 .home-service-four-title{
     margin: 5% 0 2% 40px;
+    font-size: calc(2vh + 1vh);
 }
 
 .home-service-four-button-container{
@@ -408,14 +419,14 @@
     background-color: white;
 }
 
-.home-bottom-container-four-bar{
+.home-bottom-container-four-bar, .home-bottom-container-three-bar{
     width: 90%;
     height: 8vh;
     /* background-color: aqua; */
     border-top: 1px solid rgb(179, 179, 179);
 }
 
-.home-bar-collab-text{
+.home-bar-collab-text, .home-bar-collab-text-one{
     width: 10%;
     height: 100%;
     font-size: 20px;
@@ -423,7 +434,7 @@
     align-items: end;
     border-top: 1px solid black;
 }
-.home-bottom-container-four-title{
+.home-bottom-container-four-title, .home-bottom-container-three-title{
     width: 90%;
     margin: 2vh 0 2vh 0;
     font-size: calc(5vw + 12px);
@@ -447,8 +458,8 @@
 
 .home-four-container-text{
     width: 80%;
-    text-align:center;
-    font-size: 22px;
+    text-align:left;
+    font-size: 18px;
 }
 
 .home-four-container-cards-container{
@@ -556,6 +567,40 @@
     background-color: white;
 }
 
+.home-service-button-container{
+    display: none;
+    overflow: hidden;
+}
+
+.bottom-container-four-button-container{
+    height: 8vh;
+    display: flex;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    /* background-color: aqua; */
+}
+
+.collaborate-button{
+    width: 80%;
+    /* background-color: red; */
+    background-color: rgb(47, 43, 54);
+    color: rgb(255,226,128);
+    height: 66%;
+    /* width: 100%; */
+    margin: 10% 0 15% 0;
+    border-radius: 22px 22px 22px 0;
+    display: flex;
+    /* justify-self: center; */
+    align-items: center;
+    justify-content: center;
+    /* background-color: rgb(255,226,128); */
+    transition: 300ms;
+    /* color: rgb(47, 43, 54); */
+    /* font-weight: 900; */
+    cursor:pointer;
+}
+
 @media screen and (max-width:1100px) {
     .home-filler-div-one,.home-filler-div-two{
         display: none;
@@ -648,7 +693,8 @@
         /* overflow: hidden; */
         /* background-color: aqua; */
         /* display: none; */
-        margin-top: -20px;
+        margin-top: -3.4vh;
+        /* margin: 0; */
     }
     
     .home-img-container .home-cover-img{
@@ -662,6 +708,91 @@
     .home-container-one-cards-container{
         width: 100%;
     }
+
+    .home-container-three-top, .home-container-three-bottom{
+        display: flex;
+        flex-direction: column;
+        /* height: fit-content; */
+    }
+    .home-service-one, .home-service-two, .home-service-four, .home-service-three{
+        border-radius: 10px;
+        width: 90%;
+        margin: 1% 0 3% 0;
+    }
+
+    .home-service-two, .home-service-four{
+        background-color: rgb(47, 43, 54);
+        color: rgb(255,226,128);
+    }
+
+    .home-service-three-text{
+        margin-left: 9%;
+        width: 80%;
+    }
+    .home-service-three-title{
+        margin-left: 10%;
+    }
+
+    .home-service-button-container{
+        height: 8vh;
+        display: flex;
+        width: 50%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .home-service-button{
+        width: 100%;
+        background-color: rgb(255,226,128);
+        color: rgb(47, 43, 54);
+        height: 66%;
+        /* width: 100%; */
+        margin: 10% 0 15% 0;
+        border-radius: 22px 22px 22px 0;
+        display: flex;
+        /* justify-self: center; */
+        align-items: center;
+        justify-content: center;
+        background-color: rgb(255,226,128);
+        transition: 300ms;
+        color: rgb(47, 43, 54);
+        /* font-weight: 900; */
+        cursor:pointer;
+    }
+
+    .home-bottom-container-three-bar{
+        /* height: 5vh; */
+        /* background-color: aquamarine; */
+    }
+
+    .home-bar-collab-text, .home-bar-collab-text-one{
+        width: 30%;
+        display: inline-flex;
+        /* background-color: blue; */
+        /* height: 50%; */
+        text-wrap:nowrap;
+        justify-content: flex-start;
+        align-items: start;
+        padding-top:3% ;
+    }
+
+    .home-bottom-container-three-title{
+        margin-top: 0;
+    }
+
+    .home-bottom-container-four{
+        margin-top: 1vh;
+    }
+
+    .home-service-one-button-container,
+    .home-service-two-button-container,
+    .home-service-three-button-container,
+    .home-service-four-button-container{
+        display: none;
+        overflow: hidden;
+    }
+
+
 }
 
 @media screen and (max-width:395px) {

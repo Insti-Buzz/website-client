@@ -59,7 +59,7 @@ function Login() {
     }
 
     const LoginToast = () => toast.promise(Login(), {
-        loading: 'Signing In',
+        loading: 'Raising Ticket',
         success: (result) => {
             return result.message;
         },
@@ -67,7 +67,7 @@ function Login() {
             return result.message
         },
     },{
-        id:'loginToast'
+        id:'ticketToast'
     });
 
     const toSignup = () => {

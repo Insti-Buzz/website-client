@@ -26,6 +26,7 @@
     align-items: center;    
     z-index: 5;
     flex: 1;
+    cursor: pointer;
     /* background-color: #ddddcc; */
 }
 .nav-instibuzz-logo{
@@ -199,6 +200,11 @@
 }
 
 @media screen and (max-width:560px) {
+    
+    .nav-navbar{
+        height: 8vh;
+    }
+
     .nav-navbar .nav-top-left .nav-instibuzz-logo{
         width: 40%;
         height: 14vw;
@@ -214,7 +220,7 @@
     background-color:white;
     display: inline-flex;
     width: 100%;
-    height: 60px;
+    /* height: ; */
     position: fixed;
     top: 0px;
     /* z-index: 5; */

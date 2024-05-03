@@ -4,7 +4,7 @@ import img from "../assets/shop-clothing-clothes-shop-hanger-modern-shop-boutiqu
 import toast from "react-hot-toast";
 
 
-function Ticket() {
+function CollabForm() {
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -18,6 +18,7 @@ function Ticket() {
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState(0);
   const [comment, setComment] = useState("");
+  const [cvLink, setCvLink] = useState("");
   const [error, setError] = useState(false);
   const [serviceNeeded, setServiceNeeded] = React.useState([]);
 
@@ -30,7 +31,7 @@ function Ticket() {
   }
 
   const TicketToast = () => toast.promise(Submit(), {
-    loading: 'Raising Ticket',
+    loading: 'Uploading',
     success: (result) => {
         return result.message;
     },
@@ -57,10 +58,10 @@ function Ticket() {
 
    
     let result = await fetch(
-      `${process.env.REACT_APP_server_url}/api/v1/auth/raiseTicket`,
+      `${process.env.REACT_APP_server_url}/api/v1/auth/collabForm`,
       {
         method: "POST",
-        body: JSON.stringify({ name, email, number, comment, serviceNeeded }),
+        body: JSON.stringify({ name, email, number, comment, serviceNeeded, cvLink }),
         headers: {
           "Content-Type": "application/json",
         },
@@ -131,8 +132,20 @@ function Ticket() {
           />{" "}
           <br />
         </div>
+        <div class="ticket-input-parameter">
+          <label for="cv-link">Resume</label> <br />
+          <input
+            type="text"
+            id="cv-link"
+            name="cv-link"
+            placeholder="Drive link"
+            onChange={(e) => setCvLink(e.target.value)}
+            required
+          />{" "}
+          <br />
+        </div>
         <div class="ticket-checkbox">
-          <p>Service needed</p>
+          <p>Which Profile?</p>
           <div class="services-input">
             <div>
               <input
@@ -142,7 +155,7 @@ function Ticket() {
                 value="manufacturing"
                 onChange={handleChange}
               />
-              <label for="service">Manufacturing</label> <br />
+              <label for="service">Designers</label> <br />
             </div>
             <div>
               <input
@@ -152,7 +165,7 @@ function Ticket() {
                 value="design"
                 onChange={handleChange}
               />
-              <label for="service">Design</label> <br />
+              <label for="service">Manufacturers</label> <br />
             </div>
             <div>
               <input
@@ -162,22 +175,13 @@ function Ticket() {
                 value="sales"
                 onChange={handleChange}
               />
-              <label for="service">Sales</label> <br />
+              <label for="service">Videographers</label> <br />
             </div>
-            <div>
-              <input
-                type="checkbox"
-                id="visibility"
-                name="service"
-                value="visibility"
-                onChange={handleChange}
-              />
-              <label for="service">Visibility</label> <br />
-            </div>
+            
           </div>
         </div>
         <div class="ticket-input-parameter">
-          <label for="requirement">Comments</label> <br />
+          <label for="requirement">Why do you want to work with us?</label> <br />
           <textarea
             name="requirement"
             id="requirement"
@@ -199,4 +203,4 @@ function Ticket() {
   );
 }
 
-export default Ticket;
+export default CollabForm;

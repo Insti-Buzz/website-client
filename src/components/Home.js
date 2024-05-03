@@ -32,24 +32,24 @@ import { useNavigate } from 'react-router-dom';
 
 
 function Home() {
-  const latestArrivalsRef = useRef(null);
-  const ScrollToLatestArrivals = () => {
-    useEffect(() => {
-      if (latestArrivalsRef.current) {
-        const latestArrivalsTop = latestArrivalsRef.current.offsetTop;
+  // const latestArrivalsRef = useRef(null);
+  // const ScrollToLatestArrivals = () => {
+  //   useEffect(() => {
+  //     if (latestArrivalsRef.current) {
+  //       const latestArrivalsTop = latestArrivalsRef.current.offsetTop;
 
-        setTimeout(() => {
-          window.scrollTo({
-            top: latestArrivalsTop - 70,
-            behavior: 'smooth'
-          });
-        }, 700);
+  //       setTimeout(() => {
+  //         window.scrollTo({
+  //           top: latestArrivalsTop - 70,
+  //           behavior: 'smooth'
+  //         });
+  //       }, 700);
 
-      }
-    }, []);
+  //     }
+  //   }, []);
 
-  };
-  ScrollToLatestArrivals();
+  // };
+  // ScrollToLatestArrivals();
 
   // for carousal
   const coverImgArray = [CoverImg1, CoverImg2, CoverImg3, CoverImg4];
@@ -65,6 +65,9 @@ function Home() {
 
   const toOurServices = () => {
     navigate("/ourServices")
+  }
+  const toCollab=()=>{
+    navigate("/collab")
   }
 
   // for Latest Arrivals
@@ -132,7 +135,7 @@ function Home() {
 
       <div className="home-bottom" >
 
-        <div className="home-bottom-container-one" ref={latestArrivalsRef}>
+        <div className="home-bottom-container-one">
           <h1 className="home-container-one-title">Best Sellers</h1>
           <div className="home-container-one-cards-container">
             {/* <LatestArrivals></LatestArrivals> */}
@@ -157,7 +160,7 @@ function Home() {
         </div>
 
         <div className="home-banner">
-          <img src={Banner}/>
+          <img src={Banner} alt='Banner for Home page'/>
         </div>
 
         {/* <div className="home-bottom-container-two">
@@ -169,6 +172,10 @@ function Home() {
         </div> */}
 
         <div className="home-bottom-container-three">
+        <div className="home-bottom-container-three-bar">
+            <div className="home-bar-collab-text-one">OUR SERVICES</div>
+        </div>
+          <h1 className="home-bottom-container-three-title">What we Offer?</h1>
           <div className="home-container-three-top">
             <div className="home-service-one">
               <h1 className='home-service-one-title'>Manufacturing</h1>
@@ -214,6 +221,10 @@ function Home() {
             <div className="home-filler-div-two">
               <i className="fa fa-snowflake-o" aria-hidden="true"></i>
             </div>
+            <div className="home-service-button-container">
+                <div onClick={toOurServices} className="home-service-button">Know more</div>
+            </div>
+            
 
           </div>
         </div>
@@ -222,10 +233,15 @@ function Home() {
           <div className="home-bottom-container-four-bar">
             <div className="home-bar-collab-text">COLLABORATION</div>
           </div>
-          <h1 className="home-bottom-container-four-title">Want to Work With InstiBuzz?</h1>
+          <h1 className="home-bottom-container-four-title">Let's Work Together!</h1>
           <div className="home-four-container">
-            <p className="home-four-container-text">This is the space to tell people what it's like to work with the business. Describe the team's culture and why people enjoy being a part of it.</p>
-            <div className="home-four-container-cards-container">
+            <p className="home-four-container-text">We are a diverse group with varied perspectives who love to express the campus stories and we believe the best way to do that is by fashion!
+<br/> <br/>We are always looking for people to join us in this fun and creative journey of elevating campus fashion. If you think you will fit just right in, apply right away!</p>
+            {/* <p className="home-four-container-text">This is the space to tell people what it's like to work with the business. Describe the team's culture and why people enjoy being a part of it.</p> */}
+            <div className="bottom-container-four-button-container">
+                <div className="collaborate-button" on onClick={toCollab}>View Details</div>
+            </div>
+            {/* <div className="home-four-container-cards-container">
               <div className="home-fccc-card">
                 <h3 className="home-fccc-card-title">Designers</h3>
                 <p className="home-fccc-card-body">Our designs capture the essence of campus life,
@@ -234,16 +250,7 @@ function Home() {
                   festivals, social events, and more, you will have a hands-on along the way. Join
                   our dynamic design team where you'll not only create but also learn extensively
                   about graphic designing</p>
-                {/* <div className="home-fccc-card-desc">
-                  <div className="home-desc-one">
-                    <div className="home-ques-one">Location</div>
-                    <div className="home-ans-one">Chennai</div>
-                  </div>
-                  <div className="home-desc-two">
-                    <div className="home-ques-two">Type</div>
-                    <div className="home-ans-two">Offline / WFH</div>
-                  </div>
-                </div> */}
+               
                 <div className="home-fccc-card-button">Start Now</div>
               </div>
               <div className="home-fccc-card">
@@ -254,16 +261,7 @@ function Home() {
                   can deliver cost-effective solutions, timely production, and superior
                   materials for our designs. This ensures that our customers receive nothing
                   but the best when they choose Instibuzz products.</p>
-                {/* <div className="home-fccc-card-desc">
-                  <div className="home-desc-one">
-                    <div className="home-ques-one">Location</div>
-                    <div className="home-ans-one">Chennai</div>
-                  </div>
-                  <div className="home-desc-two">
-                    <div className="home-ques-two">Type</div>
-                    <div className="home-ans-two">Offline / WFH</div>
-                  </div>
-                </div> */}
+               
                 <div className="home-fccc-card-button">Start Now</div>
               </div>
               <div className="home-fccc-card">
@@ -273,19 +271,10 @@ function Home() {
                 and photos. Your role extends beyond creativity as you join our Social Media 
                 Marketing Team, actively enhancing our presence and engagement across diverse
                  social media channels.</p>
-                {/* <div className="home-fccc-card-desc">
-                  <div className="home-desc-one">
-                    <div className="home-ques-one">Location</div>
-                    <div className="home-ans-one">Chennai</div>
-                  </div>
-                  <div className="home-desc-two">
-                    <div className="home-ques-two">Type</div>
-                    <div className="home-ans-two">Offline / WFH</div>
-                  </div>
-                </div> */}
+               
                 <div className="home-fccc-card-button">Start Now</div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
 

@@ -8,7 +8,7 @@ function MainContainer() {
     const auth = localStorage.getItem('userEmail')
     const token = localStorage.getItem('token')
     const { pathname } = useLocation();
-    const showFooter = !(pathname === '/signup' || pathname === '/login' || pathname === '/cart');
+    const showFooter = !(pathname === '/signup' || pathname === '/login' || pathname === '/cart' || pathname==='/ticket'|| pathname==='/collabForm');
     return (
         <div className='all-container'>
             <Toaster />

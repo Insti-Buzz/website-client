@@ -16,7 +16,7 @@
 
 .footer h3 {
     text-align: left;
-    font-size: 24px;
+    font-size: 20px;
 }
 
 .footer .footer-contact {
@@ -37,6 +37,10 @@
 
 .footer .footer-logo img {
     height: 180px;
+}
+
+.footer-list a {
+    font-size: 16px;
 }
 
 .footer .footer-contact a {
@@ -77,7 +81,7 @@
 
 .footer ul li {
     /* display: inline-block; */
-    padding: 5px 15px;
+    padding-bottom: 5px;
 }
 
 .footer ul a:hover {

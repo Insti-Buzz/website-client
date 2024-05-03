@@ -20,6 +20,8 @@ import Privacy from "./components/Privacy";
 import Private from './components/Private';
 import UpdateProduct from './components/UpdateProduct';
 import OurServices from "./components/OurServices";
+import Collab from "./components/Collab";
+import CollabForm from "./components/CollabForm";
 
 function App() {
   return (
@@ -47,6 +49,8 @@ function App() {
           <Route path="shipping" element={<Shipping />} />
           <Route path="privacy" element={<Privacy />} />
           <Route path="ourServices" element={<OurServices />} />
+          <Route path="collab" element={<Collab />} />
+          <Route path="collabForm" element={<CollabForm />} />
         </Route>
       </Routes>
     </BrowserRouter>
