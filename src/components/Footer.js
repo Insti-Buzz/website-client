@@ -25,10 +25,10 @@ function Footer() {
             <ul class="footer-list">
               <h3>Useful Links</h3>
               <li>
-                <a href='/about'>About Us</a>
+                <a href="/about">About Us</a>
               </li>
               <li>
-                <a href='/faqs  '>FAQs</a>
+                <a href="/faqs  ">FAQs</a>
               </li>
               <li>
                 <a href="/ticket">Contact Us</a>
@@ -58,10 +58,18 @@ function Footer() {
           <div class="footer-contact">
             <h3>Contact</h3>
             <div class="footer-address">
-              <p>IIT Madras, Chennai-600036.</p>
+              <i class="fa fa-map-marker"></i>
+              <p style={{ display: "inline-block", marginLeft: "7px" }}>
+                IIT Madras, Chennai-600036.
+              </p>
             </div>
             <hr></hr>
-            <div class="footer-phone">+91 99444 87273</div>
+            <div class="footer-phone">
+              <i class="fa fa-phone"></i>
+              <p style={{ display: "inline-block", marginLeft: "7px" }}>
+                +91 99444 87273
+              </p>
+            </div>
             <div class="footer-social">
               <a href="https://wa.me/9944487273" target="_blank">
                 <i class="fa fa-whatsapp" aria-hidden="true"></i>

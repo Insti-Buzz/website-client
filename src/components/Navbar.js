@@ -40,7 +40,8 @@ function Navbar() {
     }, [])
 
     function dropDownOpen() {
-        setDropDownHeight('480px');
+        setDropDownHeight('fit-content');
+        
     }
 
     function dropDownClose() {

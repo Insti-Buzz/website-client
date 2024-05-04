@@ -285,6 +285,10 @@
         display: none;
     }
 
+    .shop {
+        margin-top: 0;
+    }
+
     .shop-page-banner-mobile {
         display: block;
     }
