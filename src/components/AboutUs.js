@@ -13,7 +13,7 @@ import jujhar from "../assets/jujhar.jpg";
 import parth from "../assets/parth.jpg";
 
 import cultureImg from'../assets/Culture.jpg'
-import integrationImg from'../assets/Culture.jpg'
+import integrationImg from'../assets/Integration.jpg'
 import visibilityImg from'../assets/Visibility.jpg'
 import communityImg from'../assets/Community.jpg'
 
