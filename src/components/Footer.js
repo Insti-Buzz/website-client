@@ -25,10 +25,10 @@ function Footer() {
             <ul class="footer-list">
               <h3>Useful Links</h3>
               <li>
-                <a href="/about">About Us</a>
+                <a href="/faqs">FAQs</a>
               </li>
               <li>
-                <a href="/faqs  ">FAQs</a>
+                <a href="/about">About Us</a>
               </li>
               <li>
                 <a href="/ticket">Contact Us</a>
