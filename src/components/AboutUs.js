@@ -187,16 +187,6 @@ function AboutUs() {
             <h3>Chief Operations Officer</h3>
           </div>
           <div class="about-team-member-card">
-            <img src={dikshant} alt="" />
-            <h2>Dikshant Aggarwal</h2>
-            <h3>Chief Technical Officer</h3>
-          </div>
-          <div class="about-team-member-card">
-            <img src={aayush} alt="" />
-            <h2>Aayush Chodhary</h2>
-            <h3>Chief Marketing Officer</h3>
-          </div>
-          <div class="about-team-member-card">
             <img src={anshu} alt="" />
             <h2>Anshu Patel</h2>
             <h3>Operations Head </h3>
@@ -205,6 +195,16 @@ function AboutUs() {
             <img src={yashika} alt="" />
             <h2>Yashika Sahu</h2>
             <h3>Design Head</h3>
+          </div>
+          <div class="about-team-member-card">
+            <img src={dikshant} alt="" />
+            <h2>Dikshant Aggarwal</h2>
+            <h3>Chief Technical Officer</h3>
+          </div>
+          <div class="about-team-member-card">
+            <img src={aayush} alt="" />
+            <h2>Aayush Chodhary</h2>
+            <h3>Chief Marketing Officer</h3>
           </div>
           <div class="about-team-member-card">
             <img src={anantu} alt="" />

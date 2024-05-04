@@ -17,32 +17,33 @@ import Terms from "./components/Terms";
 import ReturnRefund from "./components/Exchange";
 import Shipping from "./components/Shipping";
 import Privacy from "./components/Privacy";
-import Private from './components/Private';
-import UpdateProduct from './components/UpdateProduct';
+import Private from "./components/Private";
+import UpdateProduct from "./components/UpdateProduct";
 import OurServices from "./components/OurServices";
 import Collab from "./components/Collab";
 import CollabForm from "./components/CollabForm";
+import FAQs from "./components/FAQs";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='' element={<MainContainer />}>
-          <Route element={<Private/>}>
-          <Route path='add' element={<AddProduct />} />
-          <Route path='allOrders' element={<AllOrders />} />
-          <Route path='updateProduct/:id' element={<UpdateProduct />} />
+        <Route path="" element={<MainContainer />}>
+          <Route element={<Private />}>
+            <Route path="add" element={<AddProduct />} />
+            <Route path="allOrders" element={<AllOrders />} />
+            <Route path="updateProduct/:id" element={<UpdateProduct />} />
           </Route>
-
-          <Route path='signup' element={<Signup/>}/>
-          <Route path='login' element={<Login/>}/>
-          <Route path='' element={<Home />} />
-          <Route path='shop' element={<Shop />} />
-          <Route path='product/:id' element={<Product />} />
-          <Route path='cart' element={<Cart />} />
-          <Route path='confirm' element={<Payment />} />
-          <Route path='orders' element={<OrderHistory />} />
-          <Route path='ticket' element={<Ticket />} />
+          <Route path="faqs" element={<FAQs />} />
+          <Route path="signup" element={<Signup />} />
+          <Route path="login" element={<Login />} />
+          <Route path="" element={<Home />} />
+          <Route path="shop" element={<Shop />} />
+          <Route path="product/:id" element={<Product />} />
+          <Route path="cart" element={<Cart />} />
+          <Route path="confirm" element={<Payment />} />
+          <Route path="orders" element={<OrderHistory />} />
+          <Route path="ticket" element={<Ticket />} />
           <Route path="about" element={<AboutUs />} />
           <Route path="terms-conditions" element={<Terms />} />
           <Route path="exchange" element={<ReturnRefund />} />

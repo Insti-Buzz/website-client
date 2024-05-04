@@ -64,8 +64,8 @@
     border: 1px solid red;
 }
 
-.signup-input:last-of-type {
-    margin-bottom: 0.6vw;
+.password-signup-input {
+    margin-bottom: 0;
 }
 
 .signup-form ::placeholder {

@@ -105,7 +105,7 @@
 }
 
 .about-creating-impact-card img {
-    width: 100%;
+    width: 65%;
     margin-bottom: 2.85vw;
     object-fit: cover;
     aspect-ratio: 1/1;
@@ -145,10 +145,10 @@
 }
 
 .about-in-numbers-grid {
-    padding-top: 10vw;
+    padding-top: 8vw;
     display: grid;
     grid-template-columns: repeat(2, 1fr) 1.5fr;
-    row-gap: 13vw;
+    row-gap: 8vw;
 }
 
 .about-in-numbers-card h3 {

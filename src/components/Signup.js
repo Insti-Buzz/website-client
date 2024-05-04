@@ -5,159 +5,224 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 function Signup() {
-    const navigate = useNavigate();
-    const [name, setName] = React.useState("");
-    const [email, setEmail] = React.useState("");
-    const [password, setPassword] = React.useState("");
-    const [phoneNumber, setPhoneNumber] = React.useState();
-    const [error, setError] = React.useState(false);
+  const navigate = useNavigate();
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [phoneNumber, setPhoneNumber] = React.useState();
+  const [error, setError] = React.useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [showOtp, setShowOtp] = React.useState(false);
+  const [otp, setOtp] = React.useState();
+  const [isEnabled, setIsEnabled] = React.useState(true);
 
-    const [showOtp, setShowOtp] = React.useState(false);
-    const [otp, setOtp] = React.useState();
-    const [isEnabled, setIsEnabled] = React.useState(true);
+  useEffect(() => {
+    const email = localStorage.getItem("userEmail");
+    const token = localStorage.getItem("token");
+    if (email && token) {
+      navigate("/");
+    }
+  }, []);
 
-    useEffect(() => {
-        const email = localStorage.getItem("userEmail");
-        const token = localStorage.getItem("token");
-        if (email && token) {
-            navigate("/");
-        }
-    }, []);
-
-    const Signup = async () => {
-        setIsEnabled(false)
-        if (!name || !email || !password || !phoneNumber) {
-            setError(true)
-            throw new Error("Enter Details")
-            return false
-        }
-
-        let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/auth/register`, {
-            method: 'POST',
-            body: JSON.stringify({ name, email, password, phoneNumber }),
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        })
-        result = await result.json();
-        setIsEnabled(true)
-        // console.log(result)
-        if (result.status != 200) {
-            // console.log(result.message);
-            // alert(result.message)
-            throw new Error(result.message)
-        }
-        // localStorage.setItem('userEmail', email)
-        setShowOtp(true)
-        return result
+  const Signup = async () => {
+    setIsEnabled(false);
+    if (!name || !email || !password || !phoneNumber) {
+      setError(true);
+      throw new Error("Enter Details");
+      return false;
     }
 
-    const signUpToast = () => toast.promise(Signup(), {
-        loading: 'Sending OTP',
-        success: (result) => {
-            return result.message;
+    let result = await fetch(
+      `${process.env.REACT_APP_server_url}/api/v1/auth/register`,
+      {
+        method: "POST",
+        body: JSON.stringify({ name, email, password, phoneNumber }),
+        headers: {
+          "Content-Type": "application/json",
         },
-        error: (result) => {
-            return result.message
-        },
+      }
+    );
+    result = await result.json();
+    setIsEnabled(true);
+    // console.log(result)
+    if (result.status != 200) {
+      // console.log(result.message);
+      // alert(result.message)
+      throw new Error(result.message);
+    }
+    // localStorage.setItem('userEmail', email)
+    setShowOtp(true);
+    return result;
+  };
+
+  const signUpToast = () =>
+    toast.promise(Signup(), {
+      loading: "Sending OTP",
+      success: (result) => {
+        return result.message;
+      },
+      error: (result) => {
+        return result.message;
+      },
     });
 
-    const otpToast = () => toast.promise(otpVerify(), {
-        loading: 'Verifying OTP',
+  const otpToast = () =>
+    toast.promise(
+      otpVerify(),
+      {
+        loading: "Verifying OTP",
         success: (result) => {
-            return result.message;
+          return result.message;
         },
         error: (result) => {
-            return result.message
+          return result.message;
         },
-    },
-    {
-        id:'otpVerifyToast'
-    })
+      },
+      {
+        id: "otpVerifyToast",
+      }
+    );
 
-
-    const otpVerify = async () => {
-        if (!otp) {
-            setError(true)
-            return false
-        }
-        let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/auth/verifyOtp`, {
-            method: 'POST',
-            body: JSON.stringify({ name, email, password, phoneNumber, otp }),
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        })
-        result = await result.json();
-        if (result.status == 404) {
-            // alert(result.error)
-            throw new Error(result.error);
-        } else {
-            // alert(result.message)
-            // localStorage.setItem("userEmail", email)
-            navigate('/login')
-            return result
-        }
-        // console.log(result)
-
+  const otpVerify = async () => {
+    if (!otp) {
+      setError(true);
+      return false;
     }
-
-    const toLogin = () => {
-        navigate('/login')
+    let result = await fetch(
+      `${process.env.REACT_APP_server_url}/api/v1/auth/verifyOtp`,
+      {
+        method: "POST",
+        body: JSON.stringify({ name, email, password, phoneNumber, otp }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    result = await result.json();
+    if (result.status == 404) {
+      // alert(result.error)
+      throw new Error(result.error);
+    } else {
+      // alert(result.message)
+      // localStorage.setItem("userEmail", email)
+      navigate("/login");
+      return result;
     }
-    return (
-        <div className='signup-main-container'>
-            <div class="signup-img-container">
-                <img src={img} alt="" />
-            </div>
-            <div class="signup-content">
-                <div class="signup-form">
-                    <h1>Welcome to InstiBuzz!</h1>
-                    <h4>Signup to continue</h4>
-                    <input className='signup-input' id={error && !name && "input-error"} type='text' placeholder='Name' value={name}
-                        onChange={(e) => { setName(e.target.value) }} />
-                    <br />
-                    <input className='signup-input' id={error && !email && "input-error"} type='email' placeholder='Email' value={email}
-                        onChange={(e) => { setEmail(e.target.value) }} />
-                    <br />
-                    <input type="tel" placeholder="Mobile Number" className="signup-input" id={error && !phoneNumber && "input-error"} value={phoneNumber}
-                        onChange={(e) => setPhoneNumber(e.target.value)} />
-                    <br />
-                    <input className='signup-input' type='password' placeholder='Password' id={error && !password && "input-error"} value={password}
-                        onChange={(e) => { setPassword(e.target.value) }} />
-                    <br />
+    // console.log(result)
+  };
 
-                    {/* <input type="password" placeholder="Confirm password" class="signup-input" />
+  const toLogin = () => {
+    navigate("/login");
+  };
+  return (
+    <div className="signup-main-container">
+      <div class="signup-img-container">
+        <img src={img} alt="" />
+      </div>
+      <div class="signup-content">
+        <div class="signup-form">
+          <h1>Welcome to InstiBuzz!</h1>
+          <h4>Signup to continue</h4>
+          <input
+            className="signup-input"
+            id={error && !name && "input-error"}
+            type="text"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+          />
+          <br />
+          <input
+            className="signup-input"
+            id={error && !email && "input-error"}
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
+          <br />
+          <input
+            type="tel"
+            placeholder="Mobile Number"
+            className="signup-input"
+            id={error && !phoneNumber && "input-error"}
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+          />
+          <br />
+          <div class="password-input">
+            <input
+              className="signup-input password-signup-input"
+              id={error && !password && "input-error"}
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
+            <i
+              class={showPassword ? "fa fa-eye" : "fa fa-eye-slash"}
+              onClick={() => {
+                setShowPassword(!showPassword);
+              }}
+            />
+          </div>
+
+          {/* <input type="password" placeholder="Confirm password" class="signup-input" />
                     <br /> */}
 
-                    <div class="signup-already-have-an-acc">
-                        Already have an account? <a onClick={toLogin} >Login</a> <br />
-                    </div>
+          <div class="signup-already-have-an-acc">
+            Already have an account? <a onClick={toLogin}>Login</a> <br />
+          </div>
 
-                    <div class="signup-btn-container">
-                        <button onClick={signUpToast} value="Sign Up" class="signup-btn" disabled={!isEnabled}>Signup</button>
-                    </div>
-                    <div>
-                        {showOtp && (
-                            <div className="signup-popup">
-                                <div className='signup-popup-content'>
-                                    <div className='signup-popup-content-name'>
-                                        <p>Enter Otp sent on your email</p>
-                                        <input type='text' className='signup-popup-content' placeholder='Enter recieved Otp' value={otp}
-                                            onChange={(e) => { setOtp(e.target.value) }} />
-                                        {error && !otp && <span className='invalid-input'>Enter valid otp</span>}
-                                    </div>
-                                    <button className='sinup-popup-content-button' onClick={otpToast}>Proceed</button>
-                                </div>
-                            </div>
-                        )}
-
-                    </div>
-
+          <div class="signup-btn-container">
+            <button
+              onClick={signUpToast}
+              value="Sign Up"
+              class="signup-btn"
+              disabled={!isEnabled}
+            >
+              Signup
+            </button>
+          </div>
+          <div>
+            {showOtp && (
+              <div className="signup-popup">
+                <div className="signup-popup-content">
+                  <div className="signup-popup-content-name">
+                    <p>Enter Otp sent on your email</p>
+                    <input
+                      type="text"
+                      className="signup-popup-content"
+                      placeholder="Enter recieved Otp"
+                      value={otp}
+                      onChange={(e) => {
+                        setOtp(e.target.value);
+                      }}
+                    />
+                    {error && !otp && (
+                      <span className="invalid-input">Enter valid otp</span>
+                    )}
+                  </div>
+                  <button
+                    className="sinup-popup-content-button"
+                    onClick={otpToast}
+                  >
+                    Proceed
+                  </button>
                 </div>
-            </div>
+              </div>
+            )}
+          </div>
         </div>
-    )
+      </div>
+    </div>
+  );
 }
 
 export default Signup;

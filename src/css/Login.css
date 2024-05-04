@@ -60,6 +60,34 @@
     font-family: 'Poppins', sans-serif;
 }
 
+.password-login-input {
+    margin-bottom: 0;
+}
+
+.fa-eye {
+    font-size: max(1.05vw, 12px);
+}
+
+.fa-eye-slash {
+    font-size: max(1.05vw, 12px);
+}
+
+.password-input {
+    display: flex;
+    align-items: center;
+    background-color: rgb(243, 243, 243);
+    padding-right: 20px;
+    border: none;
+    border-radius: 21px;
+    outline: none;
+    flex: auto;
+    font-weight: 400;
+    font-size: max(1.05vw, 12px);
+    width: -webkit-fill-available;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 0.6vw;
+}
+
 .login-form ::placeholder {
     color: black;
     font-weight: 300;
