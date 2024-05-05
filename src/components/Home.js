@@ -4,9 +4,9 @@ import { useRef, useEffect, useState } from 'react';
 
 // import '../css/Carousel.css';
 import CoverImg1 from '../assets/red wall intense-min-min.jpg';
-import CoverImg2 from '../assets/take lite back-min-min.jpg';
-import CoverImg3 from '../assets/avg iitian pair -park-min-min.jpg';
-import CoverImg4 from '../assets/trio 2-min-min.jpg';
+import CoverImg4 from '../assets/take lite back-min-min.jpg';
+import CoverImg2 from '../assets/avg iitian pair -park-min-min.jpg';
+import CoverImg3 from '../assets/trio 2-min-min.jpg';
 
 // import '../css/LatestArrivals.css'
 import Avg_IITian_1 from '../assets/boy back avg iitm-min-min.jpg';

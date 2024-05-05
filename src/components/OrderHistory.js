@@ -93,7 +93,7 @@ function OrderHistory() {
                             item.productsOrdered.map(e1)
                         }
                     </div>
-                    <hr/>
+                    {/* <hr/> */}
                     <div>
                         Subtotal:{
                             item.subTotal
@@ -143,8 +143,8 @@ function OrderHistory() {
                         Price: {item.price}/-
                     </div>  
 
+                <hr/>
                 </div>
-                {/* <hr/> */}
             </div>
         </div>
 
