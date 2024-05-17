@@ -166,7 +166,7 @@ function UpdateProduct() {
 
                         <div class="product-product-details product-product-info">
                             <h3>PRODUCT INFO (Product Details)</h3>
-                            <input type='text' placeholder='Enter product price' className='inputBox'
+                            <textarea type='text' placeholder='Enter product price' className='inputBox'
                                 value={details} onChange={(e) => { setDetails(e.target.value) }}
                             />
                         </div>

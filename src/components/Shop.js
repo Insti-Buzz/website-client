@@ -105,8 +105,12 @@ function Shop() {
                     <div className="shop-product-name">
                         <h2>{item.name}</h2>
                     </div>
+                    <hr />
+                    <div className='shop-product-style'>
+                        <p>{(item.style == 'regular') ? "Regular T-Shirts" : "Oversized T-Shirts" }</p>
+                    </div>
                     <div className="shop-product-price">
-                        <h3>Rs. {item.price}</h3>
+                        <h3>₹{item.price}</h3>
                     </div>
                 </button>
             </div>
