@@ -99,7 +99,9 @@ const Product = () => {
         method: "POST",
       }
     );
-    await isProductWishlisted();
+    if (isLogin) {
+      await isProductWishlisted();
+    }
     result = await result.json();
     setLoading(false);
     setName(result.name);
@@ -112,25 +114,29 @@ const Product = () => {
   };
 
   const toggleWishlist = async () => {
-    let email = localStorage.getItem("userEmail");
-    let token = localStorage.getItem("token");
-    const productId = params.id;
+    if (isLogin) {
+      let email = localStorage.getItem("userEmail");
+      let token = localStorage.getItem("token");
+      const productId = params.id;
 
-    setIsWishlisted(!isWishlisted);
+      setIsWishlisted(!isWishlisted);
 
-    let result = await fetch(
-      `${process.env.REACT_APP_server_url}/api/v1/products/toggleWishlist`,
-      {
-        method: "POST",
-        body: JSON.stringify({ email, productId }),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+      let result = await fetch(
+        `${process.env.REACT_APP_server_url}/api/v1/products/toggleWishlist`,
+        {
+          method: "POST",
+          body: JSON.stringify({ email, productId }),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-    result = await result.json();
+      result = await result.json();
+    } else {
+      alert('Login to add products to wishlist');
+    }
   }
 
   const addToCart = async () => {
