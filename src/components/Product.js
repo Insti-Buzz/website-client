@@ -9,6 +9,7 @@ const Product = () => {
   const [selectedImage, setSelectedImage] = React.useState(imageUrl[0]);
   const [loading, setLoading] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isWishlisted, setIsWishlisted] = useState(false);
 
   useEffect(() => {
     getProductDetails();
@@ -56,6 +57,37 @@ const Product = () => {
     setSelectedImage(type);
   };
 
+  const isProductWishlisted = async () => {
+    const email = localStorage.getItem("userEmail");
+    const token = localStorage.getItem("token");
+
+    let result = await fetch(
+      `${process.env.REACT_APP_server_url}/api/v1/products/get-wishlisted-products`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          email,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    result = await result.json();
+
+    const wishlist = result.products;
+    const wishlistId = wishlist.map((product) => {
+      return product.product_id;
+    })
+
+    let productId = params.id;
+    if (wishlistId.includes(productId)) {
+      setIsWishlisted(true);
+    }
+  }
+
   const getProductDetails = async () => {
     // console.log(params)
     setLoading(true);
@@ -67,6 +99,7 @@ const Product = () => {
         method: "POST",
       }
     );
+    await isProductWishlisted();
     result = await result.json();
     setLoading(false);
     setName(result.name);
@@ -77,6 +110,28 @@ const Product = () => {
     setSizesAvailable(result.sizeQuantities);
     // console.log(sizesAvailable);
   };
+
+  const toggleWishlist = async () => {
+    let email = localStorage.getItem("userEmail");
+    let token = localStorage.getItem("token");
+    const productId = params.id;
+
+    setIsWishlisted(!isWishlisted);
+
+    let result = await fetch(
+      `${process.env.REACT_APP_server_url}/api/v1/products/toggleWishlist`,
+      {
+        method: "POST",
+        body: JSON.stringify({ email, productId }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    result = await result.json();
+  }
 
   const addToCart = async () => {
     let email = localStorage.getItem("userEmail");
@@ -161,6 +216,7 @@ const Product = () => {
       <div className="product-product-description">
         <div className="product-product-name">
           <h2>{name}</h2>
+          <i class={isWishlisted ? "fa fa-heart" : "fa fa-heart-o"} onClick={toggleWishlist}></i>
         </div>
         <div className="product-product-price">
           <h3>₹{price}</h3>

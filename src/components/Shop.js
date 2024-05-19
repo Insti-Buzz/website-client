@@ -9,12 +9,12 @@ import mobileBanner from '../assets/Shop-mobile-banner.jpg'
 function Shop() {
     useEffect(() => {
         window.scrollTo({
-          top: 0,
-          behavior: "instant",
+            top: 0,
+            behavior: "instant",
         });
         // const scrollToTop = () => {
         // }
-      }, []);
+    }, []);
     const [ourProducts, setOurProducts] = useState([]);
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
@@ -107,7 +107,7 @@ function Shop() {
                     </div>
                     <hr />
                     <div className='shop-product-style'>
-                        <p>{(item.style == 'regular') ? "Regular T-Shirts" : "Oversized T-Shirts" }</p>
+                        <p>{(item.style == 'regular') ? "Regular T-Shirts" : "Oversized T-Shirts"}</p>
                     </div>
                     <div className="shop-product-price">
                         <h3>₹{item.price}</h3>
@@ -124,10 +124,10 @@ function Shop() {
                     <div>
                         <div className="shop-page-info">
                             <div className="shop-page-banner">
-                                <img src={Banner}/>
+                                <img src={Banner} />
                             </div>
                             <div className="shop-page-banner-mobile">
-                                <img src={mobileBanner}/>
+                                <img src={mobileBanner} />
                             </div>
                         </div>
                         <div className="shop-navigation-container">
@@ -144,7 +144,7 @@ function Shop() {
                                     <div className="shop-clear-all" onClick={handleClearFilterClick}>Clear</div>
                                 </div>
                                 <div className="filter-bar"> */}
-                                    {/* <div className="size-filter">
+                            {/* <div className="size-filter">
                             <h3>SIZE</h3>
                             <div className="s-filter sz-fil">S
                                 <Button filterBy="size" value="S" handleClick={handleButtonClick} active={sizeFilter === 'S'} />
@@ -163,7 +163,7 @@ function Shop() {
                             </div>
 
                         </div> */}
-                                    {/* <div className="style-filter">
+                            {/* <div className="style-filter">
                                         <h3>STYLE</h3>
                                         <div className="normal-filter sty-fil">Regular
                                             <Button filterBy="style" value="regular" handleClick={handleButtonClick} active={styleFilter === 'regular'} />
@@ -173,7 +173,7 @@ function Shop() {
                                         </div>
                                        
                                     </div> */}
-                                {/* </div>
+                            {/* </div>
                             </div> */}
                             <div className="shop-products-display">{activeProducts.map(e)}</div>
                         </div>

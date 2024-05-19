@@ -46,11 +46,25 @@ body {
     flex-basis: 375px;
 }
 
+.product-product-name {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 23px;
+}
+
+.product-product-name i {
+    font-size: 22px;
+}
+
+.fa-heart {
+    color: red;
+}
+
 .product-product-name h2 {
     font-size: max(2.1875vw, 20px);
-    margin-top: 0;
+    margin: 0;
     font-weight: 400;
-    margin-bottom: 23px;
 }
 
 .product-product-price h3 {

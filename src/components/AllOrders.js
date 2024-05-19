@@ -114,25 +114,23 @@ function AllOrders() {
 
     function e1(item, index) {
         return (
-            <div className='order-my-order'>
-                <div class="order-card">
-                    <div class="order-date">
-                        {/* <p>22 April, 2023</p> */}
+            <div class="order-card">
+                <div class="order-date">
+                    {/* <p>22 April, 2023</p> */}
+                </div>
+                <hr />
+                <div class="order-product-img-container">
+                    <img src={item.product.imageUrl[0]} alt="Product image" />
+                </div>
+                <div class="order-product-details">
+                    <div class="order-product-name">
+                        <h2>{item.product.name}</h2>
                     </div>
-                    <hr />
-                    <div class="order-product-img-container">
-                        <img src={item.product.imageUrl[0]} alt="Product image" />
+                    <div class="order-product-size">
+                        Size: {item.size}
                     </div>
-                    <div class="order-product-details">
-                        <div class="order-product-name">
-                            <h2>{item.product.name}</h2>
-                        </div>
-                        <div class="order-product-size">
-                            Size: {item.size}
-                        </div>
-                        <div class="order-product-quantity">
-                            Qty: {item.quantity}
-                        </div>
+                    <div class="order-product-quantity">
+                        Qty: {item.quantity}
                     </div>
                 </div>
             </div>
