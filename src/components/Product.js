@@ -53,6 +53,12 @@ const Product = () => {
     }
   }, [sizesAvailable]);
 
+  useEffect(() => {
+    if (isLogin) {
+      isProductWishlisted();
+    }
+  }, [isLogin])
+
   const selectImage = (type) => {
     setSelectedImage(type);
   };
@@ -99,9 +105,7 @@ const Product = () => {
         method: "POST",
       }
     );
-    if (isLogin) {
-      await isProductWishlisted();
-    }
+
     result = await result.json();
     setLoading(false);
     setName(result.name);

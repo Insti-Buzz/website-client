@@ -23,6 +23,7 @@ import OurServices from "./components/OurServices";
 import Collab from "./components/Collab";
 import CollabForm from "./components/CollabForm";
 import FAQs from "./components/FAQs";
+import Wishlist from "./components/Wishlist";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="signup" element={<Signup />} />
           <Route path="login" element={<Login />} />
           <Route path="" element={<Home />} />
+          <Route path="wishlist" element={<Wishlist />} />
           <Route path="shop" element={<Shop />} />
           <Route path="product/:id" element={<Product />} />
           <Route path="cart" element={<Cart />} />
