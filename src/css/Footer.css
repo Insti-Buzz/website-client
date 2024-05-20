@@ -97,6 +97,12 @@
 }
 
 @media screen and (max-width:724px) {
+    .footer {
+        font-size: 14px;
+        padding-top: 0;
+        padding-bottom: 15px;
+    }
+
     .footer-content{
         display: inline-flex;
         /* background-color: red; */
@@ -107,7 +113,15 @@
         /* flex-direction: column; */
     }
 
-    .footer-logo{
+    .footer h3 {
+        font-size: 16px;
+    }
+
+    .footer-list a {
+        font-size: 14px;
+    }
+
+    .footer-logo {
         /* background-color: green; */
         width: 100%;
         display: inline-flex;

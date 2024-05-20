@@ -65,9 +65,15 @@ function Wishlist() {
     return (
         <div class="wishlist-main-container">
             <h1>Wishlist</h1>
-            <div className="shop-products-display">
-                {wishlistedProducts.map(e)}
-            </div>
+            {
+                (wishlistedProducts.length != 0)
+                    ?
+                    <div className="shop-products-display">
+                        {wishlistedProducts.map(e)}
+                    </div>
+                    :
+                    <div><h2>There are no items in your wishlist...</h2></div>
+            }
         </div>
     );
 }

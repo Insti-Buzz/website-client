@@ -105,7 +105,7 @@
 }
 
 .nav-navbar .nav-center .nav-center-content > *{
-    padding: 25px;
+    margin: 25px;
     /* width: 16%; */
     text-align: center ;
     text-decoration: none;
@@ -113,8 +113,8 @@
     font-size: 17px; 
 }
 
-.nav-navbar .nav-center .nav-center-content > *:hover{
-    font-size: 17.5px;
+.nav-navbar .nav-center .nav-center-content a:hover{
+    scale: 1.02;
     color: #8c5732;
     cursor: pointer;
 }

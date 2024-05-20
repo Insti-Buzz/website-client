@@ -295,15 +295,30 @@
         display: block;
     }
 
+    .shop-filter-container{
+        display: none;
+    }
+
+    .shop-product-name h2 {
+        font-size: 14px;
+    }
+
+    .shop-product-style p {
+        font-size: 12px;
+    }
+
+    .shop-product-price h3 {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 580px) {
     .shop-products-display {
         margin-top: 50px;
         display: grid;
-        /* grid-template-columns: repeat(2, 1fr); */
-        /* grid-gap: 25px; */
-    }
-
-    .shop-filter-container{
-        display: none;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 25px;
+        margin-bottom: 35px;
     }
 }
 
