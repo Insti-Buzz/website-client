@@ -11,8 +11,8 @@ function Exchange() {
         <div class="exchange-container">
           <p>
             InstiBuzz Exchange Policy allows you to exchange your products
-            purchased from InstiBuzz for valid reasons within the given number
-            of days provided on the product info page. The product should remain
+            purchased from InstiBuzz for valid reasons within 10 days from 
+            receiving the product. The product should remain
             unused and returned in its original condition along with all the
             tags and packaging. Our delivery agent will come for the pick-up of
             your product and will do the necessary quality checks. After the
@@ -30,6 +30,12 @@ function Exchange() {
             hence cannot be modified or cancelled.
             <br />
             <br />
+            Returns are possible only if replacement cannot be done for the damaged 
+            product.It takes 7-10 business days to process returns.The balance amount will 
+            be refunded to your bank account within 7-10 business days.
+            <br />
+            <br />
+
           </p>
         </div>
       </div>

@@ -133,6 +133,10 @@
     z-index: inherit;
 }
 
+.nav-wish-logo:hover{
+    cursor: pointer;
+    /* margin-right: 5px; */
+}
 /* @media screen and (max-width:1095px){ 
     .nav-navbar .nav-center .nav-center-content{
         /* width: 65%; */

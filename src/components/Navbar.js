@@ -101,6 +101,11 @@ function Navbar() {
         window.location.reload()
     }
 
+    const wishlistPage=()=>{
+        dropDownClose()
+        navigate('/wishlist')
+    }
+
     return (
         <>
             <div className="nav-navbar" style={{ height: navbarHeight }}>
@@ -133,7 +138,9 @@ function Navbar() {
                 <div className="nav-top-right">
                     {
                         isLogin ?
-                            <><a className="fa fa-shopping-bag" aria-hidden="true" onClick={cartPage}></a>
+                            <>
+                            <a onClick={wishlistPage} class={ "fa fa-heart-o nav-wish-logo" } ></a>
+                            <a className="fa fa-shopping-bag " aria-hidden="true" onClick={cartPage}></a>
                                 <button className="nav-contact-button" onClick={Logout}>Logout</button>
                                 <a className="fa fa-bars nav-cart-logo" aria-hidden="true" onClick={dropDownOpen}></a></>
                             :

@@ -89,7 +89,7 @@ function Footer() {
             </div>
           </div>
         </div>
-        <p class="footer-copyright">InstiBuzz @ 2024</p>
+        <p class="footer-copyright">InstiBuzz Private Limited @ 2024</p>
       </div>
     </>
   );

@@ -30,7 +30,7 @@ function Terms() {
           <h2>Introduction</h2>
           <p>
             The domain name www.instibuzz.com is a site operated by InstiBuzz
-            Pvt. Ltd., a private limited firm incorporated under the laws of
+            Private Limited, a private limited firm incorporated under the laws of
             India.
           </p>
         </div>
