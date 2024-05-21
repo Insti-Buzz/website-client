@@ -154,8 +154,6 @@ function Cart() {
     const calculateSubtotal = () => {
         let subtotal = calculateMrp();
 
-        if (delivery == "delivery") subtotal += 19;
-
         return subtotal;
     };
 
@@ -445,7 +443,7 @@ function Cart() {
         return (
             <div class="checkout-select-delivery">
                 <label>
-                    <p>Deliver to your hostel for just ₹19.</p>
+                    <p>Deliver at your doorstep.</p>
                     <input
                         type="radio"
                         value="delivery"
@@ -473,71 +471,84 @@ function Cart() {
     return (
         <div>
             {
-                loading ? <LoadingPage /> : <div>
-                    {products.length != 0 ? <div class="checkout-main-container">
+                loading ? <LoadingPage /> :
+                    <div>
+                        {products.length != 0 ?
+                            <div class="checkout-main-container">
+                                <div class="checkout-my-cart">
+                                    {products.map(e)}
 
-
-
-                        <div class="checkout-my-cart">
-                            {products.map(e)}
-
-                        </div>
-                        <div class="checkout-order-summary">
-                            <div class="checkout-delivery-method">
-                                <h3>DELIVERY METHOD</h3>
-                                <RadioButtonGroup
-                                    selectedOption={delivery}
-                                    handleChange={handleChange}
-                                />
-                            </div>
-                            <hr />
-                            <div class="checkout-price-details">
-                                <h3>
-                                    PRICE DETAILS ({products.length}{" "}
-                                    {products.length == 1 ? "item" : "items"})
-                                </h3>
-                                <div class="checkout-price-details">
-                                    <div class="checkout-summary-details">
-                                        <p>Total MRP</p>
-                                        <p>₹{calculateMrp()}</p>
-                                    </div>
-                                    <div class="checkout-summary-details">
-                                        <p>Platform Fee</p>
-                                        <p>FREE</p>
-                                    </div>
-                                    <div class="checkout-summary-details">
-                                        <p>Delivery Charges</p>
-                                        <p>{delivery === "pickup" ? "FREE" : "₹19"}</p>
-                                    </div>
                                 </div>
-                                <hr />
-                                <div class="checkout-total-amount">
-                                    <p>Total Amount</p>
-                                    <p>₹{calculateSubtotal()}</p>
+                                <div class="checkout-order-summary">
+                                    <div class="checkout-delivery-method">
+                                        <h3>DELIVERY METHOD</h3>
+                                        <RadioButtonGroup
+                                            selectedOption={delivery}
+                                            handleChange={handleChange}
+                                        />
+                                    </div>
+                                    <hr />
+                                    <div class="checkout-price-details">
+                                        <h3>
+                                            PRICE DETAILS ({products.length}{" "}
+                                            {products.length == 1 ? "item" : "items"})
+                                        </h3>
+                                        <div class="checkout-price-details">
+                                            <div class="checkout-summary-details">
+                                                <p>Total MRP</p>
+                                                <p>₹{calculateMrp()}</p>
+                                            </div>
+                                            <div class="checkout-summary-details">
+                                                <p>Platform Fee</p>
+                                                <p>FREE</p>
+                                            </div>
+                                            <div class="checkout-summary-details">
+                                                <p>Delivery Charges</p>
+                                                <p>{delivery === "pickup" ? "FREE" : "MAY VARY"}</p>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="checkout-total-amount">
+                                            <p>Total Amount</p>
+                                            <p>₹{calculateSubtotal()}</p>
+                                        </div>
+                                    </div>
+                                    <button
+                                        class="cart-order-btn"
+                                        onClick={() => {
+                                            navigate("/address", {
+                                                state: {
+                                                    mrp: calculateMrp(),
+                                                    noOfProducts: products.length,
+                                                }
+                                            });
+                                        }}
+                                    >
+                                        PLACE ORDER
+                                    </button>
                                 </div>
-                            </div>
-                            <button class="cart-order-btn" onClick={proceedPayment}>
-                                PLACE ORDER
-                            </button>
-                        </div>
 
-                        {showPayment && (
-                            <div className="cart-popup">
-                                {/* <i className='fa fa-times' aria-hidden='true' onClick={setShowPayment(false)}></i> */}
-                                <IconButton onClick={() => closePayment()}>
-                                    <CloseIcon />
-                                </IconButton>
-                                <h1>Confirm Your Order?</h1>
-                                <div className="cart-popup-content">
-                                    <button onClick={confirmOrder}>Cash On Delivery</button>
-                                    {/* <button onClick={cancelOrder}>No</button> */}
-                                    <button onClick={paymentHandler}>Pay Now</button>
-                                </div>
+                                {showPayment && (
+                                    <div className="cart-popup">
+                                        {/* <i className='fa fa-times' aria-hidden='true' onClick={setShowPayment(false)}></i> */}
+                                        <IconButton onClick={() => closePayment()}>
+                                            <CloseIcon />
+                                        </IconButton>
+                                        <h1>Confirm Your Order?</h1>
+                                        <div className="cart-popup-content">
+                                            <button onClick={confirmOrder}>Cash On Delivery</button>
+                                            {/* <button onClick={cancelOrder}>No</button> */}
+                                            <button onClick={paymentHandler}>Pay Now</button>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
-                        )}
-
-                    </div> : <div class="checkout-title"><h3>Seems like your cart is empty...</h3></div>}
-                </div>
+                            :
+                            <div class="checkout-title">
+                                <h3>Seems like your cart is empty...</h3>
+                            </div>
+                        }
+                    </div>
             }
         </div>
 
