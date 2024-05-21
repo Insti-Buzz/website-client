@@ -51,7 +51,7 @@ function Ticket() {
     if (!name || !email || !number) {
       setError(true);
       throw new Error("Enter Details");
-      return false;
+      return false; 
     }
 
    

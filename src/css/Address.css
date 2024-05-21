@@ -1,0 +1,48 @@
+.address-form {
+    /* min-width: 400px; */
+    max-width: 450px;
+    padding-right: 20px;
+    border-right: 1px solid #eaeaec;
+    flex: 2;
+}
+
+.address-form h3 {
+    font-size: 14px;
+    margin: 0 0 16px 0;
+}
+
+.address-form input {
+    margin-top: 4px;
+    margin-bottom: 14px;
+    padding: 12px 12px;
+    background-color: transparent;
+    border: 1px solid #8b8b8b;
+    border-radius: 5px;
+    outline: none;
+    flex: auto;
+    font-size: 14px;
+    width: -webkit-fill-available;
+}
+
+.address-form input:last-of-type {
+    margin-bottom: 30px;
+}
+
+::placeholder {
+    color: #9f9f9f;
+}
+
+textarea {
+    font-family: "Poppins", sans-serif;
+    margin-top: 5px;
+    margin-bottom: 16px;
+    padding: 12px 12px;
+    background-color: transparent;
+    border: 1px solid #8b8b8b;
+    border-radius: 5px;
+    outline: none;
+    flex: auto;
+    font-size: 14px;
+    resize: none;
+    width: -webkit-fill-available;
+}
