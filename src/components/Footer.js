@@ -63,7 +63,7 @@ function Footer() {
                 IIT Madras, Chennai-600036.
               </p>
             </div>
-            <hr></hr>
+            <hr className="horizontal-rule" ></hr>
             <div class="footer-phone">
               <i class="fa fa-phone"></i>
               <p style={{ display: "inline-block", marginLeft: "7px" }}>
@@ -71,20 +71,22 @@ function Footer() {
               </p>
             </div>
             <div class="footer-social">
-              <a href="https://wa.me/9944487273" target="_blank">
-                <i class="fa fa-whatsapp" aria-hidden="true"></i>
+              <a rel="noreferrer" href="https://wa.me/9944487273" target="_blank">
+                <i className="fa fa-whatsapp" aria-hidden="true"  style={{color:"green"}}></i>
               </a>
-              <a href="https://www.instagram.com/insti_buzz/" target="_blank">
-                <i class="fa fa-instagram"></i>
+              <a rel="noreferrer" href="https://www.instagram.com/insti_buzz/" target="_blank">
+                <i className="fa fa-instagram"></i>
               </a>
               <a
+                rel="noreferrer"
                 href="https://www.linkedin.com/company/insti-buzz/"
                 target="_blank"
+                // style={{backgroundColor:"skyblue"}}
               >
-                <i class="fa fa-linkedin"></i>
+                <i className="fa fa-linkedin" style={{color:"#0676a8"}}></i>
               </a>
               <a href="mailto:instibuzziitm@gmail.com">
-                <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                <i className="fa fa-envelope-o" aria-hidden="true"></i>
               </a>
             </div>
           </div>

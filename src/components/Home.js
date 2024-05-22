@@ -189,7 +189,7 @@ function Home() {
         </div>
 
         <div className="home-banner">
-          <img src={Banner} alt='Banner for Home page for advertising'/>
+          <img src={Banner} alt='Banner for Home page for advertising' className='home-banner-image'/>
         </div>
         <div class="home-banner-mobile">
           <img src={mobileBanner} alt='Banner for advertising'/>
