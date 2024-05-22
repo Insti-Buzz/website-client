@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -34,8 +33,8 @@ function Navbar() {
     useEffect(() => {
         const email = localStorage.getItem("userEmail")
         if (email) setIsLogin(true)
-        if (email == 'instibuzziitm@gmail.com') {
-            setIsAdmin(true)
+        if (email === 'instibuzziitm@gmail.com') {
+            setIsAdmin(true);
         }
     }, [])
 
@@ -108,30 +107,32 @@ function Navbar() {
 
     return (
         <>
+            
+
             <div className="nav-navbar" style={{ height: navbarHeight }}>
 
-                <div className="nav-top-left" onClick={() => navigate('/')}>
-                    <img src={InstiBuzzLogo} alt="" className="nav-instibuzz-logo"/>
+                <a className="nav-top-left" href='/'>
+                    <img src={InstiBuzzLogo} alt="InstiBuzz Logo" className="nav-instibuzz-logo"/>
                     <p className="nav-instibuzz-title">InstiBuzz</p>
-                </div>
+                </a>
 
                 <div className="nav-center">
                     <div className="nav-center-content">
-                        <a className='nav-home' onClick={homePage}>Home</a>
-                        <a className='nav-shop' onClick={shopPage}>Shop</a>
+                        <a className='nav-home' href='/' onClick={homePage}>Home</a>
+                        <a className='nav-shop' href='/shop' onClick={shopPage}>Shop</a>
                         {/* {isAdmin ?
                             <a className='nav-blog' onClick={addProductPage}>Add</a> :
                             <></>
                         } */}
                         {
                             isLogin ?
-                                <a className='nav-orders' onClick={ordersPage}>Orders</a>
+                                <a className='nav-orders' href='/orders' onClick={ordersPage}>Orders</a>
                                 :
                                 <></>
 
                         }
-                        <a className='nav-ourServices' onClick={ourServicesPage}>Our Services</a>
-                        <a className='nav-aboutUs' onClick={aboutPage}>About Us</a>
+                        <a className='nav-ourServices' href='/ourServices' onClick={ourServicesPage}>Our Services</a>
+                        <a className='nav-aboutUs' href='/about' onClick={aboutPage}>About Us</a>
                     </div>
                 </div>
 
@@ -139,39 +140,40 @@ function Navbar() {
                     {
                         isLogin ?
                             <>
-                            <a onClick={wishlistPage} class={ "fa fa-heart-o nav-wish-logo" } ></a>
-                            <a className="fa fa-shopping-bag " aria-hidden="true" onClick={cartPage}></a>
+                            <button onClick={wishlistPage} class="fa fa-heart-o nav-wish-logo"></button>
+                            <button className="fa fa-shopping-bag " aria-hidden="true" onClick={cartPage}></button>
                                 <button className="nav-contact-button" onClick={Logout}>Logout</button>
-                                <a className="fa fa-bars nav-cart-logo" aria-hidden="true" onClick={dropDownOpen}></a></>
+                                <button className="fa fa-bars nav-cart-logo" aria-hidden="true" onClick={dropDownOpen}></button></>
                             :
                             <>
 
-                                <a className='nav-contact-button' onClick={loginPage}>Login/Signup</a>
-                                <a className="fa fa-bars" aria-hidden="true" onClick={dropDownOpen}></a></>
+                                <a href='/login' className='nav-contact-button' onClick={loginPage}>Login/Signup</a>
+                                <button className="fa fa-bars" aria-hidden="true" onClick={dropDownOpen}></button>
+                            </>
                     }
                 </div>
 
 
                 <div className="nav-dropdown" style={{ height: dropDownHeight }}>
-                    <a className="fa fa-times" aria-hidden="true" onClick={dropDownClose}></a>
+                    <button className="fa fa-times" aria-hidden="true" onClick={dropDownClose}></button>
                     <div className="nav-center-content">
-                        <a className='nav-home' onClick={homePage}>Home</a>
-                        <a className='nav-shop' onClick={shopPage}>Shop</a>
+                        <a href='/' className='nav-home' onClick={homePage}>Home</a>
+                        <a href='/shop' className='nav-shop' onClick={shopPage}>Shop</a>
                         {/* <a className='nav-blog' onClick={addProductPage}>Add</a> */}
                         {
                             isLogin ?
-                                <a className='nav-about' onClick={ordersPage}>Orders</a>
+                                <a href='/orders' className='nav-about' onClick={ordersPage}>Orders</a>
                                 : <></>
                         }
-                        <a className='nav-ourServices' onClick={ourServicesPage}>Our Services</a>
-                        <a className='nav-aboutUs' onClick={aboutPage}>About Us</a>
+                        <a href='/ourServices' className='nav-ourServices' onClick={ourServicesPage}>Our Services</a>
+                        <a href='/about' className='nav-aboutUs' onClick={aboutPage}>About Us</a>
 
                         {
                             isLogin ?
-                                <a className='nav-contact-button' onClick={Logout}>Logout</a>
+                                <button className='nav-contact-button' onClick={Logout}>Logout</button>
 
                                 :
-                                <a className='nav-contact-button' onClick={loginPage}>Login/Signup</a>
+                                <a href='/login' className='nav-contact-button' onClick={loginPage}>Login/Signup</a>
                         }
                         {/* <button className="nav-contact-button">Login/Signup</button> */}
                     </div>

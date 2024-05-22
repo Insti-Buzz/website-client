@@ -1,3 +1,7 @@
+fa{
+    border: 0;
+    background-color: white;
+}
 .nav-navbar{
     background-color:white;
     /* background-color:red; */
@@ -27,6 +31,7 @@
     z-index: 5;
     flex: 1;
     cursor: pointer;
+    text-decoration: none;
     /* background-color: #ddddcc; */
 }
 .nav-instibuzz-logo{
@@ -83,10 +88,14 @@
     padding: 8px;
     font-size: 20px;
     color:#40210b;
+    border: 0;
+    background-color: white;
 }
 
 .nav-navbar .nav-top-right .fa-bars{
     visibility: collapse;
+    border: 0;
+    background-color: white;
 }
 
 .nav-navbar .nav-top-right .nav-contact-button:hover{
@@ -131,6 +140,11 @@
     display: none;
     /* z-index: 6; */
     z-index: inherit;
+}
+
+.nav-wish-logo{
+    border: 0;
+    background-color: white;
 }
 
 .nav-wish-logo:hover{

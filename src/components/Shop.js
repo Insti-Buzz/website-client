@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import LoadingPage from './LoadingPage';
 import Banner from '../assets/Shop-Banner.jpg'
 import mobileBanner from '../assets/Shop-mobile-banner.jpg'
+import { Helmet } from 'react-helmet';
 
 function Shop() {
     useEffect(() => {
@@ -96,18 +97,19 @@ function Shop() {
     function e(item, index) {
         const productId = item.product_id;
         return (
+
             <div className="shop-product-div">
                 <button
                     className="shop-product-card"
                     onClick={() => productPage(item.product_id, index)}
                 >
-                    <img src={item.imageUrl[0]} alt="Image " />
+                    <img src={item.imageUrl[0]} alt="Product" />
                     <div className="shop-product-name">
                         <h2>{item.name}</h2>
                     </div>
                     <hr />
                     <div className='shop-product-style'>
-                        <p>{(item.style == 'regular') ? "Regular T-Shirts" : "Oversized T-Shirts"}</p>
+                        <p>{(item.style === 'regular') ? "Regular T-Shirts" : "Oversized T-Shirts"}</p>
                     </div>
                     <div className="shop-product-price">
                         <h3>₹{item.price}</h3>
@@ -118,16 +120,44 @@ function Shop() {
     }
 
     return (
+        <>
+            <Helmet>
+                <meta name="title" content="Shop at InstiBuzz"/>
+                <meta name="description" content="At InstiBuzz, we celebrate the vibrant campus life by offering an exclusive
+                collection of T-shirts that feature Insti slang, taglines, and campus spirit
+                designs. We carefully select each piece in our collections, making sure that it
+                meets our high standards. Our T-shirts feel exceptional because they are
+                expertly crafted to fit well, last long and look great. Shop today and experience
+                the campus spirit." />
+                <meta name="keywords" content="InstiBuzz, instibuzz, IIT Madras, College Fashion, College Culture" />
+                <meta charset="utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <meta name="theme-color" content="#000000" />
+                <meta name="robots" content="all"/>
+                
+                <meta name="og:site_name" content="InstiBuzz"/>
+                <meta name="og:title" content="Shop at InstiBuzz"/>
+                <meta name="og:description" content="At InstiBuzz, we celebrate the vibrant campus life by offering an exclusive
+                collection of T-shirts that feature Insti slang, taglines, and campus spirit
+                designs. We carefully select each piece in our collections, making sure that it
+                meets our high standards. Our T-shirts feel exceptional because they are
+                expertly crafted to fit well, last long and look great. Shop today and experience
+                the campus spirit."/>
+                <meta name="og:url" content="https://www.instibuzz.com/shop" />
+                <meta name="og:image" content="%PUBLIC_URL%/logo192.png"/>
+                <meta name="og:image:alt" content="Official logo of InstiBuzz Pvt Ltd."/>
+                <meta name="author" content="instibuzz" />        
+            </Helmet>
         <div className='shop'>
             {
                 loading ? <LoadingPage /> :
                     <div>
                         <div className="shop-page-info">
                             <div className="shop-page-banner">
-                                <img src={Banner} />
+                                <img src={Banner} alt='Banner for advertising on Shop page' />
                             </div>
                             <div className="shop-page-banner-mobile">
-                                <img src={mobileBanner} />
+                                <img src={mobileBanner} alt='Banner for advertsing on Shop page'/>
                             </div>
                         </div>
                         <div className="shop-navigation-container">
@@ -143,30 +173,30 @@ function Shop() {
                                     <p>Filter</p>
                                     <div className="shop-clear-all" onClick={handleClearFilterClick}>Clear</div>
                                 </div>
-                                <div className="filter-bar"> */}
+                            <div className="filter-bar"> */}
                             {/* <div className="size-filter">
                             <h3>SIZE</h3>
                             <div className="s-filter sz-fil">S
                                 <Button filterBy="size" value="S" handleClick={handleButtonClick} active={sizeFilter === 'S'} />
                             </div>
                             <div className="m-filter sz-fil">M
-                                <Button filterBy="size" value="M" handleClick={handleButtonClick} active={sizeFilter === 'M'} />
+                            <Button filterBy="size" value="M" handleClick={handleButtonClick} active={sizeFilter === 'M'} />
                             </div>
                             <div className="l-filter sz-fil">L
                                 <Button filterBy="size" value="L" handleClick={handleButtonClick} active={sizeFilter === 'L'} />
                             </div>
                             <div className="xl-filter sz-fil">XL
                                 <Button filterBy="size" value="XL" handleClick={handleButtonClick} active={sizeFilter === 'XL'} />
-                            </div>
-                            <div className="xxl-filter sz-fil">XXL
+                                </div>
+                                <div className="xxl-filter sz-fil">XXL
                                 <Button filterBy="size" value="XXL" handleClick={handleButtonClick} active={sizeFilter === 'XXL'} />
-                            </div>
+                                </div>
 
-                        </div> */}
+                            </div> */}
                             {/* <div className="style-filter">
                                         <h3>STYLE</h3>
                                         <div className="normal-filter sty-fil">Regular
-                                            <Button filterBy="style" value="regular" handleClick={handleButtonClick} active={styleFilter === 'regular'} />
+                                        <Button filterBy="style" value="regular" handleClick={handleButtonClick} active={styleFilter === 'regular'} />
                                         </div>
                                         <div className="oversized-filter sty-fil">OverSized
                                             <Button filterBy="style" value="oversized" handleClick={handleButtonClick} active={styleFilter === 'oversized'} />
@@ -180,6 +210,7 @@ function Shop() {
                     </div>
             }
         </div>
+</>
 
 
     )
