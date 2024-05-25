@@ -54,7 +54,9 @@ function Address() {
         const response = await fetch(`https://api.postalpincode.in/pincode/${pinCode}`);
         const data = await response.json();
 
-        if (data[0].Message === "No records found") {
+        console.log(data);
+
+        if (data[0].Status === "Error" || data[0].Status === '404') {
             alert("Enter a valid pin code")
         } else {
             const district = data[0].PostOffice[0].District;
@@ -115,11 +117,11 @@ function Address() {
                             <div class="address-form">
                                 <h3>ADDRESS</h3>
                                 <form>
-                                    <input type="text" placeholder="Address line 1*" name="address_line1" onChange={(e) => setAddress1(e.target.value)} required></input>
-                                    <input type="text" placeholder="Address line 2*" name="address_line2" onChange={(e) => setAddress2(e.target.value)} required></input>
-                                    <input type="text" placeholder="Pin Code*" name="pin_code" onBlur={setDeliveryCharges} onChange={(e) => setPinCode(e.target.value)} required></input>
-                                    <input type="text" placeholder="City*" name="city" onChange={(e) => setCity(e.target.value)} required></input>
-                                    <input type="text" placeholder="State*" name="state" onChange={(e) => setState(e.target.value)} required></input>
+                                    <input autoComplete="disabled" type="text" placeholder="Address line 1*" name="address_line1" onChange={(e) => setAddress1(e.target.value)} required></input>
+                                    <input autoComplete="disabled" type="text" placeholder="Address line 2*" name="address_line2" onChange={(e) => setAddress2(e.target.value)} required></input>
+                                    <input autoComplete="disabled" type="text" placeholder="Pin Code*" name="pin_code" onBlur={setDeliveryCharges} onChange={(e) => setPinCode(e.target.value)} required></input>
+                                    <input autoComplete="disabled" type="text" placeholder="City*" name="city" onChange={(e) => setCity(e.target.value)} required></input>
+                                    <input autoComplete="disabled" type="text" placeholder="State*" name="state" onChange={(e) => setState(e.target.value)} required></input>
                                     {/* <button class="cart-order-btn" onClick={toPaymentPage}>
                                         DELIVER TO THIS ADDRESS
                                     </button> */}
