@@ -1,6 +1,7 @@
 import '../css/Home.css'
 // import LatestArrivals from './LatestArrivals';
 import { useRef, useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
 
 // import '../css/Carousel.css';
 import CoverImg1 from '../assets/red wall intense-min-min.jpg';
@@ -109,6 +110,34 @@ function Home() {
   return (
 
     <>
+      <Helmet>
+        <meta name="title" content="InstiBuzz : The all-in-one Campus Brand"/>
+        <meta name="description" content="At InstiBuzz, we celebrate the vibrant campus life by offering an exclusive
+        collection of T-shirts that feature Insti slang, taglines, and campus spirit
+        designs. We carefully select each piece in our collections, making sure that it
+        meets our high standards. Our T-shirts feel exceptional because they are
+        expertly crafted to fit well, last long and look great. Shop today and experience
+        the campus spirit." />
+        <meta name="keywords" content="InstiBuzz, instibuzz, IIT Madras, College Fashion, College Culture" />
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="robots" content="all"/>
+        
+        <meta name="og:site_name" content="InstiBuzz"/>
+        <meta name="og:title" content="Welcome to InstiBuzz: The one-stop-shop Campus Brand"/>
+        <meta name="og:description" content="At InstiBuzz, we celebrate the vibrant campus life by offering an exclusive
+        collection of T-shirts that feature Insti slang, taglines, and campus spirit
+        designs. We carefully select each piece in our collections, making sure that it
+        meets our high standards. Our T-shirts feel exceptional because they are
+        expertly crafted to fit well, last long and look great. Shop today and experience
+        the campus spirit."/>
+        <meta name="og:url" content="https://www.instibuzz.com" />
+        <meta name="og:image" content="%PUBLIC_URL%/logo192.png"/>
+        <meta name="og:image:alt" content="Official logo of InstiBuzz Pvt Ltd."/>
+        <meta name="author" content="instibuzz" />        
+      </Helmet>
+
       <div className="home-top">
         <div className="home-top-carousal">
           <div className="home-carousel-container">
@@ -119,7 +148,7 @@ function Home() {
                 <img
                   key={index}
                   src={img}
-                  alt={index}
+                  alt="Models styling InstiBuzz Tees"
                   style={{
                     zIndex: coverImgArray.length - position,
                     transform: `translateX(${100 * position}%)`,
@@ -160,10 +189,10 @@ function Home() {
         </div>
 
         <div className="home-banner">
-          <img src={Banner} alt='Banner for Home page'/>
+          <img src={Banner} alt='Banner for Home page for advertising' className='home-banner-image'/>
         </div>
         <div class="home-banner-mobile">
-          <img src={mobileBanner} alt='Banner for Home page'/>
+          <img src={mobileBanner} alt='Banner for advertising'/>
         </div>
 
         {/* <div className="home-bottom-container-two">
@@ -186,7 +215,7 @@ function Home() {
                 i.e. Manufacturing, we uphold our unwavering dedication to quality.
                 We meticulously source materials from esteemed....  </p>
               <div className="home-service-one-button-container">
-                <div onClick={toOurServices} className="home-service-one-button">Know more</div>
+                <a href='/ourServices' className="home-service-one-button">Know more</a>
               </div>
             </div>
             <div className="home-filler-div-one">
@@ -198,7 +227,7 @@ function Home() {
                 At InstiBuzz, our products go beyond mere fashion - they embody the
                 vibrant essence ... </p>
               <div className="home-service-two-button-container">
-                <div onClick={toOurServices} className="home-service-two-button">Know more</div>
+                <a href="/ourServices" className="home-service-two-button">Know more</a>
               </div>
             </div>
           </div>
@@ -209,7 +238,7 @@ function Home() {
                 Our website is a dynamic platform that captures the essence of
                 college life. By seamlessly integrating different clubs and organizations.. </p>
               <div className="home-service-three-button-container">
-                <div onClick={toOurServices} className="home-service-three-button">Know more</div>
+                <a href="/ourServices" className="home-service-three-button">Know more</a>
               </div>
             </div>
             <div className="home-service-four">
@@ -218,14 +247,14 @@ function Home() {
                 and societies by helping them market their events. This involves
                 leveraging our website and social media platforms to... </p>
               <div className="home-service-four-button-container">
-                <div onClick={toOurServices} className="home-service-four-button">Know more</div>
+                <a href="/ourServices" className="home-service-four-button">Know more</a>
               </div>
             </div>
             <div className="home-filler-div-two">
               <i className="fa fa-snowflake-o" aria-hidden="true"></i>
             </div>
             <div className="home-service-button-container">
-                <div onClick={toOurServices} className="home-service-button">Know more</div>
+                <a href="/ourServices" className="home-service-button">Know more</a>
             </div>
             
 
@@ -242,7 +271,7 @@ function Home() {
 <br/> <br/>We are always looking for people to join us in this fun and creative journey of elevating campus fashion. If you think you will fit just right in, apply right away!</p>
             {/* <p className="home-four-container-text">This is the space to tell people what it's like to work with the business. Describe the team's culture and why people enjoy being a part of it.</p> */}
             <div className="bottom-container-four-button-container">
-                <div className="collaborate-button" on onClick={toCollab}>View Details</div>
+                <a className="collaborate-button" href='/collab'>View Details</a>
             </div>
             {/* <div className="home-four-container-cards-container">
               <div className="home-fccc-card">

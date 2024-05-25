@@ -11,6 +11,11 @@
     align-items: center;
 }
 
+.horizontal-rule{
+    /* color: black; */
+    background-color: black;
+}
+
 .footer-content .footer-phone {
     margin-bottom: 15px;
 }
@@ -45,7 +50,7 @@
 }
 
 .footer .footer-contact a {
-    font-size: 24px;
+    font-size: 30px;
     color: inherit;  
     border: 1px solid #ccc;
     width: 40px;
@@ -60,6 +65,18 @@
 
 .footer .footer-contact a:hover {
     opacity: 0.9;
+}
+
+.footer-social a{
+    transition: 300ms transform;
+    /* border-color:black ; */
+}
+
+.footer-social a:hover{
+    transform: rotateZ(-10deg) rotateX(10deg);
+    scale: 1.07;
+    /* transition: 300ms; */
+
 }
 
 .footer ul {

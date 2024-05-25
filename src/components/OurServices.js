@@ -5,6 +5,7 @@ import manufactureImg from '../assets/Manufacturer.jpg'
 import designImg from '../assets/Desigining.jpg'
 import salesImg from '../assets/Sales.jpg'
 import visibilityImg from '../assets/Visibility.jpg'
+import { Helmet } from 'react-helmet';
 
 function OurServices() {
   useEffect(() => {
@@ -23,7 +24,24 @@ function OurServices() {
   const navigate = useNavigate();
 
   return (
-  
+    <>
+      <Helmet>
+        <meta name="title" content="Our Services"/>
+        <meta name="description" content="At InstiBuzz, our commitment extends beyond the mere creation of the final product; we deeply value the entire journey from conceptualization to delivery, ensuring excellence in every step." />
+        <meta name="keywords" content="InstiBuzz, instibuzz, IIT Madras, College Fashion, College Culture" />
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="robots" content="all"/>
+        
+        <meta name="og:site_name" content="InstiBuzz"/>
+        <meta name="og:title" content="Our Services Page"/>
+        <meta name="og:description" content="At InstiBuzz, our commitment extends beyond the mere creation of the final product; we deeply value the entire journey from conceptualization to delivery, ensuring excellence in every step."/>
+        <meta name="og:url" content="https://www.instibuzz.com/ourServices" />
+        <meta name="og:image" content="%PUBLIC_URL%/logo192.png"/>
+        <meta name="og:image:alt" content="Official logo of InstiBuzz Pvt Ltd."/>
+        <meta name="author" content="instibuzz" />        
+      </Helmet>
     <div class="services-main-container">
       <div class="services-title">
         <h1>Our Services</h1>
@@ -39,7 +57,7 @@ function OurServices() {
         <h2 id="services-manufacturing">Manufacturing</h2>
         <div class="services-our-service-container">
           <div class="services-our-service-image-container">
-            <img src={manufactureImg} alt="" />
+            <img src={manufactureImg} alt="Picture of a stitching machine" />
           </div>
           <div class="services-our-service-content">
             <div class="services-our-service-text">
@@ -68,7 +86,7 @@ function OurServices() {
         <h2 id="services-design">Design</h2>
         <div class="services-our-service-container">
           <div class="services-our-service-image-container">
-            <img src={designImg} alt="" />
+            <img src={designImg} alt="Picture depicting the creation of design " />
           </div>
           <div class="services-our-service-content">
             <div class="services-our-service-text">
@@ -95,7 +113,7 @@ function OurServices() {
         <h2 id="services-sales">Sales</h2>
         <div class="services-our-service-container">
           <div class="services-our-service-image-container">
-            <img src={salesImg} alt="" />
+            <img src={salesImg} alt="Clipart depicting progress and growth" />
           </div>
           <div class="services-our-service-content">
             <div class="services-our-service-text">
@@ -122,7 +140,7 @@ function OurServices() {
         <h2 id="services-visibility">Visibility</h2>
         <div class="services-our-service-container">
           <div class="services-our-service-image-container">
-            <img src={visibilityImg} alt="" />
+            <img src={visibilityImg} alt="Clipart depicting the use of social media to reach out to a large number of audience" />
           </div>
           <div class="services-our-service-content">
             <div class="services-our-service-text">
@@ -143,6 +161,7 @@ function OurServices() {
         <button className="contact-btn" onClick={() => {navigate('/ticket')}}>Contact Us</button>
       </div>
     </div>
+  </>
   );
 }
 
