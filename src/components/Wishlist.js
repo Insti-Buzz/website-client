@@ -80,7 +80,7 @@ function Wishlist() {
     }
 
     return (
-        <div class="wishlist-main-container">
+        <div>
             {loading ? <LoadingPage /> :
                 <div class="wishlist-main-container">
                     <h1>Wishlist</h1>
