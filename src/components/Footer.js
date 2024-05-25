@@ -72,7 +72,7 @@ function Footer() {
             </div>
             <div class="footer-social">
               <a rel="noreferrer" href="https://wa.me/9944487273" target="_blank">
-                <i className="fa fa-whatsapp" aria-hidden="true"  style={{color:"green"}}></i>
+                <i className="fa fa-whatsapp" aria-hidden="true"></i>
               </a>
               <a rel="noreferrer" href="https://www.instagram.com/insti_buzz/" target="_blank">
                 <i className="fa fa-instagram"></i>
@@ -83,7 +83,7 @@ function Footer() {
                 target="_blank"
                 // style={{backgroundColor:"skyblue"}}
               >
-                <i className="fa fa-linkedin" style={{color:"#0676a8"}}></i>
+                <i className="fa fa-linkedin"></i>
               </a>
               <a href="mailto:instibuzziitm@gmail.com">
                 <i className="fa fa-envelope-o" aria-hidden="true"></i>

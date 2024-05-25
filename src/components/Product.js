@@ -89,7 +89,7 @@ const Product = () => {
       localStorage.removeItem("userEmail");
       navigate("/");
       window.location.reload();
-    } 
+    }
 
     const wishlist = result.products;
     const wishlistId = wishlist.map((product) => {
@@ -154,7 +154,7 @@ const Product = () => {
         localStorage.removeItem("userEmail");
         navigate("/");
         window.location.reload();
-      } 
+      }
     } else {
       alert('Login to add products to wishlist');
     }
@@ -235,147 +235,149 @@ const Product = () => {
   }
 
   return (
-    <div className="product-main-container">
+    <div>
       {
-        loading?<LoadingPage/>:
-      <div>
-      <div className="product-image-container">
-        <img src={selectedImage} alt="Image" className="product-display-img" />
-        <div className="product-all-images">{imageUrl.map(imageButton)}</div>
-      </div>
-      <div className="product-product-description">
-        <div className="product-product-name">
-          <h2>{name}</h2>
-          <i class={isWishlisted ? "fa fa-heart" : "fa fa-heart-o"} onClick={toggleWishlist}></i>
-        </div>
-        <div className="product-product-price">
-          <h3>₹{price}</h3>
-        </div>
-        <div className="product-product-size">
-          <p>Select Size</p>
-        </div>
-        <div className="product-size-input-container">
-          <label>
-            <input
-              type="radio"
-              name="radios"
-              value="S"
-              id="S"
-              onClick={(e) => {
-                changeButton(e.target.value);
-              }}
-            />
-            <span>S</span>
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="radios"
-              value="M"
-              id="M"
-              onClick={(e) => {
-                changeButton(e.target.value);
-              }}
-            />
-            <span>M</span>
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="radios"
-              value="L"
-              id="L"
-              onClick={(e) => {
-                changeButton(e.target.value);
-              }}
-            />
-            <span>L</span>
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="radios"
-              value="XL"
-              id="XL"
-              onClick={(e) => {
-                changeButton(e.target.value);
-              }}
-            />
-            <span>XL</span>
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="radios"
-              value="2XL"
-              id="2XL"
-              onClick={(e) => {
-                changeButton(e.target.value);
-              }}
-            />
-            <span>2XL</span>
-          </label>
-        </div>
-        <div className="product-product-quantity">
-          <p>Quantity</p>
-          <input
-            type="number"
-            name="product-quantity"
-            id="product-quantity"
-            value={quantity}
-            min="1"
-            max="5"
-            onChange={(e) => {
-              setQuantity(e.target.value);
-            }}
-          />
-        </div>
-        {isLogin ? (
-          isCart ? (
-            <button onClick={toCart} className="product-btn">
-              Go to Cart
-            </button>
-          ) : (
-            <button className="product-btn" onClick={addToCart}>
-              Add to Cart
-            </button>
-          )
-        ) : (
-          <>
-            <button onClick={toLogin} className="product-btn">
-              Login to Proceed
-            </button>
-          </>
-        )}
+        loading ? <LoadingPage /> :
+          <div className="product-main-container">
+            <div className="product-image-container">
+              <img src={selectedImage} alt="Image" className="product-display-img" />
+              <div className="product-all-images">{imageUrl.map(imageButton)}</div>
+            </div>
+            <div className="product-product-description">
+              <div className="product-product-name">
+                <h2>{name}</h2>
+                <i class={isWishlisted ? "fa fa-heart" : "fa fa-heart-o"} onClick={toggleWishlist}></i>
+              </div>
+              <div className="product-product-price">
+                <h3>₹{price}</h3>
+              </div>
+              <div className="product-product-size">
+                <p>Select Size</p>
+              </div>
+              <div className="product-size-input-container">
+                <label>
+                  <input
+                    type="radio"
+                    name="radios"
+                    value="S"
+                    id="S"
+                    onClick={(e) => {
+                      changeButton(e.target.value);
+                    }}
+                  />
+                  <span>S</span>
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="radios"
+                    value="M"
+                    id="M"
+                    onClick={(e) => {
+                      changeButton(e.target.value);
+                    }}
+                  />
+                  <span>M</span>
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="radios"
+                    value="L"
+                    id="L"
+                    onClick={(e) => {
+                      changeButton(e.target.value);
+                    }}
+                  />
+                  <span>L</span>
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="radios"
+                    value="XL"
+                    id="XL"
+                    onClick={(e) => {
+                      changeButton(e.target.value);
+                    }}
+                  />
+                  <span>XL</span>
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="radios"
+                    value="2XL"
+                    id="2XL"
+                    onClick={(e) => {
+                      changeButton(e.target.value);
+                    }}
+                  />
+                  <span>2XL</span>
+                </label>
+              </div>
+              <div className="product-product-quantity">
+                <p>Quantity</p>
+                <input
+                  type="number"
+                  name="product-quantity"
+                  id="product-quantity"
+                  value={quantity}
+                  min="1"
+                  max="5"
+                  onChange={(e) => {
+                    setQuantity(e.target.value);
+                  }}
+                />
+              </div>
+              {isLogin ? (
+                isCart ? (
+                  <button onClick={toCart} className="product-btn">
+                    Go to Cart
+                  </button>
+                ) : (
+                  <button className="product-btn" onClick={addToCart}>
+                    Add to Cart
+                  </button>
+                )
+              ) : (
+                <>
+                  <button onClick={toLogin} className="product-btn">
+                    Login to Proceed
+                  </button>
+                </>
+              )}
 
-        {isAdmin ? (
-          <button onClick={toUpdate} class="product-btn">
-            Update product
-          </button>
-        ) : (
-          <></>
-        )}
-        <div className="product-product-details product-product-info">
-          <h4>PRODUCT DESCRIPTION</h4>
-          <p>{details}</p>
-        </div>
-        <hr />
-        <div className="product-product-details product-shipping-policy">
-          <h4>SHIPPING POLICY</h4>
-          <p>
-            Your product will be delivered within 15 days of placing the order.
-          </p>
-        </div>
-        <hr />
-        <div className="product-product-details product-return-refund-policy">
-          <h4>EXCHANGE POLICY</h4>
-          <p>Easy exchange up to 7 days of delivery.</p>
-        </div>
-        <hr />
-      </div>
-      </div>
+              {isAdmin ? (
+                <button onClick={toUpdate} class="product-btn">
+                  Update product
+                </button>
+              ) : (
+                <></>
+              )}
+              <div className="product-product-details product-product-info">
+                <h4>PRODUCT DESCRIPTION</h4>
+                <p>{details}</p>
+              </div>
+              <hr />
+              <div className="product-product-details product-shipping-policy">
+                <h4>SHIPPING POLICY</h4>
+                <p>
+                  Your product will be delivered within 15 days of placing the order.
+                </p>
+              </div>
+              <hr />
+              <div className="product-product-details product-return-refund-policy">
+                <h4>EXCHANGE POLICY</h4>
+                <p>Easy exchange up to 7 days of delivery.</p>
+              </div>
+              <hr />
+            </div>
+          </div>
+
       }
     </div>
+
   );
 };
 
