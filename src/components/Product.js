@@ -64,6 +64,7 @@ const Product = () => {
   };
 
   const isProductWishlisted = async () => {
+    setLoading(true)
     const email = localStorage.getItem("userEmail");
     const token = localStorage.getItem("token");
 
@@ -83,6 +84,13 @@ const Product = () => {
 
     result = await result.json();
 
+    if (result.status == 404) {
+      alert(result.message);
+      localStorage.removeItem("userEmail");
+      navigate("/");
+      window.location.reload();
+    } 
+
     const wishlist = result.products;
     const wishlistId = wishlist.map((product) => {
       return product.product_id;
@@ -92,6 +100,7 @@ const Product = () => {
     if (wishlistId.includes(productId)) {
       setIsWishlisted(true);
     }
+    setLoading(false)
   }
 
   const getProductDetails = async () => {
@@ -118,6 +127,7 @@ const Product = () => {
   };
 
   const toggleWishlist = async () => {
+    setLoading(true)
     if (isLogin) {
       let email = localStorage.getItem("userEmail");
       let token = localStorage.getItem("token");
@@ -138,6 +148,13 @@ const Product = () => {
       );
 
       result = await result.json();
+      setLoading(false)
+      if (result.status == 404) {
+        alert(result.message);
+        localStorage.removeItem("userEmail");
+        navigate("/");
+        window.location.reload();
+      } 
     } else {
       alert('Login to add products to wishlist');
     }
@@ -219,6 +236,9 @@ const Product = () => {
 
   return (
     <div className="product-main-container">
+      {
+        loading?<LoadingPage/>:
+      <div>
       <div className="product-image-container">
         <img src={selectedImage} alt="Image" className="product-display-img" />
         <div className="product-all-images">{imageUrl.map(imageButton)}</div>
@@ -353,6 +373,8 @@ const Product = () => {
         </div>
         <hr />
       </div>
+      </div>
+      }
     </div>
   );
 };

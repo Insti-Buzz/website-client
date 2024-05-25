@@ -309,6 +309,7 @@ function Cart() {
     const paymentHandler = async (e) => {
         const token = localStorage.getItem('token')
         setShowPayment(false)
+        const isHomeDelivery=false
         const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/payment/order`, {
 
             method: "POST",
@@ -316,6 +317,7 @@ function Cart() {
                 email,
                 amount,
                 currency,
+                isHomeDelivery,
                 receipt: receiptId,
             }),
             headers: {
@@ -515,7 +517,9 @@ function Cart() {
                                     </div>
                                     <button
                                         class="cart-order-btn"
-                                        onClick={() => {
+                                        onClick={
+                                            delivery === "pickup" ?proceedPayment:
+                                            () => {
                                             navigate("/address", {
                                                 state: {
                                                     mrp: calculateMrp(),
@@ -523,8 +527,10 @@ function Cart() {
                                                 }
                                             });
                                         }}
-                                    >
-                                        PLACE ORDER
+                                    >{
+                                        delivery === "pickup" ?"PLACE ORDER":"CONTINUE"
+                                    }
+                                        
                                     </button>
                                 </div>
 

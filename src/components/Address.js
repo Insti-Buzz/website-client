@@ -26,11 +26,14 @@ function Address() {
     const [address1, setAddress1] = useState('');
     const [address2, setAddress2] = useState('');
     const [pinCode, setPinCode] = useState('');
+    const [validPin, setValidPin] = useState(true)
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [loading, setLoading] = useState(false);
     const [deliveryCharge, setDeliveryCharge] = useState(0);
     const [paymentMethod, setPaymentMethod] = useState("COD");
+    const [error, setError] = React.useState(false);
+
 
     const totalMrp = location.state.mrp;
     const noOfProducts = location.state.noOfProducts
@@ -54,9 +57,11 @@ function Address() {
         const response = await fetch(`https://api.postalpincode.in/pincode/${pinCode}`);
         const data = await response.json();
 
-        if (data[0].Message === "No records found") {
+        if (data[0].Status === "Error" || data[0].Status === "404") {
+            setValidPin(false)
             alert("Enter a valid pin code")
         } else {
+            setValidPin(true)
             const district = data[0].PostOffice[0].District;
 
             if (pinCode === "600036") {
@@ -106,6 +111,173 @@ function Address() {
         setPaymentMethod(event.target.value);
     }
 
+    const closePayment = () => {
+        setShowPayment(false)
+    }
+
+    const proceedPayment = () => {
+        const subtotal = calculateSubtotal()
+        setTotalAmount(subtotal)
+
+        if (!address1 || !address2 || !pinCode || !city || !state) {
+            setError(true);
+            return false;
+            throw new Error("Enter Details");
+        }
+        if (!validPin) {
+            alert("Please Enter Valid PinCode")
+            return false;
+        }
+        setShowPayment(true)
+
+    }
+
+    const confirmOrder = async () => {
+        setLoading(true);
+        const email = localStorage.getItem("userEmail");
+        const token = localStorage.getItem("token");
+        const isHomeDelivery = true;
+        const response = await fetch(
+            `${process.env.REACT_APP_server_url}/api/v1/payment/confirm`,
+            {
+                method: "POST",
+                body: JSON.stringify({
+                    email,
+                    products,
+                    totalAmount,
+                    isHomeDelivery,
+                    address1,
+                    address2,
+                    pinCode,
+                    city,
+                    state
+                    // quantity,
+                    // selectedSize
+                }),
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
+        // console.log(response.body);
+        setLoading(false);
+        if (response.status == 404) {
+            alert(response.message)
+            localStorage.removeItem("userEmail")
+            navigate('/')
+            window.location.reload();
+        } else {
+            alert('Your order is Placed Successfully')
+            // window.location.reload();
+            navigate('/orders')
+        }
+    };
+
+    const amount = calculateSubtotal() * 100;
+    const currency = "INR";
+    const receiptId = "qwsaq1";
+    const paymentHandler = async (e) => {
+        setLoading(true)
+        const token = localStorage.getItem('token')
+        const isHomeDelivery = true
+        setShowPayment(false)
+        const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/payment/order`, {
+
+            method: "POST",
+            body: JSON.stringify({
+                email,
+                amount,
+                currency,
+                receipt: receiptId,
+                isHomeDelivery,
+                address1,
+                address2,
+                pinCode,
+                city,
+                state
+            }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        const order = await response.json();
+        if (order.status == 404) {
+            alert(order.message)
+            localStorage.removeItem("userEmail")
+            navigate('/')
+            window.location.reload();
+        }
+        // console.log(order);
+
+        var options = {
+            key: "rzp_live_4KDT1L43T3GoOI", // Enter the Key ID generated from the Dashboard
+            amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            currency,
+            name: "InstiBuzz", //your business name
+            description: "Transaction",
+            image: InstiBuzzLogo,
+            order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            callback_url: "https://eneqd3r9zrjok.x.pipedream.net/",
+            handler: async function (response) {
+                const body = {
+                    ...response,
+                    email,
+                    totalAmount
+                };
+
+                const validateRes = await fetch(
+                    `${process.env.REACT_APP_server_url}/api/v1/payment/order/validate`,
+                    {
+                        method: "POST",
+                        body: JSON.stringify(body),
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    }
+                );
+                const jsonRes = await validateRes.json();
+                // console.log(jsonRes);
+                // console.log(jsonRes.status);
+                // console.log(jsonRes.msg);
+                // console.log(jsonRes.razorpay_order_id);
+                // console.log(jsonRes.razorpay_payment_id);
+                if (jsonRes.status == 404) {
+                    alert('Failed')
+                } else {
+                    alert('Your order is Placed Successfully')
+                    // window.location.reload();
+                    navigate('/orders')
+                }
+            },
+            prefill: {
+                //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
+                name: name, //your customer's name
+                email: email,
+                contact: phone, //Provide the customer's phone number for better conversion rates
+            },
+            notes: {
+                address: "Razorpay Corporate Office",
+            },
+            theme: {
+                color: "#3399cc",
+            },
+        };
+        var rzp1 = new window.Razorpay(options);
+        rzp1.on("payment.failed", function (response) {
+            // alert(response.error.code);
+            alert(response.error.description);
+            // alert(response.error.source);
+            // alert(response.error.step);
+            alert(response.error.reason);
+            // alert(response.error.metadata.order_id);
+            // alert(response.error.metadata.payment_id);
+        });
+        setLoading(false)
+        rzp1.open();
+        e.preventDefault();
+    };
+
     return (
         <div>
             {
@@ -115,25 +287,25 @@ function Address() {
                             <div class="address-form">
                                 <h3>ADDRESS</h3>
                                 <form>
-                                    <input type="text" placeholder="Address line 1*" name="address_line1" onChange={(e) => setAddress1(e.target.value)} required></input>
-                                    <input type="text" placeholder="Address line 2*" name="address_line2" onChange={(e) => setAddress2(e.target.value)} required></input>
-                                    <input type="text" placeholder="Pin Code*" name="pin_code" onBlur={setDeliveryCharges} onChange={(e) => setPinCode(e.target.value)} required></input>
-                                    <input type="text" placeholder="City*" name="city" onChange={(e) => setCity(e.target.value)} required></input>
-                                    <input type="text" placeholder="State*" name="state" onChange={(e) => setState(e.target.value)} required></input>
+                                    <input id={error && !address1 && "input-error"}autoComplete="disabled" type="text" placeholder="Address line 1*" name="address_line1" onChange={(e) => setAddress1(e.target.value)} required></input>
+                                    <input id={error && !address2 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 2*" name="address_line2" onChange={(e) => setAddress2(e.target.value)} required></input>
+                                    <input id={error && !pinCode && "input-error"} autoComplete="disabled" type="text" placeholder="Pin Code*" name="pin_code" onBlur={setDeliveryCharges} onChange={(e) => setPinCode(e.target.value)} required></input>
+                                    <input id={error && !city && "input-error"} autoComplete="disabled" type="text" placeholder="City*" name="city" onChange={(e) => setCity(e.target.value)} required></input>
+                                    <input id={error && !state && "input-error"} autoComplete="disabled" type="text" placeholder="State*" name="state" onChange={(e) => setState(e.target.value)} required></input>
                                     {/* <button class="cart-order-btn" onClick={toPaymentPage}>
                                         DELIVER TO THIS ADDRESS
                                     </button> */}
                                 </form>
                             </div>
                             <div class="checkout-order-summary">
-                                <div class="checkout-delivery-method">
+                                {/* <div class="checkout-delivery-method">
                                     <h3>PAYMENT METHOD</h3>
                                     <RadioButtonGroup
                                         selectedOption={paymentMethod}
                                         handleChange={handleChange}
                                     />
-                                </div>
-                                <hr />
+                                </div> */}
+                                {/* <hr /> */}
                                 <div class="checkout-price-details">
                                     <h3>
                                         PRICE DETAILS ({noOfProducts}{" "}
@@ -161,10 +333,26 @@ function Address() {
                                 </div>
                                 <button
                                     class="cart-order-btn"
-                                    // onClick={(paymentMethod === "COD") ? placeOrder : proceedPayment}
+                                    onClick={proceedPayment}
                                 >
                                     {(paymentMethod === "COD") ? "PLACE ORDER" : "PROCEED TO PAYMENT"}
                                 </button>
+
+                                {showPayment && (
+                                    <div className="cart-popup">
+                                        {/* <i className='fa fa-times' aria-hidden='true' onClick={setShowPayment(false)}></i> */}
+                                        <IconButton onClick={() => closePayment()}>
+                                            <CloseIcon />
+                                        </IconButton>
+                                        <h1>Confirm Your Order?</h1>
+                                        <div className="cart-popup-content">
+                                            <button onClick={confirmOrder}>Cash On Delivery</button>
+                                            {/* <button onClick={cancelOrder}>No</button> */}
+                                            <button onClick={paymentHandler}>Pay Now</button>
+                                        </div>
+                                    </div>
+                                )}
+
                             </div>
                         </div>
                     </div>

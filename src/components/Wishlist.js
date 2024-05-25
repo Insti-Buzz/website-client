@@ -1,17 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../css/Wishlist.css';
+import LoadingPage from "./LoadingPage";
 
 function Wishlist() {
     const [wishlistedProducts, setWishlistedProducts] = useState([]);
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         getWishlistedProducts();
+        const email = localStorage.getItem("userEmail");
+        const token = localStorage.getItem("token");
+        if (!email || !token) {
+            alert("Please Login");
+            navigate("/");
+        }
     }, []);
 
     const navigate = useNavigate();
 
     const getWishlistedProducts = async () => {
+        setLoading(true)
         const email = localStorage.getItem("userEmail");
         const token = localStorage.getItem("token");
 
@@ -30,8 +39,16 @@ function Wishlist() {
         );
 
         result = await result.json();
+        if (result.status == 404) {
+            alert(result.message);
+            localStorage.removeItem("userEmail");
+            navigate("/");
+            window.location.reload();
+        } else {
+            setWishlistedProducts(result.products);
+        }
 
-        setWishlistedProducts(result.products);
+        setLoading(false)
     }
 
     const productPage = async (productId, index) => {
@@ -64,15 +81,19 @@ function Wishlist() {
 
     return (
         <div class="wishlist-main-container">
-            <h1>Wishlist</h1>
-            {
-                (wishlistedProducts.length != 0)
-                    ?
-                    <div className="shop-products-display">
-                        {wishlistedProducts.map(e)}
-                    </div>
-                    :
-                    <div><h2>There are no items in your wishlist...</h2></div>
+            {loading ? <LoadingPage /> :
+                <div class="wishlist-main-container">
+                    <h1>Wishlist</h1>
+                    {
+                        (wishlistedProducts.length != 0)
+                            ?
+                            <div className="shop-products-display">
+                                {wishlistedProducts.map(e)}
+                            </div>
+                            :
+                            <div><h2>There are no items in your wishlist...</h2></div>
+                    }
+                </div>
             }
         </div>
     );

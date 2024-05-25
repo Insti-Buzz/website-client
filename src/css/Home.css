@@ -10,7 +10,7 @@
 .home-top-carousal {
     width: 100%;
     /* min-height: 62vw; */
-    height: 100vh;
+    /* height: 100vh; */
     background-color: white;
     position: relative;
     overflow: hidden;
