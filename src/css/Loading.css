@@ -2,14 +2,21 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 88.6vh;
-  /* background: #ffe280; */
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: white;
+  position: absolute;
+  z-index: 2;
 }
 
 .loading-cont .logo {
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  margin-top: min(-100px, -10vw);
+  margin-left: min(-100px, -10vw);
   width: max(100px, 10vw);
   animation: revolve 0.75s ease-in-out infinite;
 }

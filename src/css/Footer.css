@@ -27,8 +27,6 @@
 
 .footer .footer-contact {
     text-align: left;
-    /* padding-bottom: 25px; */
-    /* color: #4b4c4d; */
     padding: 25px;
 }
 
@@ -49,7 +47,7 @@
     font-size: 16px;
 }
 
-.footer .footer-contact a {
+.footer .footer-social a {
     font-size: 30px;
     color: inherit;  
     border: 1px solid #ccc;
@@ -63,7 +61,14 @@
     opacity: 0.75;
 }
 
-.footer .footer-contact a:hover {
+.footer-phone a {
+    margin-top: 16px;
+    font-size: 16px;
+    text-decoration: none;
+    color: black;
+}
+
+.footer .footer-social a:hover {
     opacity: 0.9;
 }
 

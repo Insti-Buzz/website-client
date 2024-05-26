@@ -66,9 +66,9 @@ function Footer() {
             <hr className="horizontal-rule" ></hr>
             <div class="footer-phone">
               <i class="fa fa-phone"></i>
-              <p style={{ display: "inline-block", marginLeft: "7px" }}>
+              <a href="tel:+919944487273" style={{ display: "inline-block", marginLeft: "7px" }}>
                 +91 99444 87273
-              </p>
+              </a>
             </div>
             <div class="footer-social">
               <a rel="noreferrer" href="https://wa.me/9944487273" target="_blank">
