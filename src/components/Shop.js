@@ -41,7 +41,9 @@ function Shop() {
             setOurProducts(result);
             // console.log(result)
         } catch (error) { }
-        setLoading(false)
+        setTimeout(() => {
+            setLoading(false)
+        }, 1000);
     };
 
 

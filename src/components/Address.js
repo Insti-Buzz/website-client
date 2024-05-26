@@ -161,7 +161,9 @@ function Address() {
             }
         );
         // console.log(response.body);
-        setLoading(false);
+        setTimeout(() => {
+            setLoading(false)
+        }, 1000);
         if (response.status == 404) {
             alert(response.message)
             localStorage.removeItem("userEmail")
@@ -273,7 +275,9 @@ function Address() {
             // alert(response.error.metadata.order_id);
             // alert(response.error.metadata.payment_id);
         });
-        setLoading(false)
+        setTimeout(() => {
+            setLoading(false)
+        }, 1000);
         rzp1.open();
         e.preventDefault();
     };

@@ -63,19 +63,21 @@ function Cart() {
         //     const updatedProducts = result.filter(item => item._id === localStorage.getItem(`product${item._id}`));
         //     setProducts(updatedProducts);
         // }
-        setLoading(false);
+        setTimeout(() => {
+            setLoading(false)
+        }, 1000);
         if (result.status == 404) {
             alert(result.message);
             localStorage.removeItem("userEmail");
             navigate("/");
-            window.location.reload();
+            // window.location.reload();
         } else {
             setProducts(result.products);
         }
     };
 
     const updateSize = async (id, e) => {
-        setLoading(true);
+        // setLoading(true);
         const email = localStorage.getItem(`userEmail`);
         const token = localStorage.getItem("token");
         const updatedSize = e.target.value;
@@ -93,7 +95,7 @@ function Cart() {
             },
         });
         const result = await response.json();
-        setLoading(false);
+        // setLoading(false);
         if (result.status == 404) {
             alert(result.message)
             localStorage.removeItem("userEmail")
@@ -103,7 +105,7 @@ function Cart() {
     };
 
     const updateQuantity = async (id, e) => {
-        setLoading(true);
+        // setLoading(true);
         const email = localStorage.getItem(`userEmail`);
         const token = localStorage.getItem("token");
         const updatedQuantity = e.target.value;
@@ -424,7 +426,9 @@ function Cart() {
             }
         );
         // console.log(response.body);
-        setLoading(false);
+        setTimeout(() => {
+            setLoading(false)
+        }, 1000);
         if (response.status == 404) {
             alert(response.message)
             localStorage.removeItem("userEmail")

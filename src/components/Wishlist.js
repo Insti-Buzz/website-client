@@ -48,7 +48,9 @@ function Wishlist() {
             setWishlistedProducts(result.products);
         }
 
-        setLoading(false)
+        setTimeout(() => {
+            setLoading(false)
+        }, 1000);
     }
 
     const productPage = async (productId, index) => {

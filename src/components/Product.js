@@ -100,7 +100,9 @@ const Product = () => {
     if (wishlistId.includes(productId)) {
       setIsWishlisted(true);
     }
-    setLoading(false)
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000);
   }
 
   const getProductDetails = async () => {
@@ -116,7 +118,9 @@ const Product = () => {
     );
 
     result = await result.json();
-    setLoading(false);
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000);
     setName(result.name);
     setPrice(result.price);
     // setSize(result.sizes)
@@ -127,7 +131,6 @@ const Product = () => {
   };
 
   const toggleWishlist = async () => {
-    setLoading(true)
     if (isLogin) {
       let email = localStorage.getItem("userEmail");
       let token = localStorage.getItem("token");
@@ -148,7 +151,6 @@ const Product = () => {
       );
 
       result = await result.json();
-      setLoading(false)
       if (result.status == 404) {
         alert(result.message);
         localStorage.removeItem("userEmail");
@@ -174,7 +176,6 @@ const Product = () => {
       alert("Please Login");
       navigate("./login");
     }
-    setLoading(true);
     let productId = params.id;
     // console.log(email)
     // console.log(productId)
@@ -191,7 +192,6 @@ const Product = () => {
     );
     result = await result.json();
     // console.log(result)
-    setLoading(false);
     if (result.status == 404) {
       alert(result.message);
       localStorage.removeItem("userEmail");

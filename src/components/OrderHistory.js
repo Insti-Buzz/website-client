@@ -37,7 +37,9 @@ function OrderHistory() {
     );
     result = await result.json();
     // console.log(result)
-    setLoading(false);
+    setTimeout(() => {
+      setLoading(false)
+  }, 1000);
     if (result.status == 404) {
       alert(result.message);
       localStorage.removeItem("userEmail");
