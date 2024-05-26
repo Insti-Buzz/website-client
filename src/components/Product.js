@@ -47,7 +47,7 @@ const Product = () => {
     if (sizesAvailable) {
       sizesAvailable.forEach((element) => {
         if (element.quantity === 0) {
-          document.getElementById(element.size).disabled = true;
+          document.getElementById(`${element.size}`).disabled = true;
         }
       });
     }
