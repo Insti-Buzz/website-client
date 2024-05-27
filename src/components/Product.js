@@ -47,7 +47,7 @@ const Product = () => {
     if (sizesAvailable) {
       sizesAvailable.forEach((element) => {
         if (element.quantity === 0) {
-          document.getElementById(`${element.size}`).disabled = true;
+          document.getElementById(element.size).disabled = true;
         }
       });
     }
@@ -100,9 +100,7 @@ const Product = () => {
     if (wishlistId.includes(productId)) {
       setIsWishlisted(true);
     }
-    setTimeout(() => {
-      setLoading(false)
-    }, 1000);
+    setLoading(false)
   }
 
   const getProductDetails = async () => {
@@ -118,9 +116,7 @@ const Product = () => {
     );
 
     result = await result.json();
-    setTimeout(() => {
-      setLoading(false)
-    }, 1000);
+    setLoading(false);
     setName(result.name);
     setPrice(result.price);
     // setSize(result.sizes)
@@ -131,6 +127,7 @@ const Product = () => {
   };
 
   const toggleWishlist = async () => {
+    setLoading(true)
     if (isLogin) {
       let email = localStorage.getItem("userEmail");
       let token = localStorage.getItem("token");
@@ -151,6 +148,7 @@ const Product = () => {
       );
 
       result = await result.json();
+      setLoading(false)
       if (result.status == 404) {
         alert(result.message);
         localStorage.removeItem("userEmail");
@@ -176,6 +174,7 @@ const Product = () => {
       alert("Please Login");
       navigate("./login");
     }
+    setLoading(true);
     let productId = params.id;
     // console.log(email)
     // console.log(productId)
@@ -192,6 +191,7 @@ const Product = () => {
     );
     result = await result.json();
     // console.log(result)
+    setLoading(false);
     if (result.status == 404) {
       alert(result.message);
       localStorage.removeItem("userEmail");

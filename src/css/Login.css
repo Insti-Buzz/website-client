@@ -158,13 +158,13 @@
     text-align: center;
 }
 
-@media screen and (max-width: 1024px) {
+@media (max-width: 1024px) {
     .login-img-container {
         display: none;
     }
 }
 
-@media screen and (max-width: 450px) {
+@media (max-width: 450px) {
 
     .login-main-container .signup-btn {
         width: 250px;
