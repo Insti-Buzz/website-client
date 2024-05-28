@@ -33,7 +33,7 @@ function Navbar() {
     useEffect(() => {
         const email = localStorage.getItem("userEmail")
         if (email) setIsLogin(true)
-        if (email === 'instibuzziitm@gmail.com') {
+        if (email === process.env.REACT_APP_admin_email) {
             setIsAdmin(true);
         }
     }, [])

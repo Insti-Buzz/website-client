@@ -15,7 +15,7 @@ const Product = () => {
     getProductDetails();
     const email = localStorage.getItem("userEmail");
     if (email) setIsLogin(true);
-    if (email == "instibuzziitm@gmail.com") {
+    if (email === process.env.REACT_APP_admin_email) {
       setIsAdmin(true);
     }
   }, []);
@@ -149,7 +149,7 @@ const Product = () => {
 
       result = await result.json();
       setLoading(false)
-      if (result.status == 404) {
+      if (result.status === 404) {
         alert(result.message);
         localStorage.removeItem("userEmail");
         navigate("/");
@@ -192,7 +192,7 @@ const Product = () => {
     result = await result.json();
     // console.log(result)
     setLoading(false);
-    if (result.status == 404) {
+    if (result.status === 404) {
       alert(result.message);
       localStorage.removeItem("userEmail");
       navigate("/");
