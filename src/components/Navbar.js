@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { isExpired, decodeToken } from "react-jwt";
 
 // import toast, { Toaster } from 'react-hot-toast';
 import '../css/Navbar.css';
@@ -31,10 +32,16 @@ function Navbar() {
     const [isAdmin, setIsAdmin] = React.useState(false)
 
     useEffect(() => {
-        const email = localStorage.getItem("userEmail")
+        const email = localStorage.getItem("userEmail");
+        const token = localStorage.getItem("token");
         if (email) setIsLogin(true)
-        if (email === 'instibuzziitm@gmail.com') {
-            setIsAdmin(true);
+        if (token) {
+          const myDecodedToken = decodeToken(token);
+          const isMyTokenExpired = isExpired(token); 
+            if ( myDecodedToken.id == process.env.REACT_APP_admin_email && !isMyTokenExpired) {
+                setIsAdmin(true);
+                console.log("admin access granted");
+            }
         }
     }, [])
 

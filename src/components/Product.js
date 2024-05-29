@@ -4,6 +4,8 @@ import "../css/Product.css";
 import { useNavigate, useParams } from "react-router-dom";
 import LoadingPage from "./LoadingPage";
 
+import { isExpired, decodeToken } from "react-jwt";
+
 const Product = () => {
   const [imageUrl, setImageUrl] = React.useState([]);
   const [selectedImage, setSelectedImage] = React.useState(imageUrl[0]);
@@ -14,10 +16,15 @@ const Product = () => {
   useEffect(() => {
     getProductDetails();
     const email = localStorage.getItem("userEmail");
-    if (email) setIsLogin(true);
-    if (email == "instibuzziitm@gmail.com") {
-      setIsAdmin(true);
+    const token = localStorage.getItem("token");
+    if (token) {
+      const myDecodedToken = decodeToken(token);
+      const isMyTokenExpired = isExpired(token); 
+      if ( myDecodedToken.id == process.env.REACT_APP_admin_email && !isMyTokenExpired) {
+        setIsAdmin(true);
+      }
     }
+    if (email) setIsLogin(true);  
   }, []);
 
   useEffect(() => {
