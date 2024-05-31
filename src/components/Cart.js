@@ -7,6 +7,8 @@ import InstiBuzzLogo from '../assets/Horizontal Logo Transparent.png';
 import CloseIcon from "@mui/icons-material/Close";
 import LoadingPage from "./LoadingPage";
 
+import { isExpired, decodeToken } from "react-jwt";
+
 function Cart() {
     const [products, setProducts] = React.useState([]);
     // const [quantity, setQuantity] = useState(Array(products.length).fill(''));
@@ -35,30 +37,79 @@ function Cart() {
         if (!email || !token) {
             alert("Please Login");
             navigate("/");
+        } else {
+            getProducts();
         }
-        getProducts();
     }, []);
 
+    const checkAuth = async (email, token) => {
+        const myDecodedToken = decodeToken(token);
+        if (myDecodedToken && myDecodedToken.email === email) {
+            return myDecodedToken.email;
+        }else {
+            console.log("Unauth Activity");
+            localStorage.clear('token');
+            localStorage.clear('userEmail');
+            await susActivity(myDecodedToken.email);
+            return null;
+        }
+    };
+
+    const susActivity = async (susEmailId) => {
+        try {
+            let result = await fetch(
+                `${process.env.REACT_APP_server_url}/api/v1/auth/safetyProtocol`,
+                {
+                    method: "POST",
+                    body: JSON.stringify({ susEmailId: `${susEmailId}` , component: 'Cart.js' }),
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+            result = await result.json();
+
+            if (result.status === 404) {
+                console.log("Error");
+            } else {
+                console.log("Action may result in Account Ban");
+            }
+        } catch (error) {
+            console.error("Error during suspicious activity notification", error);
+        }
+    };
 
 
     const getProducts = async () => {
         setLoading(true);
         const email = localStorage.getItem("userEmail");
-        setEmail(email);
         const token = localStorage.getItem("token");
-        let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/getProductsInCart`, {
-            method: "POST",
-            body: JSON.stringify({
-                email,
-            }),
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
+        const trueEmail = await checkAuth(email, token);
+        // console.log("trueEmail = ", trueEmail);
+        var result;
+        if (trueEmail) {
+            setEmail(trueEmail);
+            result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/getProductsInCart`, {
+                method: "POST",
+                body: JSON.stringify({
+                    trueEmail,
+                }),
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+            );
+            result = await result.json();
+            console.log("after trueemail: ", result);            
+        } else {
+            // alert('drfrefr');
+            localStorage.removeItem('token');
+            localStorage.removeItem('userEmail');
+            result = {status: 404};
         }
-        );
-        result = await result.json();
-        // console.log(result);
+        
+
         // for (let i = 0; i < result.length; i++) {
         //     const updatedProducts = result.filter(item => item._id === localStorage.getItem(`product${item._id}`));
         //     setProducts(updatedProducts);
@@ -67,11 +118,13 @@ function Cart() {
             setLoading(false)
         }, 1000);
         if (result.status == 404) {
-            alert(result.message);
+            // alert(result.message);
+            console.log("issue in fetching");
             localStorage.removeItem("userEmail");
             navigate("/");
-            // window.location.reload();
+            window.location.reload();
         } else {
+            console.log("Fetched Successfully");
             setProducts(result.products);
         }
     };
@@ -80,6 +133,7 @@ function Cart() {
         // setLoading(true);
         const email = localStorage.getItem(`userEmail`);
         const token = localStorage.getItem("token");
+        const trueEmail = checkAuth(email, token);
         const updatedSize = e.target.value;
         const orderItem_id = id;
         const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/changeSizeInCart`, {
@@ -87,7 +141,7 @@ function Cart() {
             body: JSON.stringify({
                 orderItem_id,
                 updatedSize,
-                email,
+                trueEmail,
             }),
             headers: {
                 "Content-Type": "application/json",
@@ -108,6 +162,8 @@ function Cart() {
         // setLoading(true);
         const email = localStorage.getItem(`userEmail`);
         const token = localStorage.getItem("token");
+        const trueEmail = checkAuth(email, token);
+
         const updatedQuantity = e.target.value;
         const orderItem_id = id;
         const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/changeQuantityInCart`, {
@@ -115,7 +171,7 @@ function Cart() {
             body: JSON.stringify({
                 orderItem_id,
                 updatedQuantity,
-                email,
+                trueEmail,
             }),
             headers: {
                 "Content-Type": "application/json",

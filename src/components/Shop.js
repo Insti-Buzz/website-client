@@ -17,7 +17,7 @@ function Shop() {
         // }
     }, []);
     const [ourProducts, setOurProducts] = useState([]);
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
 
     const productPage = async (productId, index) => {
@@ -41,9 +41,9 @@ function Shop() {
             setOurProducts(result);
             // console.log(result)
         } catch (error) {}
-        // setTimeout(() => {
-        //     setLoading(false)
-        // }, 1000);
+        setTimeout(() => {
+            setLoading(false)
+        }, 1000);
     };
 
 

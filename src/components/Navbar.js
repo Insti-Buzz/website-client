@@ -31,6 +31,8 @@ function Navbar() {
     const [isLogin, setIsLogin] = React.useState(false)
     const [isAdmin, setIsAdmin] = React.useState(false)
 
+
+
     useEffect(() => {
         const email = localStorage.getItem("userEmail");
         const token = localStorage.getItem("token");
@@ -38,7 +40,7 @@ function Navbar() {
         if (token) {
           const myDecodedToken = decodeToken(token);
           const isMyTokenExpired = isExpired(token); 
-            if ( myDecodedToken.id == process.env.REACT_APP_admin_email && !isMyTokenExpired) {
+            if ( myDecodedToken.email == process.env.REACT_APP_admin_email && !isMyTokenExpired) {
                 setIsAdmin(true);
                 console.log("admin access granted");
             }
@@ -82,7 +84,7 @@ function Navbar() {
 
     const ordersPage = () => {
         dropDownClose()
-        navigate("/orders")
+        // navigate("/orders")
     }
 
     const loginPage = () => {
