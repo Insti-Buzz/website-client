@@ -24,8 +24,10 @@ import Green_IITM_2 from '../assets/boy back green iitm-min-min.jpg';
 import Entre_Flame_1 from '../assets/boy back-min-min.jpg';
 import Entre_Flame_2 from '../assets/girl front-min-min.jpg';
 
-import Banner from '../assets/Home-Banner.jpg'
-import mobileBanner from '../assets/Home-mobile-banner.jpg';
+// import Banner from '../assets/Home-Banner.jpg'
+// import mobileBanner from '../assets/Home-mobile-banner.jpg';
+import Banner from '../assets/paradox_banner_home_desktop.png';
+import mobileBanner from '../assets/paradox_banner_home_mobile.png';
 import { useNavigate } from 'react-router-dom';
 
 
