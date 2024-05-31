@@ -53,7 +53,7 @@ function Login() {
     } else {
       // alert(result.message)
       localStorage.setItem("token", result.accessToken);
-      localStorage.setItem("userEmail", email);
+      localStorage.setItem("userEmail", result.email);
       navigate("/");
       window.location.reload();
       return result;

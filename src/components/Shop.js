@@ -40,7 +40,7 @@ function Shop() {
             result = await result.json();
             setOurProducts(result);
             // console.log(result)
-        } catch (error) { }
+        } catch (error) {}
         setTimeout(() => {
             setLoading(false)
         }, 1000);
