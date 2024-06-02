@@ -47,7 +47,7 @@ function Private() {
             if (result.status === 404) {
                 console.log("Error");
             } else {
-                console.log("Mail sent and notified to the team!");
+                // console.log("Mail sent and notified to the team!");
             }
         } catch (error) {
             console.error("Error during suspicious activity notification", error);
