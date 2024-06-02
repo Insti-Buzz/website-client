@@ -101,7 +101,22 @@ function Cart() {
             }
             );
             result = await result.json();
-            console.log("after trueemail: ", result);            
+            console.log("after trueemail: ", result);
+            setTimeout(() => {
+                setLoading(false)
+            }, 1000);
+            if (result.status == 404) {
+                // alert(result.message);
+                console.log("issue in fetching");
+                localStorage.removeItem("userEmail");
+                navigate("/");
+                window.location.reload();
+            } else {
+                console.log("Fetched Successfully");
+                setProducts(result.products);
+            }            
+
+
         } else {
             // alert('drfrefr');
             localStorage.removeItem('token');
@@ -114,19 +129,7 @@ function Cart() {
         //     const updatedProducts = result.filter(item => item._id === localStorage.getItem(`product${item._id}`));
         //     setProducts(updatedProducts);
         // }
-        setTimeout(() => {
-            setLoading(false)
-        }, 1000);
-        if (result.status == 404) {
-            // alert(result.message);
-            console.log("issue in fetching");
-            localStorage.removeItem("userEmail");
-            navigate("/");
-            window.location.reload();
-        } else {
-            console.log("Fetched Successfully");
-            setProducts(result.products);
-        }
+     
     };
 
     const updateSize = async (id, e) => {
