@@ -27,13 +27,13 @@ function Cart() {
     const [delivery, setDelivery] = useState("pickup");
 
     useEffect(() => {
-        const name = localStorage.getItem('userName')
-        const phone = localStorage.getItem('userPhone')
+        // const name = localStorage.getItem('userName')
+        // const phone = localStorage.getItem('userPhone')
         const email = localStorage.getItem("userEmail");
         const token = localStorage.getItem("token");
         setEmail(email)
-        setName(name)
-        setPhone(phone)
+        // setName(name)
+        // setPhone(phone)
         if (!email || !token) {
             alert("Please Login");
             navigate("/");
@@ -43,7 +43,7 @@ function Cart() {
     }, []);
 
     const checkAuth = async (email, token) => {
-        const myDecodedToken = decodeToken(token);
+        const myDecodedToken = await decodeToken(token);
         if (myDecodedToken && myDecodedToken.email === email) {
             return myDecodedToken.email;
         }else {
@@ -85,7 +85,7 @@ function Cart() {
         const email = localStorage.getItem("userEmail");
         const token = localStorage.getItem("token");
         const trueEmail = await checkAuth(email, token);
-        // console.log("trueEmail = ", trueEmail);
+        console.log("trueEmail = ", trueEmail);
         var result;
         if (trueEmail) {
             setEmail(trueEmail);
