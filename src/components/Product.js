@@ -20,7 +20,7 @@ const Product = () => {
     if (token) {
       const myDecodedToken = decodeToken(token);
       const isMyTokenExpired = isExpired(token); 
-      if ( myDecodedToken.id == process.env.REACT_APP_admin_email && !isMyTokenExpired) {
+      if ( myDecodedToken.email == process.env.REACT_APP_admin_email && !isMyTokenExpired) {
         setIsAdmin(true);
       }
     }

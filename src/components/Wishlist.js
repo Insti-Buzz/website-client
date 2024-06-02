@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import '../css/Wishlist.css';
 import LoadingPage from "./LoadingPage";
 
+import { isExpired, decodeToken } from "react-jwt";
+
 function Wishlist() {
     const [wishlistedProducts, setWishlistedProducts] = useState([]);
     const [loading, setLoading] = useState(false)
@@ -19,17 +21,56 @@ function Wishlist() {
 
     const navigate = useNavigate();
 
+    const checkAuth = async (email, token) => {
+        const myDecodedToken = decodeToken(token);
+        if (myDecodedToken && myDecodedToken.email === email) {
+            return myDecodedToken.email;
+        }else {
+            console.log("Unauth Activity");
+            localStorage.clear('token');
+            localStorage.clear('userEmail');
+            await susActivity(myDecodedToken.email);
+            return null;
+        }
+    };
+
+    const susActivity = async (susEmailId) => {
+        try {
+            let result = await fetch(
+                `${process.env.REACT_APP_server_url}/api/v1/auth/safetyProtocol`,
+                {
+                    method: "POST",
+                    body: JSON.stringify({ susEmailId: `${susEmailId}` , component:"Wishlist.js" }),
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+            result = await result.json();
+
+            if (result.status === 404) {
+                console.log("Error");
+            } else {
+                console.log("Mail sent and notified to the team!");
+            }
+        } catch (error) {
+            console.error("Error during suspicious activity notification", error);
+        }
+    };
+
     const getWishlistedProducts = async () => {
         setLoading(true)
         const email = localStorage.getItem("userEmail");
         const token = localStorage.getItem("token");
+
+        const trueEmail = checkAuth(email, token);
 
         let result = await fetch(
             `${process.env.REACT_APP_server_url}/api/v1/products/get-wishlisted-products`,
             {
                 method: "POST",
                 body: JSON.stringify({
-                    email,
+                    trueEmail,
                 }),
                 headers: {
                     "Content-Type": "application/json",

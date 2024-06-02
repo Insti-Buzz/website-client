@@ -4,9 +4,11 @@ import "../css/OrderHistory.css";
 import { useNavigate } from "react-router-dom";
 import LoadingPage from "./LoadingPage";
 
+import { isExpired, decodeToken } from "react-jwt";
+
 function OrderHistory() {
   const [orders, setOrders] = React.useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,38 +17,94 @@ function OrderHistory() {
     if (!email || !token) {
       alert("Please Login");
       navigate("/");
+    } else {
+      getProducts();
     }
-    getProducts();
   }, []);
+
+  const checkAuth = async (email, token) => {
+    const myDecodedToken = decodeToken(token);
+    if (myDecodedToken && myDecodedToken.email === email) {
+        return myDecodedToken.email;
+    }else {
+        console.log("Unauth Activity");
+        // localStorage.clear('token');
+        // localStorage.clear('userEmail');
+        await susActivity(myDecodedToken.email);
+        return null;
+    }
+  };
+
+  const susActivity = async (susEmailId) => {
+    try {
+        let result = await fetch(
+            `${process.env.REACT_APP_server_url}/api/v1/auth/safetyProtocol`,
+            {
+                method: "POST",
+                body: JSON.stringify({ susEmailId: `${susEmailId}` , component: 'OrderHistory.js' }),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+        result = await result.json();
+
+        if (result.status === 404) {
+            console.log("Error");
+        } else {
+            console.log("Action may result in Account Ban");
+        }
+    } catch (error) {
+        console.error("Error during suspicious activity notification", error);
+    }
+  };  
 
   const getProducts = async () => {
     setLoading(true);
     const email = localStorage.getItem("userEmail");
     const token = localStorage.getItem("token");
+    const trueEmail = await checkAuth(email, token);
+
+    var result;
+    if (trueEmail) {
+      // console.log("trueEmail exists : ", trueEmail);
+      result = await fetch(
+        `${process.env.REACT_APP_server_url}/api/v1/products/orders`,
+        {
+          method: "POST",
+          body: JSON.stringify({ trueEmail }),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      result = await result.json();
+      // console.log(result)  
+      setTimeout(() => {
+        setLoading(false)
+      }, 1000);
+    } else {
+      // console.log("trueEmail does not exist!");
+      localStorage.removeItem('token');
+      localStorage.removeItem('userEmail');
+      // navigate('/')
+      result = {status: 404};      
+    }
     // console.log(email)
-    let result = await fetch(
-      `${process.env.REACT_APP_server_url}/api/v1/products/orders`,
-      {
-        method: "POST",
-        body: JSON.stringify({ email }),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    result = await result.json();
-    // console.log(result)
-    setTimeout(() => {
-      setLoading(false)
-  }, 1000);
+
+
     if (result.status == 404) {
-      alert(result.message);
+      // alert(result.message);
       localStorage.removeItem("userEmail");
+      localStorage.removeItem("token");
+      setLoading(false);
       navigate("/");
       window.location.reload();
     } else {
+      console.log("No issues")
       setOrders(result.products);
+      console.log("orders:", orders);
     }
   };
 
@@ -140,7 +198,7 @@ function OrderHistory() {
           <h1>My Orders</h1>
           <hr />
 
-          {orders.length != 0 ? (
+          {(orders.length != 0) ? (
             orders.map(e)
           ) : (
             <div class="order-content">

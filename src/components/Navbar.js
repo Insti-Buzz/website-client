@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { isExpired, decodeToken } from "react-jwt";
+
+// import { isExpired, decodeToken } from "react-jwt";
 
 // import toast, { Toaster } from 'react-hot-toast';
 import '../css/Navbar.css';
@@ -17,6 +18,8 @@ function Navbar() {
     useEffect(() => {
         const uponScroll = () => {
             const currentPos = window.scrollY;
+            console.log("currentPos: ",currentPos);
+            // console.log("scroll Y : ", window.scrollY);
             setNavbarHeight(currentPos > prevPos ? '0' : '');
             setPrevPos(currentPos);
         }
@@ -29,20 +32,22 @@ function Navbar() {
 
     const navigate = useNavigate();
     const [isLogin, setIsLogin] = React.useState(false)
-    const [isAdmin, setIsAdmin] = React.useState(false)
+    // const [isAdmin, setIsAdmin] = React.useState(false)
+
+
 
     useEffect(() => {
         const email = localStorage.getItem("userEmail");
-        const token = localStorage.getItem("token");
+        // const token = localStorage.getItem("token");
         if (email) setIsLogin(true)
-        if (token) {
-          const myDecodedToken = decodeToken(token);
-          const isMyTokenExpired = isExpired(token); 
-            if ( myDecodedToken.id == process.env.REACT_APP_admin_email && !isMyTokenExpired) {
-                setIsAdmin(true);
-                console.log("admin access granted");
-            }
-        }
+        // if (token) {
+        //   const myDecodedToken = decodeToken(token);
+        //   const isMyTokenExpired = isExpired(token); 
+        //     if ( myDecodedToken.email == process.env.REACT_APP_admin_email && !isMyTokenExpired) {
+        //         setIsAdmin(true);
+        //         console.log("admin access granted");
+        //     }
+        // }
     }, [])
 
     function dropDownOpen() {
@@ -82,7 +87,7 @@ function Navbar() {
 
     const ordersPage = () => {
         dropDownClose()
-        navigate("/orders")
+        // navigate("/orders")
     }
 
     const loginPage = () => {
@@ -127,6 +132,8 @@ function Navbar() {
                     <div className="nav-center-content">
                         <a className='nav-home' href='/' onClick={homePage}>Home</a>
                         <a className='nav-shop' href='/shop' onClick={shopPage}>Shop</a>
+                        
+                        {/* do not uncomment this part without enabling check for authentication function */}
                         {/* {isAdmin ?
                             <a className='nav-blog' onClick={addProductPage}>Add</a> :
                             <></>
