@@ -18,7 +18,7 @@ function Navbar() {
     useEffect(() => {
         const uponScroll = () => {
             const currentPos = window.scrollY;
-            console.log("currentPos: ",currentPos);
+            // console.log("currentPos: ",currentPos);
             // console.log("scroll Y : ", window.scrollY);
             setNavbarHeight(currentPos > prevPos ? '0' : '');
             setPrevPos(currentPos);
