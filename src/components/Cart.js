@@ -86,13 +86,14 @@ function Cart() {
         const token = localStorage.getItem("token");
         const trueEmail = await checkAuth(email, token);
         console.log("trueEmail = ", trueEmail);
-        var result;
+        // var result;
         if (trueEmail) {
             setEmail(trueEmail);
-            result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/getProductsInCart`, {
+            console.log("email to be sent in backend:"+email+"  trueemail:"+trueEmail)
+           let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/getProductsInCart`, {
                 method: "POST",
                 body: JSON.stringify({
-                    trueEmail,
+                    email,
                 }),
                 headers: {
                     "Content-Type": "application/json",
@@ -100,6 +101,7 @@ function Cart() {
                 },
             }
             );
+            console.log("from backeng result: "+result)
             result = await result.json();
             console.log("after trueemail: ", result);
             setTimeout(() => {
@@ -121,7 +123,7 @@ function Cart() {
             // alert('drfrefr');
             localStorage.removeItem('token');
             localStorage.removeItem('userEmail');
-            result = {status: 404};
+            // result = {status: 404};
         }
         
 
