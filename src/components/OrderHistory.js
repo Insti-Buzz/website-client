@@ -27,7 +27,7 @@ function OrderHistory() {
     if (myDecodedToken && myDecodedToken.email === email) {
         return myDecodedToken.email;
     }else {
-        console.log("Unauth Activity");
+        // console.log("Unauth Activity");
         // localStorage.clear('token');
         // localStorage.clear('userEmail');
         await susActivity(myDecodedToken.email);
@@ -50,9 +50,9 @@ function OrderHistory() {
         result = await result.json();
 
         if (result.status === 404) {
-            console.log("Error");
+            // console.log("Error");
         } else {
-            console.log("Action may result in Account Ban");
+            // console.log("Action may result in Account Ban");
         }
     } catch (error) {
         console.error("Error during suspicious activity notification", error);
@@ -72,7 +72,7 @@ function OrderHistory() {
         `${process.env.REACT_APP_server_url}/api/v1/products/orders`,
         {
           method: "POST",
-          body: JSON.stringify({ trueEmail }),
+          body: JSON.stringify({ email }),
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -102,9 +102,9 @@ function OrderHistory() {
       navigate("/");
       window.location.reload();
     } else {
-      console.log("No issues")
+      // console.log("No issues")
       setOrders(result.products);
-      console.log("orders:", orders);
+      // console.log("orders:", orders);
     }
   };
 

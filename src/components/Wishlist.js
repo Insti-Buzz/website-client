@@ -26,7 +26,7 @@ function Wishlist() {
         if (myDecodedToken && myDecodedToken.email === email) {
             return myDecodedToken.email;
         }else {
-            console.log("Unauth Activity");
+            // console.log("Unauth Activity");
             localStorage.clear('token');
             localStorage.clear('userEmail');
             await susActivity(myDecodedToken.email);
@@ -49,9 +49,9 @@ function Wishlist() {
             result = await result.json();
 
             if (result.status === 404) {
-                console.log("Error");
+                // console.log("Error");
             } else {
-                console.log("Mail sent and notified to the team!");
+                // console.log("Mail sent and notified to the team!");
             }
         } catch (error) {
             console.error("Error during suspicious activity notification", error);
@@ -70,7 +70,7 @@ function Wishlist() {
             {
                 method: "POST",
                 body: JSON.stringify({
-                    trueEmail,
+                    email,
                 }),
                 headers: {
                     "Content-Type": "application/json",

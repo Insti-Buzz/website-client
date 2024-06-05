@@ -47,7 +47,7 @@ function Cart() {
         if (myDecodedToken && myDecodedToken.email === email) {
             return myDecodedToken.email;
         }else {
-            console.log("Unauth Activity");
+            // console.log("Unauth Activity");
             localStorage.clear('token');
             localStorage.clear('userEmail');
             await susActivity(myDecodedToken.email);
@@ -70,12 +70,12 @@ function Cart() {
             result = await result.json();
 
             if (result.status === 404) {
-                console.log("Error");
+                // console.log("Error");
             } else {
-                console.log("Action may result in Account Ban");
+                // console.log("Action may result in Account Ban");
             }
         } catch (error) {
-            console.error("Error during suspicious activity notification", error);
+            // console.error("Error during suspicious activity notification", error);
         }
     };
 
@@ -85,11 +85,11 @@ function Cart() {
         const email = localStorage.getItem("userEmail");
         const token = localStorage.getItem("token");
         const trueEmail = await checkAuth(email, token);
-        console.log("trueEmail = ", trueEmail);
+        // console.log("trueEmail = ", trueEmail);
         // var result;
         if (trueEmail) {
             setEmail(trueEmail);
-            console.log("email to be sent in backend:"+email+"  trueemail:"+trueEmail)
+            // console.log("email to be sent in backend:"+email+"  trueemail:"+trueEmail)
            let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/getProductsInCart`, {
                 method: "POST",
                 body: JSON.stringify({
@@ -101,20 +101,20 @@ function Cart() {
                 },
             }
             );
-            console.log("from backeng result: "+result)
+            // console.log("from backeng result: "+result)
             result = await result.json();
-            console.log("after trueemail: ", result);
+            // console.log("after trueemail: ", result);
             setTimeout(() => {
                 setLoading(false)
             }, 1000);
             if (result.status == 404) {
                 // alert(result.message);
-                console.log("issue in fetching");
+                // console.log("issue in fetching");
                 localStorage.removeItem("userEmail");
                 navigate("/");
                 window.location.reload();
             } else {
-                console.log("Fetched Successfully");
+                // console.log("Fetched Successfully");
                 setProducts(result.products);
             }            
 

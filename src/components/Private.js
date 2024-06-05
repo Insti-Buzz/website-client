@@ -74,7 +74,7 @@ function Private() {
             result = await result.json();
 
             if (result.status === 404) {
-                console.log("Error");
+                // console.log("Error");
             } else {
                 // console.log("Mail sent and notified to the team!");
             }
@@ -91,7 +91,7 @@ function Private() {
             //   console.log("admin access granted");
           } else if(myDecodedToken.email !== email){
               auth = false;
-              console.log("Not an actual admin");
+            //   console.log("Not an actual admin");
               susActivity(myDecodedToken.email);
               localStorage.removeItem('token');
               localStorage.removeItem('userEmail');
