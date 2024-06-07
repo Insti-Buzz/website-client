@@ -146,7 +146,7 @@ function Cart() {
             body: JSON.stringify({
                 orderItem_id,
                 updatedSize,
-                trueEmail,
+                email,
             }),
             headers: {
                 "Content-Type": "application/json",
@@ -176,7 +176,7 @@ function Cart() {
             body: JSON.stringify({
                 orderItem_id,
                 updatedQuantity,
-                trueEmail,
+                email,
             }),
             headers: {
                 "Content-Type": "application/json",
