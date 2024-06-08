@@ -2,7 +2,7 @@ import React from 'react'
 import '../css/Shop.css'
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import LoadingPage from './LoadingPage';
+// import LoadingPage from './LoadingPage';
 import Banner from '../assets/Shop-Banner.jpg'
 import mobileBanner from '../assets/Shop-mobile-banner.jpg'
 import { Helmet } from 'react-helmet';
@@ -17,7 +17,7 @@ function Shop() {
         // }
     }, []);
     const [ourProducts, setOurProducts] = useState([]);
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const navigate = useNavigate();
 
     const productPage = async (productId, index) => {
@@ -29,7 +29,7 @@ function Shop() {
     }, []);
 
     const getProducts = async () => {
-        setLoading(true)
+        // setLoading(true)
         try {
             let result = await fetch(
                 `${process.env.REACT_APP_server_url}/api/v1/products/get-product`,
@@ -39,11 +39,15 @@ function Shop() {
             );
             result = await result.json();
             setOurProducts(result);
+            setLoading(false);
             // console.log(result)
-        } catch (error) {}
-        setTimeout(() => {
-            setLoading(false)
-        }, 1000);
+        } catch (error) {
+            // console.log(error);
+
+        }
+        // // setTimeout(() => {
+        // //     setLoading(false)
+        // // }, 1000);
     };
 
 
@@ -90,6 +94,7 @@ function Shop() {
         }
     }
 
+
     function handleClearFilterClick() {
         setSizeFilter("");
         setStyleFilter("");
@@ -105,21 +110,50 @@ function Shop() {
                     className="shop-product-card"
                     onClick={() => productPage(item.product_id, index)}
                 >
-                    <img src={item.imageUrl[0]} alt="Product" />
+                    
+                    <img src={item.imageUrl[0]} className='shop-image' alt="Product" />
+                   
                     <div className="shop-product-name">
-                        <h2>{item.name}</h2>
+                        <h2 className='h2-name'>{item.name}</h2>   
                     </div>
                     <hr />
                     <div className='shop-product-style'>
-                        <p>{(item.style === 'regular') ? "Regular T-Shirts" : "Oversized T-Shirts"}</p>
+                            <p className='product-style'>{(item.style === 'regular') ? "Regular T-Shirts" : "Oversized T-Shirts"}</p>
                     </div>
+
                     <div className="shop-product-price">
-                        <h3>₹{item.price}</h3>
+                        <h3 className='price'>₹ {item.price}</h3>
                     </div>
                 </button>
             </div>
         );
     }
+
+    function ProductCards() {
+        const cards = [];
+    
+        for (let i = 0; i <= 6; i++) {
+            cards.push(
+                <div className="shop-product-div" key={i}>
+                    <button className="shop-product-card">
+                        <div className="shop-image loader"></div>
+                        <div className="shop-product-name">
+                            <h2 className="h2-name loader"></h2>
+                        </div>
+                        <hr />
+                        <div className="shop-product-style">
+                            <p className="product-style loader"></p>
+                        </div>
+                        <div className="shop-product-price">
+                            <h3 className="price loader"></h3>
+                        </div>
+                    </button>
+                </div>
+            );
+        }
+    
+        return cards;
+    } 
 
     return (
         <>
@@ -152,7 +186,7 @@ function Shop() {
             </Helmet>
         <div className='shop'>
             {
-                loading ? <LoadingPage /> :
+                // loading ? <LoadingPage /> :
                     <div>
                         <div className="shop-page-info">
                             <div className="shop-page-banner">
@@ -207,7 +241,7 @@ function Shop() {
                                     </div> */}
                             {/* </div>
                             </div> */}
-                            <div className="shop-products-display">{activeProducts.map(e)}</div>
+                            <div className="shop-products-display">{loading ? ProductCards() : activeProducts.map(e)}</div>
                         </div>
                     </div>
             }
