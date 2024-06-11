@@ -138,14 +138,14 @@ function Shop() {
                     <button className="shop-product-card">
                         <div className="shop-image loader"></div>
                         <div className="shop-product-name">
-                            <h2 className="h2-name loader"></h2>
+                            <h2 className="h2-name loader"> </h2>
                         </div>
                         <hr />
                         <div className="shop-product-style">
                             <p className="product-style loader"></p>
                         </div>
                         <div className="shop-product-price">
-                            <h3 className="price loader"></h3>
+                            <h3 className="price loader"> </h3>
                         </div>
                     </button>
                 </div>
@@ -190,10 +190,10 @@ function Shop() {
                     <div>
                         <div className="shop-page-info">
                             <div className="shop-page-banner">
-                                <img src={Banner} alt='Banner for advertising on Shop page' />
+                                <img src={Banner} alt='Banner for advertising on InstiBuzz Shop page'  className='ban-img loader'/>
                             </div>
                             <div className="shop-page-banner-mobile">
-                                <img src={mobileBanner} alt='Banner for advertsing on Shop page'/>
+                                <img src={mobileBanner} alt='Banner for advertsing on Shop page' className='ban-img-mob loader'/>
                             </div>
                         </div>
                         <div className="shop-navigation-container">

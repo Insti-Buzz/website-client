@@ -24,10 +24,12 @@
     /* margin: 20px 0 20px 0px; */
 }
 
-.shop-page-banner img {
+.shop-page-banner .ban-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    background: grey;
+    animation: flicker 2.1s linear infinite;
 }
 
 .shop-page-banner-mobile {
@@ -37,10 +39,12 @@
     /* margin: 20px 0 20px 0px; */
 }
 
-.shop-page-banner-mobile img {
+.shop-page-banner-mobile .ban-img-mob {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    background: grey;
+    animation: flicker 2s linear infinite;
 }
 
 .shop-navigation-container{
@@ -68,6 +72,7 @@
     font-size: calc(12px + 1.5vw - 0.5vh);
     margin: 5px 0 5px 2px;
     color: grey;
+    /* background-color: purple; */
 }
 
 .shop-container{
