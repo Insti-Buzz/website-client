@@ -40,10 +40,14 @@ function AllOrders() {
         }
     }
 
-
     function e(item, index) {
-        const orderId = item.order_id
+        const now = parseInt(item.date) // Get the current timestamp in milliseconds
+        const date = new Date(now);
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear();
 
+        const orderId = item.order_id
         const deliveryDone = async () => {
             const token = localStorage.getItem("token")
             let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/delivered`, {
@@ -59,89 +63,158 @@ function AllOrders() {
             window.location.reload()
         }
 
-        const now = parseInt(item.date) // Get the current timestamp in milliseconds
-        const date = new Date(now);
-        const day = date.getDate().toString().padStart(2, '0');
-        const month = (date.getMonth() + 1).toString().padStart(2, '0');
-        const year = date.getFullYear();
-
         return (
-            <div className='orders-div'>
-                <div>
-                    <div className='order-id'>OrderId :
-                        {
-                            item.order_id
-                        }
-                    </div>
-                    <div>
+            <div>
+                <hr/>
+
+                <div className='all-orders-main-container'>
+                    <p className='all-orders-content'>{index + 1}</p>
+
+                    {/* <p className='all-orders-content'> {item.order_id}</p> */}
+
+                    <p className='all-orders-content'> {item.user.name}</p>
+
+                    <p className='all-orders-content'> {item.user.phoneNumber}</p>
+                    
+                    <p className='all-orders-content'> {item.productsOrdered.map(e1)}</p>
+
+                    <p className='all-orders-content'>Date: {day + "-" + month + "-" + year}</p>
+                   
+                    <p className='all-orders-content'>
                         {item.razorpayPaymentId ?
                             <p>Payment Id: {item.razorpayPaymentId}</p>
                             :
                             <p>Cash On delivery</p>
                         }
-                    </div>
-                    <p>Date: {day + "-" + month + "-" + year}</p>
-                    <p>
+                    </p>
+
+                    <p className='all-orders-content'> {item.subTotal}</p>
+
+                    <div className='all-orders-content'>
                         {
-                            item.user.name
-                        }</p>
-                    {
-                        item.productsOrdered.map(e1)
-                    }
-                </div>
-                <div>
-                    SubTotal:{item.subTotal}
-                </div>
-                <div>
-                    {
-                        item.isDelivered ?
-                            <p><strong>Deliverd Successfully</strong></p>
-                            :
-                            <p>Coming Soon</p>
-                    }
-                </div>
-                <div>
-                    {
-                        item.isDelivered ?
-                            <></>
-                            :
-                            <button onClick={deliveryDone}>Mark as deliverd</button>
-                    }
+                            item.isDelivered ?
+                                <><p><strong>Deliverd Successfully</strong></p></>
+                                :
+                                <button onClick={deliveryDone}>Mark as deliverd</button>
+                        }
+                    </div>
                 </div>
             </div>
         )
     }
 
-    function e1(item, index) {
-        return (
-            <div class="order-card">
-                <div class="order-date">
-                    {/* <p>22 April, 2023</p> */}
-                </div>
-                <hr />
-                <div class="order-product-img-container">
-                    <img src={item.product.imageUrl[0]} alt="Product image" />
-                </div>
-                <div class="order-product-details">
-                    <div class="order-product-name">
-                        <h2>{item.product.name}</h2>
-                    </div>
-                    <div class="order-product-size">
-                        Size: {item.size}
-                    </div>
-                    <div class="order-product-quantity">
-                        Qty: {item.quantity}
-                    </div>
-                </div>
+    function e1(item,index){
+        return(
+            <div className='all-orders-product-card'>
+                    
+                    <p className='all-orders-product-content'> {item.product.name}</p>
+                    <p className='all-orders-product-content'> {item.size}</p>
+                    <p className='all-orders-product-content'> {item.quantity}</p>
             </div>
-
         )
     }
+
+    // function e(item, index) {
+    //     const orderId = item.order_id
+
+    //     const deliveryDone = async () => {
+    //         const token = localStorage.getItem("token")
+    //         let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/delivered`, {
+    //             method: 'POST',
+    //             body: JSON.stringify({ orderId }),
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //                 "Authorization": `Bearer ${token}`
+    //             },
+    //         })
+    //         result = await result.json();
+
+    //         window.location.reload()
+    //     }
+
+    //     const now = parseInt(item.date) // Get the current timestamp in milliseconds
+    //     const date = new Date(now);
+    //     const day = date.getDate().toString().padStart(2, '0');
+    //     const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    //     const year = date.getFullYear();
+
+    //     return (
+    //         <div className='orders-div'>
+    //             <div>
+    //                 <div className='order-id'>OrderId :
+    //                     {
+    //                         item.order_id
+    //                     }
+    //                 </div>
+    //                 <div>
+    //                     {item.razorpayPaymentId ?
+    //                         <p>Payment Id: {item.razorpayPaymentId}</p>
+    //                         :
+    //                         <p>Cash On delivery</p>
+    //                     }
+    //                 </div>
+    //                 <p>Date: {day + "-" + month + "-" + year}</p>
+    //                 <p>
+    //                     {
+    //                         item.user.name
+    //                     }</p>
+    //                 {
+    //                     item.productsOrdered.map(e1)
+    //                 }
+    //             </div>
+    //             <div>
+    //                 SubTotal:{item.subTotal}
+    //             </div>
+    //             <div>
+    //                 {
+    //                     item.isDelivered ?
+    //                         <p><strong>Deliverd Successfully</strong></p>
+    //                         :
+    //                         <p>Coming Soon</p>
+    //                 }
+    //             </div>
+    //             <div>
+    //                 {
+    //                     item.isDelivered ?
+    //                         <></>
+    //                         :
+    //                         <button onClick={deliveryDone}>Mark as deliverd</button>
+    //                 }
+    //             </div>
+    //         </div>
+    //     )
+    // }
+
+    // function e1(item, index) {
+    //     return (
+    //         <div class="order-card">
+    //             <div class="order-date">
+    //                 {/* <p>22 April, 2023</p> */}
+    //             </div>
+    //             <hr />
+    //             <div class="order-product-img-container">
+    //                 <img src={item.product.imageUrl[0]} alt="Product image" />
+    //             </div>
+    //             <div class="order-product-details">
+    //                 <div class="order-product-name">
+    //                     <h2>{item.product.name}</h2>
+    //                 </div>
+    //                 <div class="order-product-size">
+    //                     Size: {item.size}
+    //                 </div>
+    //                 <div class="order-product-quantity">
+    //                     Qty: {item.quantity}
+    //                 </div>
+    //             </div>
+    //         </div>
+
+    //     )
+    // }
     return (
 
-        <div class="order-main-container">
+        <div class="">
 
-            <div class="order-my-order">
+            <div class="">
                 <h1>My Orders</h1>
                 <hr />
                 {

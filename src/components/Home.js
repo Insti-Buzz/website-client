@@ -26,8 +26,8 @@ import Entre_Flame_2 from '../assets/girl front-min-min.jpg';
 
 // import Banner from '../assets/Home-Banner.jpg'
 // import mobileBanner from '../assets/Home-mobile-banner.jpg';
-import Banner from '../assets/paradox_banner_home_desktop.png';
-import mobileBanner from '../assets/paradox_banner_home_mobile.png';
+import Banner from '../assets/Home-Banner.jpg';
+import mobileBanner from '../assets/Home-mobile-banner.jpg';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -193,7 +193,7 @@ function Home() {
         <div className="home-banner">
           <img src={Banner} alt='Banner for Home page for advertising' className='home-banner-image'/>
         </div>
-        <div class="home-banner-mobile">
+        <div className="home-banner-mobile">
           <img src={mobileBanner} alt='Banner for advertising'/>
         </div>
 

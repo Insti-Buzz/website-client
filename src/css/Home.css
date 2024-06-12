@@ -103,7 +103,7 @@
     /* height: calc(80px + 3vw); */
     height: fit-content;
     /* background-color: rgb(255,226,128); */
-    padding: 2%;
+    padding: 2% 0;
     margin: 1.8vh 0 0 0;
     display: inline-flex;
     justify-content: center;
