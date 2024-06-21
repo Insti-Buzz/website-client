@@ -25,6 +25,7 @@ import CollabForm from "./components/CollabForm";
 import FAQs from "./components/FAQs";
 import Wishlist from "./components/Wishlist";
 import Address from "./components/Address";
+import PaymentValid from "./components/PaymentValid";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           <Route path="shop" element={<Shop />} />
           <Route path="product/:id" element={<Product />} />
           <Route path="cart" element={<Cart />} />
+          <Route path="paymentValid/:id" element={<PaymentValid />} />
           <Route path="address" element={<Address />} />
           <Route path="confirm" element={<Payment />} />
           <Route path="orders" element={<OrderHistory />} />
