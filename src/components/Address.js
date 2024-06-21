@@ -179,19 +179,20 @@ function Address() {
     const amount = calculateSubtotal() * 100;
     const currency = "INR";
     const receiptId = "qwsaq1";
+
     const paymentHandler = async (e) => {
-        setLoading(true)
         const token = localStorage.getItem('token')
-        const isHomeDelivery = true
+
         setShowPayment(false)
+        const isHomeDelivery=true
+        localStorage.setItem("isHomeDelivery",isHomeDelivery)
+        localStorage.setItem("totalAmount",totalAmount)
         const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/payment/order`, {
 
             method: "POST",
             body: JSON.stringify({
                 email,
                 amount,
-                currency,
-                receipt: receiptId,
                 isHomeDelivery,
                 address1,
                 address2,
@@ -204,83 +205,119 @@ function Address() {
             },
         });
         const order = await response.json();
+        window.location.href=order.link
+        console.log(order)
+
         if (order.status == 404) {
             alert(order.message)
             localStorage.removeItem("userEmail")
             navigate('/')
             window.location.reload();
         }
-        // console.log(order);
-
-        var options = {
-            key: "rzp_live_4KDT1L43T3GoOI", // Enter the Key ID generated from the Dashboard
-            amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-            currency,
-            name: "InstiBuzz", //your business name
-            description: "Transaction",
-            image: InstiBuzzLogo,
-            order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-            callback_url: "https://eneqd3r9zrjok.x.pipedream.net/",
-            handler: async function (response) {
-                const body = {
-                    ...response,
-                    email,
-                    totalAmount
-                };
-
-                const validateRes = await fetch(
-                    `${process.env.REACT_APP_server_url}/api/v1/payment/order/validate`,
-                    {
-                        method: "POST",
-                        body: JSON.stringify(body),
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                    }
-                );
-                const jsonRes = await validateRes.json();
-                // console.log(jsonRes);
-                // console.log(jsonRes.status);
-                // console.log(jsonRes.msg);
-                // console.log(jsonRes.razorpay_order_id);
-                // console.log(jsonRes.razorpay_payment_id);
-                if (jsonRes.status == 404) {
-                    alert('Failed')
-                } else {
-                    alert('Your order is Placed Successfully')
-                    // window.location.reload();
-                    navigate('/orders')
-                }
-            },
-            prefill: {
-                //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
-                name: name, //your customer's name
-                email: email,
-                contact: phone, //Provide the customer's phone number for better conversion rates
-            },
-            notes: {
-                address: "Razorpay Corporate Office",
-            },
-            theme: {
-                color: "#3399cc",
-            },
-        };
-        var rzp1 = new window.Razorpay(options);
-        rzp1.on("payment.failed", function (response) {
-            // alert(response.error.code);
-            alert(response.error.description);
-            // alert(response.error.source);
-            // alert(response.error.step);
-            alert(response.error.reason);
-            // alert(response.error.metadata.order_id);
-            // alert(response.error.metadata.payment_id);
-        });
-        setTimeout(() => {
-            setLoading(false)
-        }, 1000);
-        rzp1.open();
-        e.preventDefault();
     };
+
+    // const paymentHandler = async (e) => {
+    //     setLoading(true)
+    //     const token = localStorage.getItem('token')
+    //     const isHomeDelivery = true
+    //     setShowPayment(false)
+    //     const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/payment/order`, {
+
+    //         method: "POST",
+    //         body: JSON.stringify({
+    //             email,
+    //             amount,
+    //             currency,
+    //             receipt: receiptId,
+    //             isHomeDelivery,
+    //             address1,
+    //             address2,
+    //             pinCode,
+    //             city,
+    //             state
+    //         }),
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //         },
+    //     });
+    //     const order = await response.json();
+    //     if (order.status == 404) {
+    //         alert(order.message)
+    //         localStorage.removeItem("userEmail")
+    //         navigate('/')
+    //         window.location.reload();
+    //     }
+    //     // console.log(order);
+
+    //     var options = {
+    //         key: "rzp_live_4KDT1L43T3GoOI", // Enter the Key ID generated from the Dashboard
+    //         amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    //         currency,
+    //         name: "InstiBuzz", //your business name
+    //         description: "Transaction",
+    //         image: InstiBuzzLogo,
+    //         order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    //         callback_url: "https://eneqd3r9zrjok.x.pipedream.net/",
+    //         handler: async function (response) {
+    //             const body = {
+    //                 ...response,
+    //                 email,
+    //                 totalAmount
+    //             };
+
+    //             const validateRes = await fetch(
+    //                 `${process.env.REACT_APP_server_url}/api/v1/payment/order/validate`,
+    //                 {
+    //                     method: "POST",
+    //                     body: JSON.stringify(body),
+    //                     headers: {
+    //                         "Content-Type": "application/json",
+    //                     },
+    //                 }
+    //             );
+    //             const jsonRes = await validateRes.json();
+    //             // console.log(jsonRes);
+    //             // console.log(jsonRes.status);
+    //             // console.log(jsonRes.msg);
+    //             // console.log(jsonRes.razorpay_order_id);
+    //             // console.log(jsonRes.razorpay_payment_id);
+    //             if (jsonRes.status == 404) {
+    //                 alert('Failed')
+    //             } else {
+    //                 alert('Your order is Placed Successfully')
+    //                 // window.location.reload();
+    //                 navigate('/orders')
+    //             }
+    //         },
+    //         prefill: {
+    //             //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
+    //             name: name, //your customer's name
+    //             email: email,
+    //             contact: phone, //Provide the customer's phone number for better conversion rates
+    //         },
+    //         notes: {
+    //             address: "Razorpay Corporate Office",
+    //         },
+    //         theme: {
+    //             color: "#3399cc",
+    //         },
+    //     };
+    //     var rzp1 = new window.Razorpay(options);
+    //     rzp1.on("payment.failed", function (response) {
+    //         // alert(response.error.code);
+    //         alert(response.error.description);
+    //         // alert(response.error.source);
+    //         // alert(response.error.step);
+    //         alert(response.error.reason);
+    //         // alert(response.error.metadata.order_id);
+    //         // alert(response.error.metadata.payment_id);
+    //     });
+    //     setTimeout(() => {
+    //         setLoading(false)
+    //     }, 1000);
+    //     rzp1.open();
+    //     e.preventDefault();
+    // };
 
     return (
         <div>
