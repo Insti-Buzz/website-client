@@ -28,14 +28,16 @@ function PaymentValid() {
         });
         const order = await response.json();
         console.log(order)
-        if(order.data && order.data.code === "PAYMENT_SUCCESS"){
+        console.log("code "+order.code)
+        if(order.code == "PAYMENT_SUCCESS"){
             alert("Your order is placed successfully")
+            navigate('/orders')
         }
 
         if (order.status == 404) {
             alert(order.message)
             localStorage.removeItem("userEmail")
-            navigate('/order')
+            navigate('/')
             window.location.reload();
         }
     };
