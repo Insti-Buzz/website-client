@@ -176,7 +176,7 @@ function Address() {
         }
     };
 
-    const amount = calculateSubtotal() * 100;
+    const amount = calculateSubtotal() ;
     const currency = "INR";
     const receiptId = "qwsaq1";
 
