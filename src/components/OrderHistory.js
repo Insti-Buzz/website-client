@@ -137,8 +137,8 @@ function OrderHistory() {
         <div>
           <div className="order-id">OrderId :{item.order_id}</div>
           <div>
-            {item.razorpayPaymentId ? (
-              <p>Payment Id: {item.razorpayPaymentId}</p>
+            {item.transactionId ? (
+              <p>Payment Id: {item.transactionId}</p>
             ) : (
               <p>Cash On delivery</p>
             )}
@@ -156,12 +156,12 @@ function OrderHistory() {
               <p>Coming Soon</p>
             )}
           </div>
-          <div>
+          {/* <div>
             <p>
               Date:
               {day + "-" + month + "-" + year}
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     );
