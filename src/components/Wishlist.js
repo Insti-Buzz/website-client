@@ -54,7 +54,7 @@ function Wishlist() {
                 // console.log("Mail sent and notified to the team!");
             }
         } catch (error) {
-            console.error("Error during suspicious activity notification", error);
+            // consoleconsole.error("Error during suspicious activity notification", error);
         }
     };
 

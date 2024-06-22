@@ -27,8 +27,8 @@ function PaymentValid() {
             },
         });
         const order = await response.json();
-        console.log(order)
-        console.log("code "+order.code)
+        // console.log(order)
+        // console.log("code "+order.code)
         if(order.message=="orderAlreadyPlaced"){
             alert("orderAlreadyPlaced")
             navigate('/orders')

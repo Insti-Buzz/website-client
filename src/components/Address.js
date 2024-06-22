@@ -133,6 +133,7 @@ function Address() {
     }
 
     const confirmOrder = async () => {
+        const amount=totalAmount
         setLoading(true);
         const email = localStorage.getItem("userEmail");
         const token = localStorage.getItem("token");
@@ -144,7 +145,7 @@ function Address() {
                 body: JSON.stringify({
                     email,
                     products,
-                    totalAmount,
+                    amount,
                     isHomeDelivery,
                     address1,
                     address2,
@@ -206,7 +207,7 @@ function Address() {
         });
         const order = await response.json();
         window.location.href=order.link
-        console.log(order)
+        // console.log(order)
 
         if (order.status == 404) {
             alert(order.message)

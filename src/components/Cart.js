@@ -25,6 +25,8 @@ function Cart() {
     const navigate = useNavigate("");
     const [loading, setLoading] = useState(false);
     const [delivery, setDelivery] = useState("pickup");
+    const [promoCode, setPromoCode] = useState('')
+    const [isDiscount, setIsDiscount] = useState(false)
 
     useEffect(() => {
         // const name = localStorage.getItem('userName')
@@ -46,7 +48,7 @@ function Cart() {
         const myDecodedToken = await decodeToken(token);
         if (myDecodedToken && myDecodedToken.email === email) {
             return myDecodedToken.email;
-        }else {
+        } else {
             // console.log("Unauth Activity");
             localStorage.clear('token');
             localStorage.clear('userEmail');
@@ -61,7 +63,7 @@ function Cart() {
                 `${process.env.REACT_APP_server_url}/api/v1/auth/safetyProtocol`,
                 {
                     method: "POST",
-                    body: JSON.stringify({ susEmailId: `${susEmailId}` , component: 'Cart.js' }),
+                    body: JSON.stringify({ susEmailId: `${susEmailId}`, component: 'Cart.js' }),
                     headers: {
                         "Content-Type": "application/json",
                     },
@@ -90,7 +92,7 @@ function Cart() {
         if (trueEmail) {
             setEmail(trueEmail);
             // console.log("email to be sent in backend:"+email+"  trueemail:"+trueEmail)
-           let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/getProductsInCart`, {
+            let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/getProductsInCart`, {
                 method: "POST",
                 body: JSON.stringify({
                     email,
@@ -116,7 +118,7 @@ function Cart() {
             } else {
                 // console.log("Fetched Successfully");
                 setProducts(result.products);
-            }            
+            }
 
 
         } else {
@@ -125,13 +127,13 @@ function Cart() {
             localStorage.removeItem('userEmail');
             // result = {status: 404};
         }
-        
+
 
         // for (let i = 0; i < result.length; i++) {
         //     const updatedProducts = result.filter(item => item._id === localStorage.getItem(`product${item._id}`));
         //     setProducts(updatedProducts);
         // }
-     
+
     };
 
     const updateSize = async (id, e) => {
@@ -216,7 +218,6 @@ function Cart() {
 
     const calculateSubtotal = () => {
         let subtotal = calculateMrp();
-
         return subtotal;
     };
 
@@ -465,16 +466,18 @@ function Cart() {
 
 
     /////////////////////////////////PHONEPAY////////////////////////////////////////////
-   
-    const amount = calculateSubtotal() ;
-    
+
+    var amount = calculateSubtotal();
+
     const paymentHandler = async (e) => {
         const token = localStorage.getItem('token')
-
+        if(isDiscount){
+            amount=0.9*amount
+        }
         setShowPayment(false)
-        const isHomeDelivery=false
-        localStorage.setItem("isHomeDelivery",isHomeDelivery)
-        localStorage.setItem("totalAmount",totalAmount)
+        const isHomeDelivery = false
+        localStorage.setItem("isHomeDelivery", isHomeDelivery)
+        localStorage.setItem("totalAmount", amount)
         const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/payment/order`, {
 
             method: "POST",
@@ -488,8 +491,8 @@ function Cart() {
             },
         });
         const order = await response.json();
-        window.location.href=order.link
-        console.log(order)
+        window.location.href = order.link
+        // console.log(order)
 
         if (order.status == 404) {
             alert(order.message)
@@ -498,11 +501,16 @@ function Cart() {
             window.location.reload();
         }
     };
-    
+
     /////////////////////////////////PHONEPAY////////////////////////////////////////////
 
+    var amount = calculateSubtotal();
     const confirmOrder = async () => {
         setLoading(true);
+        if(isDiscount){
+            amount=0.9*amount
+            console.log(amount)
+        }
         const email = localStorage.getItem("userEmail");
         const token = localStorage.getItem("token");
         const isHomeDelivery = delivery == "delivery" ? true : false;
@@ -513,7 +521,7 @@ function Cart() {
                 body: JSON.stringify({
                     email,
                     products,
-                    totalAmount,
+                    amount,
                     isHomeDelivery,
                     // quantity,
                     // selectedSize
@@ -573,6 +581,14 @@ function Cart() {
         setDelivery(event.target.value);
     }
 
+    function applyPromoCode() {
+        if (promoCode === "TEE20") {
+            setIsDiscount(true)
+        } else {
+            alert("Invalid Code")
+        }
+    }
+
     return (
         <div>
             {
@@ -611,29 +627,43 @@ function Cart() {
                                                 <p>Delivery Charges</p>
                                                 <p>{delivery === "pickup" ? "FREE" : "MAY VARY"}</p>
                                             </div>
+                                            <div class="checkout-summary-details">
+                                                <input className=""
+                                                    placeholder="Promo Code"
+                                                    value={promoCode}
+                                                    onChange={(e) => {
+                                                        setPromoCode(e.target.value);
+                                                    }}
+                                                />
+                                                <button onClick={applyPromoCode}>Apply</button>
+                                            </div>
                                         </div>
                                         <hr />
                                         <div class="checkout-total-amount">
                                             <p>Total Amount</p>
-                                            <p>₹{calculateSubtotal()}</p>
+                                            <p class="checkout-total-amount">₹{isDiscount ?
+                                               <div> <s>{calculateSubtotal()}</s>  {0.9 * calculateSubtotal()}
+                                                </div>
+                                                :
+                                                calculateSubtotal()}</p>
                                         </div>
                                     </div>
                                     <button
                                         class="cart-order-btn"
                                         onClick={
-                                            delivery === "pickup" ?proceedPayment:
-                                            () => {
-                                            navigate("/address", {
-                                                state: {
-                                                    mrp: calculateMrp(),
-                                                    noOfProducts: products.length,
-                                                }
-                                            });
-                                        }}
+                                            delivery === "pickup" ? proceedPayment :
+                                                () => {
+                                                    navigate("/address", {
+                                                        state: {
+                                                            mrp:isDiscount? 0.9*calculateMrp():calculateMrp(),
+                                                            noOfProducts: products.length,
+                                                        }
+                                                    });
+                                                }}
                                     >{
-                                        delivery === "pickup" ?"PLACE ORDER":"CONTINUE"
-                                    }
-                                        
+                                            delivery === "pickup" ? "PLACE ORDER" : "CONTINUE"
+                                        }
+
                                     </button>
                                 </div>
 
