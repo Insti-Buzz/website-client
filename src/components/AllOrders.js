@@ -81,8 +81,8 @@ function AllOrders() {
                     <p className='all-orders-content'>Date: {day + "-" + month + "-" + year}</p>
                    
                     <p className='all-orders-content'>
-                        {item.razorpayPaymentId ?
-                            <p>Payment Id: {item.razorpayPaymentId}</p>
+                        {item.transactionId ?
+                            <p>RazorPay Payment Id: {item.transactionId}</p>
                             :
                             <p>Cash On delivery</p>
                         }
