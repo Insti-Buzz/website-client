@@ -106,6 +106,8 @@ function Cart() {
             // alert('drfrefr');
             localStorage.removeItem('token');
             localStorage.removeItem('userEmail');
+            localStorage.removeItem('name');
+            localStorage.removeItem('phone');
             result = {status: 404};
         }
         

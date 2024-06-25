@@ -95,6 +95,8 @@ function Private() {
               susActivity(myDecodedToken.email);
               localStorage.removeItem('token');
               localStorage.removeItem('userEmail');
+              localStorage.removeItem('name');
+              localStorage.removeItem('phone');
             //   Navigate('/');
               
           } else {
@@ -102,6 +104,8 @@ function Private() {
             // console.log("Not an actual admin");
             localStorage.removeItem('token');
             localStorage.removeItem('userEmail');
+            localStorage.removeItem('name');
+            localStorage.removeItem('phone');
           }
     }
 

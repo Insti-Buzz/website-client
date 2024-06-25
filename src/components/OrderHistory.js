@@ -88,6 +88,8 @@ function OrderHistory() {
       // console.log("trueEmail does not exist!");
       localStorage.removeItem('token');
       localStorage.removeItem('userEmail');
+      localStorage.removeItem('name');
+      localStorage.removeItem('phone');
       // navigate('/')
       result = {status: 404};      
     }
@@ -98,6 +100,8 @@ function OrderHistory() {
       // alert(result.message);
       localStorage.removeItem("userEmail");
       localStorage.removeItem("token");
+      localStorage.removeItem("name");
+      localStorage.removeItem("phone");
       setLoading(false);
       navigate("/");
       window.location.reload();

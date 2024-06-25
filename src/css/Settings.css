@@ -1,0 +1,99 @@
+.settings{
+    height: fit-content;
+    width: 100%;
+    background-color: teal;
+    display: inline-flex;
+    justify-content: center;
+}
+
+.settings-navigation-container{
+    height: 100vh;
+    width: 40%;
+    background-color: white;
+    display: inline-flex;
+    /* align-items: end; */
+    justify-content: end;
+    /* position: relative; */
+}
+.wrapper{
+    width: 80%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    /* position: sticky; */
+    /* top: 0; */
+}
+
+.user-info-container{
+    /* height: 100px; */
+    width: 65%;
+    padding: 2vh;
+    /* padding-top: 8vh; */
+    margin-top: 10vh;
+    margin-bottom: 6vh;
+    background-color: #F9E8DC;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+}
+
+.profile-button , .my-orders-button , .saved-address-button , .logout-button{
+        /* height: 100px; */
+        width: 65%;
+        padding: 2vh;
+        margin: 1vh;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        border: 1px solid lightgrey;
+        border-radius: 5px;
+        font-size: 2vh;
+        transition: 500ms;
+}
+
+.profile-button:hover , .my-orders-button:hover , .saved-address-button:hover , .logout-button:hover{
+    /* background-color: #FFE281; */
+    /* font-size: 2.05vh; */
+}
+
+.user-name{
+    font-size: 3.5vh;
+}
+
+.user-email , .user-number{
+    font-size: 1.5vh;
+    color: grey;
+}
+
+.settings-body{
+    padding: 0;
+    margin: 0;
+    /* flex: 5; */
+    width: 60%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    /* height: 80vh; */
+    /* overflow: scroll;     */
+}
+
+.setting-body-title{
+    background-color: white;
+    font-size: 36px;
+    padding: 8vh 0 1vh 3vh;
+}
+
+.setting-body-content{
+    /* background-color:thistle; */
+    height: 80vh;
+    /* width: fit-content; */
+    /* width: 100%; */
+    /* width: 100%; */
+    overflow-y: auto;
+    overflow-x: hidden;
+    /* padding-top: 8vh; */
+}
