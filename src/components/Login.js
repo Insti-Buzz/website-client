@@ -117,6 +117,7 @@ function Login() {
                 onClick={() => {
                   setShowPassword(!showPassword);
                 }}
+                style={{ cursor: "pointer" }}
               />
             </div>
             {/* <div class="forgot-password">

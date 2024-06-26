@@ -270,6 +270,12 @@ function Cart() {
                                 >
                                     {/* <option value="">{selectedSize}</option> */}
                                     <option
+                                        value="XS"
+                                        disabled={isSizeDisabled("S", sizesAvailable)}
+                                    >
+                                        XS
+                                    </option>
+                                    <option
                                         value="S"
                                         disabled={isSizeDisabled("S", sizesAvailable)}
                                     >

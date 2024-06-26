@@ -266,6 +266,18 @@ const Product = () => {
                   <input
                     type="radio"
                     name="radios"
+                    value="XS"
+                    id="XS"
+                    onClick={(e) => {
+                      changeButton(e.target.value);
+                    }}
+                  />
+                  <span>XS</span>
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="radios"
                     value="S"
                     id="S"
                     onClick={(e) => {

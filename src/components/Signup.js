@@ -31,7 +31,7 @@ function Signup() {
       throw new Error("Enter Details");
       return false;
     }
-    
+
 
     let result = await fetch(
       `${process.env.REACT_APP_server_url}/api/v1/auth/register`,
@@ -171,6 +171,7 @@ function Signup() {
               onClick={() => {
                 setShowPassword(!showPassword);
               }}
+              style={{ cursor: "pointer" }}
             />
           </div>
 
