@@ -263,52 +263,14 @@ function Cart() {
                             <div class="checkout-product-size">
                                 <h5>Size:</h5>
                                 {/* <select id="dropdown" value={selectedSize[index]} onChange={(e => { handleSizeChange(index, e) })}> */}
-                                <select
-                                    id="size-dropdown"
-                                    value={item.size}
-                                    onChange={(e) => updateSize(item.orderItem_id, e)}
-                                >
+                                <select id="size-dropdown" value={item.size} onChange={(e) => updateSize(item.orderItem_id, e)}>
                                     {/* <option value="">{selectedSize}</option> */}
-                                    <option
-                                        value="XS"
-                                        disabled={isSizeDisabled("S", sizesAvailable)}
-                                    >
-                                        XS
-                                    </option>
-                                    <option
-                                        value="S"
-                                        disabled={isSizeDisabled("S", sizesAvailable)}
-                                    >
-                                        S
-                                    </option>
-                                    <option
-                                        value="M"
-                                        id="M"
-                                        disabled={isSizeDisabled("M", sizesAvailable)}
-                                    >
-                                        M
-                                    </option>
-                                    <option
-                                        value="L"
-                                        id="L"
-                                        disabled={isSizeDisabled("L", sizesAvailable)}
-                                    >
-                                        L
-                                    </option>
-                                    <option
-                                        value="XL"
-                                        id="XL"
-                                        disabled={isSizeDisabled("XL", sizesAvailable)}
-                                    >
-                                        XL
-                                    </option>
-                                    <option
-                                        value="2XL"
-                                        id="2XL"
-                                        disabled={isSizeDisabled("2XL", sizesAvailable)}
-                                    >
-                                        2XL
-                                    </option>
+                                    <option value="XS" id="XS" disabled={isSizeDisabled("XS", sizesAvailable)}>XS</option>
+                                    <option value="S" id="S" disabled={isSizeDisabled("S", sizesAvailable)}>S</option>
+                                    <option value="M" id="M" disabled={isSizeDisabled("M", sizesAvailable)}>M</option>
+                                    <option value="L" id="L" disabled={isSizeDisabled("L", sizesAvailable)}>L</option>
+                                    <option value="XL" id="XL" disabled={isSizeDisabled("XL", sizesAvailable)}>XL</option>
+                                    <option value="2XL" id="2XL" disabled={isSizeDisabled("2XL", sizesAvailable)}>2XL</option>
                                 </select>
                             </div>
                             <div class="checkout-product-quantity">
@@ -477,8 +439,8 @@ function Cart() {
 
     const paymentHandler = async (e) => {
         const token = localStorage.getItem('token')
-        if(isDiscount){
-            amount=0.9*amount
+        if (isDiscount) {
+            amount = 0.9 * amount
         }
         setShowPayment(false)
         const isHomeDelivery = false
@@ -513,8 +475,8 @@ function Cart() {
     var amount = calculateSubtotal();
     const confirmOrder = async () => {
         setLoading(true);
-        if(isDiscount){
-            amount=0.9*amount
+        if (isDiscount) {
+            amount = 0.9 * amount
             console.log(amount)
         }
         const email = localStorage.getItem("userEmail");
@@ -648,7 +610,7 @@ function Cart() {
                                         <div class="checkout-total-amount">
                                             <p>Total Amount</p>
                                             <p class="checkout-total-amount">₹{isDiscount ?
-                                               <div> <s>{calculateSubtotal()}</s>  {0.9 * calculateSubtotal()}
+                                                <div> <s>{calculateSubtotal()}</s>  {0.9 * calculateSubtotal()}
                                                 </div>
                                                 :
                                                 calculateSubtotal()}</p>
@@ -661,7 +623,7 @@ function Cart() {
                                                 () => {
                                                     navigate("/address", {
                                                         state: {
-                                                            mrp:isDiscount? 0.9*calculateMrp():calculateMrp(),
+                                                            mrp: isDiscount ? 0.9 * calculateMrp() : calculateMrp(),
                                                             noOfProducts: products.length,
                                                         }
                                                     });
