@@ -113,7 +113,55 @@ function MyOrders() {
         setOrders(result.products);
         console.log("orders:", orders);
       }
-    };
+  };
+  
+//   function OrderCards() {
+//     const cards = [];
+
+//     for (let i = 0; i <= 10; i++) {
+//         cards.push(
+//           <div className="orders-card">
+//           <div className="block user-info ">
+//               <h3>{uName}</h3>
+//               {/* <p className='sm-text'>{item.details}</p> */}
+//         <span className='sm-text'>Mobile: <span style={{ fontWeight: 500 }}>{phone}</span></span>
+//         <span className="order-placed-date" style={{ fontWeight: 300 }}>Date: {day+":"+month+":"+year} </span>
+//           </div>
+//       <>
+//       {item.productsOrdered.map(e1)}
+//       </>    
+
+//           <div className="delivery-info">
+//               <div className="timeline">
+//                   <div className="circle circle-one" style={{ backgroundColor: 'green' }}></div>
+//                   <hr style={item.isDelivered ? { borderTop: '2.5px dashed green '} : {}}/>
+//                   {/* <div className="circle circle-two" style={isDispatched ? { backgroundColor: 'green' } : {}}></div> */}
+//                   {/* <hr style={isDelivered ? { borderTop: '2.5px dashed green '} : {}}/> */}
+//                   <div className="circle circle-three" style={item.isDelivered ? { backgroundColor: 'green' } : {}}></div>
+//               </div>
+//               <div className="timeline-status">
+//                   <div className="status status-one">
+//                       <span className="order-placed">Order Placed</span>
+//                       {/* <span className="order-placed-date">date</span> */}
+//                   </div>
+
+//                   {/* <div className="status status-two">
+//                           <span className="dispatched">Dispatched</span>
+//                           <span className="dispatched-date">date</span>
+//                   </div> */}
+
+//                   <div className="status status-three">
+//                           <span className="delivered" style={item.isDelivered? {}:{color:'grey'}}>Delivered</span>
+//                           {/* <span className="order-placed-date" style={item.isDelivered? {}:{color:'grey'}}>date</span> */}
+//                   </div>
+//               </div>
+//           </div>
+//       </div>
+//         );
+//     }
+
+//     return cards;
+// }
 
     function e(item, index) {
         const orderId = item.order_id;
@@ -207,7 +255,7 @@ function MyOrders() {
     <>
         <div className='container'>
         {loading ? (
-        <LoadingPage />
+          <LoadingPage />
       ) : (
         <div class="order-my-order">
           {/* <h1>My Orders</h1>
