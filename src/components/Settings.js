@@ -23,22 +23,47 @@ function Settings({ reqComp }) {
     useEffect(() => {
         const email = localStorage.getItem('userEmail');
         const token = localStorage.getItem('token');
-        const name = localStorage.getItem('name');
-        const phone = localStorage.getItem('phone');
+        // const name = localStorage.getItem('name');
+        // const phone = localStorage.getItem('phone');
 
         if (!email && !token) {
             // alert('Please Login');
             navigate('/');
         } else {
             setActiveComponent({ component: reqComp.comp, title: reqComp.compName });
-            setUserDetails({
-                name: name,
-                email: email,
-                phone: phone,
-            });
+            // setUserDetails({
+            //     name: name,
+            //     email: email,
+            //     phone: phone,
+            // });
+            getUserDetails();
         }
 
     }, [reqComp]);
+
+    const getUserDetails = async () => {
+        var result = await fetch(
+            `${process.env.REACT_APP_server_url}/api/v1/auth/get-user-details`,
+            {
+                method: "GET",
+            },
+        );
+        result = await result.json();
+        // console.log(result);
+        setUserDetails({
+            name: result.name,
+            email: result.email,
+            phone: result.phoneNumber,
+        })
+        // setName(result.name);
+        // setGender(result.gender);
+        // setPhoneNumber(result.phoneNumber);
+        // setEmail(result.email);
+        // setAddress(result.address);
+        // setCity(result.city);
+        // setState(result.state);
+        // setPinCode(result.pinCode);
+    }
 
 
     const settingsNavigation = (toComponent, componentTitle) => {

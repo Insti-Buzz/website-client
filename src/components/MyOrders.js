@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import LoadingPage from "./LoadingPage";
 
 import { isExpired, decodeToken } from "react-jwt";
+import { Height } from '@mui/icons-material';
 
 function MyOrders() {
     const [orders, setOrders] = React.useState([]);
@@ -115,53 +116,58 @@ function MyOrders() {
       }
   };
   
-//   function OrderCards() {
-//     const cards = [];
+  function OrderCards() {
+    const cards = [];
 
-//     for (let i = 0; i <= 10; i++) {
-//         cards.push(
-//           <div className="orders-card">
-//           <div className="block user-info ">
-//               <h3>{uName}</h3>
-//               {/* <p className='sm-text'>{item.details}</p> */}
-//         <span className='sm-text'>Mobile: <span style={{ fontWeight: 500 }}>{phone}</span></span>
-//         <span className="order-placed-date" style={{ fontWeight: 300 }}>Date: {day+":"+month+":"+year} </span>
-//           </div>
-//       <>
-//       {item.productsOrdered.map(e1)}
-//       </>    
+    for (let i = 0; i <= 6; i++) {
+        cards.push(
+          <div className="orders-card">
+          <div className="block user-info ">
+              <div className="text-loader" style={{height:"1.8rem", width:"20%"}}></div>
+              <span className='text-loader sm-text' style={{height:"0.9rem", width:"18%"}}></span>
+              <span className="text-loader sm-text" style={{height:"0.9rem", width:"17%"}}></span>
+          </div>
+          <div className="block product-info">
+                <div className="info " style={{width:"40%"}}>
+                  <div className='productImg-loader'></div>
+                  <div className='sub-block'style={{width:"100%"}} >
+                    <div className='text-loader' style={{height:"2rem", width:"65%"}}></div>
+                    {/* <p className=' sm-text' style={{height:"0.9rem", width:"80%"}}></p> */}
+                    <div style={{marginTop:10+"px" , width:"100%" , display:"inline-flex"}}>
 
-//           <div className="delivery-info">
-//               <div className="timeline">
-//                   <div className="circle circle-one" style={{ backgroundColor: 'green' }}></div>
-//                   <hr style={item.isDelivered ? { borderTop: '2.5px dashed green '} : {}}/>
-//                   {/* <div className="circle circle-two" style={isDispatched ? { backgroundColor: 'green' } : {}}></div> */}
-//                   {/* <hr style={isDelivered ? { borderTop: '2.5px dashed green '} : {}}/> */}
-//                   <div className="circle circle-three" style={item.isDelivered ? { backgroundColor: 'green' } : {}}></div>
-//               </div>
-//               <div className="timeline-status">
-//                   <div className="status status-one">
-//                       <span className="order-placed">Order Placed</span>
-//                       {/* <span className="order-placed-date">date</span> */}
-//                   </div>
+                      <div className='text-loader sm-text' style={{height:"0.9rem", width:"30%", margin:"2px" }}></div>
+                      <div className='text-loader sm-text' style={{height:"0.9rem", width:"30%" , margin:"2px"}}></div>
+                    </div>
+                  </div>
+                </div>
+              <div className="price" style={{width:"18%"}}>
+                <div className='text-loader' style={{ height: "1.9rem", width: "48%"}}></div>
+                <div className='text-loader' style={{ height: "0.5rem", width: "89%", marginTop:"10px"}}></div>
+              </div>
+                  
+              </div>    
 
-//                   {/* <div className="status status-two">
-//                           <span className="dispatched">Dispatched</span>
-//                           <span className="dispatched-date">date</span>
-//                   </div> */}
+          <div className="delivery-info">
+              <div className="timeline">
+                  <div className="circle circle-one" style={{ backgroundColor: 'grey' }}></div>
+                  <hr style={"item.isDelivered" ? { borderTop: '2.5px dashed grey '} : {}}/>
+                  <div className="circle circle-three" style={"item.isDelivered" ? { backgroundColor: 'grey' } : {}}></div>
+              </div>
+              <div className="timeline-status">
+                  <div className="status status-one">
+                      <span className="text-loader" style={{color:"grey",height: "1.3rem", width: "85%", margin: "2px" }}></span>
+                  </div>
+                  <div className="status status-three">
+                          <span className="text-loader" style={{color:"grey",height: "1.3rem", width: "85%", margin: "2px" }}></span>
+                  </div>
+              </div>
+          </div>
+      </div>
+        );
+    }
 
-//                   <div className="status status-three">
-//                           <span className="delivered" style={item.isDelivered? {}:{color:'grey'}}>Delivered</span>
-//                           {/* <span className="order-placed-date" style={item.isDelivered? {}:{color:'grey'}}>date</span> */}
-//                   </div>
-//               </div>
-//           </div>
-//       </div>
-//         );
-//     }
-
-//     return cards;
-// }
+    return cards;
+}
 
     function e(item, index) {
         const orderId = item.order_id;
@@ -255,7 +261,7 @@ function MyOrders() {
     <>
         <div className='container'>
         {loading ? (
-          <LoadingPage />
+          OrderCards()
       ) : (
         <div class="order-my-order">
           {/* <h1>My Orders</h1>
