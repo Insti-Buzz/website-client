@@ -31,7 +31,7 @@ function MyOrders() {
       if (myDecodedToken && myDecodedToken.email === email) {
           return myDecodedToken.email;
       }else {
-          console.log("Unauth Activity");
+          // console.log("Unauth Activity");
           // localStorage.clear('token');
           // localStorage.clear('userEmail');
           await susActivity(myDecodedToken.email);
@@ -112,7 +112,7 @@ function MyOrders() {
       } else {
         console.log("No issues")
         setOrders(result.products);
-        console.log("orders:", orders);
+        // console.log("orders:", orders);
       }
   };
   

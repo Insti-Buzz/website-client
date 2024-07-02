@@ -480,7 +480,7 @@ function Cart({chooseComp}) {
         setLoading(true);
         if (isDiscount) {
             amount = 0.9 * amount
-            console.log(amount)
+            // console.log(amount)
         }
         const email = localStorage.getItem("userEmail");
         const token = localStorage.getItem("token");

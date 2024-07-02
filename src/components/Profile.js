@@ -32,7 +32,7 @@ function Profile() {
             },
         );
         result = await result.json();
-        console.log(result);
+        // console.log(result);
         setName(result.name);
         setGender(result.gender);
         setPhoneNumber(result.phoneNumber);
