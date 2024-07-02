@@ -32,11 +32,11 @@ function CollabForm() {
   const TicketToast = () => toast.promise(Submit(), {
     loading: 'Uploading',
     success: (result) => {
-      alert(result.message)
+      alert(result.message);
         return result.message;
     },
     error: (result) => {
-      alert(result.message)
+      alert(result.message);
         return result.message
     },
 },{

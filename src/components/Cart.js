@@ -6,10 +6,11 @@ import InstiBuzzLogo from '../assets/Horizontal Logo Transparent.png';
 
 import CloseIcon from "@mui/icons-material/Close";
 import LoadingPage from "./LoadingPage";
+import MyOrders from './MyOrders.js';
 
 import { isExpired, decodeToken } from "react-jwt";
 
-function Cart() {
+function Cart({chooseComp}) {
     const [products, setProducts] = React.useState([]);
     // const [quantity, setQuantity] = useState(Array(products.length).fill(''));
     // const [quantity, setQuantity] = useState(Array.from({ length: products.length }, () => 1));
@@ -125,6 +126,8 @@ function Cart() {
             // alert('drfrefr');
             localStorage.removeItem('token');
             localStorage.removeItem('userEmail');
+            localStorage.removeItem('name');
+            localStorage.removeItem('phone');
             // result = {status: 404};
         }
 
@@ -504,15 +507,17 @@ function Cart() {
         setTimeout(() => {
             setLoading(false)
         }, 1000);
+        console.log(response)
         if (response.status == 404) {
             alert(response.message)
             localStorage.removeItem("userEmail")
             navigate('/')
             window.location.reload();
         } else {
-            alert('Your order is Placed Successfully')
+            alert('Your order is Placed Successfully');
+            chooseComp(MyOrders, "My Orders");
             // window.location.reload();
-            navigate('/orders')
+            navigate('/settings')
         }
     };
 

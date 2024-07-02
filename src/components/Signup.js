@@ -74,6 +74,7 @@ function Signup() {
         loading: "Verifying OTP",
         success: (result) => {
           return result.message;
+
         },
         error: (result) => {
           return result.message;

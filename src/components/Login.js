@@ -13,8 +13,7 @@ function Login() {
   const [showPassword, setShowPassword] = React.useState(false);
   const [error, setError] = React.useState(false);
   const [loading, setLoading] = useState(false);
-  // const[isEnabled,setIsEnabled]=useState(true)
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   useEffect(() => {
     const email = localStorage.getItem("userEmail");
@@ -25,12 +24,9 @@ function Login() {
   }, []);
 
   const Login = async () => {
-    // setLoading(true)
-    // setIsEnabled(false)
     if (!email || !password) {
       setError(true);
       throw new Error("Enter Details");
-      return false;
     }
 
     let result = await fetch(
@@ -44,16 +40,14 @@ function Login() {
       }
     );
     result = await result.json();
-    // setLoading(false)
-    // setIsEnabled(true)
-    // console.log(result)
     if (result.status == 404) {
-      // alert(result.error)
       throw new Error(result.error);
     } else {
-      // alert(result.message)
       localStorage.setItem("token", result.accessToken);
       localStorage.setItem("userEmail", result.email);
+      // localStorage.setItem('name', result.name);
+      localStorage.setItem('name', result.userName);
+      localStorage.setItem('phone', result.userPhone);
       navigate("/");
       window.location.reload();
       return result;

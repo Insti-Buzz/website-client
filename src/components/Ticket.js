@@ -31,11 +31,11 @@ function Ticket() {
   const TicketToast = () => toast.promise(Submit(), {
     loading: 'Raising Ticket',
     success: (result) => {
-      alert(result.message)
+      alert(result.message);
         return result.message;
     },
     error: (result) => {
-      alert(result.message)
+      alert(result.message);
         return result.message
     },
 },{

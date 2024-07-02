@@ -1,0 +1,166 @@
+/* .profile-container > * , .profile-container > * > *
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+} */
+
+/* * {
+    box-sizing: border-box;
+} */
+
+:root 
+{
+    --grey-lite:rgb(205, 201, 201);
+}
+
+.profile-container
+{
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    width: 100%;
+    /* background: red; */
+    /* box-sizing: border-box; */
+    /* min-height: 100vh; */
+    height: fit-content;
+    margin-left: 20px;
+}
+
+.profile-container .card 
+{
+    /* background: yellow; */
+    /* width: 50vw; */
+    width: 80%;
+    padding: 2vw;
+    padding: 5px;
+    border: 1px solid grey;
+    /* aspect-ratio: 9/16; */
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    /* gap: 10px; */
+}
+
+.profile-container .card .block
+{
+    /* background: blue; */
+    padding: 10px;   
+    width: 100%;
+}
+
+
+.profile-container .card .block .input-cont
+{
+    /* background: red; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.profile-container .card .block .input-cont input, .profile-container .card .block .input-cont select
+{
+    padding: 8px;
+    width: 90%;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid var(--grey-lite);
+}
+
+
+.profile-container .card .block.address-selector
+{
+    display: flex;
+    gap: 30px;
+    padding: 0;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    /* background-color: red; */
+}
+
+
+.profile-container .card .block.address-selector button 
+{
+    padding: 15px 10px ;
+    flex: 0.5;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid var(--grey-lite);
+    cursor: pointer;
+    background: white;
+    
+}
+
+.profile-container .card .block.details
+{
+    border: 1px solid var(--grey-lite);
+    border-radius: 10px;
+}
+
+.grey
+{
+    color: grey;
+}
+
+.profile-container .card .block.residence-address
+{
+    /* background: red; */
+    display: flex;
+    gap: 20px;
+}
+
+.profile-container .card .block.address-type
+{
+    /* background: red; */
+    gap: 10px;
+    display: flex;
+}
+
+.profile-container .card .block.address-type button 
+{
+    padding: 5px 10px;
+    outline: none;
+    border: none;
+    font-size: 0.7rem;
+    border-radius: 5px;
+    background: rgb(255, 226, 129);
+    border: 1px solid var(--grey-lite);
+}
+
+.profile-container .card .block.save-btn
+{
+    /* background: red; */
+    display: flex;
+    justify-content: center;
+}
+
+.profile-container .card .block.save-btn button 
+{
+    padding: 10px 20px;
+    width: 40%;
+    font-size: 1.1rem;
+    outline: none;
+    border: none;
+    background: #FFE281;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 768px)
+{
+    .profile-container .card
+    {
+        width: 100vw;
+        padding: 20px;
+    }
+    .profile-container .card .block.save-btn button 
+    {
+        width: 100%;
+        background: #FFE281;
+    }
+}
+    
