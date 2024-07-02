@@ -14,10 +14,10 @@ function Profile() {
     const [pinCode, setPinCode] = useState("");
 
     useEffect(() => {
-        getUserDetails();
         const email = localStorage.getItem("userEmail");
         setEmail(email)
         const token = localStorage.getItem("token");
+        getUserDetails();
     }, []);
 
     const getUserDetails = async () => {
