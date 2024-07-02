@@ -15,13 +15,20 @@ function Profile() {
 
     useEffect(() => {
         getUserDetails();
+        const email = localStorage.getItem("userEmail");
+        setEmail(email)
+        const token = localStorage.getItem("token");
     }, []);
 
     const getUserDetails = async () => {
         var result = await fetch(
             `${process.env.REACT_APP_server_url}/api/v1/auth/get-user-details`,
             {
-                method: "GET",
+                method: "POST",
+                body: JSON.stringify({  email }),
+                headers: {
+                    "Content-type": "application/json",
+                },
             },
         );
         result = await result.json();

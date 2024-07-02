@@ -18,10 +18,12 @@ function Settings({ reqComp }) {
         email: '',
         phone: '',
     });
+    const[email,setEmail]=useState()
     const navigate = useNavigate();
 
     useEffect(() => {
         const email = localStorage.getItem('userEmail');
+        setEmail(email)
         const token = localStorage.getItem('token');
         // const name = localStorage.getItem('name');
         // const phone = localStorage.getItem('phone');
@@ -43,9 +45,13 @@ function Settings({ reqComp }) {
 
     const getUserDetails = async () => {
         var result = await fetch(
-            `${process.env.REACT_APP_server_url}/api/v1/auth/get-user-details`,
+           `${process.env.REACT_APP_server_url}/api/v1/auth/get-user-details`,
             {
-                method: "GET",
+                method: "POST",
+                body: JSON.stringify({  email }),
+                headers: {
+                    "Content-type": "application/json",
+                },
             },
         );
         result = await result.json();
