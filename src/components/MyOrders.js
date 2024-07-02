@@ -76,7 +76,7 @@ function MyOrders() {
           `${process.env.REACT_APP_server_url}/api/v1/products/orders`,
           {
             method: "POST",
-            body: JSON.stringify({ trueEmail }),
+            body: JSON.stringify({ email }),
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${token}`,
