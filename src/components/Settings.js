@@ -1,4 +1,4 @@
-import React, { useState ,useEffect ,useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import '../css/Settings.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,8 +7,8 @@ import Profile from './Profile.js';
 // import SavedAddress from './MyOrders.js';
 
 
-function Settings({ reqComp}) {
-    
+function Settings({ reqComp }) {
+
     // console.log("Name : ", reqComp.compName);
 
     // console.log("userDetails : ",userDetails);
@@ -17,27 +17,27 @@ function Settings({ reqComp}) {
         name: '',
         email: '',
         phone: '',
-      });
+    });
     const navigate = useNavigate();
 
     useEffect(() => {
-        const email = localStorage.getItem('userEmail'); 
+        const email = localStorage.getItem('userEmail');
         const token = localStorage.getItem('token');
         const name = localStorage.getItem('name');
         const phone = localStorage.getItem('phone');
-        
+
         if (!email && !token) {
             // alert('Please Login');
-            navigate('/');            
+            navigate('/');
         } else {
             setActiveComponent({ component: reqComp.comp, title: reqComp.compName });
             setUserDetails({
                 name: name,
                 email: email,
                 phone: phone,
-              });
+            });
         }
-        
+
     }, [reqComp]);
 
 
@@ -68,8 +68,8 @@ function Settings({ reqComp}) {
                 if (rightDiv.scrollTop < rightDiv.scrollHeight - rightDiv.clientHeight) {
                     rightDiv.scrollTop += e.deltaY;
                     e.preventDefault();
-                  } else {}
-                
+                } else { }
+
             } else if (e.deltaY < 0) {
                 if (window.scrollY > 0) {
 
@@ -97,10 +97,10 @@ function Settings({ reqComp}) {
                     // console.log("else")
                     rightDiv.scrollTop = rightDiv.scrollTop + e.deltaY;
                     e.preventDefault();
-                }                
+                }
             }
         }
-    
+
         const rightDiv = rightDivRef.current;
         const outDiv1 = outDiv1Ref.current;
         const outDiv2 = outDiv2Ref.current;
@@ -118,61 +118,61 @@ function Settings({ reqComp}) {
             rightDiv.addEventListener('wheel', handleScrollInside);
         }
 
-    
-        return () => {
-          if (outDiv1) {
-            outDiv1.removeEventListener('wheel', handleScrollOutside);
-          }
-          if (outDiv2) {
-            outDiv2.removeEventListener('wheel', handleScrollOutside);
-          }
-          if (outDiv3) {
-            outDiv3.removeEventListener('wheel', handleScrollOutside);
-          }
-          if (rightDiv) {
-            rightDiv.removeEventListener('wheel', handleScrollInside);
-          }
-        };
-      }, []);
-  
-    return (
-    <>
-      <div className="settings">
-        
-        <div className="settings-navigation-container" ref={outDiv1Ref}>
-                    <div className="wrapper" >
-                    
-                    <div className="user-info-container">
-                        <span className='user-name'>{userDetails.name}</span>
-                        <span className="user-email">{userDetails.email}</span>
-                            <span className="user-number">{ userDetails.phone }</span>  
-                    </div> 
-                    <div className="profile-button"
-                        style={activeComponent.title === "Profile" ?
-                            { backgroundColor: "#FFE281" } : {}}
-                        onClick={()=>settingsNavigation(Profile ,"Profile")}
-                    >My Profile</div>
-                    <div className="my-orders-button"
-                        style={activeComponent.title === "My Orders" ?
-                            { backgroundColor: "#FFE281" } : {}}
-                        onClick={()=>settingsNavigation(MyOrders,"My Orders")}
-                    >My Orders</div>
 
-                    <div className="logout-button" onClick={Logout}>Logout</div>
-                   
+        return () => {
+            if (outDiv1) {
+                outDiv1.removeEventListener('wheel', handleScrollOutside);
+            }
+            if (outDiv2) {
+                outDiv2.removeEventListener('wheel', handleScrollOutside);
+            }
+            if (outDiv3) {
+                outDiv3.removeEventListener('wheel', handleScrollOutside);
+            }
+            if (rightDiv) {
+                rightDiv.removeEventListener('wheel', handleScrollInside);
+            }
+        };
+    }, []);
+
+    return (
+        <>
+            <div className="settings">
+
+                <div className="settings-navigation-container" ref={outDiv1Ref}>
+                    <div className="wrapper" >
+
+                        <div className="user-info-container">
+                            <span className='user-name'>{userDetails.name}</span>
+                            <span className="user-email">{userDetails.email}</span>
+                            <span className="user-number">{userDetails.phone}</span>
+                        </div>
+                        <div className="profile-button"
+                            style={activeComponent.title === "Profile" ?
+                                { backgroundColor: "#FFE281" } : {}}
+                            onClick={() => settingsNavigation(Profile, "Profile")}
+                        >My Profile</div>
+                        <div className="my-orders-button"
+                            style={activeComponent.title === "My Orders" ?
+                                { backgroundColor: "#FFE281" } : {}}
+                            onClick={() => settingsNavigation(MyOrders, "My Orders")}
+                        >My Orders</div>
+
+                        <div className="logout-button" onClick={Logout}>Logout</div>
+
+                    </div>
+
+
                 </div>
-                    
-                            
-        </div>
-        
-        
-        <div className="settings-body">
+
+
+                <div className="settings-body">
                     <div className="setting-body-title" ref={outDiv2Ref}>{activeComponent.title}</div>
-                    <div className="setting-body-content" ref={rightDivRef}>{<activeComponent.component/>}</div>
-        </div>
-      </div>
-    </>
-  )
+                    <div className="setting-body-content" ref={rightDivRef}>{<activeComponent.component />}</div>
+                </div>
+            </div>
+        </>
+    )
 }
 
 export default Settings
