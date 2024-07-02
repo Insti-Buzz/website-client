@@ -132,7 +132,7 @@ function Shop() {
     function ProductCards() {
         const cards = [];
     
-        for (let i = 0; i <= 6; i++) {
+        for (let i = 0; i <= 10; i++) {
             cards.push(
                 <div className="shop-product-div" key={i}>
                     <button className="shop-product-card">
@@ -200,7 +200,7 @@ function Shop() {
                             <div className="shop-navigation">
                                 {/* <p className='shop-path'>Shop / <span style={{ color: 'black' }}>Our Products</span></p> */}
                                 {/* <br /> */}
-                                <p className='shop-count'><span style={{ color: 'black' }}>Our Products</span> - {activeProducts.length}</p>
+                                <p className='shop-count'><span style={{ color: 'black' }}>Our Products</span> - {loading ? <div className='p-qty'></div> : activeProducts.length}</p>
                             </div>
                         </div>
                         <div className="shop-container">
@@ -241,7 +241,7 @@ function Shop() {
                                     </div> */}
                             {/* </div>
                             </div> */}
-                            <div className="shop-products-display">{loading ? ProductCards() : activeProducts.map(e)}</div>
+                            <div className="shop-products-display" style={loading?{height:"300px", overflow:"hidden"}:{}}>{loading ? ProductCards() : activeProducts.map(e)}</div>
                         </div>
                     </div>
             }

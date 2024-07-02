@@ -50,10 +50,10 @@ function Navbar({chooseComp}) {
         // if (token) {
         //   const myDecodedToken = decodeToken(token);
         //   const isMyTokenExpired = isExpired(token); 
-        //     if ( myDecodedToken.email == process.env.REACT_APP_admin_email && !isMyTokenExpired) {
-        //         setIsAdmin(true);
-        //         console.log("admin access granted");
-        //     }
+            // if ( myDecodedToken.email == process.env.REACT_APP_admin_email && !isMyTokenExpired) {
+            //     setIsAdmin(true);
+            //     console.log("admin access granted");
+            // }
         // }
     }, [isLogin])
 
@@ -155,13 +155,13 @@ function Navbar({chooseComp}) {
                             <a className='nav-blog' onClick={addProductPage}>Add</a> :
                             <></>
                         } */}
-                        {
+                        {/* {
                             isLogin ?
                                 <a className='nav-orders' href='/orders' onClick={ordersPage}>Orders</a>
                                 :
                                 <></>
 
-                        }
+                        } */}
                         <a className='nav-ourServices' href='/ourServices' onClick={ourServicesPage}>Our Services</a>
                         <a className='nav-aboutUs' href='/about' onClick={aboutPage}>About Us</a>
                     </div>
@@ -173,8 +173,8 @@ function Navbar({chooseComp}) {
                             (isLogin && <>
                                 {/* <button onClick={wishlistPage} class="fa fa-heart-o nav-wish-logo"></button> */}
                                 <button className="fa fa-shopping-bag " aria-hidden="true" onClick={cartPage}></button>
-                                <div className="nav-profile-button" onClick={profileDropDownHeight.open ? profileDropDownClose : profileDropDownOpen}>{ usersName }</div>
                                 <button className="fa fa-bars nav-cart-logo" aria-hidden="true" onClick={dropDownOpen}></button>
+                                <div className="nav-profile-button" onClick={profileDropDownHeight.open ? profileDropDownClose : profileDropDownOpen}>{ usersName }</div>
                             </>)
                             :
                             <>
@@ -196,7 +196,10 @@ function Navbar({chooseComp}) {
                         profileDropDownClose()
                         navigate('/settings');
                     }}>My Orders</div>
-                    <div onClick={wishlistPage} >Wishlist</div>
+                    <div onClick={() => {
+                        profileDropDownClose()
+                        wishlistPage();
+                    }} >Wishlist</div>
                     <div onClick={Logout}>Logout</div>
                     {/* <div>hyufegwu</div> */}
                     {/* <div>hyufegwu</div> */}

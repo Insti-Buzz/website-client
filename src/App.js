@@ -70,10 +70,10 @@ function App() {
           <Route path="wishlist" element={<Wishlist />} />
           <Route path="shop" element={<Shop />} />
           <Route path="product/:id" element={<Product />} />
-          <Route path="cart" element={<Cart />} />
+          <Route path="cart" element={<Cart chooseComp={chooseComp}/>} />
           <Route path="address" element={<Address />} />
           <Route path="confirm" element={<Payment />} />
-          <Route path="orders" element={<OrderHistory />} />
+          {/* <Route path="orders" element={<OrderHistory />} /> */}
           <Route path="ticket" element={<Ticket />} />
           <Route path="about" element={<AboutUs />} />
           <Route path="terms-conditions" element={<Terms />} />
