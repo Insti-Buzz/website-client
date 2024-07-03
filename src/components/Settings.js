@@ -38,10 +38,13 @@ function Settings({ reqComp }) {
             //     email: email,
             //     phone: phone,
             // });
-            getUserDetails();
         }
-
+        
     }, [reqComp]);
+    
+    useEffect(() => {
+        getUserDetails();
+    }, [email]);
 
     const getUserDetails = async () => {
         var result = await fetch(
@@ -55,7 +58,7 @@ function Settings({ reqComp }) {
             },
         );
         result = await result.json();
-        // console.log(result);
+        console.log(result);
         setUserDetails({
             name: result.name,
             email: result.email,
