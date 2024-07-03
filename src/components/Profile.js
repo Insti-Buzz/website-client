@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import '../css/Profile.css';
 
-function Profile() {
-    const [selected, setSelected] = useState('hostel')
-    const [addressType, setAddressType] = useState('home')
-    const [name, setName] = useState("");
+function Profile({userDetails}) {
+    // const [selected, setSelected] = useState('hostel')
+    // const [addressType, setAddressType] = useState('home')
+    const [name, setName] = useState('');
     const [gender, setGender] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [email, setEmail] = useState("");
@@ -17,34 +17,15 @@ function Profile() {
         const email = localStorage.getItem("userEmail");
         setEmail(email)
         const token = localStorage.getItem("token");
-    }, []);
-
-    useEffect(() => {
-        getUserDetails();
-    }, [email]);
-
-    const getUserDetails = async () => {
-        var result = await fetch(
-            `${process.env.REACT_APP_server_url}/api/v1/auth/get-user-details`,
-            {
-                method: "POST",
-                body: JSON.stringify({ email }),
-                headers: {
-                    "Content-type": "application/json",
-                },
-            },
-        );
-        result = await result.json();
-        // console.log(result);
-        setName(result.name);
-        setGender(result.gender);
-        setPhoneNumber(result.phoneNumber);
-        // setEmail(result.email);
-        setAddress(result.address);
-        setCity(result.city);
-        setState(result.state);
-        setPinCode(result.pinCode);
-    }
+        
+        setName(userDetails.name);
+        setGender(userDetails.gender);
+        setPhoneNumber(userDetails.phone);
+        setAddress(userDetails.address);
+        setCity(userDetails.city);
+        setState(userDetails.state);
+        setPinCode(userDetails.pinCode);
+    }, [userDetails]);
 
     const updateUserDetails = async () => {
         var result = await fetch(

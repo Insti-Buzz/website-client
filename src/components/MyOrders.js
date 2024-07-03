@@ -7,11 +7,9 @@ import LoadingPage from "./LoadingPage";
 import { isExpired, decodeToken } from "react-jwt";
 import { Height } from '@mui/icons-material';
 
-function MyOrders() {
+function MyOrders({userDetails}) {
     const [orders, setOrders] = React.useState([]);
     const [loading, setLoading] = useState(true);
-    const uName = localStorage.getItem("name");
-    const phone = localStorage.getItem("phone");
     const navigate = useNavigate();
   
     useEffect(() => {
@@ -26,57 +24,53 @@ function MyOrders() {
       }
     }, []);
   
-    const checkAuth = async (email, token) => {
-      const myDecodedToken = decodeToken(token);
-      if (myDecodedToken && myDecodedToken.email === email) {
-          return myDecodedToken.email;
-      }else {
-          // console.log("Unauth Activity");
-          // localStorage.clear('token');
-          // localStorage.clear('userEmail');
-          await susActivity(myDecodedToken.email);
-          return null;
-      }
-    };
+    // const checkAuth = async (email, token) => {
+    //   const myDecodedToken = decodeToken(token);
+    //   if (myDecodedToken && myDecodedToken.email === email) {
+    //       return myDecodedToken.email;
+    //   }else {
+    //       await susActivity(myDecodedToken.email);
+    //       return null;
+    //   }
+    // };
   
-    const susActivity = async (susEmailId) => {
-      try {
-          let result = await fetch(
-              `${process.env.REACT_APP_server_url}/api/v1/auth/safetyProtocol`,
-              {
-                  method: "POST",
-                  body: JSON.stringify({ susEmailId: `${susEmailId}` , component: 'OrderHistory.js' }),
-                  headers: {
-                      "Content-Type": "application/json",
-                  },
-              }
-          );
-          result = await result.json();
+    // const susActivity = async (susEmailId) => {
+    //   try {
+    //       let result = await fetch(
+    //           `${process.env.REACT_APP_server_url}/api/v1/auth/safetyProtocol`,
+    //           {
+    //               method: "POST",
+    //               body: JSON.stringify({ susEmailId: `${susEmailId}` , component: 'OrderHistory.js' }),
+    //               headers: {
+    //                   "Content-Type": "application/json",
+    //               },
+    //           }
+    //       );
+    //       result = await result.json();
   
-          if (result.status === 404) {
-              console.log("Error");
-          } else {
-              console.log("Action may result in Account Ban");
-          }
-      } catch (error) {
-          console.error("Error during suspicious activity notification", error);
-      }
-    };  
+    //       if (result.status === 404) {
+    //           console.log("Error");
+    //       } else {
+    //           console.log("Action may result in Account Ban");
+    //       }
+    //   } catch (error) {
+    //       console.error("Error during suspicious activity notification", error);
+    //   }
+    // };  
   
     const getProducts = async () => {
       setLoading(true);
       const email = localStorage.getItem("userEmail");
       const token = localStorage.getItem("token");
-      const trueEmail = await checkAuth(email, token);
   
       var result;
-      if (trueEmail) {
+      if (email) {
         // console.log("trueEmail exists : ", trueEmail);
         result = await fetch(
           `${process.env.REACT_APP_server_url}/api/v1/products/orders`,
           {
             method: "POST",
-            body: JSON.stringify({ email }),
+            body: JSON.stringify({ email:email }),
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${token}`,
@@ -89,19 +83,14 @@ function MyOrders() {
           setLoading(false)
         }, 1000);
       } else {
-        // console.log("trueEmail does not exist!");
         localStorage.removeItem('token');
         localStorage.removeItem('userEmail');
         localStorage.removeItem('name');
         localStorage.removeItem('phone');
-        // navigate('/')
         result = {status: 404};      
       }
-      // console.log(email)
-  
-  
+
       if (result.status == 404) {
-        // alert(result.message);
         localStorage.removeItem("userEmail");
         localStorage.removeItem("token");
         localStorage.removeItem("name");
@@ -181,9 +170,9 @@ function MyOrders() {
         return (
             <div className="orders-card">
                 <div className="block user-info ">
-                    <h3>{uName}</h3>
+                    <h3>{userDetails.name}</h3>
                     {/* <p className='sm-text'>{item.details}</p> */}
-              <span className='sm-text'>Mobile: <span style={{ fontWeight: 500 }}>{phone}</span></span>
+              <span className='sm-text'>Mobile: <span style={{ fontWeight: 500 }}>{userDetails.phone}</span></span>
               <span className="order-placed-date" style={{ fontWeight: 300 }}>Date: {day+":"+month+":"+year} </span>
               <span className='sm-text'>Subtotal: <span style={{ fontWeight: 500 }}>{item.subTotal}</span></span>
 
