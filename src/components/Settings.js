@@ -18,7 +18,7 @@ function Settings({ reqComp }) {
         email: '',
         phone: '',
     });
-    const[email,setEmail]=useState()
+    const[email,setEmail]=useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -58,7 +58,6 @@ function Settings({ reqComp }) {
             },
         );
         result = await result.json();
-        console.log(result);
         setUserDetails({
             name: result.name,
             email: result.email,
