@@ -17,15 +17,18 @@ function Profile() {
         const email = localStorage.getItem("userEmail");
         setEmail(email)
         const token = localStorage.getItem("token");
-        getUserDetails();
     }, []);
+
+    useEffect(() => {
+        getUserDetails();
+    }, [email]);
 
     const getUserDetails = async () => {
         var result = await fetch(
             `${process.env.REACT_APP_server_url}/api/v1/auth/get-user-details`,
             {
                 method: "POST",
-                body: JSON.stringify({  email }),
+                body: JSON.stringify({ email }),
                 headers: {
                     "Content-type": "application/json",
                 },
@@ -36,7 +39,7 @@ function Profile() {
         setName(result.name);
         setGender(result.gender);
         setPhoneNumber(result.phoneNumber);
-        setEmail(result.email);
+        // setEmail(result.email);
         setAddress(result.address);
         setCity(result.city);
         setState(result.state);
