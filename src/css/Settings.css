@@ -89,7 +89,7 @@
 
 .setting-body-content{
     /* background-color:thistle; */
-    height: 80vh;
+    height: 86vh;
     /* width: fit-content; */
     /* width: 100%; */
     /* width: 100%; */
@@ -97,3 +97,7 @@
     overflow-x: hidden;
     /* padding-top: 8vh; */
 }
+
+.setting-body-content::-webkit-scrollbar {
+    display: none;
+  }

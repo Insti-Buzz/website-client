@@ -1,0 +1,226 @@
+.individual-order-container{
+    width: 85%;
+    height: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(236, 236, 236);
+    padding: 0 0 10px 0 ;    /* background-color: purple; */
+}
+
+.block-2{
+    /* height: 200px; */
+    width: 92%;
+    background-color: white;
+    margin: 10px 0 0 0;
+    padding: 20px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px ;
+}
+
+.product-info-container{
+    align-items: center;
+}
+
+.product-info-container .product-img-container{
+    width: 174px;
+    height: 232px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0 10px 0;
+}
+
+.product-info-container .product-img-container img{
+    object-fit:scale-down;
+    height: 100%;
+}
+
+.product-info-container .product-name-container{
+    font-size: 24px;
+    font-family: Tenor Sans;
+}
+.product-info-container .product-type-container{
+    font-size: 16px;
+    font-family: Tenor Sans;
+    color: #555555;
+    /* font-weight: 600; */
+}
+.product-info-container .product-size-container{
+    font-size: 14px;
+    font-family: Tenor Sans;
+    color: #555555;
+}
+
+.product-status-map-container{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* padding: 20px 0 20px 0; */
+    /* width: 100%; */
+    gap: 5px;
+}
+
+.product-status-map-container .timeline{
+    height: 12px;
+    width: 82%;
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+}
+.product-status-map-container .timeline hr{
+    border: none;
+    border-top: 2.5px dashed grey;
+    background-color: inherit;
+    width: 80%;
+    font-family: monospace;
+}
+
+.product-status-map-container .timeline .circle{
+    height: 140%;
+    aspect-ratio: 1/1;
+    background-color: grey;
+    border-radius: 50%;
+}
+.product-status-map-container .timeline-status{
+    height: 30px;
+    height: fit-content;
+    width: 98%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.product-status-map-container .timeline-status .status{
+    height: fit-content;
+    width: 18%;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-status-info-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: #E9E9E9; */
+}
+
+.product-status-info{
+    border: 1px solid #808080 ;
+    color: #555555;
+    background-color: #E9E9E9;
+    width: 100%;
+    height: 32px;
+    border-radius: 5px;
+    padding: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.delivery-info-container{
+    /* padding: 20px; */
+    /* background-color: thistle; */
+    flex-direction: column;
+}
+
+.delivery-info-header{
+    /* background-color: aquamarine; */
+    font-family: tenor sans;
+    font-size: 18px;
+    font-weight: bolder;
+}
+
+.delivery-info-customer-name{
+    font-family: Tenor sans;
+    font-size: 16px;
+    margin: 10px 0 10px 0;
+    font-weight: 400;
+}
+.delivery-info-customer-address{
+    font-family: Tenor sans;
+    font-size: 14px;
+    margin: 0 0 8px 0;
+    font-weight:lighter; 
+    max-width: 480px;   
+}
+
+.delivery-info-customer-phone{
+    font-family: Tenor sans;
+    font-size: 12px;
+    /* margin: 10px 0 10px 0; */
+    font-weight:lighter; 
+    max-width: 480px;     
+}
+
+.total-price-info-container{
+    flex-direction: column;
+    /* background-color: aqua; */
+}
+
+.total-price-info-box-1{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+}
+
+.total-price-info-box-1-header{
+    font-size: 22px;
+    font-family: Tenor Sans;
+    font-weight: bold;
+}
+
+.total-price-info-box-1-Value{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-1-value{
+    font-size: 18px;
+    font-family: Tenor Sans;
+    font-weight: bold; 
+    margin-bottom: 7px;
+}
+
+.box-1-value-breakup{
+    font-size: 12px;
+    font-family: Tenor Sans;
+    font-weight: bold;  
+    color: #FF7F50;   
+}
+
+.total-price-info-box-2{
+    flex-direction: column;
+    border: 1px solid #808080 ;
+    color: #555555;
+    background-color: #E9E9E9;
+    width: 95%;
+    height: 52px;
+    border-radius: 5px;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.box-2-payment-method{
+    font-size: 18px;
+    font-family: Tenor Sans;
+    /* font-weight: bold;         */
+}
+
+.order-placed-date , .dispatched-date, .order-placed-date{
+    font-size: 14px;
+    /* color: #555555; */
+    font-family: tenor sans;
+
+}
+

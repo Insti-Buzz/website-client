@@ -35,20 +35,7 @@ import Profile from './components/Profile.js';
 function App() {
   
   const [reqComp, setReqComp] = useState({ comp: Profile, compName: "Profile" });
-  // const [userDetails, setUserDetails] = useState({
-  //   name: 'per',
-  //   email: 'person@gmail.com',
-  //   phone: '123456789',
-  // });
 
-  // function updateUserDetails(res) {
-  //   console.log("res : ", res);
-  //   setUserDetails({
-  //     name: res.userName,
-  //     email: res.email,
-  //     phone: res.userPhone,
-  //   });
-  // }
 
   function chooseComp(comp , compName) {
     setReqComp({ comp: comp, compName: compName });

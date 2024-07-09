@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 import MyOrders from './MyOrders.js';
 import Profile from './Profile.js';
+import IndividualOrder from './IndividualOrder.js';
+import ExchangeProduct from './ExchangeProduct.js';
 import Address from './Address.js';
 // import SavedAddress from './MyOrders.js';
 
@@ -115,8 +117,8 @@ function Settings({ reqComp }) {
     }
 
 
-    const settingsNavigation = (toComponent, componentTitle) => {
-        setActiveComponent({ component: toComponent, title: componentTitle });
+    const settingsNavigation = (toComponent, componentTitle , props) => {
+        setActiveComponent({ component: toComponent , title: componentTitle , props: props });
     }
 
     const Logout = () => {
@@ -242,7 +244,9 @@ function Settings({ reqComp }) {
 
                 <div className="settings-body">
                     <div className="setting-body-title" ref={outDiv2Ref}>{activeComponent.title}</div>
-                    <div className="setting-body-content" ref={rightDivRef}>{<activeComponent.component userDetails={userDetails} />}</div>
+                    <div className="setting-body-content" ref={rightDivRef}>{<activeComponent.component userDetails={userDetails} settingsNavigation={settingsNavigation} props={activeComponent.props} />}</div>
+                    {/* <div className="setting-body-content" ref={rightDivRef}>{<IndividualOrder/>}</div> */}
+                    {/* <div className="setting-body-content" ref={rightDivRef}>{<ExchangeProduct/>}</div> */}
                 </div>
             </div>
         </>

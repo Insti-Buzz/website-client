@@ -1,0 +1,450 @@
+.exchange-container{
+    width: 80%;
+    height: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(236, 236, 236);
+    padding: 0 0 10px 0 ;    /* background-color: purple; */
+    /* box-sizing: border-box; */
+}
+
+.exchange-container > *{
+    box-sizing: border-box;
+}
+
+.block-3{
+        width: 92%;
+        background-color: white;
+        margin: 10px 0 0 0;
+        /* padding: 20px 20px 20px 20px; */
+        display: flex;
+        /* flex-direction: column; */
+        border-radius: 5px ;
+        border: 1px solid #AAAAAA;
+}
+
+.exchange-container-1{
+    flex-direction: column;
+    /* padding: 20px; */
+}
+
+.exchange-user-details{
+    display: flex;
+    flex-direction: column;
+    padding: 20px 20px 10px 20px;
+    border-bottom: 1px solid #AAAAAA;
+}
+
+.exchange-user-details .exchange-user-name{
+    font-size: 20px;
+    font-family: Tenor Sans;
+    margin-bottom: 10px;
+}
+.exchange-user-details .exchange-user-address{
+    font-size: 14px;
+    font-family: Tenor Sans;
+    margin-bottom: 5px;
+}
+.exchange-user-details .exchange-user-phone{
+    font-size: 12px;
+    font-family: Tenor Sans;
+}
+
+.exchange-product-details{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px 20px 20px 20px;
+}
+
+.exchange-info{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.exchange-product-details .exchange-info img {
+    height: 110px;
+    object-fit: cover;
+    aspect-ratio: 11/15;
+    background-color: grey;
+}
+
+.exchange-product-name{
+    font-family: tenor sans;
+    font-size: 24px;
+}
+
+.exchange-sub-block{
+    display: flex;
+    flex-direction:column ;
+    justify-content: space-between;
+    padding: 2px 0 2px 0;
+}
+
+.sm-text{
+    font-size: 16px;
+    font-family: tenor sans;
+}
+
+.exchange-price{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    gap: 0;
+    padding: 2px;
+}
+
+.exchange-price h2{
+    margin: 0 0 10px 0;
+    padding: 0;
+    font-size: 24px;
+    font-family: tenor sans;
+
+}
+
+.exchange-container-2{
+    flex-direction: column;
+    padding: 20px;
+}
+
+.conatiner-2-heading{
+    font-size: 20px;
+    font-family: tenor sans;
+    font-weight: 600;
+}
+
+.radio-btn-container{
+    display: inline-flex;
+    /* justify-content:center; */
+    margin-top: 15px;
+    /* align-items: center; */
+    /* width: 90%; */
+}
+
+.radio-btn-container div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.radio-btn-container div input{
+    appearance: none;
+
+    border-radius: 50%;
+    width: 19px;
+    height: 19px;
+
+    transition: 300ms;
+    border: 3px double #AAAAAA;
+}
+
+.radio-btn-container div input:checked{
+    border: 5px double white;
+    background-color: green;
+}
+
+.exchange-container-3{
+    flex-direction: column;
+    padding: 20px;
+}
+
+.container-3-heading{
+    font-size: 20px;
+    font-family: tenor sans;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.form-container{
+    display: inline-flex;
+    /* background-color: aqua; */
+    /* gap: 5px; */
+}
+
+.form-container form{
+    display: inline-flex;
+    /* background-color: orange; */
+    gap: 10px;
+    padding: 2px;
+}
+
+.image-1-container{
+    height: 120px;
+    width: 95px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #FFCB00;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 22px;
+    font-weight: bolder;
+    color: #FFCB00;
+    transition: background-color 0.3s ease;
+    overflow: hidden;
+    background-color: white;
+    /* margin: 10px; */
+}
+
+.image-1-container:hover{
+    font-size: 24px;
+}
+.image-1-container img{
+    height: 100%;
+    width: 100%;
+    object-fit:cover;
+    /* border: 2px solid white;    */
+}
+.container-3-heading-2{
+    font-size: 20px;
+    font-family: tenor sans;
+    margin-bottom: 15px;
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+.exchange-reason-form{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 30px;
+}
+
+.exchange-reason-form div input{
+    appearance: none;
+    margin: 2px;
+    border-radius: 50%;
+    width: 19px;
+    height: 19px;
+
+    transition: 300ms;
+    border: 3px double #AAAAAA;    
+}
+
+.exchange-reason-form div{
+    display: flex;
+    align-items: center;
+    gap:5px;
+    /* justify-content: center; */
+}
+
+.exchange-reason-form div input:checked{
+    border: 5px double white;
+    background-color: green;
+}
+
+.exchange-reason-form label{
+    color: grey;
+}
+
+.exchange-reason-form div input:checked ~ label{
+    color: black;
+}
+
+.exchange-container-4-heading{
+    /* display: flex; */
+    /* width: 92%; */
+    background-color: rgb(236, 236, 236);
+    border: none;
+    font-size: 20px;
+    font-family: tenor sans;
+    font-weight: 500;
+}
+
+.exchange-container-4{
+    background-color: rgb(236, 236, 236);
+    border:none;
+}
+.exchange-container-4 textarea{
+    width: 100% ;
+    height: 180px;
+    border: 1px solid #AAAAAA;
+    background-color: white;
+    /* rows: 10; */
+
+}
+
+.exchange-container-5{
+    flex-direction: column;
+    padding: 0 20px 20px 20px;
+}
+
+.title-container{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0 20px 0;
+}
+
+.product-product-size  .title-container .title{
+    font-family: tenor sans;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.product-product-size  .title-container .size-unavailable{
+    font-family: tenor sans;
+    font-size: 12px;
+    color: #808080;
+}
+
+.product-product-size  .title-container .size-unavailable a{
+    text-decoration: underline;
+    color: #FF7F50;
+    font-size: 14px;
+}
+.exchange-product-size-input-container {
+    display: flex;
+    gap: 10px;
+}
+
+.exchange-product-size-input-container input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.exchange-product-size-input-container span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 40px;
+    border: 1px solid #000;
+    background-color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.exchange-product-size-input-container input:checked+span {
+    color: black;
+    background-color: #FFCB00;
+}
+
+.exchange-product-size-input-container input:hover+span {
+    /* background-color: #a6602d; */
+    border: 1px solid #FFCB00;
+    /* color: #a6602d; */
+}
+
+.exchange-product-size-input-container input:disabled+span {
+    border: 2px solid #c5c5c5;
+    color: #c5c5c5;
+}
+
+.exchange-product-size-input-container input:disabled+span {
+    cursor: not-allowed;
+}
+
+.condition-accept-container{
+    width: 92%;
+    margin: 20px;
+    /* display: flex; */
+    /* align-items: center; */
+}
+
+.checkbox-container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: #555555;
+    /* background: orange; */
+    /* width: 100%; */
+  }
+  
+  /* Hide the browser's default checkbox */
+  .checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    /* background-color: #eee; */
+    background-color: white;
+    border: 1px solid #555555;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .checkbox-container:hover input ~ .checkmark {
+    background-color: #ccc;
+    cursor: pointer;
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .checkbox-container input:checked ~ .checkmark {
+    background-color: #808080;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .checkbox-container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  .all-form-submit-button-container{
+    /* background-color: #FFCB00; */
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .all-form-submit-button{
+    width: 320px;
+    height: 50px;
+    background-color: #FFCB00;
+    margin: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-family: tenor sans;
+    cursor: pointer;
+    transition: 400ms;
+  }
+  .all-form-submit-button:hover{
+    scale: 1.02;
+  }

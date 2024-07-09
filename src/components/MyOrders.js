@@ -1,13 +1,17 @@
 import React,{ useState , useEffect } from 'react'
-import '../css/MyOrders.css'
-
 import { useNavigate } from "react-router-dom";
-import LoadingPage from "./LoadingPage";
 
-import { isExpired, decodeToken } from "react-jwt";
-import { Height } from '@mui/icons-material';
+import '../css/MyOrders.css'
+import orderPlacedImage from '../assets/vectors/OrderPlaced.svg' 
+import arrowHead from '../assets/vectors/ArrowHead.svg'
+import deliveredSvg from '../assets/vectors/Delivered.svg'
+import infoPopupSymbol from '../assets/vectors/InfoPopupSymbol.svg'
+import { Icon } from '@mui/material';
 
-function MyOrders({userDetails}) {
+import IndividualOrder from './IndividualOrder.js';
+
+
+function MyOrders({userDetails , settingsNavigation}) {
     const [orders, setOrders] = React.useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
@@ -24,39 +28,6 @@ function MyOrders({userDetails}) {
       }
     }, []);
   
-    // const checkAuth = async (email, token) => {
-    //   const myDecodedToken = decodeToken(token);
-    //   if (myDecodedToken && myDecodedToken.email === email) {
-    //       return myDecodedToken.email;
-    //   }else {
-    //       await susActivity(myDecodedToken.email);
-    //       return null;
-    //   }
-    // };
-  
-    // const susActivity = async (susEmailId) => {
-    //   try {
-    //       let result = await fetch(
-    //           `${process.env.REACT_APP_server_url}/api/v1/auth/safetyProtocol`,
-    //           {
-    //               method: "POST",
-    //               body: JSON.stringify({ susEmailId: `${susEmailId}` , component: 'OrderHistory.js' }),
-    //               headers: {
-    //                   "Content-Type": "application/json",
-    //               },
-    //           }
-    //       );
-    //       result = await result.json();
-  
-    //       if (result.status === 404) {
-    //           console.log("Error");
-    //       } else {
-    //           console.log("Action may result in Account Ban");
-    //       }
-    //   } catch (error) {
-    //       console.error("Error during suspicious activity notification", error);
-    //   }
-    // };  
   
     const getProducts = async () => {
       setLoading(true);
@@ -159,119 +130,89 @@ function MyOrders({userDetails}) {
 }
 
     function e(item, index) {
-        const orderId = item.order_id;
- 
-        const now = parseInt(item.date); // Get the current timestamp in milliseconds
-        const date = new Date(now);
-        const day = date.getDate().toString().padStart(2, "0");
-        const month = (date.getMonth() + 1).toString().padStart(2, "0");
-        const year = date.getFullYear();
-    
+      const orderId = item.order_id;
+      const isDelivered = item.isDelivered;
         return (
-            <div className="orders-card">
-                <div className="block user-info ">
-                    <h3>{userDetails.name}</h3>
-                    {/* <p className='sm-text'>{item.details}</p> */}
-              <span className='sm-text'>Mobile: <span style={{ fontWeight: 500 }}>{userDetails.phone}</span></span>
-              <span className="order-placed-date" style={{ fontWeight: 300 }}>Date: {day+":"+month+":"+year} </span>
-              <span className='sm-text'>Subtotal: <span style={{ fontWeight: 500 }}>{item.subTotal}</span></span>
-
-                </div>
             <>
-            {item.productsOrdered.map(e1)}
-            </>    
-
-                <div className="delivery-info">
-                    <div className="timeline">
-                        <div className="circle circle-one" style={{ backgroundColor: 'green' }}></div>
-                        <hr style={item.isDelivered ? { borderTop: '2.5px dashed green '} : {}}/>
-                        {/* <div className="circle circle-two" style={isDispatched ? { backgroundColor: 'green' } : {}}></div> */}
-                        {/* <hr style={isDelivered ? { borderTop: '2.5px dashed green '} : {}}/> */}
-                        <div className="circle circle-three" style={item.isDelivered ? { backgroundColor: 'green' } : {}}></div>
-                    </div>
-                    <div className="timeline-status">
-                        <div className="status status-one">
-                            <span className="order-placed">Order Placed</span>
-                            {/* <span className="order-placed-date">date</span> */}
-                        </div>
-
-                        {/* <div className="status status-two">
-                                <span className="dispatched">Dispatched</span>
-                                <span className="dispatched-date">date</span>
-                        </div> */}
-
-                        <div className="status status-three">
-                                <span className="delivered" style={item.isDelivered? {}:{color:'grey'}}>Delivered</span>
-                                {/* <span className="order-placed-date" style={item.isDelivered? {}:{color:'grey'}}>date</span> */}
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {item.productsOrdered.map(e1(item))}
+            </>
         );
   }
   
-  function e1(item, index) {
+  const e1 = (item) => (item1, index) => {
     return (
-                    <div className="block product-info">
-                        <div className="info ">
-                      <img src={item.product.imageUrl[0]} alt="ordered product info" />
-                      <div className='sub-block'>
-                          <h2>{item.product.name}</h2>
-                          <p className='sm-text'>{item.style}</p>
-                          <div style={{marginTop:10+"px"}}>
+<div className='orders-card' >
+          <div className="block user-info ">
+              
+            <div className="status-indicator-container">
+              <div className="status-img-container" style={item.isDelivered ? { backgroundColor: '#42210B' } : {}}>
+              <img src={item.isDelivered ? deliveredSvg : orderPlacedImage} alt="" />
+              </div>
+              <div className="status-text-container">
+                <div className="status-text">{ item.isDelivered? 'Delivered' : 'Order Placed'}</div>
+                <div className="status-date">{ item.isDelivered? '' : `Order Placed on: ${item.date}`} </div>
+              </div>
+            </div>  
+          </div>
+        <div className="block product-info" onClick={()=>settingsNavigation(IndividualOrder, "My Orders" , {item:item , item1:item1 })}>
+        <div className="info ">
+            <img src={item1.product.imageUrl[0]} alt="ordered product info" />
+            <div className='sub-block'>
+                <h2>{item1.product.name}</h2>
+                <p className='sm-text'>{item1.style}</p>
+                <div style={{marginTop:10+"px"}}>
 
-                          <span className='sm-text' style={{marginRight:10+"px"}}>Size: {item.size}</span>
-                          <span className='sm-text'>Qty: {item.quantity}</span>
-                          </div>
-                      </div>
-                  </div>
-                  <div className="price"><h2>₹{item.price}</h2><span className='smm-text'>Inclusive of all taxes.</span></div>
-                  
-                  </div>
-    
+                <span className='sm-text' style={{marginRight:10+"px"}}>Size: {item1.size}</span>
+                <span className='sm-text'>Qty: {item1.quantity}</span>
+                </div>
+            </div>
+        </div>
+        <img src={arrowHead} className="price"/> 
+      </div>
+        
+        <div className="available-action block">
+          <div className='availlable-action-btn' style={{marginLeft:'15px'}}>{item.isDelivered ? 'Exchange' : 'Cancel'}</div>
+          <img src={infoPopupSymbol} alt="" />
+          <div className='popup'>
+            {item.isDelivered ?
+              'You can exchange your order within 7 days after delivery. Once 7 days have passed, exchange is not possible.'
+              :
+              'You can cancel your order within 24 hours of placing it. Once 24 hours have passed, cancellation is not possible.'}</div>
+        </div>
+  </div>  
     );
   }
 
-    // const [tshirt,setTshirt] = useState({
-    //     name:"White IITM",
-    //     style:"Regular T-shirt",
-    //     size:"S",
-    //     qty:1,
-    //     price:50
-    // })
+  // const [activeComponent, setActiveComponent] = useState(null);
 
-    // const [user,setUser] = useState({
-    //     name:"Ritika Sahni",
-    //     address:"House No. 94, Near Village Metro Station, Nellutla City, Sector 30, Deot Wada, North East Delhi, Delhi, Pincode-199222",
-    //     mobile:"1234567891"
-    // })
+  // function chooseOrder(individualOrder) {
+  //   setActiveComponent(individualOrder); 
+  // }
 
-    // const [isDispatched, setIsDispatched] = useState(true);
-    // const [isDelivered, setIsDelivered] = useState(true);
+
   return (
     <>
         <div className='container'>
         {loading ? (
           OrderCards()
-      ) : (
-        <div class="order-my-order">
-          {/* <h1>My Orders</h1>
-          <hr /> */}
+        ) : (
+          <div class="order-my-order">
 
-          {(orders.length != 0) ? (
-            orders.map(e)
-          ) : (
-            <div class="order-content">
-              <h1>
-                Seems like you are new here...
-                <br />
-                Visit our shop page and order now!
-              </h1>
-            </div>
-          )}
-        </div>
-      )}            
-        {/* {orders.map(e)} */}
+            {(orders.length != 0) ? (
+              orders.map(e)
+            ) : (
+              <div class="order-content">
+                <h1>
+                  Seems like you are new here...
+                  <br />
+                  Visit our shop page and order now!
+                </h1>
+              </div>
+            )}
+              </div>
+        )}
+        
+
           
         </div>
     </>
@@ -279,3 +220,15 @@ function MyOrders({userDetails}) {
 }
 
 export default MyOrders
+
+
+
+
+
+
+
+
+
+
+
+// onClick='{() => chooseOrder(<IndividualOrder item={item} />)}'
