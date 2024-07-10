@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 import Profile from './Profile';
 import MyOrders from './MyOrders';
+import MyAddresses from './MyAddresses';
+
 // import { isExpired, decodeToken } from "react-jwt";
 
 // import toast, { Toaster } from 'react-hot-toast';
@@ -67,7 +69,7 @@ function Navbar({chooseComp}) {
     }
 
     function profileDropDownOpen() {
-        setProfileDropDownHeight({height:'350px', boxShadow: '1px 1px 12px 1px rgba(0, 0, 0, 0.482)',open:true});
+        setProfileDropDownHeight({height:'fit-content', boxShadow: '1px 1px 12px 1px rgba(0, 0, 0, 0.482)',open:true});
     }
 
     function profileDropDownClose() {
@@ -197,14 +199,16 @@ function Navbar({chooseComp}) {
                         navigate('/settings');
                     }}>My Orders</div>
                     <div onClick={() => {
+                        chooseComp(MyAddresses, "My Addresses");
+                        profileDropDownClose()
+                        navigate('/settings');
+                    }}>My Addresses</div>
+                    <div onClick={() => {
                         profileDropDownClose()
                         wishlistPage();
                     }} >Wishlist</div>
                     <div onClick={Logout}>Logout</div>
-                    {/* <div>hyufegwu</div> */}
-                    {/* <div>hyufegwu</div> */}
-                    {/* <div>hyufegwu</div> */}
-                    {/* <div>hyufegwu</div> */}
+
                 </div>    
                 <div className="nav-dropdown" style={{ height: dropDownHeight }}>
                     <button className="fa fa-times" aria-hidden="true" onClick={dropDownClose}></button>
