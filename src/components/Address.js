@@ -4,11 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import InstiBuzzLogo from '../assets/Horizontal Logo Transparent.png';
-
+import { isEqual } from "lodash";
 import CloseIcon from "@mui/icons-material/Close";
 import LoadingPage from "./LoadingPage";
+import { isExpired, decodeToken } from "react-jwt";
+import MyOrders from "./MyOrders";
 
-function Address() {
+
+function Address({chooseComp}) {
     const [products, setProducts] = React.useState([]);
     // const [quantity, setQuantity] = useState(Array(products.length).fill(''));
     // const [quantity, setQuantity] = useState(Array.from({ length: products.length }, () => 1));
@@ -33,12 +36,21 @@ function Address() {
     const [deliveryCharge, setDeliveryCharge] = useState(0);
     const [paymentMethod, setPaymentMethod] = useState("COD");
     const [error, setError] = React.useState(false);
-
-
-    const totalMrp = location.state.mrp;
-    const noOfProducts = location.state.noOfProducts
+    const [addresses, setAddresses] = React.useState([""])
+    const [showAddAddress, setShowAddAddress] = useState(false)
+    const [selectedAddressId, setSelectedAddressId] = useState('');
+    const [totalMrp, setTotalMrp] = useState('')
+    const [noOfProducts, setNoOfProducts] = useState('')
+    // const totalMrp=0,noOfProducts=0
+    // const totalMrp = location.state.mrp;
+    // const noOfProducts = location.state.noOfProducts
 
     useEffect(() => {
+        const mrp = localStorage.getItem('mrp')
+        const noOfProducts = localStorage.getItem('noOfProducts')
+        setTotalMrp(mrp)
+        setNoOfProducts(noOfProducts)
+        getProducts();
         const name = localStorage.getItem('userName')
         const phone = localStorage.getItem('userPhone')
         const email = localStorage.getItem("userEmail");
@@ -50,7 +62,8 @@ function Address() {
             alert("Please Login");
             navigate("/");
         }
-        console.log(totalMrp)
+        getAddresses()
+        // console.log(totalMrp)
     }, []);
 
     const setDeliveryCharges = async () => {
@@ -63,21 +76,23 @@ function Address() {
         } else {
             setValidPin(true)
             const district = data[0].PostOffice[0].District;
-
-            if (pinCode === "600036") {
-                setDeliveryCharge(19);
-            } else if (district === "Chennai") {
-                setDeliveryCharge(49);
-            } else {
-                setDeliveryCharge(99);
-            }
+            // setDeliveryCharge(99)
+            // if (pinCode === "600036") {
+            //     setDeliveryCharge(19);
+            // } else if (district === "Chennai") {
+            //     setDeliveryCharge(49);
+            // } else {
+            //     setDeliveryCharge(99);
+            // }
         }
     }
 
     const calculateSubtotal = () => {
-        let subtotal = totalMrp;
+        let subtotal = parseInt(totalMrp);
 
-        subtotal += deliveryCharge;
+        subtotal += 99;
+        // subtotal += deliveryCharge;
+        // alert(deliveryCharge)
 
         return subtotal;
     };
@@ -85,24 +100,7 @@ function Address() {
     function RadioButtonGroup(props) {
         return (
             <div class="checkout-select-delivery">
-                <label>
-                    <p>Cash on Delivery.</p>
-                    <input
-                        type="radio"
-                        value="COD"
-                        checked={props.selectedOption === "COD"}
-                        onChange={props.handleChange}
-                    />
-                </label>
-                <label>
-                    <p>Pay now</p>
-                    <input
-                        type="radio"
-                        value="pay now"
-                        checked={props.selectedOption === "pay now"}
-                        onChange={props.handleChange}
-                    />
-                </label>
+
             </div>
         );
     }
@@ -111,29 +109,126 @@ function Address() {
         setPaymentMethod(event.target.value);
     }
 
+    const setAddressField = (event) => {
+        setSelectedAddressId(event.target.value);
+        const index = addresses.findIndex((e) => e.id === event.target.value);
+        console.log(addresses[index]);
+        setAddress1(addresses[index].address1);
+        setAddress2(addresses[index].address2);
+        setPinCode(addresses[index].pinCode);
+        setCity(addresses[index].city);
+        setState(addresses[index].state);
+    }
+
+    const getProducts = async () => {
+        setLoading(true);
+        const email = localStorage.getItem("userEmail");
+        const token = localStorage.getItem("token");
+        const trueEmail = await checkAuth(email, token);
+        // console.log("trueEmail = ", trueEmail);
+        // var result;
+        if (trueEmail) {
+            setEmail(trueEmail);
+            // console.log("email to be sent in backend:"+email+"  trueemail:"+trueEmail)
+            let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/getProductsInCart`, {
+                method: "POST",
+                body: JSON.stringify({
+                    email,
+                }),
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+            );
+            // console.log("from backeng result: "+result)
+            result = await result.json();
+            // console.log("after trueemail: ", result);
+            setTimeout(() => {
+                setLoading(false)
+            }, 1000);
+            if (result.status == 404) {
+                // alert(result.message);
+                // console.log("issue in fetching");
+                localStorage.removeItem("userEmail");
+                navigate("/");
+                window.location.reload();
+            } else {
+                // console.log("Fetched Successfully");
+                setProducts(result.products);
+            }
+
+
+        } else {
+            // alert('drfrefr');
+            localStorage.removeItem('token');
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('name');
+            localStorage.removeItem('phone');
+            // result = {status: 404};
+        }
+    }
+
+    const checkAuth = async (email, token) => {
+        const myDecodedToken = await decodeToken(token);
+        if (myDecodedToken && myDecodedToken.email === email) {
+            return myDecodedToken.email;
+        } else {
+            // console.log("Unauth Activity");
+            localStorage.clear('token');
+            localStorage.clear('userEmail');
+            await susActivity(myDecodedToken.email);
+            return null;
+        }
+    }
+
+    const susActivity = async (susEmailId) => {
+        try {
+            let result = await fetch(
+                `${process.env.REACT_APP_server_url}/api/v1/auth/safetyProtocol`,
+                {
+                    method: "POST",
+                    body: JSON.stringify({ susEmailId: `${susEmailId}`, component: 'Address.js' }),
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+            result = await result.json();
+
+            if (result.status === 404) {
+                // console.log("Error");
+            } else {
+                // console.log("Action may result in Account Ban");
+            }
+        } catch (error) {
+            // console.error("Error during suspicious activity notification", error);
+        }
+    }
+
     const closePayment = () => {
         setShowPayment(false)
+    }
+
+    const closeAddress = () => {
+        setShowAddAddress(false)
     }
 
     const proceedPayment = () => {
         const subtotal = calculateSubtotal()
         setTotalAmount(subtotal)
 
-        if (!address1 || !address2 || !pinCode || !city || !state) {
-            setError(true);
-            return false;
-            throw new Error("Enter Details");
+        if (selectedAddressId.length == 0) {
+            alert("Select an address");
+            return;
         }
-        if (!validPin) {
-            alert("Please Enter Valid PinCode")
-            return false;
-        }
+
         setShowPayment(true)
 
     }
 
     const confirmOrder = async () => {
-        const amount=totalAmount
+        const amount = totalAmount
         setLoading(true);
         const email = localStorage.getItem("userEmail");
         const token = localStorage.getItem("token");
@@ -152,8 +247,6 @@ function Address() {
                     pinCode,
                     city,
                     state
-                    // quantity,
-                    // selectedSize
                 }),
                 headers: {
                     "Content-Type": "application/json",
@@ -173,11 +266,12 @@ function Address() {
         } else {
             alert('Your order is Placed Successfully')
             // window.location.reload();
-            navigate('/orders')
+            chooseComp(MyOrders,"My Orders")
+            navigate('/settings')
         }
     };
 
-    const amount = calculateSubtotal() ;
+    const amount = calculateSubtotal();
     const currency = "INR";
     const receiptId = "qwsaq1";
 
@@ -185,9 +279,9 @@ function Address() {
         const token = localStorage.getItem('token')
 
         setShowPayment(false)
-        const isHomeDelivery=true
-        localStorage.setItem("isHomeDelivery",isHomeDelivery)
-        localStorage.setItem("totalAmount",totalAmount)
+        const isHomeDelivery = true
+        localStorage.setItem("isHomeDelivery", isHomeDelivery)
+        localStorage.setItem("totalAmount", totalAmount)
         const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/payment/order`, {
 
             method: "POST",
@@ -206,7 +300,7 @@ function Address() {
             },
         });
         const order = await response.json();
-        window.location.href=order.link
+        window.location.href = order.link
         // console.log(order)
 
         if (order.status == 404) {
@@ -320,25 +414,223 @@ function Address() {
     //     e.preventDefault();
     // };
 
+    const getAddresses = async () => {
+        setLoading(true);
+        const email = localStorage.getItem("userEmail");
+        const token = localStorage.getItem("token");
+
+        var result;
+        if (email) {
+            // console.log("trueEmail exists : ", trueEmail);
+            result = await fetch(
+                `${process.env.REACT_APP_server_url}/api/v1/auth/get-user-addresses`,
+                {
+                    method: "POST",
+                    body: JSON.stringify({
+                        email: email,
+
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            result = await result.json();
+            console.log(result)
+            setTimeout(() => {
+                setLoading(false)
+            }, 1000);
+        } else {
+            localStorage.removeItem('token');
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('name');
+            localStorage.removeItem('phone');
+            //   result = {status: 404};      
+        }
+
+        if (result.status == 404) {
+            localStorage.removeItem("userEmail");
+            localStorage.removeItem("token");
+            localStorage.removeItem("name");
+            localStorage.removeItem("phone");
+            setLoading(false);
+            navigate("/");
+            window.location.reload();
+        } else {
+            console.log("No issues")
+            setAddresses(result);
+            // console.log("orders:", orders);
+        }
+    };
+
+    const saveAddress = async () => {
+        if (!address1 || !address2 || !pinCode || !city || !state) {
+            setError(true);
+            return false;
+            throw new Error("Enter Details");
+        }
+        if (!validPin) {
+            setError(true);
+            alert("Please Enter Valid PinCode")
+            return false;
+        }
+        // setLoading(true);
+        const email = localStorage.getItem("userEmail");
+        const token = localStorage.getItem("token");
+
+        var result;
+        if (email) {
+            try {
+
+
+                // console.log("trueEmail exists : ", trueEmail);
+                result = await fetch(
+                    `${process.env.REACT_APP_server_url}/api/v1/auth/add-user-address`,
+                    {
+                        method: "POST",
+                        body: JSON.stringify({
+                            email,
+                            address1,
+                            address2,
+                            pinCode,
+                            city,
+                            state
+                        }),
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+                result = await result.json();
+                console.log(result)
+                navigate('/address')
+                setTimeout(() => {
+                    setLoading(false)
+                }, 1000);
+            } catch (error) {
+                alert(error)
+            }
+        } else {
+            localStorage.removeItem('token');
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('name');
+            localStorage.removeItem('phone');
+        }
+        if (result.status == 404) {
+            localStorage.removeItem("userEmail");
+            localStorage.removeItem("token");
+            localStorage.removeItem("name");
+            localStorage.removeItem("phone");
+            setLoading(false);
+            navigate("/");
+            window.location.reload();
+        } else {
+            console.log("object")
+        }
+    }
+
+    const removeAddress = async (index) => {
+        const email = localStorage.getItem("userEmail");
+        const token = localStorage.getItem("token");
+
+        var result;
+        if (email) {
+            try {
+                // console.log("trueEmail exists : ", trueEmail);
+                result = await fetch(
+                    `${process.env.REACT_APP_server_url}/api/v1/auth/remove-user-address`,
+                    {
+                        method: "POST",
+                        body: JSON.stringify({
+                            email,
+                            index
+                        }),
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+                result = await result.json();
+                alert(result.message)
+                window.location.reload()
+                setTimeout(() => {
+                    setLoading(false)
+                }, 1000);
+            } catch (error) {
+                alert(error)
+            }
+        } else {
+            localStorage.removeItem('token');
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('name');
+            localStorage.removeItem('phone');
+        }
+        if (result.status == 404) {
+            localStorage.removeItem("userEmail");
+            localStorage.removeItem("token");
+            localStorage.removeItem("name");
+            localStorage.removeItem("phone");
+            setLoading(false);
+            navigate("/");
+            window.location.reload();
+        }
+    }
+
+    function e(item, index) {
+        return (
+            <div className='address-card'>
+                <div className="address-card-content">
+                    <span>
+                        <p>{item.address1}</p>
+                        <p> {item.address2}</p>
+                        <p>{item.pinCode}</p>
+                        <div>
+                            <p> {item.city} , {item.state}</p>
+
+                        </div>
+                        <p> {item.phoneNumber}</p>
+                    </span>
+                    <input
+                        type="radio"
+                        value={item.id}
+                        checked={selectedAddressId === item.id}
+                        onChange={setAddressField}
+                    />
+                </div>
+                <button className="address-remove-button"
+                    onClick={() =>
+                        removeAddress(index)
+                    }
+                >
+                    Remove
+                </button>
+            </div>
+        )
+    }
+    const addressHandler = async (e) => {
+        setShowAddAddress(true)
+    }
+
     return (
         <div>
             {
                 loading ? <LoadingPage /> :
                     <div>
                         <div class="checkout-main-container">
-                            <div class="address-form">
-                                <h3>ADDRESS</h3>
-                                <form>
-                                    <input id={error && !address1 && "input-error"}autoComplete="disabled" type="text" placeholder="Address line 1*" name="address_line1" onChange={(e) => setAddress1(e.target.value)} required></input>
-                                    <input id={error && !address2 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 2*" name="address_line2" onChange={(e) => setAddress2(e.target.value)} required></input>
-                                    <input id={error && !pinCode && "input-error"} autoComplete="disabled" type="text" placeholder="Pin Code*" name="pin_code" onBlur={setDeliveryCharges} onChange={(e) => setPinCode(e.target.value)} required></input>
-                                    <input id={error && !city && "input-error"} autoComplete="disabled" type="text" placeholder="City*" name="city" onChange={(e) => setCity(e.target.value)} required></input>
-                                    <input id={error && !state && "input-error"} autoComplete="disabled" type="text" placeholder="State*" name="state" onChange={(e) => setState(e.target.value)} required></input>
-                                    {/* <button class="cart-order-btn" onClick={toPaymentPage}>
-                                        DELIVER TO THIS ADDRESS
-                                    </button> */}
-                                </form>
+                            <div className="checkout-address-container">
+                                <div className="address-container">
+
+                                    {addresses.map(e)}
+                                </div>
+                                <button onClick={addressHandler}>Add Address</button>
                             </div>
+
+
+
+
                             <div class="checkout-order-summary">
                                 {/* <div class="checkout-delivery-method">
                                     <h3>PAYMENT METHOD</h3>
@@ -364,7 +656,8 @@ function Address() {
                                         </div>
                                         <div class="checkout-summary-details">
                                             <p>Delivery Charges</p>
-                                            <p>{(deliveryCharge == 0) ? "MAY VARY" : `₹${deliveryCharge}`}</p>
+                                            {/* <p>{(deliveryCharge == 0) ? "MAY VARY" : `₹${deliveryCharge}`}</p> */}
+                                            <p>₹99</p>
                                         </div>
                                     </div>
                                     <hr />
@@ -380,6 +673,24 @@ function Address() {
                                     {(paymentMethod === "COD") ? "PLACE ORDER" : "PROCEED TO PAYMENT"}
                                 </button>
 
+
+                                {showAddAddress && <div class="address-form cart-popup">
+                                    <IconButton onClick={() => closeAddress()}>
+                                        <CloseIcon />
+                                    </IconButton>
+                                    <h3>ADDRESS</h3>
+                                    <form>
+                                        <input id={error && !address1 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 1*" name="address_line1" onChange={(e) => setAddress1(e.target.value)} required></input>
+                                        <input id={error && !address2 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 2*" name="address_line2" onChange={(e) => setAddress2(e.target.value)} required></input>
+                                        <input id={error && !pinCode && "input-error"} autoComplete="disabled" type="text" placeholder="Pin Code*" name="pin_code" onBlur={setDeliveryCharges} onChange={(e) => setPinCode(e.target.value)} required></input>
+                                        <input id={error && !city && "input-error"} autoComplete="disabled" type="text" placeholder="City*" name="city" onChange={(e) => setCity(e.target.value)} required></input>
+                                        <input id={error && !state && "input-error"} autoComplete="disabled" type="text" placeholder="State*" name="state" onChange={(e) => setState(e.target.value)} required></input>
+                                        <button onClick={saveAddress}>Save Address</button>
+                                        {/* <button class="cart-order-btn" onClick={toPaymentPage}>
+                                        DELIVER TO THIS ADDRESS
+                                    </button> */}
+                                    </form>
+                                </div>}
                                 {showPayment && (
                                     <div className="cart-popup">
                                         {/* <i className='fa fa-times' aria-hidden='true' onClick={setShowPayment(false)}></i> */}

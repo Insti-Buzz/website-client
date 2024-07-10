@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import MyOrders from './MyOrders.js';
 import Profile from './Profile.js';
-import Address from './Address.js';
+import MyAddresses from './MyAddresses.js';
 // import SavedAddress from './MyOrders.js';
 
 import { isExpired, decodeToken } from "react-jwt";
@@ -33,34 +33,34 @@ function Settings({ reqComp }) {
             navigate('/');
         } else {
             setActiveComponent({ component: reqComp.comp, title: reqComp.compName });
-            getUserDetails(email,token);
+            getUserDetails(email, token);
         }
     }, [reqComp]);
-    
+
     const checkAuth = async (email, token) => {
         const myDecodedToken = decodeToken(token);
         if (myDecodedToken && myDecodedToken.email === email) {
             return myDecodedToken.email;
-        }else {
+        } else {
             await susActivity(myDecodedToken.email);
             return null;
         }
-      };
-    
-      const susActivity = async (susEmailId) => {
+    };
+
+    const susActivity = async (susEmailId) => {
         try {
             let result = await fetch(
                 `${process.env.REACT_APP_server_url}/api/v1/auth/safetyProtocol`,
                 {
                     method: "POST",
-                    body: JSON.stringify({ susEmailId: `${susEmailId}` , component: 'Settings.js' }),
+                    body: JSON.stringify({ susEmailId: `${susEmailId}`, component: 'Settings.js' }),
                     headers: {
                         "Content-Type": "application/json",
                     },
                 }
             );
             result = await result.json();
-    
+
             if (result.status === 404) {
                 console.log("Error");
             } else {
@@ -69,29 +69,29 @@ function Settings({ reqComp }) {
         } catch (error) {
             console.error("Error during suspicious activity notification", error);
         }
-      };
+    };
 
-    const getUserDetails = async (email,token) => {
-        console.log("getUserDetails Called in Settings.js");
+    const getUserDetails = async (email, token) => {
+        // console.log("getUserDetails Called in Settings.js");
         const trueEmail = await checkAuth(email, token);
         var result;
         if (trueEmail) {
             setUserDetails(prevDetails => ({ ...prevDetails, email: trueEmail }));
             result = await fetch(
                 `${process.env.REACT_APP_server_url}/api/v1/auth/get-user-details`,
-                 {
-                     method: "POST",
-                     body: JSON.stringify({  email: email }),
-                     headers: {
-                         "Content-Type": "application/json",
-                         Authorization: `Bearer ${token}`,
-                       },
-                 },
-             );
-             result = await result.json();
+                {
+                    method: "POST",
+                    body: JSON.stringify({ email: email }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                },
+            );
+            result = await result.json();
         } else {
             localStorage.clear();
-            result = { status: 404 }; 
+            result = { status: 404 };
         }
 
         if (result.status === 404) {
@@ -231,6 +231,12 @@ function Settings({ reqComp }) {
                                 { backgroundColor: "#FFE281" } : {}}
                             onClick={() => settingsNavigation(MyOrders, "My Orders")}
                         >My Orders</div>
+
+                        <div className="my-orders-button"
+                            style={activeComponent.title === "My Addresses" ?
+                                { backgroundColor: "#FFE281" } : {}}
+                            onClick={() => settingsNavigation(MyAddresses, "My Addresses")}
+                        >My Addresses</div>
 
                         <div className="logout-button" onClick={Logout}>Logout</div>
 

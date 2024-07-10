@@ -72,8 +72,8 @@ function App() {
           <Route path="shop" element={<Shop />} />
           <Route path="product/:id" element={<Product />} />
           <Route path="cart" element={<Cart chooseComp={chooseComp}/>} />
-          <Route path="paymentValid/:id" element={<PaymentValid />} />
-          <Route path="address" element={<Address />} />
+          <Route path="paymentValid/:id" element={<PaymentValid chooseComp={chooseComp}/>} />
+          <Route path="address" element={<Address chooseComp={chooseComp} />} />
           <Route path="confirm" element={<Payment />} />
           {/* <Route path="orders" element={<OrderHistory />} /> */}
           <Route path="ticket" element={<Ticket />} />

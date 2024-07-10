@@ -19,12 +19,12 @@ const Product = () => {
     const token = localStorage.getItem("token");
     if (token) {
       const myDecodedToken = decodeToken(token);
-      const isMyTokenExpired = isExpired(token); 
-      if ( myDecodedToken.email === process.env.REACT_APP_admin_email && !isMyTokenExpired) {
+      const isMyTokenExpired = isExpired(token);
+      if (myDecodedToken.email === process.env.REACT_APP_admin_email && !isMyTokenExpired) {
         setIsAdmin(true);
       }
     }
-    if (email) setIsLogin(true);  
+    if (email) setIsLogin(true);
   }, []);
 
   useEffect(() => {
