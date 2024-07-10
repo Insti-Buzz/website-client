@@ -93,19 +93,22 @@ function Private() {
               auth = false;
             //   console.log("Not an actual admin");
               susActivity(myDecodedToken.email);
-              localStorage.removeItem('token');
-              localStorage.removeItem('userEmail');
-              localStorage.removeItem('name');
-              localStorage.removeItem('phone');
+              localStorage.clear();
+
+            //   localStorage.removeItem('token');
+            //   localStorage.removeItem('userEmail');
+            //   localStorage.removeItem('name');
+            //   localStorage.removeItem('phone');
             //   Navigate('/');
               
           } else {
             auth = false;
-            // console.log("Not an actual admin");
-            localStorage.removeItem('token');
-            localStorage.removeItem('userEmail');
-            localStorage.removeItem('name');
-            localStorage.removeItem('phone');
+              // console.log("Not an actual admin");
+              localStorage.clear()
+            // localStorage.removeItem('token');
+            // localStorage.removeItem('userEmail');
+            // localStorage.removeItem('name');
+            // localStorage.removeItem('phone');
           }
     }
 

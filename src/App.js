@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainContainer from "./components/MainContainer";
 import Product from "./components/Product";
@@ -35,11 +35,22 @@ import Profile from './components/Profile.js';
 function App() {
   
   const [reqComp, setReqComp] = useState({ comp: Profile, compName: "Profile" });
-
+  // var comp;
 
   function chooseComp(comp , compName) {
     setReqComp({ comp: comp, compName: compName });
+    localStorage.setItem('comp', compName);
   }
+
+  // useEffect(() => {
+  //   comp = localStorage.getItem('comp');
+  //   if (comp) {
+  //     comp==="My Orders" ?
+  //       setReqComp({ comp: MyOrders, compName: comp }) :
+  //       setReqComp({ comp: Profile, compName: comp })
+  //   }
+
+  // },[comp])
   
 
   return (

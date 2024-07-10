@@ -61,39 +61,44 @@ function MyOrders({ userDetails, settingsNavigation }) {
         const cards = [];
         for (let i = 0; i <= 6; i++) {
             cards.push(
-
-            <div className='dikshant-ka-idea'>
-                <div className='orders-card' key={i}>
-                    <div className="block user-info" style={{width:'100%'}}>
-                        <div className="status-indicator-container" >
-                            <div className="status-img-container productImg-loader"></div>
-                            <div className="status-text-container" style={{ width:'80%', height:'100%' , gap:'5px'}}>
-                                <div className="status-text text-loader" style={{ height: "1.2rem", width: "22%" }}></div>
-                                <div className="status-date text-loader" style={{ height: "0.7rem", width: "30%" }}></div>
-                            </div>
-                        </div>  
+                <div className="orders-card" key={i}>
+                    <div className="block user-info ">
+                        <div className="text-loader" style={{ height: "1.8rem", width: "20%" }}></div>
+                        <span className='text-loader sm-text' style={{ height: "0.9rem", width: "18%" }}></span>
+                        <span className="text-loader sm-text" style={{ height: "0.9rem", width: "17%" }}></span>
                     </div>
-
-                    <div className="block product-info"  style={{cursor:'pointer'}}>
-                        <div className="info" style={{width:'100%',height:'100%', alignItems:"center"}}>
+                    <div className="block product-info">
+                        <div className="info " style={{ width: "40%" }}>
                             <div className='productImg-loader'></div>
-                            <div className='sub-block' style={{width:'30%' , height:'100px' ,justifyContent: 'space-between'}}>
-                                <div className="name-style-container" style={{display: 'flex' , flexDirection: 'column' ,gap: '5px'  }}>
-                                    <h2 className='text-loader' style={{ height: "1.8rem", width: "80%" }}></h2>
-                                    <p className='sm-text text-loader' style={{ height: "1.1rem", width: "55%"}}></p>
-                                </div>
-                                <div style={{ marginTop:"10px", width:'100%' , height: "1.4rem", display:'inline-flex'}}>
-                                    <div className='text-loader' style={{ width: "30%" , height:'75%'}}></div>
-                                    <div className='text-loader' style={{ width: "30%" , height:'75%' , marginLeft:"10px"}}></div>
+                            <div className='sub-block' style={{ width: "100%" }}>
+                                <div className='text-loader' style={{ height: "2rem", width: "65%" }}></div>
+                                <div style={{ marginTop: 10 + "px", width: "100%", display: "inline-flex" }}>
+                                    <div className='text-loader sm-text' style={{ height: "0.9rem", width: "30%", margin: "2px" }}></div>
+                                    <div className='text-loader sm-text' style={{ height: "0.9rem", width: "30%", margin: "2px" }}></div>
                                 </div>
                             </div>
                         </div>
+                        <div className="price" style={{ width: "18%" }}>
+                            <div className='text-loader' style={{ height: "1.9rem", width: "48%" }}></div>
+                            <div className='text-loader' style={{ height: "0.5rem", width: "89%", marginTop: "10px" }}></div>
+                        </div>
                     </div>
-                    <div className="available-action block" style={{padding:'15px' , justifyContent:'start'}}>
-                        <div className='text-loader' style={{height:'1.2rem', width:'35%'}}></div>
+                    <div className="delivery-info">
+                        <div className="timeline">
+                            <div className="circle circle-one" style={{ backgroundColor: 'grey' }}></div>
+                            <hr style={"item.isDelivered" ? { borderTop: '2.5px dashed grey ' } : {}} />
+                            <div className="circle circle-three" style={" " ? { backgroundColor: 'grey' } : {}}></div>
+                        </div>
+                        <div className="timeline-status">
+                            <div className="status status-one">
+                                <span className="text-loader" style={{ color: "grey", height: "1.3rem", width: "85%", margin: "2px" }}></span>
+                            </div>
+                            <div className="status status-three">
+                                <span className="text-loader" style={{ color: "grey", height: "1.3rem", width: "85%", margin: "2px" }}></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
             );
         }
         return cards;
@@ -142,11 +147,9 @@ function MyOrders({ userDetails, settingsNavigation }) {
                     <div className="info ">
                         <img src={item1.product.imageUrl[0]} alt="ordered product info" />
                         <div className='sub-block'>
-                            <div className="name-style-container">
-                                <h2>{item1.product.name}</h2>
-                                <p className=''>{item1.product.style}</p>
-                            </div>
-                            <div style={{ marginTop: "10px" }}>
+                            <h2>{item1.product.name}</h2>
+                            <p className='sm-text'>{item1.style}</p>
+                            <div style={{ marginTop: 10 + "px" }}>
                                 <span className='sm-text' style={{ marginRight: 10 + "px" }}>Size: {item1.size}</span>
                                 <span className='sm-text'>Qty: {item1.quantity}</span>
                             </div>
@@ -184,7 +187,7 @@ function MyOrders({ userDetails, settingsNavigation }) {
     return (
         <div className='container'>
             {loading ? (
-               <div className='order-my-order'> {OrderCards()} </div>
+                OrderCards()
             ) : (
                 <div className="order-my-order">
                     {orders.length ? (

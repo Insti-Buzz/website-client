@@ -121,10 +121,11 @@ function Navbar({chooseComp}) {
     }
 
     const Logout = () => {
-        localStorage.removeItem("userEmail")
-        localStorage.removeItem("token")
-        localStorage.removeItem("name")
-        localStorage.removeItem("phone")
+        localStorage.clear()
+        // localStorage.removeItem("userEmail")
+        // localStorage.removeItem("token")
+        // localStorage.removeItem("name")
+        // localStorage.removeItem("phone")
         navigate('/')
         window.location.reload()
     }

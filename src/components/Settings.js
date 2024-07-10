@@ -11,7 +11,6 @@ import Address from './Address.js';
 
 import { isExpired, decodeToken } from "react-jwt";
 
-
 function Settings({ reqComp }) {
 
     const [activeComponent, setActiveComponent] = useState({ component: reqComp.comp, title: reqComp.compName });
@@ -33,8 +32,14 @@ function Settings({ reqComp }) {
         const token = localStorage.getItem('token');
         if (!email && !token) {
             navigate('/');
+            localStorage.clear();
         } else {
-            setActiveComponent({ component: reqComp.comp, title: reqComp.compName });
+            const comp = localStorage.getItem('comp');
+            if (comp) {
+                comp === "My Orders" ?
+                    setActiveComponent({ component: MyOrders, title: comp }) :
+                    setActiveComponent({ component: Profile, title: comp });
+            } else setActiveComponent({ component: reqComp.comp, title: reqComp.compName });
             getUserDetails(email,token);
         }
     }, [reqComp]);
@@ -118,14 +123,16 @@ function Settings({ reqComp }) {
 
 
     const settingsNavigation = (toComponent, componentTitle , props) => {
-        setActiveComponent({ component: toComponent , title: componentTitle , props: props });
+        setActiveComponent({ component: toComponent, title: componentTitle, props: props });
+        localStorage.setItem('comp', `${componentTitle}`);
     }
 
     const Logout = () => {
-        localStorage.removeItem("userEmail")
-        localStorage.removeItem("token")
-        localStorage.removeItem("name")
-        localStorage.removeItem("phone")
+        localStorage.clear();
+        // localStorage.removeItem("userEmail")
+        // localStorage.removeItem("token")
+        // localStorage.removeItem("name")
+        // localStorage.removeItem("phone")
         navigate('/')
         window.location.reload()
     }

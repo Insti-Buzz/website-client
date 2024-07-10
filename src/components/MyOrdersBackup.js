@@ -83,18 +83,20 @@ function MyOrders({userDetails}) {
           setLoading(false)
         }, 1000);
       } else {
-        localStorage.removeItem('token');
-        localStorage.removeItem('userEmail');
-        localStorage.removeItem('name');
-        localStorage.removeItem('phone');
+        localStorage.clear()
+        // localStorage.removeItem('token');
+        // localStorage.removeItem('userEmail');
+        // localStorage.removeItem('name');
+        // localStorage.removeItem('phone');
         result = {status: 404};      
       }
 
       if (result.status == 404) {
-        localStorage.removeItem("userEmail");
-        localStorage.removeItem("token");
-        localStorage.removeItem("name");
-        localStorage.removeItem("phone");
+        localStorage.clear()
+        // localStorage.removeItem("userEmail");
+        // localStorage.removeItem("token");
+        // localStorage.removeItem("name");
+        // localStorage.removeItem("phone");
         setLoading(false);
         navigate("/");
         window.location.reload();

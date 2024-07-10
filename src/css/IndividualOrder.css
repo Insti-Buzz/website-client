@@ -111,7 +111,7 @@
     /* background-color: #E9E9E9; */
 }
 
-.product-status-info{
+.product-status-info.availlable-action-btn{
     border: 1px solid #808080 ;
     color: #555555;
     background-color: #E9E9E9;
@@ -122,6 +122,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.IO-exchange-not-allowed-text , .IO-cancel-not-allowed-text{
+    cursor: not-allowed;
+    /* background-color: #FF7F50; */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .delivery-info-container{
