@@ -1,8 +1,10 @@
 import React from 'react'
 import '../css/IndividualOrder.css'
 
+import ExchangeProduct from './ExchangeProduct';
 
-function IndividualOrder({ props }) {
+
+function IndividualOrder({ props , settingsNavigation }) {
   
   console.log("item: ", props.item);
   console.log("------------------------------");
@@ -16,12 +18,17 @@ function IndividualOrder({ props }) {
 
   const deliveryStatus = "Order Placed";
 
+  const returnOrExchangeLogic = (props) => {
+    settingsNavigation(ExchangeProduct, "ExchangeProduct", props);
+  }
   
+  
+  //classname mein io- ka matlab individual order hai short mein likha hai bhai :)
   return (
     <>
         <div className="individual-order-container">
               <div className="product-info-container block-2">
-                <div className="product-img-container">
+                <div className="io-product-img-container">
                   <img src={props.item1.product.imageUrl[0]} alt="" />
                 </div>
           <div className="product-name-container">{ props.item1.product.name }</div>
@@ -59,7 +66,7 @@ function IndividualOrder({ props }) {
                     </div>
               </div>
               <div className="product-status-info-container block-2">
-              <div className='availlable-action-btn product-status-info' style={{ marginLeft: '15px' , cursor:'pointer' }}>
+              <div className='availlable-action-btn product-status-info' style={{ marginLeft: '15px' , cursor:'pointer' }} onClick={() => returnOrExchangeLogic(props)}> 
                         {props.item1.isDelivered ?
                             (props.item1.isExchangable ? 'Exchange' : <div className='IO-exchange-not-allowed-text'>Exchange window is/was closed on {new Date(parseInt(props.item1.deliveredDate) + props.allowedTimeToExchangeTheOrder).toLocaleDateString( undefined,options )}</div>) :
                             (props.item1.isCancellable ? 'Cancel' : <div className='IO-cancel-not-allowed-text'>Cancellation window is/was closed on {new Date(parseInt(props.item.date) + props.allowedTimeToCancelTheOrder).toLocaleDateString( undefined,options )}</div>)}

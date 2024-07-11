@@ -1,17 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react'
 import '../css/Settings.css';
 import { useNavigate } from 'react-router-dom';
+import returnSvg from '../assets/vectors/Return.svg'
 
 import MyOrders from './MyOrders.js';
 import Profile from './Profile.js';
+import MyAddresses from './MyAddresses.js';
+
 import IndividualOrder from './IndividualOrder.js';
 import ExchangeProduct from './ExchangeProduct.js';
-import Address from './Address.js';
-// import SavedAddress from './MyOrders.js';
 
 import { isExpired, decodeToken } from "react-jwt";
 
-function Settings({ reqComp }) {
+function Settings({ reqComp , profileProps }) {
 
     const [activeComponent, setActiveComponent] = useState({ component: reqComp.comp, title: reqComp.compName });
     const [userDetails, setUserDetails] = useState({
@@ -24,7 +25,11 @@ function Settings({ reqComp }) {
         state: '',
         pinCode: '',
     });
-    // const[email,setEmail]=useState("");
+
+
+    const componentMap = {
+        Profile , MyOrders , MyAddresses
+    }
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -36,38 +41,36 @@ function Settings({ reqComp }) {
         } else {
             const comp = localStorage.getItem('comp');
             if (comp) {
-                comp === "My Orders" ?
-                    setActiveComponent({ component: MyOrders, title: comp }) :
-                    setActiveComponent({ component: Profile, title: comp });
+                setActiveComponent({ component: componentMap[comp] || MyOrders, title: comp || "MyOrders"})
             } else setActiveComponent({ component: reqComp.comp, title: reqComp.compName });
             getUserDetails(email,token);
         }
     }, [reqComp]);
-    
+
     const checkAuth = async (email, token) => {
         const myDecodedToken = decodeToken(token);
         if (myDecodedToken && myDecodedToken.email === email) {
             return myDecodedToken.email;
-        }else {
+        } else {
             await susActivity(myDecodedToken.email);
             return null;
         }
-      };
-    
-      const susActivity = async (susEmailId) => {
+    };
+
+    const susActivity = async (susEmailId) => {
         try {
             let result = await fetch(
                 `${process.env.REACT_APP_server_url}/api/v1/auth/safetyProtocol`,
                 {
                     method: "POST",
-                    body: JSON.stringify({ susEmailId: `${susEmailId}` , component: 'Settings.js' }),
+                    body: JSON.stringify({ susEmailId: `${susEmailId}`, component: 'Settings.js' }),
                     headers: {
                         "Content-Type": "application/json",
                     },
                 }
             );
             result = await result.json();
-    
+
             if (result.status === 404) {
                 console.log("Error");
             } else {
@@ -76,29 +79,29 @@ function Settings({ reqComp }) {
         } catch (error) {
             console.error("Error during suspicious activity notification", error);
         }
-      };
+    };
 
-    const getUserDetails = async (email,token) => {
-        console.log("getUserDetails Called in Settings.js");
+    const getUserDetails = async (email, token) => {
+        // console.log("getUserDetails Called in Settings.js");
         const trueEmail = await checkAuth(email, token);
         var result;
         if (trueEmail) {
             setUserDetails(prevDetails => ({ ...prevDetails, email: trueEmail }));
             result = await fetch(
                 `${process.env.REACT_APP_server_url}/api/v1/auth/get-user-details`,
-                 {
-                     method: "POST",
-                     body: JSON.stringify({  email: email }),
-                     headers: {
-                         "Content-Type": "application/json",
-                         Authorization: `Bearer ${token}`,
-                       },
-                 },
-             );
-             result = await result.json();
+                {
+                    method: "POST",
+                    body: JSON.stringify({ email: email }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                },
+            );
+            result = await result.json();
         } else {
             localStorage.clear();
-            result = { status: 404 }; 
+            result = { status: 404 };
         }
 
         if (result.status === 404) {
@@ -127,12 +130,18 @@ function Settings({ reqComp }) {
         localStorage.setItem('comp', `${componentTitle}`);
     }
 
+    const handleReturnClick = () => {
+        const currentComp = localStorage.getItem('comp');
+        if (currentComp === "IndividualOrder" || "ExchangeProduct") {
+            setActiveComponent({ component: MyOrders, title: "MyOrders" });
+            localStorage.setItem('comp', 'MyOrders');
+        } 
+        
+
+    }
+
     const Logout = () => {
         localStorage.clear();
-        // localStorage.removeItem("userEmail")
-        // localStorage.removeItem("token")
-        // localStorage.removeItem("name")
-        // localStorage.removeItem("phone")
         navigate('/')
         window.location.reload()
     }
@@ -141,10 +150,13 @@ function Settings({ reqComp }) {
     const outDiv2Ref = useRef(null);
     const outDiv3Ref = useRef(null);
     const rightDivRef = useRef(null);
+    
+    const settingsRef = useRef(null);
 
     useEffect(() => {
 
         const handleScrollOutside = (e) => {
+            // profileProps.profileDropDownClose();
             const rightDiv = rightDivRef.current;
             // console.log("Outside");
             if (e.deltaY > 0) {
@@ -184,6 +196,13 @@ function Settings({ reqComp }) {
             }
         }
 
+        const handleClickOnSettings = () => {
+            if (!profileProps.profileDropDownHeight.open) {
+                profileProps.profileDropDownClose();
+                // console.log("Clicked in Settings");
+            }
+        }
+
         const rightDiv = rightDivRef.current;
         const outDiv1 = outDiv1Ref.current;
         const outDiv2 = outDiv2Ref.current;
@@ -201,6 +220,11 @@ function Settings({ reqComp }) {
             rightDiv.addEventListener('wheel', handleScrollInside);
         }
 
+        const settingsComp = settingsRef.current;
+        if (settingsComp) {
+            settingsComp.addEventListener('click', handleClickOnSettings );
+        }
+
 
         return () => {
             if (outDiv1) {
@@ -215,12 +239,15 @@ function Settings({ reqComp }) {
             if (rightDiv) {
                 rightDiv.removeEventListener('wheel', handleScrollInside);
             }
+            if (settingsComp) {
+                settingsComp.removeEventListener('click',handleClickOnSettings)
+            }
         };
     }, []);
 
     return (
         <>
-            <div className="settings">
+            <div className="settings" ref={settingsRef}>
 
                 <div className="settings-navigation-container" ref={outDiv1Ref}>
                     <div className="wrapper" >
@@ -236,10 +263,16 @@ function Settings({ reqComp }) {
                             onClick={() => settingsNavigation(Profile, "Profile")}
                         >My Profile</div>
                         <div className="my-orders-button"
-                            style={activeComponent.title === "My Orders" ?
+                            style={activeComponent.title === "MyOrders" ?
                                 { backgroundColor: "#FFE281" } : {}}
-                            onClick={() => settingsNavigation(MyOrders, "My Orders")}
+                            onClick={() => settingsNavigation(MyOrders, "MyOrders")}
                         >My Orders</div>
+
+                        <div className="my-orders-button"
+                            style={activeComponent.title === "MyAddresses" ?
+                                { backgroundColor: "#FFE281" } : {}}
+                            onClick={() => settingsNavigation(MyAddresses, "MyAddresses")}
+                        >My Addresses</div>
 
                         <div className="logout-button" onClick={Logout}>Logout</div>
 
@@ -250,7 +283,7 @@ function Settings({ reqComp }) {
 
 
                 <div className="settings-body">
-                    <div className="setting-body-title" ref={outDiv2Ref}>{activeComponent.title}</div>
+                    <div className="setting-body-title" ref={outDiv2Ref}><img src={returnSvg} alt="" onClick={()=>handleReturnClick()}/></div>
                     <div className="setting-body-content" ref={rightDivRef}>{<activeComponent.component userDetails={userDetails} settingsNavigation={settingsNavigation} props={activeComponent.props} />}</div>
                     {/* <div className="setting-body-content" ref={rightDivRef}>{<IndividualOrder/>}</div> */}
                     {/* <div className="setting-body-content" ref={rightDivRef}>{<ExchangeProduct/>}</div> */}

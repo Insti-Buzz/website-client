@@ -4,7 +4,7 @@ import { Toaster } from 'react-hot-toast'
 import Navbar from './Navbar'
 import Footer from './Footer'
 
-function MainContainer({chooseComp}) {
+function MainContainer({chooseComp , profileProps}) {
     // const auth = localStorage.getItem('userEmail')
     // const token = localStorage.getItem('token')
     const { pathname } = useLocation();
@@ -12,7 +12,7 @@ function MainContainer({chooseComp}) {
     return (
         <div className='all-container'>
             <Toaster />
-            {<Navbar chooseComp={chooseComp} />}
+            {<Navbar chooseComp={chooseComp} profileProps={profileProps} />}
             <Outlet />
             {showFooter && <Footer />}
         </div>

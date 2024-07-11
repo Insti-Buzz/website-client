@@ -24,16 +24,18 @@
     align-items: center;
 }
 
-.product-info-container .product-img-container{
+.product-info-container .io-product-img-container{
     width: 174px;
+    width: fit-content;
     height: 232px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 10px 0 10px 0;
+    /* background-color:slateblue; */
 }
 
-.product-info-container .product-img-container img{
+.product-info-container .io-product-img-container img{
     object-fit:scale-down;
     height: 100%;
 }
@@ -44,13 +46,13 @@
 }
 .product-info-container .product-type-container{
     font-size: 16px;
-    font-family: Tenor Sans;
+    font-family: Lato;
     color: #555555;
     /* font-weight: 600; */
 }
 .product-info-container .product-size-container{
     font-size: 14px;
-    font-family: Tenor Sans;
+    font-family: Lato;
     color: #555555;
 }
 
@@ -58,6 +60,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    font-family: Lato;
     /* padding: 20px 0 20px 0; */
     /* width: 100%; */
     gap: 5px;
@@ -231,7 +234,7 @@
 .order-placed-date , .dispatched-date, .order-placed-date{
     font-size: 14px;
     /* color: #555555; */
-    font-family: tenor sans;
+    font-family: Lato;
 
 }
 

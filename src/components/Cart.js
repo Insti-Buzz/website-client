@@ -10,7 +10,7 @@ import MyOrders from './MyOrders.js';
 
 import { isExpired, decodeToken } from "react-jwt";
 
-function Cart({chooseComp}) {
+function Cart({ chooseComp }) {
     const [products, setProducts] = React.useState([]);
     // const [quantity, setQuantity] = useState(Array(products.length).fill(''));
     // const [quantity, setQuantity] = useState(Array.from({ length: products.length }, () => 1));
@@ -563,6 +563,18 @@ function Cart({chooseComp}) {
         }
     }
 
+    const toAddress=()=>{
+        navigate("/address", {
+            state: {
+                mrp: isDiscount ? 0.9 * calculateMrp() : calculateMrp(),
+                noOfProducts: products.length,
+            }
+        }
+    );
+    localStorage.setItem("mrp", isDiscount ? 0.9 * calculateMrp() : calculateMrp())
+    localStorage.setItem("noOfProducts", products.length)
+    }
+
     return (
         <div>
             {
@@ -625,15 +637,9 @@ function Cart({chooseComp}) {
                                     <button
                                         class="cart-order-btn"
                                         onClick={
-                                            delivery === "pickup" ? proceedPayment :
-                                                () => {
-                                                    navigate("/address", {
-                                                        state: {
-                                                            mrp: isDiscount ? 0.9 * calculateMrp() : calculateMrp(),
-                                                            noOfProducts: products.length,
-                                                        }
-                                                    });
-                                                }}
+                                            delivery === "pickup" ? proceedPayment : () => {
+                                               toAddress()
+                                            }}
                                     >{
                                             delivery === "pickup" ? "PLACE ORDER" : "CONTINUE"
                                         }

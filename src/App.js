@@ -42,21 +42,27 @@ function App() {
     localStorage.setItem('comp', compName);
   }
 
-  // useEffect(() => {
-  //   comp = localStorage.getItem('comp');
-  //   if (comp) {
-  //     comp==="My Orders" ?
-  //       setReqComp({ comp: MyOrders, compName: comp }) :
-  //       setReqComp({ comp: Profile, compName: comp })
-  //   }
+  const [profileDropDownHeight, setProfileDropDownHeight] = useState({ height: '0', display: 'none', open: false });
+  function profileDropDownOpen() {
+      setProfileDropDownHeight({height:'fit-content', boxShadow: '1px 1px 12px 1px rgba(0, 0, 0, 0.482)',open:true});
+      // console.log("Open ? :",profileDropDownHeight.open);
+  }
+  function profileDropDownClose() {
+      setProfileDropDownHeight({height:'0', boxShadow: '0 0 0 0 transparent',open:false});
+      // console.log("Open ? :",profileDropDownHeight.open);
+      // console.log("close call called")
+  }
 
-  // },[comp])
-  
+  const profileProps = {
+    profileDropDownHeight: profileDropDownHeight,
+    profileDropDownOpen: profileDropDownOpen,
+    profileDropDownClose: profileDropDownClose,
+  }
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="" element={<MainContainer chooseComp={chooseComp}/>}>
+        <Route path="" element={<MainContainer chooseComp={chooseComp} profileProps={ profileProps } />}>
           <Route element={<Private />}>
             <Route path="add" element={<AddProduct />} />
             <Route path="allOrders" element={<AllOrders />} />
@@ -70,8 +76,8 @@ function App() {
           <Route path="shop" element={<Shop />} />
           <Route path="product/:id" element={<Product />} />
           <Route path="cart" element={<Cart chooseComp={chooseComp}/>} />
-          <Route path="paymentValid/:id" element={<PaymentValid />} />
-          <Route path="address" element={<Address />} />
+          <Route path="paymentValid/:id" element={<PaymentValid chooseComp={chooseComp}/>} />
+          <Route path="address" element={<Address chooseComp={chooseComp} />} />
           <Route path="confirm" element={<Payment />} />
           {/* <Route path="orders" element={<OrderHistory />} /> */}
           <Route path="ticket" element={<Ticket />} />
@@ -83,7 +89,7 @@ function App() {
           <Route path="ourServices" element={<OurServices />} />
           <Route path="collab" element={<Collab />} />
           <Route path="collabForm" element={<CollabForm />} />
-          <Route path="settings" element={<Settings reqComp={reqComp} />} />
+          <Route path="settings" element={<Settings reqComp={reqComp} profileProps={profileProps} />} />
         </Route>
       </Routes>
     </BrowserRouter>

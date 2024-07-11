@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 import Profile from './Profile';
 import MyOrders from './MyOrders';
+import MyAddresses from './MyAddresses';
+
 // import { isExpired, decodeToken } from "react-jwt";
 
 // import toast, { Toaster } from 'react-hot-toast';
@@ -11,9 +13,9 @@ import '../css/Navbar.css';
 import InstiBuzzLogo from '../assets/973300f3-c585-48d9-9e8c-601a3ae24121.png';
 // import { resolveConfig } from 'vite';
 
-function Navbar({chooseComp}) {
+function Navbar({chooseComp,profileProps}) {
     const [dropDownHeight, setDropDownHeight] = useState('0');
-    const [profileDropDownHeight, setProfileDropDownHeight] = useState({height:'0', display:'none', open:false});
+    // const [profileDropDownHeight, setProfileDropDownHeight] = useState({height:'0', display:'none', open:false});
     // const [navbarDisplay, setNavbarDisplay] = useState('inline-flex');
     const [navbarHeight, setNavbarHeight] = useState('');
     const [prevPos, setPrevPos] = useState(0);
@@ -39,6 +41,7 @@ function Navbar({chooseComp}) {
     // const [isAdmin, setIsAdmin] = React.useState(false)
 
 
+
     useEffect(() => {
         const email = localStorage.getItem("userEmail");
         const name = localStorage.getItem("name");
@@ -50,12 +53,15 @@ function Navbar({chooseComp}) {
         // if (token) {
         //   const myDecodedToken = decodeToken(token);
         //   const isMyTokenExpired = isExpired(token); 
-            // if ( myDecodedToken.email == process.env.REACT_APP_admin_email && !isMyTokenExpired) {
-            //     setIsAdmin(true);
-            //     console.log("admin access granted");
-            // }
+        // if ( myDecodedToken.email == process.env.REACT_APP_admin_email && !isMyTokenExpired) {
+        //     setIsAdmin(true);
+        //     console.log("admin access granted");
         // }
-    }, [isLogin])
+        // }
+
+        
+    }, [isLogin]);
+
 
     function dropDownOpen() {
         setDropDownHeight('fit-content');
@@ -66,13 +72,13 @@ function Navbar({chooseComp}) {
         setDropDownHeight('0');
     }
 
-    function profileDropDownOpen() {
-        setProfileDropDownHeight({height:'350px', boxShadow: '1px 1px 12px 1px rgba(0, 0, 0, 0.482)',open:true});
-    }
+    // function profileDropDownOpen() {
+    //     setProfileDropDownHeight({height:'fit-content', boxShadow: '1px 1px 12px 1px rgba(0, 0, 0, 0.482)',open:true});
+    // }
 
-    function profileDropDownClose() {
-        setProfileDropDownHeight({height:'0', boxShadow: '0 0 0 0 transparent',open:false});
-    }
+    // function profileDropDownClose() {
+    //     setProfileDropDownHeight({height:'0', boxShadow: '0 0 0 0 transparent',open:false});
+    // }
 
 
     const homePage = () => {
@@ -175,7 +181,7 @@ function Navbar({chooseComp}) {
                                 {/* <button onClick={wishlistPage} class="fa fa-heart-o nav-wish-logo"></button> */}
                                 <button className="fa fa-shopping-bag " aria-hidden="true" onClick={cartPage}></button>
                                 <button className="fa fa-bars nav-cart-logo" aria-hidden="true" onClick={dropDownOpen}></button>
-                                <div className="nav-profile-button" onClick={profileDropDownHeight.open ? profileDropDownClose : profileDropDownOpen}>{ usersName }</div>
+                                <div className="nav-profile-button" onClick={()=> profileProps.profileDropDownHeight.open ? profileProps.profileDropDownClose() : profileProps.profileDropDownOpen()}>{ usersName }</div>
                             </>)
                             :
                             <>
@@ -186,26 +192,28 @@ function Navbar({chooseComp}) {
                     }
                 </div>
 
-                <div className='nav-profile-dropdown' style={{ height: profileDropDownHeight.height , boxShadow: profileDropDownHeight.boxShadow }}>
+                <div className='nav-profile-dropdown' style={{ height: profileProps.profileDropDownHeight.height , boxShadow: profileProps.profileDropDownHeight.boxShadow }}>
                     <div onClick={() => {
                         chooseComp(Profile, "Profile");
-                        profileDropDownClose();
+                        profileProps.profileDropDownClose();
                         navigate('/settings');
                     }}>Profile</div>
                     <div onClick={() => {
-                        chooseComp(MyOrders, "My Orders");
-                        profileDropDownClose()
+                        chooseComp(MyOrders, "MyOrders");
+                        profileProps.profileDropDownClose()
                         navigate('/settings');
                     }}>My Orders</div>
                     <div onClick={() => {
-                        profileDropDownClose()
+                        chooseComp(MyAddresses, "MyAddresses");
+                        profileProps.profileDropDownClose()
+                        navigate('/settings');
+                    }}>My Addresses</div>
+                    <div onClick={() => {
+                        profileProps.profileDropDownClose()
                         wishlistPage();
                     }} >Wishlist</div>
                     <div onClick={Logout}>Logout</div>
-                    {/* <div>hyufegwu</div> */}
-                    {/* <div>hyufegwu</div> */}
-                    {/* <div>hyufegwu</div> */}
-                    {/* <div>hyufegwu</div> */}
+
                 </div>    
                 <div className="nav-dropdown" style={{ height: dropDownHeight }}>
                     <button className="fa fa-times" aria-hidden="true" onClick={dropDownClose}></button>

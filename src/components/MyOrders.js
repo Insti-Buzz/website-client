@@ -103,7 +103,7 @@ function MyOrders({ userDetails, settingsNavigation }) {
       const currentDate = Date.now();
         const options = { year: "numeric", month: "long", day: "numeric" }
         
-      const allowedTimeToCancelTheOrder = 30000; //in millisecond.
+      const allowedTimeToCancelTheOrder = 300000000000000000000000; //in millisecond.
         item1.isCancellable = (currentDate - item.date) < allowedTimeToCancelTheOrder;
         
         const allowedTimeToExchangeTheOrder = 6000; //in millisecond
@@ -138,7 +138,7 @@ function MyOrders({ userDetails, settingsNavigation }) {
                         </div>
                     </div>  
                 </div>
-                <div className="block product-info" onClick={() => settingsNavigation(IndividualOrder, "My Orders", { item, item1 , allowedTimeToCancelTheOrder, allowedTimeToExchangeTheOrder })} style={{cursor:'pointer'}}>
+                <div className="block product-info" onClick={() => settingsNavigation(IndividualOrder, "IndividualOrder", { item, item1 , allowedTimeToCancelTheOrder, allowedTimeToExchangeTheOrder })} style={{cursor:'pointer'}}>
                     <div className="info ">
                         <img src={item1.product.imageUrl[0]} alt="ordered product info" />
                         <div className='sub-block'>
@@ -147,8 +147,8 @@ function MyOrders({ userDetails, settingsNavigation }) {
                                 <p className=''>{item1.product.style}</p>
                             </div>
                             <div style={{ marginTop: "10px" }}>
-                                <span className='sm-text' style={{ marginRight: 10 + "px" }}>Size: {item1.size}</span>
-                                <span className='sm-text'>Qty: {item1.quantity}</span>
+                                <span className='myorders-sm-text' style={{ marginRight: 10 + "px" }}>Size: {item1.size}</span>
+                                <span className='myorders-sm-text'>Qty: {item1.quantity}</span>
                             </div>
                         </div>
                     </div>
@@ -157,10 +157,10 @@ function MyOrders({ userDetails, settingsNavigation }) {
             <div className="available-action block"
               style={((!item1.isCancellable && !item1.isDelivered) || (!item1.isExchangable && item1.isDelivered)) ?
                 {justifyContent:'start' , fontSize:'14px'} : {}}>
-                    <div className='availlable-action-btn' style={{ marginLeft: '15px' }}>
+                    <div className='availlable-action-btn' style={{ marginLeft: '15px' ,cursor:'default'  }}>
                         {item1.isDelivered ?
-                            (item1.isExchangable ? 'Exchange' : <div className='exchange-not-allowed-text' style={{cursor:'not-allowed'}}>Exchange window was closed on {new Date(parseInt(item1.deliveredDate) + allowedTimeToExchangeTheOrder).toLocaleDateString( undefined,options )}</div>) :
-                            (item1.isCancellable ? 'Cancel' : <div className='cancel-not-allowed-text' style={{cursor:'not-allowed'}}>Cancellation window was closed on {new Date(parseInt(item.date) + allowedTimeToCancelTheOrder).toLocaleDateString( undefined,options )}</div>)}
+                            (item1.isExchangable ? <div style={{cursor:'pointer'}}>Exchange</div> : <div className='exchange-not-allowed-text' style={{cursor:'not-allowed'}}>Exchange window was closed on {new Date(parseInt(item1.deliveredDate) + allowedTimeToExchangeTheOrder).toLocaleDateString( undefined,options )}</div>) :
+                            (item1.isCancellable ? <div style={{cursor:'pointer'}}>Cancel</div> : <div className='cancel-not-allowed-text' style={{}}>Cancellation window was closed on {new Date(parseInt(item.date) + allowedTimeToCancelTheOrder).toLocaleDateString( undefined,options )}</div>)}
                     </div>
                     <img src={infoPopupSymbol} alt="" />
                     <div className='popup'>

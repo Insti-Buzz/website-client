@@ -3,7 +3,9 @@ import React,{useState} from 'react'
 import '../css/ExchangeProduct.css'
 // import '../css/MyOrders.css'
 
-function ExchangeProduct() {
+function ExchangeProduct({ props }) {
+  
+  // console.log(props);
 
     const [option, setOption] = useState('option-1');
     const handleRadioBtn = (event) => {
@@ -58,7 +60,7 @@ function ExchangeProduct() {
     <div className="exchange-container">
         <div className="exchange-container-1 block-3">
             <div className="exchange-user-details">
-                <div className="exchange-user-name">Anantu</div>
+            <div className="exchange-user-name">{props.item1.price}</div>
                 <div className="exchange-user-address">Helooo</div>
                 <div className="exchange-user-phone">94929320</div>
             </div>
@@ -67,7 +69,7 @@ function ExchangeProduct() {
                       <img src={'item.product.imageUrl[0]'} alt="ordered product info" />
                       <div className='exchange-sub-block'>
                         <div className='ex-name-sty-container'>
-                          <div className='exchange-product-name'>White IITM</div>
+                          <div className='exchange-product-name'>{props.item.name}</div>
                           <div className='sm-text'>{'item.style'}</div>
                         </div>
                           <div className='ex-sty-qty-container'>

@@ -1,7 +1,7 @@
 .settings{
     height: fit-content;
     width: 100%;
-    background-color: teal;
+    /* background-color: teal; */
     display: inline-flex;
     justify-content: center;
 }
@@ -38,6 +38,7 @@
     gap: 10px;
     border: 1px solid lightgrey;
     border-radius: 5px;
+    cursor: default;
 }
 
 .profile-button , .my-orders-button , .saved-address-button , .logout-button{
@@ -53,20 +54,23 @@
         border-radius: 5px;
         font-size: 2vh;
         transition: 500ms;
+        cursor: pointer;
 }
 
-.profile-button:hover , .my-orders-button:hover , .saved-address-button:hover , .logout-button:hover{
-    /* background-color: #FFE281; */
+.logout-button:hover{
+    background-color:salmon;
     /* font-size: 2.05vh; */
 }
 
 .user-name{
     font-size: 3.5vh;
+    font-family: Tenor Sans;
 }
 
 .user-email , .user-number{
     font-size: 1.5vh;
     color: grey;
+    font-family: Lato;
 }
 
 .settings-body{
@@ -77,6 +81,7 @@
     background-color: white;
     display: flex;
     flex-direction: column;
+    /* background-color: red; */
     /* height: 80vh; */
     /* overflow: scroll;     */
 }
@@ -85,6 +90,12 @@
     background-color: white;
     font-size: 36px;
     padding: 8vh 0 1vh 3vh;
+}
+
+.settings-body .setting-body-title img{
+    font-size: 42px;
+    scale: 2;
+    padding: 20px;
 }
 
 .setting-body-content{
@@ -97,6 +108,26 @@
     overflow-x: hidden;
     /* padding-top: 8vh; */
 }
+
+@media screen and (max-width:850px) {
+    .settings-navigation-container{
+        display: none;
+    }
+
+    .setting-body{
+        width: 90%;
+    }
+
+    .setting-body-content{
+        width: 100%;
+    }
+
+    .settings{
+        width: 100%;
+        /* background-color: aliceblue; */
+    }
+}
+
 
 .setting-body-content::-webkit-scrollbar {
     display: none;
