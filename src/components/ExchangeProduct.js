@@ -1,11 +1,100 @@
-import React,{useState} from 'react'
+import React, { useState , useEffect } from 'react'
+import { useNavigate, useParams ,useLocation} from "react-router-dom";
 
 import '../css/ExchangeProduct.css'
+import LoadingPage from './LoadingPage';
 // import '../css/MyOrders.css'
 
-function ExchangeProduct({ props }) {
+function ExchangeProduct({userDetails}) {
   
-  // console.log(props);
+  const params = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  console.log('itemid',params);
+  console.log('orderid', location.state.id);
+  const [isLoading, setIsLoading] = useState(true);
+  const [order, setOrder] = useState();
+  const [orderItem, setOrderItem] = useState();
+  const [exchangeEndsOn, setExchangeEndsOn] = useState(); 
+  const [returnEndsOn, setReturnEndsOn] = useState(); 
+  const options = { year: "numeric", month: "short", day: "numeric" }  
+  const allowedTimeToCancelTheOrder = 30000; //in millisecond. Define same value in MyOrders.js too
+  const allowedTimeToExchangeTheOrder = 600; //in millisecond Define same value in MyOrders.js too
+
+  function setExchangeAndReturnCondition(result) {
+    setOrderItem(prevOrderItem => ({
+      ...prevOrderItem, isCancellable: (Date.now() - result.order.date) < allowedTimeToCancelTheOrder
+    }));
+    if (result.orderItem.deliveredDate) {
+      setOrderItem(prevOrderItem => ({
+        ...prevOrderItem, isExchangable: (Date.now() - result.orderItem.deliveredDate) < allowedTimeToExchangeTheOrder
+      }));
+    };
+  }
+
+  // const handleExchangeOrReturnLogic = (order,orderItem) => {
+  //   if (orderItem.isDelivered) {
+  //     if (orderItem.isExchangable) {
+  //       navigate(`/profile/my-orders/exchange-product/${orderItem.orderItem_id}`);
+  //     }
+  //   } else {
+  //     if (orderItem.isCancellable) {
+  //       alert('Handle return request');
+  //     }
+  //   }
+  // }
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'instant',
+    });
+    getIndividualOrder();
+    // if (!orderItem.isExchangable) {
+    //   alert("Invaild action : Navigate the User to some other page. logout not required.");
+    //   console.log("rendered")
+    // }
+  }, []);
+  
+  // useEffect(() => {
+    
+  // }, [orderItem.isExchangable]);
+  
+  const getIndividualOrder = async () => {
+    try {
+      let result = await fetch(
+        `${process.env.REACT_APP_server_url}/api/v1/products/get-individual-order/${params.id}`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            orderId: (location.state.id ? location.state.id : '' ),
+          })
+        }
+      );
+
+      result = await result.json();
+
+      if (result) {
+        setIsLoading(false);
+        setOrder(result.order);
+        setOrderItem(result.orderItem);
+
+        setExchangeAndReturnCondition(result);
+        setReturnEndsOn(new Date(parseInt(result.order.date) + allowedTimeToCancelTheOrder).toLocaleDateString( undefined,options ))
+        setExchangeEndsOn(new Date(parseInt(result.orderItem.deliveredDate) + allowedTimeToExchangeTheOrder).toLocaleDateString( undefined,options ))
+      } else {
+        throw new Error("Some error");
+      }
+    } catch (error) {
+      alert(error);
+      // navigate('/');
+      // window.location.reload()
+      // localStorage.clear();
+    }
+  }
+  
+
 
     const [option, setOption] = useState('option-1');
     const handleRadioBtn = (event) => {
@@ -57,19 +146,20 @@ function ExchangeProduct({ props }) {
 
   return (
     <>
-    <div className="exchange-container">
+    { isLoading ? <LoadingPage/> :
+      <div className="exchange-container">
         <div className="exchange-container-1 block-3">
             <div className="exchange-user-details">
-            <div className="exchange-user-name">{props.item1.price}</div>
+            <div className="exchange-user-name">{userDetails.name}</div>
                 <div className="exchange-user-address">Helooo</div>
-                <div className="exchange-user-phone">94929320</div>
+                <div className="exchange-user-phone">{userDetails.phone}</div>
             </div>
             <div className="exchange-product-details">
                     <div className="exchange-info ">
                       <img src={'item.product.imageUrl[0]'} alt="ordered product info" />
                       <div className='exchange-sub-block'>
                         <div className='ex-name-sty-container'>
-                          <div className='exchange-product-name'>{props.item.name}</div>
+                          <div className='exchange-product-name'>{"props.item.name"}</div>
                           <div className='sm-text'>{'item.style'}</div>
                         </div>
                           <div className='ex-sty-qty-container'>
@@ -262,7 +352,7 @@ function ExchangeProduct({ props }) {
         <div className="all-form-submit-button-container">
           <div className="all-form-submit-button">Submit</div>
         </div>
-    </div>
+    </div>}
 
     </>
   )

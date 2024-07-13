@@ -31,38 +31,64 @@ import Settings from "./components/Settings"
 
 import MyOrders from './components/MyOrders.js';
 import Profile from './components/Profile.js';
+import MyAddresses from "./components/MyAddresses.js";
+import IndividualOrder from "./components/IndividualOrder.js";
+import ExchangeProduct from "./components/ExchangeProduct.js";
 
 function App() {
-  
-  const [reqComp, setReqComp] = useState({ comp: Profile, compName: "Profile" });
-  // var comp;
-
-  function chooseComp(comp , compName) {
-    setReqComp({ comp: comp, compName: compName });
-    localStorage.setItem('comp', compName);
-  }
 
   const [profileDropDownHeight, setProfileDropDownHeight] = useState({ height: '0', display: 'none', open: false });
   function profileDropDownOpen() {
-      setProfileDropDownHeight({height:'fit-content', boxShadow: '1px 1px 12px 1px rgba(0, 0, 0, 0.482)',open:true});
-      // console.log("Open ? :",profileDropDownHeight.open);
+    setProfileDropDownHeight({
+      height: 'fit-content',
+      boxShadow: '1px 1px 12px 1px rgba(0, 0, 0, 0.482)',
+      open: true
+    });
   }
   function profileDropDownClose() {
-      setProfileDropDownHeight({height:'0', boxShadow: '0 0 0 0 transparent',open:false});
-      // console.log("Open ? :",profileDropDownHeight.open);
-      // console.log("close call called")
+    setProfileDropDownHeight({
+      height: '0',
+      boxShadow: '0 0 0 0 transparent',
+      open: false
+    });
   }
-
   const profileProps = {
     profileDropDownHeight: profileDropDownHeight,
     profileDropDownOpen: profileDropDownOpen,
     profileDropDownClose: profileDropDownClose,
   }
 
+  const [userDetails, setUserDetails] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    gender: '',
+    address: '',
+    city: '',
+    state: '',
+    pinCode: '',
+  });
+
+  function getAndStoreUserDetails(result) {
+    setUserDetails(prevDetails => ({
+      ...prevDetails,
+      name: result.name,
+      email: result.email,
+      phone: result.phoneNumber,
+      gender: result.gender,
+      address: result.address,
+      city: result.city,
+      state: result.state,
+      pinCode: result.pinCode,
+  }));
+  }
+
+  
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="" element={<MainContainer chooseComp={chooseComp} profileProps={ profileProps } />}>
+        <Route path="" element={<MainContainer profileProps={ profileProps } />}>
           <Route element={<Private />}>
             <Route path="add" element={<AddProduct />} />
             <Route path="allOrders" element={<AllOrders />} />
@@ -75,9 +101,9 @@ function App() {
           <Route path="wishlist" element={<Wishlist />} />
           <Route path="shop" element={<Shop />} />
           <Route path="product/:id" element={<Product />} />
-          <Route path="cart" element={<Cart chooseComp={chooseComp}/>} />
-          <Route path="paymentValid/:id" element={<PaymentValid chooseComp={chooseComp}/>} />
-          <Route path="address" element={<Address chooseComp={chooseComp} />} />
+          <Route path="cart" element={<Cart/>} />
+          <Route path="paymentValid/:id" element={<PaymentValid />} />
+          <Route path="address" element={<Address />} />
           <Route path="confirm" element={<Payment />} />
           {/* <Route path="orders" element={<OrderHistory />} /> */}
           <Route path="ticket" element={<Ticket />} />
@@ -89,7 +115,14 @@ function App() {
           <Route path="ourServices" element={<OurServices />} />
           <Route path="collab" element={<Collab />} />
           <Route path="collabForm" element={<CollabForm />} />
-          <Route path="settings" element={<Settings reqComp={reqComp} profileProps={profileProps} />} />
+          <Route path="profile/" element={<Settings getAndStoreUserDetails={getAndStoreUserDetails} profileProps={profileProps} />} >
+            <Route path="" element={<Profile userDetails={userDetails} />} />
+            <Route path="my-orders" element={<MyOrders />} />
+            <Route path="my-orders/:id" element={<IndividualOrder userDetails={userDetails} />} />
+            <Route path="my-addresses" element={<MyAddresses />} />
+            <Route path="my-orders/exchange-product/:id" element={<ExchangeProduct userDetails={userDetails} /> } />
+          </Route>
+          <Route path="*" element={<h1>Wrong Route Broooooooo!!!</h1>}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

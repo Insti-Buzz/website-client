@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import '../css/Profile.css';
 
 function Profile({userDetails}) {
-    // const [selected, setSelected] = useState('hostel')
-    // const [addressType, setAddressType] = useState('home')
     const [name, setName] = useState('');
     const [gender, setGender] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");

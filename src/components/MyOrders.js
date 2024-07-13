@@ -8,7 +8,7 @@ import deliveredSvg from '../assets/vectors/Delivered.svg';
 import infoPopupSymbol from '../assets/vectors/InfoPopupSymbol.svg';
 import IndividualOrder from './IndividualOrder.js';
 
-function MyOrders({ userDetails, settingsNavigation }) {
+function MyOrders({ userDetails}) {
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
@@ -103,10 +103,10 @@ function MyOrders({ userDetails, settingsNavigation }) {
       const currentDate = Date.now();
         const options = { year: "numeric", month: "long", day: "numeric" }
         
-      const allowedTimeToCancelTheOrder = 300000000000000000000000; //in millisecond.
+      const allowedTimeToCancelTheOrder = 30000; //in millisecond. Define same value in IndividualOrder.js too
         item1.isCancellable = (currentDate - item.date) < allowedTimeToCancelTheOrder;
         
-        const allowedTimeToExchangeTheOrder = 6000; //in millisecond
+        const allowedTimeToExchangeTheOrder = 600; //in millisecond Define same value in IndividualOrder.js too
         item1.deliveredDate ?
             item1.isExchangable = (currentDate - item1.deliveredDate) < allowedTimeToExchangeTheOrder
             : item1.isExchangable = false;
@@ -138,7 +138,7 @@ function MyOrders({ userDetails, settingsNavigation }) {
                         </div>
                     </div>  
                 </div>
-                <div className="block product-info" onClick={() => settingsNavigation(IndividualOrder, "IndividualOrder", { item, item1 , allowedTimeToCancelTheOrder, allowedTimeToExchangeTheOrder })} style={{cursor:'pointer'}}>
+                <div className="block product-info" onClick={() => navigate(`/profile/my-orders/${item1.orderItem_id}`,{state:{id: item.order_id}})} style={{cursor:'pointer'}}>
                     <div className="info ">
                         <img src={item1.product.imageUrl[0]} alt="ordered product info" />
                         <div className='sub-block'>

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import '../css/Settings.css';
 import { useNavigate } from 'react-router-dom';
 import returnSvg from '../assets/vectors/Return.svg'
+import { Outlet , useLocation } from 'react-router-dom'
 
 import MyOrders from './MyOrders.js';
 import Profile from './Profile.js';
@@ -9,12 +10,12 @@ import MyAddresses from './MyAddresses.js';
 
 import IndividualOrder from './IndividualOrder.js';
 import ExchangeProduct from './ExchangeProduct.js';
+import LoadingPage from './LoadingPage.js';
 
 import { isExpired, decodeToken } from "react-jwt";
 
-function Settings({ reqComp , profileProps }) {
+function Settings({getAndStoreUserDetails,profileProps}) {
 
-    const [activeComponent, setActiveComponent] = useState({ component: reqComp.comp, title: reqComp.compName });
     const [userDetails, setUserDetails] = useState({
         name: '',
         email: '',
@@ -27,9 +28,7 @@ function Settings({ reqComp , profileProps }) {
     });
 
 
-    const componentMap = {
-        Profile , MyOrders , MyAddresses
-    }
+   
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -39,13 +38,9 @@ function Settings({ reqComp , profileProps }) {
             navigate('/');
             localStorage.clear();
         } else {
-            const comp = localStorage.getItem('comp');
-            if (comp) {
-                setActiveComponent({ component: componentMap[comp] || MyOrders, title: comp || "MyOrders"})
-            } else setActiveComponent({ component: reqComp.comp, title: reqComp.compName });
             getUserDetails(email,token);
         }
-    }, [reqComp]);
+    }, []);
 
     const checkAuth = async (email, token) => {
         const myDecodedToken = decodeToken(token);
@@ -82,7 +77,6 @@ function Settings({ reqComp , profileProps }) {
     };
 
     const getUserDetails = async (email, token) => {
-        // console.log("getUserDetails Called in Settings.js");
         const trueEmail = await checkAuth(email, token);
         var result;
         if (trueEmail) {
@@ -120,25 +114,24 @@ function Settings({ reqComp , profileProps }) {
                 state: result.state,
                 pinCode: result.pinCode,
             }));
+            getAndStoreUserDetails(result);
 
         }
     }
 
 
-    const settingsNavigation = (toComponent, componentTitle , props) => {
-        setActiveComponent({ component: toComponent, title: componentTitle, props: props });
-        localStorage.setItem('comp', `${componentTitle}`);
-    }
+    // const settingsNavigation = (toComponent, componentTitle , props) => {
+    //     setActiveComponent({ component: toComponent, title: componentTitle, props: props });
+    //     localStorage.setItem('comp', `${componentTitle}`);
+    // }
 
-    const handleReturnClick = () => {
-        const currentComp = localStorage.getItem('comp');
-        if (currentComp === "IndividualOrder" || "ExchangeProduct") {
-            setActiveComponent({ component: MyOrders, title: "MyOrders" });
-            localStorage.setItem('comp', 'MyOrders');
-        } 
-        
-
-    }
+    // const handleReturnClick = () => {
+    //     const currentComp = localStorage.getItem('comp');
+    //     if (currentComp === "IndividualOrder" || "ExchangeProduct") {
+    //         setActiveComponent({ component: MyOrders, title: "MyOrders" });
+    //         localStorage.setItem('comp', 'MyOrders');
+    //     } 
+    // }
 
     const Logout = () => {
         localStorage.clear();
@@ -156,9 +149,7 @@ function Settings({ reqComp , profileProps }) {
     useEffect(() => {
 
         const handleScrollOutside = (e) => {
-            // profileProps.profileDropDownClose();
             const rightDiv = rightDivRef.current;
-            // console.log("Outside");
             if (e.deltaY > 0) {
                 if (rightDiv.scrollTop < rightDiv.scrollHeight - rightDiv.clientHeight) {
                     rightDiv.scrollTop += e.deltaY;
@@ -178,18 +169,14 @@ function Settings({ reqComp , profileProps }) {
 
         const handleScrollInside = (e) => {
             const rightDiv = rightDivRef.current;
-            // console.log("Inside");
-            // console.log(e.deltaY);
             if (e.deltaY < 0) {
                 if (window.scrollY > 0) {
-                    // console.log("if")
                     window.scrollBy({
                         top: e.deltaY,
                         behavior: 'smooth',
                     })
                     e.preventDefault()
                 } else {
-                    // console.log("else")
                     rightDiv.scrollTop = rightDiv.scrollTop + e.deltaY;
                     e.preventDefault();
                 }
@@ -199,7 +186,6 @@ function Settings({ reqComp , profileProps }) {
         const handleClickOnSettings = () => {
             if (!profileProps.profileDropDownHeight.open) {
                 profileProps.profileDropDownClose();
-                // console.log("Clicked in Settings");
             }
         }
 
@@ -245,6 +231,8 @@ function Settings({ reqComp , profileProps }) {
         };
     }, []);
 
+    const { pathname } = useLocation();
+
     return (
         <>
             <div className="settings" ref={settingsRef}>
@@ -258,20 +246,20 @@ function Settings({ reqComp , profileProps }) {
                             <span className="user-number">{userDetails.phone}</span>
                         </div>
                         <div className="profile-button"
-                            style={activeComponent.title === "Profile" ?
+                            style={pathname === "/profile" ?
                                 { backgroundColor: "#FFE281" } : {}}
-                            onClick={() => settingsNavigation(Profile, "Profile")}
+                            onClick={() => navigate('/profile')}
                         >My Profile</div>
                         <div className="my-orders-button"
-                            style={activeComponent.title === "MyOrders" ?
+                            style={pathname === "/profile/my-orders" ?
                                 { backgroundColor: "#FFE281" } : {}}
-                            onClick={() => settingsNavigation(MyOrders, "MyOrders")}
+                            onClick={() => navigate('/profile/my-orders')}
                         >My Orders</div>
 
                         <div className="my-orders-button"
-                            style={activeComponent.title === "MyAddresses" ?
+                            style={pathname === "/profile/my-addresses" ?
                                 { backgroundColor: "#FFE281" } : {}}
-                            onClick={() => settingsNavigation(MyAddresses, "MyAddresses")}
+                            onClick={() => navigate('/profile/my-addresses')}
                         >My Addresses</div>
 
                         <div className="logout-button" onClick={Logout}>Logout</div>
@@ -283,10 +271,10 @@ function Settings({ reqComp , profileProps }) {
 
 
                 <div className="settings-body">
-                    <div className="setting-body-title" ref={outDiv2Ref}><img src={returnSvg} alt="" onClick={()=>handleReturnClick()}/></div>
-                    <div className="setting-body-content" ref={rightDivRef}>{<activeComponent.component userDetails={userDetails} settingsNavigation={settingsNavigation} props={activeComponent.props} />}</div>
-                    {/* <div className="setting-body-content" ref={rightDivRef}>{<IndividualOrder/>}</div> */}
-                    {/* <div className="setting-body-content" ref={rightDivRef}>{<ExchangeProduct/>}</div> */}
+                    <div className="setting-body-title" ref={outDiv2Ref}><img src={returnSvg} alt=""/></div>
+                    <div className="setting-body-content" ref={rightDivRef}>
+                        <Outlet userDetails={userDetails} />
+                    </div>
                 </div>
             </div>
         </>
@@ -294,3 +282,5 @@ function Settings({ reqComp , profileProps }) {
 }
 
 export default Settings
+
+

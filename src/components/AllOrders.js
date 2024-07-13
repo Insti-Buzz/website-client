@@ -47,12 +47,13 @@ function AllOrders() {
         const month = (date.getMonth() + 1).toString().padStart(2, '0');
         const year = date.getFullYear();
 
-        const orderId = item.order_id
-        const deliveryDone = async () => {
+        // const orderId = item.order_id
+        
+        const deliveryDone = async (orderItem_id) => {
             const token = localStorage.getItem("token")
             let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/delivered`, {
                 method: 'POST',
-                body: JSON.stringify({ orderId }),
+                body: JSON.stringify({ orderItem_id }),
                 headers: {
                     'Content-Type': 'application/json',
                     "Authorization": `Bearer ${token}`
@@ -60,7 +61,7 @@ function AllOrders() {
             })
             result = await result.json();
 
-            window.location.reload()
+            window.location.reload();
         }
 
         return (
@@ -76,7 +77,7 @@ function AllOrders() {
 
                     <p className='all-orders-content'> {item.user.phoneNumber}</p>
                     
-                    <p className='all-orders-content'> {item.productsOrdered.map(e1)}</p>
+                    <p className='all-orders-content'> {item.productsOrdered.map(e1(deliveryDone))}</p>
 
                     <p className='all-orders-content'>Date: {day + "-" + month + "-" + year}</p>
                    
@@ -90,26 +91,37 @@ function AllOrders() {
 
                     <p className='all-orders-content'> {item.subTotal}</p>
 
-                    <div className='all-orders-content'>
+                    {/* <div className='all-orders-content'>
                         {
                             item.isDelivered ?
                                 <><p><strong>Deliverd Successfully</strong></p></>
                                 :
                                 <button onClick={deliveryDone}>Mark as deliverd</button>
                         }
-                    </div>
+                    </div> */}
                 </div>
             </div>
         )
     }
 
-    function e1(item,index){
+    const e1 = (deliveryDone) => (item, index) => {
+        console.log("dwqdwdw item : ", item)
         return(
             <div className='all-orders-product-card'>
                     
                     <p className='all-orders-product-content'> {item.product.name}</p>
                     <p className='all-orders-product-content'> {item.size}</p>
                     <p className='all-orders-product-content'> {item.quantity}</p>
+                    <p className='all-orders-product-content'>
+                        <div>
+                        {
+                            item.isDelivered ?
+                                <><p><strong>Deliverd Successfully</strong></p></>
+                                :
+                                <button onClick={()=> deliveryDone(item.orderItem_id)}>Mark as deliverd</button>
+                        }
+                        </div>
+                    </p>
             </div>
         )
     }

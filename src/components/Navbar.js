@@ -13,7 +13,7 @@ import '../css/Navbar.css';
 import InstiBuzzLogo from '../assets/973300f3-c585-48d9-9e8c-601a3ae24121.png';
 // import { resolveConfig } from 'vite';
 
-function Navbar({chooseComp,profileProps}) {
+function Navbar({profileProps}) {
     const [dropDownHeight, setDropDownHeight] = useState('0');
     // const [profileDropDownHeight, setProfileDropDownHeight] = useState({height:'0', display:'none', open:false});
     // const [navbarDisplay, setNavbarDisplay] = useState('inline-flex');
@@ -194,19 +194,19 @@ function Navbar({chooseComp,profileProps}) {
 
                 <div className='nav-profile-dropdown' style={{ height: profileProps.profileDropDownHeight.height , boxShadow: profileProps.profileDropDownHeight.boxShadow }}>
                     <div onClick={() => {
-                        chooseComp(Profile, "Profile");
+                        // chooseComp(Profile, "Profile");
                         profileProps.profileDropDownClose();
-                        navigate('/settings');
+                        navigate('/profile');
                     }}>Profile</div>
                     <div onClick={() => {
-                        chooseComp(MyOrders, "MyOrders");
+                        // chooseComp(MyOrders, "MyOrders");
                         profileProps.profileDropDownClose()
-                        navigate('/settings');
+                        navigate('/profile/my-orders');
                     }}>My Orders</div>
                     <div onClick={() => {
-                        chooseComp(MyAddresses, "MyAddresses");
+                        // chooseComp(MyAddresses, "MyAddresses");
                         profileProps.profileDropDownClose()
-                        navigate('/settings');
+                        navigate('/profile/my-addresses');
                     }}>My Addresses</div>
                     <div onClick={() => {
                         profileProps.profileDropDownClose()
