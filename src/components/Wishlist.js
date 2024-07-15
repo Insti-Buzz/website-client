@@ -105,8 +105,9 @@ function Wishlist() {
                 <button
                     className="shop-product-card"
                     onClick={() => productPage(item.product_id, index)}
+                    // style={{height:'fit-content'}}
                 >
-                    <img src={item.imageUrl[0]} alt="Image " />
+                    <img src={item.imageUrl[0]} alt="Image "  style={{height:'100%',width:'100%'}}/>
                     <div className="shop-product-name">
                         <h2>{item.name}</h2>
                     </div>

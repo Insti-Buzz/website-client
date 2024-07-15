@@ -42,6 +42,7 @@ function MyOrders({ userDetails}) {
                 }
             );
             result = await result.json();
+            // console.log(result);
             setTimeout(() => setLoading(false), 1000);
         } else {
             localStorage.clear();
@@ -53,7 +54,11 @@ function MyOrders({ userDetails}) {
             navigate("/");
             window.location.reload();
         } else {
-            setOrders(result.products);
+            // console.log(result)
+            if (result.products) {
+                // console.log('Orders:', result.products);
+                setOrders(result.products);
+            } else setOrders(null);
         }
     };
   
@@ -157,17 +162,17 @@ function MyOrders({ userDetails}) {
             <div className="available-action block"
               style={((!item1.isCancellable && !item1.isDelivered) || (!item1.isExchangable && item1.isDelivered)) ?
                 {justifyContent:'start' , fontSize:'14px'} : {}}>
-                    <div className='availlable-action-btn' style={{ marginLeft: '15px' ,cursor:'default'  }}>
+                    {/* <div className='availlable-action-btn' style={{ marginLeft: '15px' ,cursor:'default'  }}>
                         {item1.isDelivered ?
                             (item1.isExchangable ? <div style={{cursor:'pointer'}}>Exchange</div> : <div className='exchange-not-allowed-text' style={{cursor:'not-allowed'}}>Exchange window was closed on {new Date(parseInt(item1.deliveredDate) + allowedTimeToExchangeTheOrder).toLocaleDateString( undefined,options )}</div>) :
                             (item1.isCancellable ? <div style={{cursor:'pointer'}}>Cancel</div> : <div className='cancel-not-allowed-text' style={{}}>Cancellation window was closed on {new Date(parseInt(item.date) + allowedTimeToCancelTheOrder).toLocaleDateString( undefined,options )}</div>)}
-                    </div>
-                    <img src={infoPopupSymbol} alt="" />
-                    <div className='popup'>
+                    </div> */}
+                    {/* <img src={infoPopupSymbol} alt="" /> */}
+                    {/* <div className='popup'>
                         {item1.isDelivered ?
                             'You can exchange your order within 7 days after delivery. Once 7 days have passed, exchange is not possible.' :
                             'You can cancel your order within 24 hours of placing it. Once 24 hours have passed, cancellation is not possible.'}
-                    </div>
+                    </div> */}
                 </div>
             </div>  
         );
@@ -187,8 +192,8 @@ function MyOrders({ userDetails}) {
                <div className='order-my-order'> {OrderCards()} </div>
             ) : (
                 <div className="order-my-order">
-                    {orders.length ? (
-                        orders.map(e)
+                    { orders && orders.length ? (
+                        orders.sort((a, b) => b.date - a.date).map(e)
                     ) : (
                         <div className="order-content">
                             <h1>
@@ -196,6 +201,7 @@ function MyOrders({ userDetails}) {
                                 <br />
                                 Visit our shop page and order now!
                             </h1>
+                            <div className="my-orders-shop-navigation-button" onClick={()=>navigate('/shop')}>Shop Now</div>
                         </div>
                     )}
                 </div>

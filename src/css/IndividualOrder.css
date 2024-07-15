@@ -181,13 +181,14 @@
 .total-price-info-box-1{
     display: flex;
     flex-direction: row;
-    justify-content:space-between;
+    justify-content:end;
 }
 
 .total-price-info-box-1-header{
     font-size: 22px;
     font-family: Tenor Sans;
     font-weight: bold;
+    margin-right: 2%;
 }
 
 .total-price-info-box-1-Value{
@@ -198,7 +199,7 @@
 }
 
 .box-1-value{
-    font-size: 18px;
+    font-size: 22px;
     font-family: Tenor Sans;
     font-weight: bold; 
     margin-bottom: 7px;

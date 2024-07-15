@@ -4,7 +4,7 @@ import '../css/MyAddresses.css'
 
 function MyAddresses() {
 
-    const [addresses, setAddresses] = React.useState([""])
+    const [addresses, setAddresses] = React.useState([])
     const [loading, setLoading] = React.useState()
     const navigate = useNavigate();
     useEffect(() => {
@@ -87,7 +87,16 @@ function MyAddresses() {
     }
     return (
         <div className='my-addresses'>
-            {addresses.map(e)}
+            { addresses ?
+                <>
+                    <div className='no-addresses-available'>No addresses available.
+                        {/* <a href='/address'>Click here</a> to add an address */}
+                    </div>
+                </>
+                :
+                addresses.map(e)    
+        }
+            {/* {addresses.map(e)} */}
         </div>
     )
 }

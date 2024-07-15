@@ -89,7 +89,9 @@
 .setting-body-title{
     background-color: white;
     font-size: 36px;
-    padding: 8vh 0 1vh 3vh;
+    padding: 9vh 0 1vh 3vh;
+    /* color: #F9E8DC; */
+    /* background-color: aqua; */
 }
 
 .settings-body .setting-body-title img{
@@ -114,12 +116,31 @@
         display: none;
     }
 
-    .setting-body{
-        width: 90%;
+    .settings{
+        /* background-color: tomato; */
+
+    }
+    .setting-body-title{
+        padding: 0;
+    }
+
+    .settings-body{
+        width: 100%;
+        /* background-color: blue; */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        /* padding: 10px; */
     }
 
     .setting-body-content{
         width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* background-color: lightgray; */
+        /* padding: 10px; */
     }
 
     .settings{

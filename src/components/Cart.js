@@ -10,7 +10,7 @@ import MyOrders from './MyOrders.js';
 
 import { isExpired, decodeToken } from "react-jwt";
 
-function Cart({ chooseComp }) {
+function Cart() {
     const [products, setProducts] = React.useState([]);
     // const [quantity, setQuantity] = useState(Array(products.length).fill(''));
     // const [quantity, setQuantity] = useState(Array.from({ length: products.length }, () => 1));
@@ -516,9 +516,9 @@ function Cart({ chooseComp }) {
             window.location.reload();
         } else {
             alert('Your order is Placed Successfully');
-            chooseComp(MyOrders, "My Orders");
+            // chooseComp(MyOrders, "My Orders");
             // window.location.reload();
-            navigate('/settings')
+            navigate('/profile/my-orders')
         }
     };
 
@@ -529,7 +529,7 @@ function Cart({ chooseComp }) {
     function RadioButtonGroup(props) {
         return (
             <div class="checkout-select-delivery">
-                <label>
+                {/* <label>
                     <p>Deliver at your doorstep.</p>
                     <input
                         type="radio"
@@ -537,9 +537,9 @@ function Cart({ chooseComp }) {
                         checked={props.selectedOption === "delivery"}
                         onChange={props.handleChange}
                     />
-                </label>
+                </label> */}
                 <label>
-                    <p>Pickup from Cauvery.</p>
+                    <p>Pickup from Saraswati.</p>
                     <input
                         type="radio"
                         value="pickup"
@@ -614,14 +614,14 @@ function Cart({ chooseComp }) {
                                                 <p>{delivery === "pickup" ? "FREE" : "MAY VARY"}</p>
                                             </div>
                                             <div class="checkout-summary-details">
-                                                <input className=""
+                                                {/* <input className=""
                                                     placeholder="Promo Code"
                                                     value={promoCode}
                                                     onChange={(e) => {
                                                         setPromoCode(e.target.value);
                                                     }}
-                                                />
-                                                <button onClick={applyPromoCode}>Apply</button>
+                                                /> */}
+                                                {/* <button onClick={applyPromoCode}>Apply</button> */}
                                             </div>
                                         </div>
                                         <hr />
@@ -655,7 +655,7 @@ function Cart({ chooseComp }) {
                                         </IconButton>
                                         <h1>Confirm Your Order?</h1>
                                         <div className="cart-popup-content">
-                                            <button onClick={confirmOrder}>Cash On Delivery</button>
+                                            {/* <button onClick={confirmOrder}>Cash On Delivery</button> */}
                                             {/* <button onClick={cancelOrder}>No</button> */}
                                             <button onClick={paymentHandler}>Pay Now</button>
                                         </div>

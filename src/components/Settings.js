@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import '../css/Settings.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import returnSvg from '../assets/vectors/Return.svg'
 import { Outlet , useLocation } from 'react-router-dom'
 
@@ -15,7 +15,7 @@ import LoadingPage from './LoadingPage.js';
 import { isExpired, decodeToken } from "react-jwt";
 
 function Settings({getAndStoreUserDetails,profileProps}) {
-
+    const params = useParams();
     const [userDetails, setUserDetails] = useState({
         name: '',
         email: '',
@@ -43,6 +43,7 @@ function Settings({getAndStoreUserDetails,profileProps}) {
     }, []);
 
     const checkAuth = async (email, token) => {
+        console.log("Security check done!")
         const myDecodedToken = decodeToken(token);
         if (myDecodedToken && myDecodedToken.email === email) {
             return myDecodedToken.email;
@@ -251,7 +252,7 @@ function Settings({getAndStoreUserDetails,profileProps}) {
                             onClick={() => navigate('/profile')}
                         >My Profile</div>
                         <div className="my-orders-button"
-                            style={pathname === "/profile/my-orders" ?
+                            style={pathname === "/profile/my-orders" || pathname === `/profile/my-orders/${params.id}` ?
                                 { backgroundColor: "#FFE281" } : {}}
                             onClick={() => navigate('/profile/my-orders')}
                         >My Orders</div>
@@ -260,7 +261,7 @@ function Settings({getAndStoreUserDetails,profileProps}) {
                             style={pathname === "/profile/my-addresses" ?
                                 { backgroundColor: "#FFE281" } : {}}
                             onClick={() => navigate('/profile/my-addresses')}
-                        >My Addresses</div>
+                        >Saved Addresses</div>
 
                         <div className="logout-button" onClick={Logout}>Logout</div>
 
@@ -271,7 +272,7 @@ function Settings({getAndStoreUserDetails,profileProps}) {
 
 
                 <div className="settings-body">
-                    <div className="setting-body-title" ref={outDiv2Ref}><img src={returnSvg} alt=""/></div>
+                    <div className="setting-body-title" ref={outDiv2Ref}></div>
                     <div className="setting-body-content" ref={rightDivRef}>
                         <Outlet userDetails={userDetails} />
                     </div>

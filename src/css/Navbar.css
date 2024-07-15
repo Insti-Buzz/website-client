@@ -112,6 +112,7 @@ fa{
 
 .nav-navbar .nav-top-right .fa-shopping-bag{
     padding: 8px;
+    padding-top: 7px;
     font-size: 20px;
     color:#40210b;
     border: 0;
@@ -120,6 +121,7 @@ fa{
 
 .nav-navbar .nav-top-right .fa-bars{
     visibility: collapse;
+    display: none;
     border: 0;
     background-color: white;
 }
@@ -171,18 +173,17 @@ fa{
 .nav-profile-dropdown{
     display: block;
     position: fixed;
-    /* padding: 20px; */
-    /* padding-bottom: 10px; */
-    /* margin-bottom: 20px; */
+    /* padding: 30px; */
     top: 80px;
-    right: 5px;
+    right: 15px;
     width: 300px;
     height: 350px;
+    height: fit-content;
     z-index: inherit;
     border-radius: 12px;
     transition: 0.6s;
     overflow: hidden;
-    background-color: #fee48c;
+    background-color: #FCFCFC;
     color: #40210b;
     /* box-shadow: 1px 1px 12px 1px rgba(0, 0, 0, 0.482); */
     /* box-shadow: 1px 1px 12px 1px transparent; */
@@ -195,11 +196,22 @@ fa{
 .nav-profile-dropdown > *{
     cursor: pointer;
     height: 50px;
-    width: 100%;
-    border-bottom: 1px solid black;
+    width: 80%;
+    /* border-bottom: 1px solid black; */
     display: inline-flex;
-    justify-content: center;
+    /* justify-content: center; */
+    color: #2B2B2B;
     align-items: center;
+    font-family: Lato;
+    margin-left: 30px;
+}
+.nav-profile-dropdown *:nth-child(n+2):hover{
+    text-decoration: underline;
+}
+
+.nav-profile-dropdown *:nth-child(1){
+    /* text-decoration: underline; */
+    margin: 30px 0 15px 30px;
 }
 
 /* nav-profile-dropdown :nth-child(1){
@@ -211,9 +223,18 @@ fa{
     font-size:28px;
 } */
 
-.nav-wish-logo{
+.nav-wish-logo.fa-heart{
     border: 0;
     background-color: white;
+    scale: 1.2;
+    /* fill-opacity:calc(20px); */
+    /* fill: black; */
+    /* color: black; */
+    /* background-color: black; */
+}
+
+.fa-heart{
+    /* scale: 3; */
 }
 
 .nav-wish-logo:hover{
@@ -436,6 +457,7 @@ fa{
     
     .nav-navbar .nav-top-right .fa-bars{
         visibility: visible;
+        display: block;
         padding: 8px;
         font-size: 14px;
         color:rgb(64,63,43);

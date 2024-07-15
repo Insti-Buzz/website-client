@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import MainContainer from "./components/MainContainer";
 import Product from "./components/Product";
 import Shop from "./components/Shop";
@@ -41,6 +41,7 @@ function App() {
   function profileDropDownOpen() {
     setProfileDropDownHeight({
       height: 'fit-content',
+      // padding:'30px',
       boxShadow: '1px 1px 12px 1px rgba(0, 0, 0, 0.482)',
       open: true
     });
@@ -49,6 +50,7 @@ function App() {
     setProfileDropDownHeight({
       height: '0',
       boxShadow: '0 0 0 0 transparent',
+      // padding:'0px',
       open: false
     });
   }
@@ -120,9 +122,9 @@ function App() {
             <Route path="my-orders" element={<MyOrders />} />
             <Route path="my-orders/:id" element={<IndividualOrder userDetails={userDetails} />} />
             <Route path="my-addresses" element={<MyAddresses />} />
-            <Route path="my-orders/exchange-product/:id" element={<ExchangeProduct userDetails={userDetails} /> } />
+            {/* <Route path="my-orders/exchange-product/:id" element={<ExchangeProduct userDetails={userDetails} /> } /> */}
           </Route>
-          <Route path="*" element={<h1>Wrong Route Broooooooo!!!</h1>}></Route>
+          <Route path="*" element={<Navigate to='/' replace/>}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

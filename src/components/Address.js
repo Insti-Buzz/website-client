@@ -11,7 +11,7 @@ import { isExpired, decodeToken } from "react-jwt";
 import MyOrders from "./MyOrders";
 
 
-function Address({chooseComp}) {
+function Address() {
     const [products, setProducts] = React.useState([]);
     // const [quantity, setQuantity] = useState(Array(products.length).fill(''));
     // const [quantity, setQuantity] = useState(Array.from({ length: products.length }, () => 1));
@@ -266,8 +266,8 @@ function Address({chooseComp}) {
         } else {
             alert('Your order is Placed Successfully')
             // window.location.reload();
-            chooseComp(MyOrders,"My Orders")
-            navigate('/settings')
+            // chooseComp(MyOrders,"My Orders")
+            navigate('/profile/my-orders')
         }
     };
 
@@ -699,7 +699,7 @@ function Address({chooseComp}) {
                                         </IconButton>
                                         <h1>Confirm Your Order?</h1>
                                         <div className="cart-popup-content">
-                                            <button onClick={confirmOrder}>Cash On Delivery</button>
+                                            {/* <button onClick={confirmOrder}>Cash On Delivery</button> */}
                                             {/* <button onClick={cancelOrder}>No</button> */}
                                             <button onClick={paymentHandler}>Pay Now</button>
                                         </div>

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import MyOrders from './MyOrders';
 
-function PaymentValid({chooseComp}) {
+function PaymentValid() {
     const params = useParams();
     const navigate=useNavigate()
     useEffect(()=>{
@@ -32,13 +32,13 @@ function PaymentValid({chooseComp}) {
         // console.log("code "+order.code)
         if(order.message=="orderAlreadyPlaced"){
             alert("orderAlreadyPlaced")
-            chooseComp(MyOrders,"My Orders")
-            navigate('/settings')
+            // chooseComp(MyOrders,"My Orders")
+            navigate('/profile/my-orders')
         }
         if(order.code == "PAYMENT_SUCCESS"){
             alert("Your order is placed successfully")
-            chooseComp(MyOrders,"My Orders")
-            navigate('/settings')
+            // chooseComp(MyOrders,"My Orders")
+            navigate('/profile/my-orders')
         }
 
         if (order.status == 404) {

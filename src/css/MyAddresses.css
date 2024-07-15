@@ -5,3 +5,29 @@
     border-radius: 10px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
+
+.no-addresses-available{
+    font-size: 22px;
+    font-family: Tenor sans;
+    cursor: default;
+}
+
+.no-addresses-available a{
+    text-decoration: none;
+    color: #FF7F50;
+    font-weight: 600;
+}
+.no-addresses-available a:hover{
+    text-decoration: underline;
+    /* color: #FF7F50; */
+    /* font-weight: 600; */
+}
+
+
+
+.my-addresses{
+    background-color: rgb(236, 236, 236);
+    padding: 2rem;
+    height: 60vh;
+    width: 80%;
+}

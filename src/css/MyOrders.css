@@ -31,7 +31,7 @@
 
 .orders-card {
     border: 1px solid grey;
-    border-radius: 20px;
+    border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     height: fit-content;
     background-color:#FCFCFC;
@@ -39,14 +39,16 @@
 }
 .dikshant-ka-idea{
     background-color: #cacaca;
+    /* background-color:red; */
     margin-bottom: 10px;
     width: 95%;
     display: flex;
     align-items: center;
     flex-direction: column;
     gap: 10px;
-    border-radius: 16px;
-    padding: 10px;
+    border-radius: 20px;
+    padding: 5px;
+    /* padding:; */
 }
 .orders-card .block {
     display: flex;
@@ -221,7 +223,7 @@
     align-items: center;
     gap: 15px;
     position: relative;
-    padding: 15px;
+    padding: 20px;
 }
 
 .available-action img:hover ~ .popup{
@@ -254,6 +256,22 @@
     padding: 20px 0 20px 0;
     width: 100%;
     gap: 5px;
+}
+
+.my-orders-shop-navigation-button{
+    background-color: #FFE281;
+    margin-top: 50px;
+    padding: 20px;
+    width: 35%;
+    border-radius: 10px;
+    border: 1px solid #808080;
+    transition: 300ms;
+    font-family: tenor sans;
+    font-size: 18px;
+    cursor: pointer;
+}
+.my-orders-shop-navigation-button:hover{
+    scale: 1.02;
 }
 
 /* .timeline{
@@ -335,7 +353,7 @@
 {
     .orders-card
     {
-        transform: scale(0.9);
+        /* transform: scale(0.9); */
     }
 
     

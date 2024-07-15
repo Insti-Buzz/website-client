@@ -22,7 +22,7 @@ function ExchangeProduct({userDetails}) {
   const allowedTimeToCancelTheOrder = 30000; //in millisecond. Define same value in MyOrders.js too
   const allowedTimeToExchangeTheOrder = 600; //in millisecond Define same value in MyOrders.js too
 
-  function setExchangeAndReturnCondition(result) {
+  const setExchangeAndReturnCondition = async (result) => {
     setOrderItem(prevOrderItem => ({
       ...prevOrderItem, isCancellable: (Date.now() - result.order.date) < allowedTimeToCancelTheOrder
     }));
@@ -51,10 +51,12 @@ function ExchangeProduct({userDetails}) {
       behavior: 'instant',
     });
     getIndividualOrder();
-    // if (!orderItem.isExchangable) {
-    //   alert("Invaild action : Navigate the User to some other page. logout not required.");
-    //   console.log("rendered")
-    // }
+    if (!orderItem.isExchangable) {
+      alert("Invaild action : Navigate the User to some other page. logout not required.");
+      console.log("rendered")
+    } else {
+      alert('all okay');
+    }
   }, []);
   
   // useEffect(() => {
@@ -80,7 +82,7 @@ function ExchangeProduct({userDetails}) {
         setOrder(result.order);
         setOrderItem(result.orderItem);
 
-        setExchangeAndReturnCondition(result);
+        await setExchangeAndReturnCondition(result);
         setReturnEndsOn(new Date(parseInt(result.order.date) + allowedTimeToCancelTheOrder).toLocaleDateString( undefined,options ))
         setExchangeEndsOn(new Date(parseInt(result.orderItem.deliveredDate) + allowedTimeToExchangeTheOrder).toLocaleDateString( undefined,options ))
       } else {

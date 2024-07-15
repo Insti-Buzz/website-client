@@ -178,7 +178,7 @@ function Navbar({profileProps}) {
                     {
                         isLogin ?
                             (isLogin && <>
-                                {/* <button onClick={wishlistPage} class="fa fa-heart-o nav-wish-logo"></button> */}
+                                <button onClick={wishlistPage} class="fa fa-heart nav-wish-logo" style={{color:'black'}}></button>
                                 <button className="fa fa-shopping-bag " aria-hidden="true" onClick={cartPage}></button>
                                 <button className="fa fa-bars nav-cart-logo" aria-hidden="true" onClick={dropDownOpen}></button>
                                 <div className="nav-profile-button" onClick={()=> profileProps.profileDropDownHeight.open ? profileProps.profileDropDownClose() : profileProps.profileDropDownOpen()}>{ usersName }</div>
@@ -192,26 +192,48 @@ function Navbar({profileProps}) {
                     }
                 </div>
 
-                <div className='nav-profile-dropdown' style={{ height: profileProps.profileDropDownHeight.height , boxShadow: profileProps.profileDropDownHeight.boxShadow }}>
-                    <div onClick={() => {
-                        // chooseComp(Profile, "Profile");
-                        profileProps.profileDropDownClose();
-                        navigate('/profile');
-                    }}>Profile</div>
+                <div className='nav-profile-dropdown' style={{ height: profileProps.profileDropDownHeight.height , boxShadow: profileProps.profileDropDownHeight.boxShadow}}>
+                    <div style={{color:'#FF7F50', fontSize:'22px', marginBottom:'10px'}}>
+                        Hello! {localStorage.getItem('name')}
+                    </div>
+                    
                     <div onClick={() => {
                         // chooseComp(MyOrders, "MyOrders");
                         profileProps.profileDropDownClose()
                         navigate('/profile/my-orders');
                     }}>My Orders</div>
-                    <div onClick={() => {
-                        // chooseComp(MyAddresses, "MyAddresses");
-                        profileProps.profileDropDownClose()
-                        navigate('/profile/my-addresses');
-                    }}>My Addresses</div>
+                   
                     <div onClick={() => {
                         profileProps.profileDropDownClose()
                         wishlistPage();
                     }} >Wishlist</div>
+                   
+                    
+                    
+                    <div onClick={() => {
+                        // chooseComp(Profile, "Profile");
+                        profileProps.profileDropDownClose();
+                        navigate('/collabForm');
+                    }}>Collaboration</div>
+                    
+                    <div onClick={() => {
+                        // chooseComp(Profile, "Profile");
+                        profileProps.profileDropDownClose();
+                        navigate('/ticket');
+                    }} style={{borderBottom: '1px solid black'}}>Contact us</div>
+                   {/* <hr></hr> */}
+                    <div onClick={() => {
+                        // chooseComp(MyAddresses, "MyAddresses");
+                        profileProps.profileDropDownClose()
+                        navigate('/profile/my-addresses');
+                    }}>Saved Addresses</div>
+
+                    <div onClick={() => {
+                        // chooseComp(Profile, "Profile");
+                        profileProps.profileDropDownClose();
+                        navigate('/profile');
+                    }}>Profile</div>
+                   
                     <div onClick={Logout}>Logout</div>
 
                 </div>    

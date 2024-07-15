@@ -130,16 +130,16 @@ function IndividualOrder({userDetails}) {
                         </div>
                     </div>
               </div>
-              <div className="product-status-info-container block-2">
+              {/* <div className="product-status-info-container block-2">
               <div onClick={()=>handleExchangeOrReturnLogic(order,orderItem)} className='availlable-action-btn product-status-info' style={{ marginLeft: '15px' , cursor:'pointer' }} > 
                         {orderItem.isDelivered ?
                             (orderItem.isExchangable ? 'Exchange' : <div className='IO-exchange-not-allowed-text'>Exchange window is/was closed on {exchangeEndsOn}</div>) :
                             (orderItem.isCancellable ? 'Cancel' : <div className='IO-cancel-not-allowed-text'>Cancellation window is/was closed on {returnEndsOn}</div>)}
                     </div>
-              </div>
+              </div> */}
               <div className="delivery-info-container block-2">
-                <div className="delivery-info-header">{order.isHomeDelivery ? "Deliver to address :" : "Deliver to address : Saraswati Hostel"}</div>
-                <div className="delivery-info-customer-name">{userDetails.name}</div>
+                <div className="delivery-info-header">{order.isHomeDelivery ? "Deliver to address :" : "Pickup from : Saraswati Hostel"}</div>
+                <div className="delivery-info-customer-name">Hey {userDetails.name},</div>
                 <div className="delivery-info-customer-address">{order.isHomeDelivery ? order.deliveryAddress : "You'll be notified when your order is ready for pickup !"}</div>
                 {order.isHomeDelivery ?
                 <div className="delivery-info-customer-phone">Phone : {userDetails.phone} </div> : <></>}
@@ -152,10 +152,10 @@ function IndividualOrder({userDetails}) {
                       <div className="box-1-value-breakup">View breakup</div>
                     </div>
                   </div>
-                  <div className="total-price-info-box-2">
+                  {/* <div className="total-price-info-box-2">
                     <div className="box-2-payment-method">Cash on Delivery</div>
                     <div className="box-2-payment-addn-info">At the time of delivery, UPI payment is accepted</div>
-                  </div>
+                  </div> */}
               </div>
               
         </div>}       
