@@ -181,7 +181,6 @@ const Product = () => {
       alert("Please Login");
       navigate("./login");
     }
-    setLoading(true);
     let productId = params.id;
     // console.log(email)
     // console.log(productId)
@@ -198,7 +197,6 @@ const Product = () => {
     );
     result = await result.json();
     // console.log(result)
-    setLoading(false);
     if (result.status === 404) {
       alert(result.message);
       localStorage.removeItem("userEmail");
