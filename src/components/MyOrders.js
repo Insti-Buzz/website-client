@@ -162,7 +162,13 @@ function MyOrders({ userDetails}) {
             <div className="available-action block"
               style={((!item1.isCancellable && !item1.isDelivered) || (!item1.isExchangable && item1.isDelivered)) ?
                         { justifyContent: 'start', fontSize: '14px' } : {}}>
+                            {
+                            item.transactionId?
+                    <div style={{fontFamily:'lato',cursor:'default'}}>Transaction Id: {item.transactionId}</div>
+                    :
                     <div style={{fontFamily:'lato',cursor:'default'}}>Order Id: {item.order_id}</div>
+
+                            }
                     {/* <div className='availlable-action-btn' style={{ marginLeft: '15px' ,cursor:'default'  }}>
                         {item1.isDelivered ?
                             (item1.isExchangable ? <div style={{cursor:'pointer'}}>Exchange</div> : <div className='exchange-not-allowed-text' style={{cursor:'not-allowed'}}>Exchange window was closed on {new Date(parseInt(item1.deliveredDate) + allowedTimeToExchangeTheOrder).toLocaleDateString( undefined,options )}</div>) :
