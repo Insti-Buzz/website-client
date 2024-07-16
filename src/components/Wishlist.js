@@ -107,7 +107,7 @@ function Wishlist() {
                     onClick={() => productPage(item.product_id, index)}
                     // style={{height:'fit-content'}}
                 >
-                    <img src={item.imageUrl[0]} alt="Image "  style={{height:'100%',width:'100%'}}/>
+                    <img src={item.imageUrl[0]} alt="Image "  style={{height:'35vh',width:'100%',objectFit:'cover'}}/>
                     <div className="shop-product-name">
                         <h2>{item.name}</h2>
                     </div>
