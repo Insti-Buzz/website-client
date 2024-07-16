@@ -13,7 +13,7 @@ import '../css/Navbar.css';
 import InstiBuzzLogo from '../assets/973300f3-c585-48d9-9e8c-601a3ae24121.png';
 // import { resolveConfig } from 'vite';
 
-function Navbar({profileProps}) {
+function Navbar({profileProps,navbarRef }) {
     const [dropDownHeight, setDropDownHeight] = useState('0');
     // const [profileDropDownHeight, setProfileDropDownHeight] = useState({height:'0', display:'none', open:false});
     // const [navbarDisplay, setNavbarDisplay] = useState('inline-flex');
@@ -145,7 +145,7 @@ function Navbar({profileProps}) {
         <>
             
 
-            <div className="nav-navbar" style={{ height: navbarHeight }}>
+            <div className="nav-navbar" style={{ height: navbarHeight }} ref={navbarRef}> 
 
                 <a className="nav-top-left" href='/'>
                     <img src={InstiBuzzLogo} alt="InstiBuzz Logo" className="nav-instibuzz-logo"/>
@@ -174,7 +174,7 @@ function Navbar({profileProps}) {
                     </div>
                 </div>
 
-                <div className="nav-top-right">
+                <div className="nav-top-right" >
                     {
                         isLogin ?
                             (isLogin && <>

@@ -391,7 +391,7 @@ fa{
         transition: 0.6s;
         overflow: hidden;
         background-color: #fee48c;
-        color: #40210b;
+        color: #2b2b2b;
         box-shadow: 1px 1px 12px 1px rgba(0, 0, 0, 0.482);
         /* background-color: red; */
         /* backdrop-filter: drop-shadow(40px 4px 10px blue) ; */
@@ -407,7 +407,7 @@ fa{
         margin-left: 91.3%;
         margin-top: 17px;
         padding: 2px;
-        color: #40210b  ;
+        color: #2b2b2b  ;
     }
 
     .nav-dropdown .nav-center-content{
@@ -453,16 +453,16 @@ fa{
     
     .nav-navbar .nav-top-right .fa-shopping-bag{
         padding: 8px;
-        font-size: 14px;
-        color:rgb(64,63,43);
+        font-size: 16px;
+        /* color:rgb(64,63,43); */
     }
     
     .nav-navbar .nav-top-right .fa-bars{
         visibility: visible;
         display: block;
         padding: 8px;
-        font-size: 14px;
-        color:rgb(64,63,43);
+        font-size: 16px;
+        /* color:rgb(64,63,43); */
         margin-right: 10px;
     }
 } 

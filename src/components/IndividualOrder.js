@@ -150,7 +150,7 @@ function IndividualOrder({userDetails}) {
                     <div className="total-price-info-box-1-header">Total</div>
                     <div className="total-price-info-box-1-Value">
                       <div className="box-1-value">₹ {orderItem.price}</div>
-                      <div className="box-1-value-breakup">View breakup</div>
+                      {/* <div className="box-1-value-breakup">View breakup</div> */}
                     </div>
                   </div>
                   {/* <div className="total-price-info-box-2">
