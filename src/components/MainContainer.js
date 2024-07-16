@@ -5,13 +5,11 @@ import Navbar from './Navbar'
 import Footer from './Footer'
 
 function MainContainer({profileProps}) {
-    // const auth = localStorage.getItem('userEmail')
-    // const token = localStorage.getItem('token')
 
     const outletRef = useRef(null);
     useEffect(() => {
         const handleClickOnOutlet = () => {
-            console.log("clickkkk")
+            // console.log("clickkkk")
             if (!profileProps.profileDropDownHeight.open) {
                 profileProps.profileDropDownClose();
             }
@@ -23,7 +21,7 @@ function MainContainer({profileProps}) {
         }
         return () => {
             if (mainContainerComp) {
-                mainContainerComp.removeEventListener('click',handleClickOnOutlet)
+                mainContainerComp.removeEventListener('click', handleClickOnOutlet);
             }
         };
     }, []);
