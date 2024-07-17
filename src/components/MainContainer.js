@@ -4,20 +4,29 @@ import { Toaster } from 'react-hot-toast'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import { click } from '@testing-library/user-event/dist/click'
+// import '../css/MainContainer.css'
 
 function MainContainer({profileProps}) {
 
     const outletRef = useRef(null);
     const navbarRef = useRef(null);
     useEffect(() => {
-        const handleClickOnOutlet = () => {
+        const handleClickOnOutlet = (event) => {
             if (!profileProps.profileDropDownHeight.open) {
                 profileProps.profileDropDownClose();
+            }
+            if (!profileProps.sidePanel.open) {
+                // console.log(event);
+                profileProps.sidePanelClose();
             }
         }
         const handleClickOnNavbar = (event) => {
             if (!profileProps.profileDropDownHeight.open && event.target.className !== 'nav-profile-button') {
                 profileProps.profileDropDownClose();
+            }
+            if (!profileProps.sidePanel.open && event.target.className === 'nav-dropdown' ) {
+                // console.log(event);
+                profileProps.sidePanelClose();
             }
         }
 
@@ -38,6 +47,8 @@ function MainContainer({profileProps}) {
             }
         };
     }, []);
+
+
 
     const { pathname } = useLocation();
     const showFooter = !(pathname === '/signup' || pathname === '/login' || pathname === '/cart' || pathname === '/address' || pathname === '/ticket' || pathname === '/collabForm' ||  pathname === '/wishlist');

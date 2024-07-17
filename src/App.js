@@ -54,10 +54,22 @@ function App() {
       open: false
     });
   }
+  const [sidePanel, setSidePanel] = useState({ width: '0', open: false });
+  function sidePanelOpen() {
+      setSidePanel({width:'100%',open:true});
+      
+  }
+  function sidePanelClose() {
+      setSidePanel({width:'0',open:false});
+  }
+
   const profileProps = {
     profileDropDownHeight: profileDropDownHeight,
     profileDropDownOpen: profileDropDownOpen,
     profileDropDownClose: profileDropDownClose,
+    sidePanel: sidePanel,
+    sidePanelOpen: sidePanelOpen,
+    sidePanelClose: sidePanelClose,
   }
 
   const [userDetails, setUserDetails] = useState({
