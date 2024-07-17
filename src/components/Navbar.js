@@ -258,7 +258,7 @@ function Navbar({profileProps,navbarRef }) {
                             <a href='/ourServices' className="nav-instibuzz-container-3" style={ location.pathname==='/ourServices' ? {backgroundColor:'#FF7F50' ,color:'white'}:{}}>Our Services</a>
                             <a href='/about' className="nav-instibuzz-container-4" style={ location.pathname==='/about' ? {backgroundColor:'#FF7F50' ,color:'white'}:{}}>Our Story</a>
                         </div>
-                        <div className="nav-profile-container">
+                        <div className="nav-profile-container" style={isLogin ? {}:{display:'none'}}>
                             <div className="nav-profile-container-heading">PROFILE</div>
                             <a href="/profile/my-orders" style={ location.pathname==='/profile/my-orders' ? {backgroundColor:'#FF7F50' ,color:'white'}:{}}>My Orders</a>
                             <a href="/wishlist" style={ location.pathname==='/wishlist' ? {backgroundColor:'#FF7F50' ,color:'white'}:{}}>Wishlist</a>
