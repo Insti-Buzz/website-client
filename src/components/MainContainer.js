@@ -27,7 +27,7 @@ function MainContainer({profileProps}) {
     }, []);
 
     const { pathname } = useLocation();
-    const showFooter = !(pathname === '/signup' || pathname === '/login' || pathname === '/cart' || pathname === '/address' || pathname === '/ticket' || pathname === '/collabForm' ||  pathname === '/wishlist');
+    const showFooter = !(pathname=="/change-password" || pathname=="/enter-otp" || pathname === "/forgot-password" || pathname === '/signup' || pathname === '/login' || pathname === '/cart' || pathname === '/address' || pathname === '/ticket' || pathname === '/collabForm' ||  pathname === '/wishlist');
     return (
         <div className='all-container'>
             <Toaster />
