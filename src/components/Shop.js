@@ -118,7 +118,10 @@ function Shop() {
                     </div>
                     <hr />
                     <div className='shop-product-style'>
-                            <p className='product-style'>{(item.style === 'regular') ? "Regular T-Shirts" : "Oversized T-Shirts"}</p>
+                            <p className='product-style'>{
+                            (item.style === 'regular') ? "Regular T-Shirts" :
+                            (item.style === 'hoodie') ? "Hoodie" :
+                            "Oversized T-Shirts"}</p>
                     </div>
 
                     <div className="shop-product-price">

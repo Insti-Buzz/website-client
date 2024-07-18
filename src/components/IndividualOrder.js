@@ -21,29 +21,29 @@ function IndividualOrder({userDetails}) {
   const allowedTimeToCancelTheOrder = 30000; //in millisecond. Define same value in MyOrders.js too
   const allowedTimeToExchangeTheOrder = 6000000000000; //in millisecond Define same value in MyOrders.js too
 
-  function setExchangeAndReturnCondition(result) {
-    setOrderItem(prevOrderItem => ({
-      ...prevOrderItem, isCancellable: (Date.now() - result.order.date) < allowedTimeToCancelTheOrder
-    }));
-    if (result.orderItem.deliveredDate) {
-      setOrderItem(prevOrderItem => ({
-        ...prevOrderItem, isExchangable: (Date.now() - result.orderItem.deliveredDate) < allowedTimeToExchangeTheOrder
-      }));
-    };
-  }
+  // function setExchangeAndReturnCondition(result) {
+  //   setOrderItem(prevOrderItem => ({
+  //     ...prevOrderItem, isCancellable: (Date.now() - result.order.date) < allowedTimeToCancelTheOrder
+  //   }));
+  //   if (result.orderItem.deliveredDate) {
+  //     setOrderItem(prevOrderItem => ({
+  //       ...prevOrderItem, isExchangable: (Date.now() - result.orderItem.deliveredDate) < allowedTimeToExchangeTheOrder
+  //     }));
+  //   };
+  // }
 
-  const handleExchangeOrReturnLogic = (order,orderItem) => {
-    if (orderItem.isDelivered) {
-      if (orderItem.isExchangable) {
-        console.log("helloo",order.order_id);
-        navigate(`/profile/my-orders/exchange-product/${orderItem.orderItem_id}` , {state:{id:order.order_id}});
-      }
-    } else {
-      if (orderItem.isCancellable) {
-        alert('Handle return request');
-      }
-    }
-  }
+  // const handleExchangeOrReturnLogic = (order,orderItem) => {
+  //   if (orderItem.isDelivered) {
+  //     if (orderItem.isExchangable) {
+  //       console.log("helloo",order.order_id);
+  //       navigate(`/profile/my-orders/exchange-product/${orderItem.orderItem_id}` , {state:{id:order.order_id}});
+  //     }
+  //   } else {
+  //     if (orderItem.isCancellable) {
+  //       alert('Handle return request');
+  //     }
+  //   }
+  // }
 
   useEffect(() => {
     window.scrollTo({
@@ -71,8 +71,9 @@ function IndividualOrder({userDetails}) {
         setIsLoading(false);
         setOrder(result.order);
         setOrderItem(result.orderItem);
+        console.log("result.order.date : ",result.order.date);
 
-        setExchangeAndReturnCondition(result);
+        // setExchangeAndReturnCondition(result);
         setReturnEndsOn(new Date(parseInt(result.order.date) + allowedTimeToCancelTheOrder).toLocaleDateString( undefined,options ))
         setExchangeEndsOn(new Date(parseInt(result.orderItem.deliveredDate) + allowedTimeToExchangeTheOrder).toLocaleDateString( undefined,options ))
       } else {
@@ -149,7 +150,7 @@ function IndividualOrder({userDetails}) {
                     <div className="total-price-info-box-1-header">Total</div>
                     <div className="total-price-info-box-1-Value">
                       <div className="box-1-value">₹ {orderItem.price}</div>
-                      <div className="box-1-value-breakup">View breakup</div>
+                      {/* <div className="box-1-value-breakup">View breakup</div> */}
                     </div>
                   </div>
                   {/* <div className="total-price-info-box-2">

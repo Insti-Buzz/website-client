@@ -25,7 +25,7 @@ body h3 {
     }
 } */
 
-@media (max-width: 560px) {
+@media (max-width: 860px) {
     body {
         margin-top: 8vh;
     }

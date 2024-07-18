@@ -145,7 +145,7 @@ function AddProduct() {
 
                 <div className='addproduct-quantity-div'>
                     <p className='addproduct-items'>Style</p>
-                    <input className='addproduct-quantity' type='text' placeholder='regular/oversized' value={style}
+                    <input className='addproduct-quantity' type='text' placeholder='regular/oversized/hoodie' value={style}
                         onChange={(e) => { setStyle(e.target.value) }} />
                     {error && !style && <span className='invalid-input'>Enter valid Style</span>}
 
