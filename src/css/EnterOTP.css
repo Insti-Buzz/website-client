@@ -1,0 +1,25 @@
+.enter-otp-form {
+    text-align: center;
+}
+
+.enter-otp-form label {
+    font-size: 12px;
+}
+
+.enter-otp-input {
+    display: flex;
+    justify-content: center;
+}
+
+.enter-otp-input input {
+    height: 50px;
+    margin: 20px 10px;
+    padding: 5px 12.5px;
+    font-size: 30px;
+    border-radius: 5px;
+    border: 1px solid #808080;
+    color: #3d3d3d;
+    font-weight: 200;
+    font-family: "Tenor Sans", sans-serif;
+}
+

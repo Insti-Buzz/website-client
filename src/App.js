@@ -34,6 +34,9 @@ import Profile from './components/Profile.js';
 import MyAddresses from "./components/MyAddresses.js";
 import IndividualOrder from "./components/IndividualOrder.js";
 import ExchangeProduct from "./components/ExchangeProduct.js";
+import ForgotPassword from "./components/ForgotPassword.js";
+import EnterOTP from "./components/EnterOTP.js";
+import ChangePassword from "./components/ChangePassword.js";
 
 function App() {
 
@@ -109,6 +112,9 @@ function App() {
             <Route path="updateProduct/:id" element={<UpdateProduct />} />
           </Route>
           <Route path="faqs" element={<FAQs />} />
+          <Route path="forgot-password" element={<ForgotPassword />} />
+          <Route path="enter-otp" element={<EnterOTP />} />
+          <Route path="change-password" element={<ChangePassword />} />
           <Route path="signup" element={<Signup />} />
           <Route path="login" element={<Login />} />
           <Route path="" element={<Home />} />

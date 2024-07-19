@@ -114,9 +114,9 @@ function Login() {
                 style={{ cursor: "pointer" }}
               />
             </div>
-            {/* <div class="forgot-password">
-                        <a href="">Forgot password?</a> <br />
-                    </div> */}
+            <div class="forgot-password">
+              <a href="/forgot-password">Forgot password?</a> <br />
+            </div>
             <div class="login-btn-container">
               <button className="login-btn" onClick={LoginToast}>
                 Login
