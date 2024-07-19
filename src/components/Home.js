@@ -30,31 +30,8 @@ import mobileBanner from '../assets/Home-mobile-banner.jpg';
 // import mobileBanner from '../assets/t20_banner_mobile.jpg';
 import { useNavigate } from 'react-router-dom';
 
-
-
-
-
 function Home() {
-  // const latestArrivalsRef = useRef(null);
-  // const ScrollToLatestArrivals = () => {
-  //   useEffect(() => {
-  //     if (latestArrivalsRef.current) {
-  //       const latestArrivalsTop = latestArrivalsRef.current.offsetTop;
 
-  //       setTimeout(() => {
-  //         window.scrollTo({
-  //           top: latestArrivalsTop - 70,
-  //           behavior: 'smooth'
-  //         });
-  //       }, 700);
-
-  //     }
-  //   }, []);
-
-  // };
-  // ScrollToLatestArrivals();
-
-  // for carousal
   const coverImgArray = [CoverImg1, CoverImg2, CoverImg3, CoverImg4];
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -66,14 +43,6 @@ function Home() {
     return () => clearInterval(carouselInterval);
   }, [coverImgArray.length]);
 
-  const toOurServices = () => {
-    navigate("/ourServices")
-  }
-  const toCollab=()=>{
-    navigate("/collab")
-  }
-
-  // for Latest Arrivals
   const overSizedProducts = [
     { productName: "Average IITian", image: [Avg_IITian_1, Avg_IITian_2], link: "/shop" },
     { productName: "Take Lite", image: [Take_Lite_1, Take_Lite_2], link: "/shop" },
@@ -93,13 +62,11 @@ function Home() {
   useEffect(() => {
     const interval_2 = setInterval(() => {
       setClassicCountOne(prevCount => (prevCount + 1) % normalProducts.length);
-      // console.log("The interval 2 count is", classicCountOne);
     }, 4109);
 
 
     const interval_1 = setInterval(() => {
       setOverSizedCount(prevCount => (prevCount + 1) % overSizedProducts.length);
-      // console.log("The interval 1 count is", overSizedCount);
     }, 5931);
 
     return () => {
@@ -275,40 +242,6 @@ function Home() {
             <div className="bottom-container-four-button-container">
                 <a className="collaborate-button" href='/collab'>View Details</a>
             </div>
-            {/* <div className="home-four-container-cards-container">
-              <div className="home-fccc-card">
-                <h3 className="home-fccc-card-title">Designers</h3>
-                <p className="home-fccc-card-body">Our designs capture the essence of campus life,
-                  reflecting the vibrancy and spirit of our college community. By becoming part of
-                  our designer squad, you'll have the opportunity to immerse yourself in college
-                  festivals, social events, and more, you will have a hands-on along the way. Join
-                  our dynamic design team where you'll not only create but also learn extensively
-                  about graphic designing</p>
-               
-                <div className="home-fccc-card-button">Start Now</div>
-              </div>
-              <div className="home-fccc-card">
-                <h3 className="home-fccc-card-title">Manufacturers</h3>
-                <p className="home-fccc-card-body">At InstiBuzz, we place great
-                  importance on the quality of our tees as it reflects our promise
-                  to customers. We actively seek partnerships with manufacturers who
-                  can deliver cost-effective solutions, timely production, and superior
-                  materials for our designs. This ensures that our customers receive nothing
-                  but the best when they choose Instibuzz products.</p>
-               
-                <div className="home-fccc-card-button">Start Now</div>
-              </div>
-              <div className="home-fccc-card">
-                <h3 className="home-fccc-card-title">Videographers</h3>
-                <p className="home-fccc-card-body">As part of Instibuzz's videography 
-                team, you'll dive into the world of shooting and editing engaging videos 
-                and photos. Your role extends beyond creativity as you join our Social Media 
-                Marketing Team, actively enhancing our presence and engagement across diverse
-                 social media channels.</p>
-               
-                <div className="home-fccc-card-button">Start Now</div>
-              </div>
-            </div> */}
           </div>
         </div>
 

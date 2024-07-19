@@ -11,6 +11,7 @@ function MainContainer({profileProps}) {
     const outletRef = useRef(null);
     const navbarRef = useRef(null);
     useEffect(() => {
+        // window.scrollY
         const handleClickOnOutlet = (event) => {
             if (!profileProps.profileDropDownHeight.open) {
                 profileProps.profileDropDownClose();
@@ -29,6 +30,17 @@ function MainContainer({profileProps}) {
                 profileProps.sidePanelClose();
             }
         }
+        const handleTouchOnNavbar = (event) => {
+            // document.addEventListener('scroll',(e)=>{e.preventDefault()})
+        }
+
+        const scrollvalue = (event) => {
+            console.log(event)
+            document.addEventListener('scroll', (e) => {
+                console.log("e",e);
+                e.preventDefault();
+            })
+        }
 
         const mainContainerComp = outletRef.current;
         const navbarComp = navbarRef.current;
@@ -37,13 +49,17 @@ function MainContainer({profileProps}) {
         }
         if (navbarComp) {
             navbarComp.addEventListener('click', handleClickOnNavbar);
+            navbarComp.addEventListener('touchmove', handleTouchOnNavbar);
+            // documet.addEventListener('scroll',scrollvalue)
         }
         return () => {
             if (mainContainerComp) {
                 mainContainerComp.removeEventListener('click', handleClickOnOutlet);
             }
             if (navbarComp) {
-                navbarComp.addEventListener('click', handleClickOnNavbar);
+                navbarComp.removeEventListener('click', handleClickOnNavbar);
+                navbarComp.removeEventListener('touchmove', handleTouchOnNavbar);
+                
             }
         };
     }, []);

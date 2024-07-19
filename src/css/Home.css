@@ -5,18 +5,14 @@
     align-items: center;
     justify-content: center;
     margin-top: 8vh;
-    /* background-color: aqua; */
 }
 
 .home-top-carousal {
     width: 100%;
-    /* min-height: 62vw; */
-    /* height: 100vh; */
     height: fit-content;
     background-color: white;
     position: relative;
     overflow: hidden;
-    /* background-color:aquamarine; */
 }
 
 .home-top-carousal-img {
@@ -60,7 +56,6 @@
     width: 95%;
     font-size: 64px;
     font-size: calc(31px + 2vw);
-    /* height: 100px; */
     border-bottom: 1px solid black;
     font-family: Tenor Sans;
     font-weight: 100;
@@ -68,24 +63,17 @@
 }
 
 .home-container-one-cards-container {
-    /* width: 100%; */
-    /* height: 60vh; */
-    /* padding: 10px; */
     background-color: white;
     display: inline-flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    /* overflow-wrap: break-word; */
     flex-wrap: wrap;
 }
 
 .home-banner {
     width: 100%;
-    /* height: calc(80px + 3vw); */
     height: fit-content;
-    /* background-color: rgb(255,226,128); */
-    /* padding: 2%; */
     margin: 1.5vh 0 0 0;
     display: inline-flex;
     justify-content: center;
@@ -93,16 +81,13 @@
     font-size: 44px;
     font-weight: 500;
     background-color: aquamarine;
-    /* overflow: hidden; */
 }
 
 
 .home-banner-mobile {
     display: none;
     width: 100%;
-    /* height: calc(80px + 3vw); */
     height: fit-content;
-    /* background-color: rgb(255,226,128); */
     padding: 2% 0;
     margin: 1.8vh 0 0 0;
     display: inline-flex;
@@ -114,8 +99,6 @@
 
 .home-banner img {
     width: 100%;
-    /* overflow: hidden; */
-    /* background-color: red; */
 }
 
 .home-banner-mobile img {
@@ -129,7 +112,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* margin: 0; */
     margin-top: 12vh;
 
 }
@@ -138,10 +120,7 @@
     width: 98%;
     height: 50vw;
     display: inline-flex;
-    /* flex-wrap: nowrap; */
-    /* flex-direction: row; */
     overflow: hidden;
-    /* margin-top: 12vh; */
 }
 
 .home-bottom-container-three {

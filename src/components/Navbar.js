@@ -241,7 +241,7 @@ function Navbar({profileProps,navbarRef }) {
 
                 </div>    
                
-                <div className="nav-dropdown" style={{ width: profileProps.sidePanel.width }}>
+                <div className="nav-dropdown" style={{ width: profileProps.sidePanel.width , touchAction:'none'}}>
                     <div className='nav-dropdown-contents'>
                         <div className="nav-intro-container">
                             
