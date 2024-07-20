@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../css/ForgotPassword.css";
 import "../css/EnterOTP.css";
-import illustration from "../assets/Illustrations/Login.svg";
+import illustration from "../assets/Illustrations/Sign up img.png";
 import OtpInput from "react-otp-input";
 import toast from "react-hot-toast";
 

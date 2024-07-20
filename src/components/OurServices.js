@@ -4,7 +4,7 @@ import "../css/OurServices.css";
 import manufactureImg from '../assets/Manufacturer.jpg'
 import designImg from '../assets/Desigining.jpg'
 import salesImg from '../assets/Sales.jpg'
-import visibilityImg from '../assets/Visibility.jpg'
+import visibilityImg from '../assets/About us/Visibility.png'
 import { Helmet } from 'react-helmet';
 
 function OurServices() {

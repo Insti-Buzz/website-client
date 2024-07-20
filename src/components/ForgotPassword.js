@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/ForgotPassword.css";
-import illustration from "../assets/Illustrations/Login.svg";
+import illustration from "../assets/Illustrations/Sign up img.png";
 import toast from "react-hot-toast";
 
 function ForgotPassword() {
