@@ -46,6 +46,7 @@ function IndividualOrder({userDetails}) {
   // }
 
   useEffect(() => {
+    // const 
     window.scrollTo({
       top: 0,
       behavior: 'instant',
@@ -61,7 +62,10 @@ function IndividualOrder({userDetails}) {
           method: "POST",
           body: JSON.stringify({
             orderId: location.state.id,
-          })
+          }),
+          headers: {
+            "Content-Type": "application/json",
+        },
         }
       );
 
