@@ -4,6 +4,7 @@ import "../css/ForgotPassword.css";
 import "../css/ChangePassword.css";
 import illustration from "../assets/Illustrations/Sign up img.png";
 import toast from "react-hot-toast";
+import logo from "../assets/Horizontal Logo Transparent.png";
 
 function ChangePassword() {
     const [password, setPassword] = React.useState("");
@@ -49,9 +50,25 @@ function ChangePassword() {
         }
     }
 
+    const changePasswordToast = () => {
+        toast.promise(
+            changePassword(),
+            {
+                loading: "Setting new password",
+                success: (result) => {
+                    return "Password changed";
+                },
+                error: (result) =>{
+                    return result.message;
+                }
+            }
+        );
+    }
+
     return (
         <div className="forgot-password-main-container">
             <div className="forgot-password-head">
+                <img src={logo} />
                 <h1>Welcome to InstiBuzz</h1>
                 <h2>The All-In-One Campus Fashion Brand</h2>
             </div>
@@ -68,7 +85,7 @@ function ChangePassword() {
                             <label>Confirm your password</label>
                             <input className="forgot-password-input" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Password" required />
                             <p>{error}</p>
-                            <button className="forgot-password-btn" onClick={changePassword}>Set Password</ button>
+                            <button className="forgot-password-btn" onClick={changePasswordToast}>Set Password</ button>
                         </div>
                     </div>
                 </div>

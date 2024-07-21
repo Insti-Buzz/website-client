@@ -5,6 +5,7 @@ import "../css/EnterOTP.css";
 import illustration from "../assets/Illustrations/Sign up img.png";
 import OtpInput from "react-otp-input";
 import toast from "react-hot-toast";
+import logo from "../assets/Horizontal Logo Transparent.png";
 
 function EnterOTP() {
     const [otp, setOtp] = useState('');
@@ -26,7 +27,6 @@ function EnterOTP() {
     const submitOTP = async () => {
         const email = location.state.email;
         setIsLoading(true);
-        document.querySelector(".forgot-password-btn").setAttribute("disabled", "true");
         // console.log('called')
         if (otp.length == 4) {
             let result = await fetch(
@@ -50,7 +50,6 @@ function EnterOTP() {
         } else {
             throw new Error("Fill in OTP");
         }
-        document.querySelector(".forgot-password-btn").removeAttribute("disabled");
         setIsLoading(false);
     }
 
@@ -91,6 +90,7 @@ function EnterOTP() {
     }
 
     const submitOTPToast = () => {
+        document.querySelector(".forgot-password-btn").setAttribute("disabled", "true");
         toast.promise(
             submitOTP(),
             {
@@ -103,11 +103,13 @@ function EnterOTP() {
                 }
             }
         )
+        document.querySelector(".forgot-password-btn").removeAttribute("disabled");
     }
 
     return (
         <div className="forgot-password-main-container">
             <div className="forgot-password-head">
+                <img src={logo} />
                 <h1>Welcome to InstiBuzz</h1>
                 <h2>The All-In-One Campus Fashion Brand</h2>
             </div>
@@ -132,7 +134,7 @@ function EnterOTP() {
                                 />
                             </div>
                             <div className="forgot-password-otp">
-                                <a onClick={ isLoading ? () => {} : resendOTPToast}>Resend OTP</a>
+                                <a onClick={isLoading ? () => { } : resendOTPToast}>Resend OTP</a>
                             </div>
                             <button className="forgot-password-btn" onClick={submitOTPToast}>Continue</button>
                         </div>

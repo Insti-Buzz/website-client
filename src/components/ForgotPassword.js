@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../css/ForgotPassword.css";
 import illustration from "../assets/Illustrations/Sign up img.png";
 import toast from "react-hot-toast";
+import logo from "../assets/Horizontal Logo Transparent.png";
 
 function ForgotPassword() {
     const [email, setEmail] = useState();
@@ -20,7 +21,6 @@ function ForgotPassword() {
         if (!email) {
             throw new Error("Enter email");
         }
-        document.querySelector(".forgot-password-btn").setAttribute("disabled", "true");
         let result = await fetch(
             `${process.env.REACT_APP_server_url}/api/v1/auth/forgetPassword`,
             {
@@ -33,15 +33,15 @@ function ForgotPassword() {
         );
         result = await result.json();
         console.log(result)
-        document.querySelector(".forgot-password-btn").removeAttribute("disabled");
         if (result.status == 404) {
             throw new Error("This email is not registered")
         } else {    
             navigate("/enter-otp", { state: { email: email } });
         }
     }
-
+    
     const sendOTPToast = () => {
+        document.querySelector(".forgot-password-btn").setAttribute("disabled", "true");
         toast.promise(
             sendOTP(),
             {
@@ -54,11 +54,13 @@ function ForgotPassword() {
                 }
             }
         )
+        document.querySelector(".forgot-password-btn").removeAttribute("disabled");
     }
 
     return (
         <div className="forgot-password-main-container">
             <div className="forgot-password-head">
+                <img src={logo} />
                 <h1>Welcome to InstiBuzz</h1>
                 <h2>The All-In-One Campus Fashion Brand</h2>
             </div>
