@@ -208,7 +208,7 @@ function AboutUs() {
             <p>OUR TEAM</p>
             <div className="about-section-title-design"></div>
           </div>
-          <h2>Meet the Founders</h2>
+          <h2>Meet the Team</h2>
           <div class="about-team-grid">
             <div class="about-team-member-card">
               <img src={parth} alt="Parth Bajpai: Chief Executive Officer" />

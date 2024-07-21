@@ -257,9 +257,9 @@
     padding: 0;
     cursor: pointer;
     text-align: left;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    /* overflow: hidden; */
+    /* white-space: nowrap; */
+    /* text-overflow: ellipsis; */
     border: none;
     /* transition: background-color .2s ease-in-out, color .2s ease-in-out, box-shadow .2s ease-in-out; */
 
@@ -305,6 +305,11 @@
   
 }
 
+.shop-product-name {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
 
 .shop-product-name .h2-name {
     font-size: 18px;
