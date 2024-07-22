@@ -392,15 +392,15 @@
         display: none;
     }
 
-    .shop-product-name h2 {
-        font-size: 14px;
+    .shop-product-name .h2-name {
+        font-size: 15px;
     }
 
-    .shop-product-style p {
+    .shop-product-style .product-style {
         font-size: 12px;
     }
 
-    .shop-product-price h3 {
+    .shop-product-price .price {
         font-size: 14px;
     }
 }
