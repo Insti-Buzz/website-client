@@ -26,6 +26,7 @@ function Cart() {
     const navigate = useNavigate("");
     const [loading, setLoading] = useState(false);
     const [delivery, setDelivery] = useState("pickup");
+    const [deliveryCharges, setDeliveryCharges] = useState(0);
     const [promoCode, setPromoCode] = useState('')
     const [isDiscount, setIsDiscount] = useState(false)
 
@@ -221,7 +222,7 @@ function Cart() {
     };
 
     const calculateSubtotal = () => {
-        let subtotal = calculateMrp();
+        let subtotal = calculateMrp() + deliveryCharges;
         return subtotal;
     };
 
@@ -527,33 +528,47 @@ function Cart() {
         setShowPayment(false);
     };
 
-    function RadioButtonGroup(props) {
-        return (
-            <div class="checkout-select-delivery">
-                {/* <label>
-                    <p>Deliver at your doorstep.</p>
-                    <input
-                        type="radio"
-                        value="delivery"
-                        checked={props.selectedOption === "delivery"}
-                        onChange={props.handleChange}
-                    />
-                </label> */}
-                <label>
-                    <p>Pickup from Saraswati.</p>
-                    <input
-                        type="radio"
-                        value="pickup"
-                        checked={props.selectedOption === "pickup"}
-                        onChange={props.handleChange}
-                    />
-                </label>
-            </div>
-        );
-    }
+    // function RadioButtonGroup(props) {
+    //     return (
+    //         <div class="checkout-select-delivery">
+    //             <label>
+    //                 <p>Deliver at your doorstep.</p>
+    //                 <input
+    //                     type="radio"
+    //                     value="delivery"
+    //                     checked={props.selectedOption === "delivery"}
+    //                     onClick={props.handleChange}
+    //                 />
+    //             </label>
+    //             <label>
+    //                 <p>Pickup from Saraswati.</p>
+    //                 <input
+    //                     type="radio"
+    //                     value="pickup"
+    //                     checked={props.selectedOption === "pickup"}
+    //                     onClick={props.handleChange}
+    //                 />
+    //             </label>
+    //         </div>
+    //     );
+    // }
 
     function handleChange(event) {
         setDelivery(event.target.value);
+        switch (event.target.value) {
+            case 'pickup':
+                setDeliveryCharges(0);
+                break;
+            case 'hostel':
+                setDeliveryCharges(19);
+                break;
+            case 'delivery':
+                setDeliveryCharges(99);
+                break;
+            default:
+                setDeliveryCharges(0);
+                break;
+        }
     }
 
     function applyPromoCode() {
@@ -564,16 +579,16 @@ function Cart() {
         }
     }
 
-    const toAddress=()=>{
+    const toAddress = () => {
         navigate("/address", {
             state: {
                 mrp: isDiscount ? 0.9 * calculateMrp() : calculateMrp(),
                 noOfProducts: products.length,
             }
         }
-    );
-    localStorage.setItem("mrp", isDiscount ? 0.9 * calculateMrp() : calculateMrp())
-    localStorage.setItem("noOfProducts", products.length)
+        );
+        localStorage.setItem("mrp", isDiscount ? 0.9 * calculateMrp() : calculateMrp())
+        localStorage.setItem("noOfProducts", products.length)
     }
 
     return (
@@ -590,10 +605,35 @@ function Cart() {
                                 <div class="checkout-order-summary">
                                     <div class="checkout-delivery-method">
                                         <h3>DELIVERY METHOD</h3>
-                                        <RadioButtonGroup
-                                            selectedOption={delivery}
-                                            handleChange={handleChange}
-                                        />
+                                        <div class="checkout-select-delivery">
+                                            <label>
+                                                <p>Deliver to your hostel.</p>
+                                                <input
+                                                    type="radio"
+                                                    value="hostel"
+                                                    checked={delivery === "hostel"}
+                                                    onClick={handleChange}
+                                                />
+                                            </label>
+                                            <label>
+                                                <p>Deliver outside IITM.</p>
+                                                <input
+                                                    type="radio"
+                                                    value="delivery"
+                                                    checked={delivery === "delivery"}
+                                                    onClick={handleChange}
+                                                />
+                                            </label>
+                                            <label>
+                                                <p>Pickup from Saraswati.</p>
+                                                <input
+                                                    type="radio"
+                                                    value="pickup"
+                                                    checked={delivery === "pickup"}
+                                                    onClick={handleChange}
+                                                />
+                                            </label>
+                                        </div>
                                     </div>
                                     <hr />
                                     <div class="checkout-price-details">
@@ -612,7 +652,7 @@ function Cart() {
                                             </div>
                                             <div class="checkout-summary-details">
                                                 <p>Delivery Charges</p>
-                                                <p>{delivery === "pickup" ? "FREE" : "MAY VARY"}</p>
+                                                <p>{deliveryCharges == 0 ? "FREE" : "₹"+ deliveryCharges}</p>
                                             </div>
                                             <div class="checkout-summary-details">
                                                 {/* <input className=""
@@ -639,7 +679,7 @@ function Cart() {
                                         class="cart-order-btn"
                                         onClick={
                                             delivery === "pickup" ? proceedPayment : () => {
-                                               toAddress()
+                                                toAddress()
                                             }}
                                     >{
                                             delivery === "pickup" ? "PLACE ORDER" : "CONTINUE"
