@@ -305,12 +305,6 @@
   
 }
 
-.shop-product-name {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
 .shop-product-name .h2-name {
     font-size: 18px;
     /* font-weight: 400; */
