@@ -17,7 +17,6 @@ function MainContainer({profileProps}) {
                 profileProps.profileDropDownClose();
             }
             if (!profileProps.sidePanel.open) {
-                // console.log(event);
                 profileProps.sidePanelClose();
             }
         }
@@ -26,12 +25,27 @@ function MainContainer({profileProps}) {
                 profileProps.profileDropDownClose();
             }
             if (!profileProps.sidePanel.open && event.target.className === 'nav-dropdown' ) {
-                // console.log(event);
                 profileProps.sidePanelClose();
             }
+
         }
+        const handleSwipeOnMainContainer = (event) => {
+            // console.log(event.changedTouches[0]);
+            console.log(event);
+        }
+
+
         const handleTouchOnNavbar = (event) => {
-            // document.addEventListener('scroll',(e)=>{e.preventDefault()})
+            // console.log(event)
+            // event.preventDefault();
+            // const events = event;
+            // document.body.addEventListener('touchstart',(e) => {
+            //     console.log(e);
+            //     e.preventDefault();
+            // })
+            
+
+            // if(event.target.className==='nav-')
         }
 
         const scrollvalue = (event) => {
@@ -42,19 +56,22 @@ function MainContainer({profileProps}) {
             })
         }
 
+        // var 
         const mainContainerComp = outletRef.current;
         const navbarComp = navbarRef.current;
         if (mainContainerComp) {
             mainContainerComp.addEventListener('click', handleClickOnOutlet );
+            // mainContainerComp.addEventListener('touchmove', handleSwipeOnMainContainer );
         }
         if (navbarComp) {
             navbarComp.addEventListener('click', handleClickOnNavbar);
-            navbarComp.addEventListener('touchmove', handleTouchOnNavbar);
+            // navbarComp.addEventListener('touchmove', handleTouchOnNavbar);
             // documet.addEventListener('scroll',scrollvalue)
         }
         return () => {
             if (mainContainerComp) {
                 mainContainerComp.removeEventListener('click', handleClickOnOutlet);
+                // mainContainerComp
             }
             if (navbarComp) {
                 navbarComp.removeEventListener('click', handleClickOnNavbar);
@@ -71,9 +88,9 @@ function MainContainer({profileProps}) {
     return (
         <div className='all-container'>
             <Toaster />
-            <Navbar profileProps={profileProps} navbarRef={navbarRef} />
+            <Navbar profileProps={profileProps} navbarRef={navbarRef}/>
             <div ref={outletRef}><Outlet/></div>
-            {showFooter && <Footer />}
+            {showFooter && <Footer/>}
         </div>
     )
 }

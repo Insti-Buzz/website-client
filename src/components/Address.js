@@ -597,7 +597,7 @@ function Address() {
                         type="radio"
                         value={item.id}
                         checked={selectedAddressId === item.id}
-                        onChange={setAddressField}
+                        onClick={setAddressField}
                     />
                 </div>
                 <button className="address-remove-button"

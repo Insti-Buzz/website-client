@@ -554,6 +554,7 @@ function Cart() {
     // }
 
     function handleChange(event) {
+        console.log(event.target.value);
         setDelivery(event.target.value);
         switch (event.target.value) {
             case 'pickup':
@@ -607,6 +608,15 @@ function Cart() {
                                         <h3>DELIVERY METHOD</h3>
                                         <div class="checkout-select-delivery">
                                             <label>
+                                                <p>Pickup from Saraswati.</p>
+                                                <input
+                                                    type="radio"
+                                                    value="pickup"
+                                                    checked={delivery === "pickup"}
+                                                    onClick={handleChange}
+                                                />
+                                            </label>
+                                            <label>
                                                 <p>Deliver to your hostel.</p>
                                                 <input
                                                     type="radio"
@@ -621,15 +631,6 @@ function Cart() {
                                                     type="radio"
                                                     value="delivery"
                                                     checked={delivery === "delivery"}
-                                                    onClick={handleChange}
-                                                />
-                                            </label>
-                                            <label>
-                                                <p>Pickup from Saraswati.</p>
-                                                <input
-                                                    type="radio"
-                                                    value="pickup"
-                                                    checked={delivery === "pickup"}
                                                     onClick={handleChange}
                                                 />
                                             </label>
@@ -678,11 +679,11 @@ function Cart() {
                                     <button
                                         class="cart-order-btn"
                                         onClick={
-                                            delivery === "pickup" ? proceedPayment : () => {
+                                            delivery !== "delivery" ? proceedPayment : () => {
                                                 toAddress()
                                             }}
                                     >{
-                                            delivery === "pickup" ? "PLACE ORDER" : "CONTINUE"
+                                            delivery !== "delivery" ? "PLACE ORDER" : "CONTINUE"
                                         }
 
                                     </button>
@@ -696,7 +697,7 @@ function Cart() {
                                         </IconButton>
                                         <h1>Confirm Your Order?</h1>
                                         <div className="cart-popup-content">
-                                            {/* <button onClick={confirmOrder}>Cash On Delivery</button> */}
+                                            <button onClick={confirmOrder}>Cash On Delivery</button>
                                             {/* <button onClick={cancelOrder}>No</button> */}
                                             <button onClick={paymentHandler}>Pay Now</button>
                                         </div>

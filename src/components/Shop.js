@@ -125,7 +125,7 @@ function Shop() {
                     </div>
 
                     <div className="shop-product-price">
-                        <h3 className='price'>₹ {item.price}</h3>
+                        <h3 className='price'><s>₹{item.style === 'hoodie' ? (parseInt(item.price) + 100) : (parseInt(item.price) + 50)}</s> ₹{item.price}</h3>
                     </div>
                 </button>
             </div>
