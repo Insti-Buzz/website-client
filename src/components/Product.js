@@ -203,7 +203,7 @@ const Product = () => {
       navigate("/");
       window.location.reload();
     } else {
-      // alert("Product is added to cart Successfully")
+      alert("Added to cart")
       // navigate('/cart')
       // window.location.reload();
     }

@@ -475,15 +475,15 @@ function Address() {
             alert("Please Enter Valid PinCode")
             return false;
         }
-        // setLoading(true);
         const email = localStorage.getItem("userEmail");
         const token = localStorage.getItem("token");
-
+        
         var result;
         if (email) {
             try {
-
-
+                
+                
+                setLoading(true);
                 // console.log("trueEmail exists : ", trueEmail);
                 result = await fetch(
                     `${process.env.REACT_APP_server_url}/api/v1/auth/add-user-address`,
@@ -504,11 +504,14 @@ function Address() {
                     }
                 );
                 result = await result.json();
-                console.log(result)
-                navigate('/address')
-                setTimeout(() => {
-                    setLoading(false)
-                }, 1000);
+                // setLoading(false)
+            window.location.reload();
+
+                // console.log(result)
+                // navigate('/address') 
+                // setTimeout(() => {
+                //     setLoading(false)
+                // }, 1000);
             } catch (error) {
                 alert(error)
             }
@@ -539,6 +542,7 @@ function Address() {
         if (email) {
             try {
                 // console.log("trueEmail exists : ", trueEmail);
+                setLoading(true)
                 result = await fetch(
                     `${process.env.REACT_APP_server_url}/api/v1/auth/remove-user-address`,
                     {
@@ -554,7 +558,8 @@ function Address() {
                     }
                 );
                 result = await result.json();
-                alert(result.message)
+                // setLoading(false)
+                // alert(result.message)
                 window.location.reload()
                 setTimeout(() => {
                     setLoading(false)
