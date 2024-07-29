@@ -41,7 +41,7 @@ function AllOrders() {
     }
 
     function e(item, index) {
-        // console.log(item)
+        console.log(item)
         const now = parseInt(item.date) // Get the current timestamp in milliseconds
         const date = new Date(now);
         const day = date.getDate().toString().padStart(2, '0');
@@ -69,7 +69,7 @@ function AllOrders() {
 
             <div>
                 {
-                    item.user.email == 'instibuzziitm@gmail.com' ? <></> :
+                    item.user.email == 'instibuzziitm@gmail.com'||item.user.email =='radhakorba1@gmail.com' ||item.user.email=='anantuspai@gmail.com'||item.user.email=='dalmiapiyush5@gmail.com'||item.user.email=='pshadalmia@gmail.com'? <></> :
                         <div>
                             <hr />
 
@@ -96,7 +96,7 @@ function AllOrders() {
 
                                 <p className='all-orders-content'> {item.subTotal}</p>
                                 {
-                                    (item.deliveryAddresses).length != 0 ?
+                                    (item.deliveryAddresses) ?
                                         <div>
                                             <p className='all-orders-content'> Address:{item.deliveryAddresses.address1}, {item.deliveryAddresses.address2}</p>
                                             {/* <p className='all-orders-content'> address2:{item.deliveryAddresses.address2}</p> */}
