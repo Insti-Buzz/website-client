@@ -41,6 +41,7 @@ function AllOrders() {
     }
 
     function e(item, index) {
+        // console.log(item)
         const now = parseInt(item.date) // Get the current timestamp in milliseconds
         const date = new Date(now);
         const day = date.getDate().toString().padStart(2, '0');
@@ -48,7 +49,7 @@ function AllOrders() {
         const year = date.getFullYear();
 
         // const orderId = item.order_id
-        
+
         const deliveryDone = async (orderItem_id) => {
             const token = localStorage.getItem("token")
             let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/delivered`, {
@@ -65,63 +66,80 @@ function AllOrders() {
         }
 
         return (
+
             <div>
-                <hr/>
+                {
+                    item.user.email == 'instibuzziitm@gmail.com' ? <></> :
+                        <div>
+                            <hr />
 
-                <div className='all-orders-main-container'>
-                    <p className='all-orders-content'>{index + 1}</p>
+                            <div className='all-orders-main-container'>
+                                <p className='all-orders-content'>{index + 1}</p>
 
-                    {/* <p className='all-orders-content'> {item.order_id}</p> */}
+                                {/* <p className='all-orders-content'> {item.order_id}</p> */}
 
-                    <p className='all-orders-content'> {item.user.name}</p>
+                                <p className='all-orders-content'> {item.user.name}</p>
 
-                    <p className='all-orders-content'> {item.user.phoneNumber}</p>
-                    
-                    <p className='all-orders-content'> {item.productsOrdered.map(e1(deliveryDone))}</p>
+                                <p className='all-orders-content'> {item.user.phoneNumber}</p>
 
-                    <p className='all-orders-content'>Date: {day + "-" + month + "-" + year}</p>
-                   
-                    <p className='all-orders-content'>
-                        {item.transactionId ?
-                            <p>RazorPay Payment Id: {item.transactionId}</p>
-                            :
-                            <p>Cash On delivery</p>
-                        }
-                    </p>
+                                <p className='all-orders-content'> {item.productsOrdered.map(e1(deliveryDone))}</p>
 
-                    <p className='all-orders-content'> {item.subTotal}</p>
+                                <p className='all-orders-content'>Date: {day + "-" + month + "-" + year}</p>
 
-                    {/* <div className='all-orders-content'>
-                        {
-                            item.isDelivered ?
-                                <><p><strong>Deliverd Successfully</strong></p></>
-                                :
-                                <button onClick={deliveryDone}>Mark as deliverd</button>
-                        }
-                    </div> */}
-                </div>
+                                <p className='all-orders-content'>
+                                    {item.transactionId ?
+                                        <p>RazorPay Payment Id: {item.transactionId}</p>
+                                        :
+                                        <p>Cash On delivery</p>
+                                    }
+                                </p>
+
+                                <p className='all-orders-content'> {item.subTotal}</p>
+                                {
+                                    (item.deliveryAddresses).length != 0 ?
+                                        <div>
+                                            <p className='all-orders-content'> Address:{item.deliveryAddresses.address1}, {item.deliveryAddresses.address2}</p>
+                                            {/* <p className='all-orders-content'> address2:{item.deliveryAddresses.address2}</p> */}
+                                            {/* <p className='all-orders-content'> pinCode:{item.deliveryAddresses.pinCode}</p> */}
+                                            <p className='all-orders-content'> City:{item.deliveryAddresses.city}, {item.deliveryAddresses.pinCode}</p>
+                                            <p className='all-orders-content'> State:{item.deliveryAddresses.state}</p>
+                                        </div> : <></>
+                                }
+
+                                {/* <div className='all-orders-content'>
+        {
+            item.isDelivered ?
+                <><p><strong>Deliverd Successfully</strong></p></>
+                :
+                <button onClick={deliveryDone}>Mark as deliverd</button>
+        }
+    </div> */}
+                            </div>
+                        </div>
+                }
+
             </div>
         )
     }
 
     const e1 = (deliveryDone) => (item, index) => {
-        console.log("dwqdwdw item : ", item)
-        return(
+
+        return (
             <div className='all-orders-product-card'>
-                    
-                    <p className='all-orders-product-content'> {item.product.name}</p>
-                    <p className='all-orders-product-content'> {item.size}</p>
-                    <p className='all-orders-product-content'> {item.quantity}</p>
-                    <p className='all-orders-product-content'>
-                        <div>
+
+                <p className='all-orders-product-content'> {item.product.name}</p>
+                <p className='all-orders-product-content'> {item.size}</p>
+                <p className='all-orders-product-content'> {item.quantity}</p>
+                <p className='all-orders-product-content'>
+                    <div>
                         {
                             item.isDelivered ?
                                 <><p><strong>Deliverd Successfully</strong></p></>
                                 :
-                                <button onClick={()=> deliveryDone(item.orderItem_id)}>Mark as deliverd</button>
+                                <button onClick={() => deliveryDone(item.orderItem_id)}>Mark as deliverd</button>
                         }
-                        </div>
-                    </p>
+                    </div>
+                </p>
             </div>
         )
     }
