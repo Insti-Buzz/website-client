@@ -13,6 +13,7 @@ const Product = () => {
   const [loading, setLoading] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isWishlisted, setIsWishlisted] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   useEffect(() => {
     getProductDetails();
@@ -185,6 +186,7 @@ const Product = () => {
     let productId = params.id;
     // console.log(email)
     // console.log(productId)
+    setIsDisabled(true);
     let result = await fetch(
       `${process.env.REACT_APP_server_url}/api/v1/products/addToCart`,
       {
@@ -208,6 +210,7 @@ const Product = () => {
       // navigate('/cart')
       // window.location.reload();
     }
+    setIsDisabled(false);
     setIsCart(true);
   };
 
@@ -216,7 +219,7 @@ const Product = () => {
       addToCart(),
       {
         loading: (result) => {
-          return;
+          return "Adding to cart";
         },
         success: (result) => {
           return "Added to cart";
@@ -224,6 +227,9 @@ const Product = () => {
         error: (result) => {
           return result.message;
         }
+      },
+      {
+        id: "addToCartToast"
       }
     )
   }
@@ -371,7 +377,7 @@ const Product = () => {
                     Go to Cart
                   </button>
                 ) : (
-                  <button className="product-btn" onClick={addToCartToast}>
+                  <button className="product-btn" disabled={isDisabled} onClick={addToCartToast}>
                     Add to Cart
                   </button>
                 )

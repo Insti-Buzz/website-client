@@ -250,6 +250,10 @@ function Cart() {
     // };
 
     const toPayment = () => {
+        if (delivery == 'hostel' && !hostel) {
+            alert("Enter hostel name");
+            return;
+        }
         navigate("/payment",
             {
                 state: {

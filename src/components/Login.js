@@ -86,6 +86,7 @@ function Login() {
             <h1>The All-in-One Campus Fashion Brand</h1>
             <h4>Please Login to your Account</h4>
             <input
+            aut
               className="login-input"
               id={error && !email && "input-error"}
               type="email"
