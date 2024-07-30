@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../css/AddProduct.css'
 import { useNavigate } from 'react-router-dom';
 import { storage } from '../firebase';
@@ -9,6 +9,7 @@ import { styled } from '@mui/material';
 function AddProduct() {
     const [name, setName] = React.useState('');
     const [details, setDetails] = React.useState('');
+    const [description, setDescription] = useState('');
     const [colors, setColors] = React.useState('');
     const [sizeQuantities, setSizeQuantities] = React.useState([{ size: '', quantity: '' }]);
     const [price, setPrice] = React.useState('');
@@ -52,7 +53,7 @@ function AddProduct() {
 
         // console.log("imageUpload", imageUpload);
 
-        if (!name || !price || !details || !imageUpload||!styled) {
+        if (!name || !price || !details || !imageUpload || !styled) {
             setError(true)
             return false
         }
@@ -67,11 +68,11 @@ function AddProduct() {
                 });
             });
         }
-        
+
         const token = localStorage.getItem("token");
         let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/add-product`, {
             method: 'POST',
-            body: JSON.stringify({ name, details, price, sizeQuantities, imageUrl,style }),
+            body: JSON.stringify({ name, description, details, price, sizeQuantities, imageUrl, style }),
             headers: {
                 'Content-Type': 'application/json',
                 "Authorization": `Bearer ${token}`
@@ -96,9 +97,15 @@ function AddProduct() {
             {error && !name && <span className='invalid-input'>Enter valid name</span>}
 
             <p className='addproduct-items'>Product Details</p>
-            <textarea className='addproduct-details' type='text' placeholder='Enter your Product Details' value={details}
+            <input className='addproduct-name' type='text' placeholder='Enter product details' value={details}
                 onChange={(e) => { setDetails(e.target.value) }} />
             {error && !details && <span className='invalid-input'>Enter valid details</span>}
+
+
+            <p className='addproduct-items'>Product Description</p>
+            <textarea className='addproduct-details' type='text' placeholder='Enter your Product description' value={description}
+                onChange={(e) => { setDescription(e.target.value) }} />
+            {error && !description && <span className='invalid-input'>Enter valid description</span>}
 
 
             <p className='addproduct-items'>Colors</p>

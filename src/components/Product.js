@@ -43,6 +43,7 @@ const Product = () => {
   }, []);
 
   const [name, setName] = React.useState();
+  const [description, setDescription] = React.useState();
   const [price, setPrice] = React.useState();
   const [details, setDetails] = React.useState();
   const [quantity, setQuantity] = React.useState("1");
@@ -131,6 +132,7 @@ const Product = () => {
     // setSize(result.sizes)
     setImageUrl(result.imageUrl);
     setDetails(result.details);
+    setDescription(result.description);
     setSizesAvailable(result.sizeQuantities);
     // console.log(sizesAvailable);
   };
@@ -277,6 +279,9 @@ const Product = () => {
                 <h2>{name}</h2>
                 <i class={isWishlisted ? "fa fa-heart" : "fa fa-heart-o"} onClick={toggleWishlist}></i>
               </div>
+              <div className="product-product-detail">
+                <p>{details}</p>
+              </div>
               <div className="product-product-price">
                 <h3>₹{price}</h3>
               </div>
@@ -398,7 +403,7 @@ const Product = () => {
               )}
               <div className="product-product-details product-product-info">
                 <h4>PRODUCT DESCRIPTION</h4>
-                <p>{details}</p>
+                <p>{description}</p>
               </div>
               <hr />
               <div className="product-product-details product-shipping-policy">

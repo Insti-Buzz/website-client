@@ -113,7 +113,10 @@ function Wishlist() {
                     </div>
                     <hr />
                     <div className='shop-product-style'>
-                        <p>{(item.style == 'regular') ? "Regular T-Shirts" : "Oversized T-Shirts"}</p>
+                        <p>{
+                            (item.style === 'regular') ? "Regular T-Shirt" :
+                            (item.style === 'hoodie') ? "Hoodie" :
+                            "Oversized T-Shirt"}</p>
                     </div>
                     <div className="shop-product-price">
                         <h3>₹{item.price}</h3>

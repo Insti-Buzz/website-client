@@ -21,8 +21,10 @@ function UpdateProduct() {
 
     const [name, setName] = React.useState()
     const [price, setPrice] = React.useState()
+    const [description, setDescription] = React.useState();
     const [details, setDetails] = React.useState()
-    const [sizeQuantities, setSizeQuantities] = React.useState([{size_id:'', size: 'S', quantity: '1' }]);
+    const [style, setStyle] = React.useState()
+    const [sizeQuantities, setSizeQuantities] = React.useState([{ size_id: '', size: 'S', quantity: '1' }]);
     const navigate = useNavigate()
     const params = useParams();
 
@@ -39,10 +41,12 @@ function UpdateProduct() {
         result = await result.json()
         // console.log(result)
         setName(result.name)
+        setDescription(result.description)
         setPrice(result.price)
         setSizeQuantities(result.sizeQuantities)
         setImageUrl(result.imageUrl)
         setDetails(result.details)
+        setStyle(result.style)
         setLoading(false)
     }
 
@@ -78,7 +82,7 @@ function UpdateProduct() {
         // console.log(productId)
         let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/update-product-details/${params.id}`, {
             method: 'POST',
-            body: JSON.stringify({ productId, name, price,sizeQuantities, details }),
+            body: JSON.stringify({ productId, name,style, description, price, sizeQuantities, details }),
             headers: {
                 'Content-Type': 'application/json',
                 "Authorization": `Bearer ${token}`
@@ -127,6 +131,11 @@ function UpdateProduct() {
                                 value={name} onChange={(e) => { setName(e.target.value) }}
                             />
                         </div>
+                        <div class="product-product-details">
+                            <input type='text' placeholder='Enter product details' className='inputBox'
+                                value={details} onChange={(e) => { setDetails(e.target.value) }}
+                            />
+                        </div>
                         <div class="product-product-price">
                             <input type='text' placeholder='Enter product price' className='inputBox'
                                 value={price} onChange={(e) => { setPrice(e.target.value) }}
@@ -164,10 +173,19 @@ function UpdateProduct() {
                             <button class="product-btn" onClick={updateProduct}>Update Details</button>
                         }
 
+                        
+
+                        <div class="product-product-details product-product-info">
+                            <h3>PRODUCT Style </h3>
+                            <textarea type='text' placeholder='regular/oversized/hoodie' className='inputBox'
+                                value={style} onChange={(e) => { setStyle(e.target.value) }}
+                            />
+                        </div>
+
                         <div class="product-product-details product-product-info">
                             <h3>PRODUCT INFO (Product Details)</h3>
-                            <textarea type='text' placeholder='Enter product price' className='inputBox'
-                                value={details} onChange={(e) => { setDetails(e.target.value) }}
+                            <textarea type='text' placeholder='Enter product description' className='inputBox'
+                                value={description} onChange={(e) => { setDescription(e.target.value) }}
                             />
                         </div>
                         <hr />
