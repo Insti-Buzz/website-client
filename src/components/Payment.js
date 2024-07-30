@@ -138,24 +138,24 @@ function Payment() {
     };
 
     const paymentHandler = async (e) => {
-        console.log("payment called")
-        console.log(email)
-        // localStorage.setItem("deliveryMethod", deliveryMethod)
-        // localStorage.setItem("totalAmount", totalAmount)
-        console.log(deliveryMethod)
-        console.log(hostel)
-        console.log(state)
+        // console.log("payment called")
+        // console.log(email)
+        // // localStorage.setItem("deliveryMethod", deliveryMethod)
+        // // localStorage.setItem("totalAmount", totalAmount)
+        // console.log(deliveryMethod)
+        // console.log(hostel)
+        // console.log(state)
         
         const token = localStorage.getItem('token')
-        const totalAmount = calculateSubtotal();
-        console.log(totalAmount)
+        const amount = calculateSubtotal();
+        // console.log(totalAmount)
 
         const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/payment/order`, {
 
             method: "POST",
             body: JSON.stringify({
                 email,
-                totalAmount,
+                amount,
                 deliveryMethod,
                 hostel,
                 address1,

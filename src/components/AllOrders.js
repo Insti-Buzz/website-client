@@ -41,7 +41,7 @@ function AllOrders() {
     }
 
     function e(item, index) {
-        console.log(item)
+        // console.log(item)
         const now = parseInt(item.date) // Get the current timestamp in milliseconds
         const date = new Date(now);
         const day = date.getDate().toString().padStart(2, '0');

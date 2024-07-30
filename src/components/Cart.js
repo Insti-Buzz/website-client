@@ -524,7 +524,7 @@ function Cart() {
         setTimeout(() => {
             setLoading(false)
         }, 1000);
-        console.log(response)
+        // console.log(response)
         if (response.status == 404) {
             alert(response.message)
             localStorage.removeItem("userEmail")

@@ -127,7 +127,7 @@ function Address() {
     const setAddressField = (event) => {
         setSelectedAddressId(event.target.value);
         const index = addresses.findIndex((e) => e.id === event.target.value);
-        console.log(addresses[index]);
+        // console.log(addresses[index]);
         setAddress1(addresses[index].address1);
         setAddress2(addresses[index].address2);
         setPinCode(addresses[index].pinCode);
@@ -452,7 +452,7 @@ function Address() {
                 }
             );
             result = await result.json();
-            console.log(result)
+            // console.log(result)
             setTimeout(() => {
                 setLoading(false)
             }, 1000);
