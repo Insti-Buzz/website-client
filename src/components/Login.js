@@ -105,6 +105,7 @@ function Login() {
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
+                onKeyDown={(event) => { if (event.key == "Enter") LoginToast() }}
               />
               <i
                 class={showPassword ? "fa fa-eye" : "fa fa-eye-slash"}

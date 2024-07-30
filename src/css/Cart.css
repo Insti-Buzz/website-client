@@ -2,6 +2,7 @@
     font-weight: 300;
     padding: 32px 10px;
     display: flex;
+    gap: 30px;
     justify-content: center;
 }
 

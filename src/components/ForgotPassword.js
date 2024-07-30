@@ -74,7 +74,7 @@ function ForgotPassword() {
                         <div className="forgot-password-form">
                             <form>
                                 <label>Enter your mail</label>
-                                <input className="forgot-password-input" type="email" value={email} placeholder="instibuzz@gmail.com" onChange={(e) => setEmail(e.target.value)} required />
+                                <input className="forgot-password-input" type="email" value={email} placeholder="instibuzziitm@gmail.com" onChange={(e) => setEmail(e.target.value)} required />
                             </form>
                             <button className="forgot-password-btn" onClick={sendOTPToast} >Send OTP</button>
                         </div>

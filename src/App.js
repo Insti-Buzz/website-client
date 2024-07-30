@@ -124,7 +124,7 @@ function App() {
           <Route path="cart" element={<Cart/>} />
           <Route path="paymentValid/:id" element={<PaymentValid />} />
           <Route path="address" element={<Address />} />
-          <Route path="confirm" element={<Payment />} />
+          <Route path="payment" element={<Payment />} />
           {/* <Route path="orders" element={<OrderHistory />} /> */}
           <Route path="ticket" element={<Ticket />} />
           <Route path="about" element={<AboutUs />} />

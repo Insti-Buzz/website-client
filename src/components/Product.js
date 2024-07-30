@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import LoadingPage from "./LoadingPage";
 
 import { isExpired, decodeToken } from "react-jwt";
+import toast from "react-hot-toast";
 
 const Product = () => {
   const [imageUrl, setImageUrl] = React.useState([]);
@@ -178,7 +179,7 @@ const Product = () => {
     selectedSize = selectedSize.value;
     // console.log(token)
     if (!email) {
-      alert("Please Login");
+      throw new Error("Please login");
       navigate("./login");
     }
     let productId = params.id;
@@ -198,17 +199,34 @@ const Product = () => {
     result = await result.json();
     // console.log(result)
     if (result.status === 404) {
-      alert(result.message);
+      throw new Error(result.message);
       localStorage.removeItem("userEmail");
       navigate("/");
       window.location.reload();
     } else {
-      alert("Added to cart")
+      // alert("Added to cart")
       // navigate('/cart')
       // window.location.reload();
     }
     setIsCart(true);
   };
+
+  const addToCartToast = async () => {
+    toast.promise(
+      addToCart(),
+      {
+        loading: (result) => {
+          return;
+        },
+        success: (result) => {
+          return "Added to cart";
+        }, 
+        error: (result) => {
+          return result.message;
+        }
+      }
+    )
+  }
 
   const changeButton = (e) => {
     setIsCart(false);
@@ -353,7 +371,7 @@ const Product = () => {
                     Go to Cart
                   </button>
                 ) : (
-                  <button className="product-btn" onClick={addToCart}>
+                  <button className="product-btn" onClick={addToCartToast}>
                     Add to Cart
                   </button>
                 )

@@ -9,6 +9,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import LoadingPage from "./LoadingPage";
 import { isExpired, decodeToken } from "react-jwt";
 import MyOrders from "./MyOrders";
+import toast from "react-hot-toast";
 
 
 function Address() {
@@ -33,37 +34,51 @@ function Address() {
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [loading, setLoading] = useState(false);
+    const [delivery, setDelivery] = useState('pickup');
     const [deliveryCharge, setDeliveryCharge] = useState(0);
     const [paymentMethod, setPaymentMethod] = useState("COD");
     const [error, setError] = React.useState(false);
     const [addresses, setAddresses] = React.useState([""])
     const [showAddAddress, setShowAddAddress] = useState(false)
     const [selectedAddressId, setSelectedAddressId] = useState('');
-    const [totalMrp, setTotalMrp] = useState('')
+    const [totalMrp, setTotalMrp] = useState(0)
     const [noOfProducts, setNoOfProducts] = useState('')
     // const totalMrp=0,noOfProducts=0
     // const totalMrp = location.state.mrp;
     // const noOfProducts = location.state.noOfProducts
 
     useEffect(() => {
-        const mrp = localStorage.getItem('mrp')
-        const noOfProducts = localStorage.getItem('noOfProducts')
-        setTotalMrp(mrp)
-        setNoOfProducts(noOfProducts)
-        getProducts();
-        const name = localStorage.getItem('userName')
-        const phone = localStorage.getItem('userPhone')
-        const email = localStorage.getItem("userEmail");
-        const token = localStorage.getItem("token");
-        setEmail(email)
-        setName(name)
-        setPhone(phone)
-        if (!email || !token) {
-            alert("Please Login");
+        // const mrp = localStorage.getItem('mrp')
+        // const noOfProducts = localStorage.getItem('noOfProducts')
+        if (!location.state) {
             navigate("/");
+        } else {
+
+            setTotalMrp(location.state.mrp);
+            setNoOfProducts(location.state.noOfProducts);
+            setDelivery(location.state.deliveryMethod);
+
+            getProducts();
+            getAddresses()
+
+            const name = localStorage.getItem('userName');
+            const phone = localStorage.getItem('userPhone');
+            const email = localStorage.getItem("userEmail");
+            const token = localStorage.getItem("token");
+            setEmail(email)
+            setName(name)
+            setPhone(phone)
+            if (!email || !token) {
+                alert("Please Login");
+                navigate("/");
+            }
+            if (location.state.deliveryMethod == 'hostel') {
+                setDeliveryCharge(19);
+            } else if (location.state.deliveryMethod == 'delivery') {
+                setDeliveryCharge(99);
+            }
+            // console.log(totalMrp)
         }
-        getAddresses()
-        // console.log(totalMrp)
     }, []);
 
     const setDeliveryCharges = async () => {
@@ -90,7 +105,7 @@ function Address() {
     const calculateSubtotal = () => {
         let subtotal = parseInt(totalMrp);
 
-        subtotal += 99;
+        subtotal += deliveryCharge;
         // subtotal += deliveryCharge;
         // alert(deliveryCharge)
 
@@ -462,6 +477,9 @@ function Address() {
             setAddresses(result);
             // console.log("orders:", orders);
         }
+        if (result.length == 0) {
+            setShowAddAddress(true);
+        }
     };
 
     const saveAddress = async () => {
@@ -477,12 +495,12 @@ function Address() {
         }
         const email = localStorage.getItem("userEmail");
         const token = localStorage.getItem("token");
-        
+
         var result;
         if (email) {
             try {
-                
-                
+
+
                 setLoading(true);
                 // console.log("trueEmail exists : ", trueEmail);
                 result = await fetch(
@@ -505,7 +523,7 @@ function Address() {
                 );
                 result = await result.json();
                 // setLoading(false)
-            window.location.reload();
+                window.location.reload();
 
                 // console.log(result)
                 // navigate('/address') 
@@ -581,6 +599,29 @@ function Address() {
             setLoading(false);
             navigate("/");
             window.location.reload();
+        }
+    }
+
+    const toPayment = () => {
+        if (!selectedAddressId) {
+            alert("Select a delivery address");
+        } else {
+            navigate("/payment",
+                {
+                    state: {
+                        mrp: totalMrp,
+                        deliveryMethod: delivery,
+                        noOfProducts: noOfProducts,
+                        address: {
+                            address1,
+                            address2,
+                            city,
+                            state,
+                            pinCode,
+                        }
+                    }
+                }
+            );
         }
     }
 
@@ -662,7 +703,7 @@ function Address() {
                                         <div class="checkout-summary-details">
                                             <p>Delivery Charges</p>
                                             {/* <p>{(deliveryCharge == 0) ? "MAY VARY" : `₹${deliveryCharge}`}</p> */}
-                                            <p>₹99</p>
+                                            <p>₹{deliveryCharge}</p>
                                         </div>
                                     </div>
                                     <hr />
@@ -673,16 +714,18 @@ function Address() {
                                 </div>
                                 <button
                                     class="cart-order-btn"
-                                    onClick={proceedPayment}
+                                    onClick={toPayment}
                                 >
-                                    {(paymentMethod === "COD") ? "PLACE ORDER" : "PROCEED TO PAYMENT"}
+                                    PROCEED TO PAYMENT
                                 </button>
 
 
                                 {showAddAddress && <div class="address-form cart-popup">
-                                    <IconButton onClick={() => closeAddress()}>
-                                        <CloseIcon />
-                                    </IconButton>
+                                    <div className="cart-popup-close-btn">
+                                        <IconButton onClick={() => closeAddress()}>
+                                            <CloseIcon />
+                                        </IconButton>
+                                    </div>
                                     <h3>ADDRESS</h3>
                                     <form>
                                         <input id={error && !address1 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 1*" name="address_line1" onChange={(e) => setAddress1(e.target.value)} required></input>
@@ -696,20 +739,22 @@ function Address() {
                                     </button> */}
                                     </form>
                                 </div>}
-                                {showPayment && (
-                                    <div className="cart-popup">
-                                        {/* <i className='fa fa-times' aria-hidden='true' onClick={setShowPayment(false)}></i> */}
-                                        <IconButton onClick={() => closePayment()}>
-                                            <CloseIcon />
-                                        </IconButton>
-                                        <h1>Confirm Your Order?</h1>
-                                        <div className="cart-popup-content">
-                                            {/* <button onClick={confirmOrder}>Cash On Delivery</button> */}
-                                            {/* <button onClick={cancelOrder}>No</button> */}
-                                            <button onClick={paymentHandler}>Pay Now</button>
-                                        </div>
-                                    </div>
-                                )}
+                                {
+                                    // showPayment && (
+                                    //     <div className="cart-popup">
+                                    //         {/* <i className='fa fa-times' aria-hidden='true' onClick={setShowPayment(false)}></i> */}
+                                    //         <IconButton onClick={() => closePayment()}>
+                                    //             <CloseIcon />
+                                    //         </IconButton>
+                                    //         <h1>Confirm Your Order?</h1>
+                                    //         <div className="cart-popup-content">
+                                    //             {/* <button onClick={confirmOrder}>Cash On Delivery</button> */}
+                                    //             {/* <button onClick={cancelOrder}>No</button> */}
+                                    //             <button onClick={paymentHandler}>Pay Now</button>
+                                    //         </div>
+                                    //     </div>
+                                    // )
+                                }
 
                             </div>
                         </div>

@@ -119,9 +119,9 @@ function Shop() {
                     <hr />
                     <div className='shop-product-style'>
                             <p className='product-style'>{
-                            (item.style === 'regular') ? "Regular T-Shirts" :
+                            (item.style === 'regular') ? "Regular T-Shirt" :
                             (item.style === 'hoodie') ? "Hoodie" :
-                            "Oversized T-Shirts"}</p>
+                            "Oversized T-Shirt"}</p>
                     </div>
 
                     <div className="shop-product-price">

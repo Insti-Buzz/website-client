@@ -28,6 +28,8 @@ function Cart() {
     const [delivery, setDelivery] = useState("pickup");
     const [deliveryCharges, setDeliveryCharges] = useState(0);
     const [promoCode, setPromoCode] = useState('')
+    const [showAddAddress, setShowAddAddress] = useState(false);
+    const [hostel, setHostel] = useState();
     const [isDiscount, setIsDiscount] = useState(false)
 
     useEffect(() => {
@@ -226,26 +228,39 @@ function Cart() {
         return subtotal;
     };
 
-    const proceedPayment = () => {
-        // console.log(quantity)
-        // console.log(selectedSize)
-        const subtotal = calculateSubtotal();
-        setTotalAmount(subtotal);
-        // setShowDetails(false)
-        if (subtotal == 0) {
-            alert("Pls add products in cart");
-            return;
-        }
-        // if (!selectedSize) {
-        //     alert("Please Select Size")
-        //     return
-        // }
-        setShowPayment(true);
-    };
+    // const proceedPayment = () => {
+    //     // console.log(quantity)
+    //     // console.log(selectedSize)
+    //     const subtotal = calculateSubtotal();
+    //     setTotalAmount(subtotal);
+    //     // setShowDetails(false)
+    //     if (subtotal == 0) {
+    //         alert("Pls add products in cart");
+    //         return;
+    //     }
+    //     // if (!selectedSize) {
+    //     //     alert("Please Select Size")
+    //     //     return
+    //     // }
+    //     setShowPayment(true);
+    // };
 
-    const closePayment = () => {
-        setShowPayment(false);
-    };
+    // const closePayment = () => {
+    //     setShowPayment(false);
+    // };
+
+    const toPayment = () => {
+        navigate("/payment",
+            {
+                state: {
+                    mrp: calculateMrp(),
+                    deliveryMethod: delivery,
+                    noOfProducts: products.length,
+                    hostel: hostel
+                }
+            }
+        );
+    }
 
     function isSizeDisabled(size, sizesAvailable) {
         const foundSize = sizesAvailable.find((s) => s.size === size);
@@ -494,7 +509,6 @@ function Cart() {
                 method: "POST",
                 body: JSON.stringify({
                     email,
-                    products,
                     amount,
                     isHomeDelivery,
                     // quantity,
@@ -581,15 +595,25 @@ function Cart() {
     }
 
     const toAddress = () => {
-        navigate("/address", {
-            state: {
-                mrp: isDiscount ? 0.9 * calculateMrp() : calculateMrp(),
-                noOfProducts: products.length,
-            }
+        if (delivery == 'delivery') {
+            navigate("/address",
+                {
+                    state: {
+                        deliveryMethod: delivery,
+                        mrp: isDiscount ? 0.9 * calculateMrp() : calculateMrp(),
+                        noOfProducts: products.length,
+                    }
+                }
+            );
+        } else if (delivery == 'hostel') {
+            setShowAddAddress(true);
         }
-        );
-        localStorage.setItem("mrp", isDiscount ? 0.9 * calculateMrp() : calculateMrp())
-        localStorage.setItem("noOfProducts", products.length)
+        // localStorage.setItem("mrp", isDiscount ? 0.9 * calculateMrp() : calculateMrp())
+        // localStorage.setItem("noOfProducts", products.length)
+    }
+
+    const closeAddress = () => {
+        setShowAddAddress(false);
     }
 
     return (
@@ -608,7 +632,7 @@ function Cart() {
                                         <h3>DELIVERY METHOD</h3>
                                         <div class="checkout-select-delivery">
                                             <label>
-                                                <p>Pickup from Saraswati.</p>
+                                                <p>Pickup from Saraswathi.</p>
                                                 <input
                                                     type="radio"
                                                     value="pickup"
@@ -653,7 +677,7 @@ function Cart() {
                                             </div>
                                             <div class="checkout-summary-details">
                                                 <p>Delivery Charges</p>
-                                                <p>{deliveryCharges == 0 ? "FREE" : "₹"+ deliveryCharges}</p>
+                                                <p>{deliveryCharges == 0 ? "FREE" : "₹" + deliveryCharges}</p>
                                             </div>
                                             <div class="checkout-summary-details">
                                                 {/* <input className=""
@@ -676,33 +700,41 @@ function Cart() {
                                                 calculateSubtotal()}</p>
                                         </div>
                                     </div>
-                                    <button
-                                        class="cart-order-btn"
-                                        onClick={
-                                            delivery !== "delivery" ? proceedPayment : () => {
-                                                toAddress()
-                                            }}
-                                    >{
-                                            delivery !== "delivery" ? "PLACE ORDER" : "CONTINUE"
-                                        }
-
+                                    <button class="cart-order-btn" onClick={delivery == "pickup" ? toPayment : toAddress}>
+                                        {delivery == "pickup" ? "PROCEED TO PAYMENT" : "CONTINUE"}
                                     </button>
                                 </div>
+                                {showAddAddress && <div class="address-form cart-popup">
+                                    <div className="cart-popup-close-btn">
+                                        <IconButton onClick={() => closeAddress()}>
+                                            <CloseIcon />
+                                        </IconButton>
+                                    </div>
+                                    {
+                                        <>
+                                            <h3>HOSTEL ADDRESS</h3>
+                                            <form>
+                                                <input autoComplete="disabled" type="text" placeholder="Hostel" value={hostel} onChange={(e) => setHostel(e.target.value)} required></input>
+                                                <button onClick={toPayment}>Proceed to Payment</button>
+                                            </form>
+                                        </>
+                                    }
+                                </div>}
 
-                                {showPayment && (
+                                {/* {showPayment && (
                                     <div className="cart-popup">
-                                        {/* <i className='fa fa-times' aria-hidden='true' onClick={setShowPayment(false)}></i> */}
+                                        <i className='fa fa-times' aria-hidden='true' onClick={setShowPayment(false)}></i>
                                         <IconButton onClick={() => closePayment()}>
                                             <CloseIcon />
                                         </IconButton>
                                         <h1>Confirm Your Order?</h1>
                                         <div className="cart-popup-content">
                                             <button onClick={confirmOrder}>Cash On Delivery</button>
-                                            {/* <button onClick={cancelOrder}>No</button> */}
+                                            <button onClick={cancelOrder}>No</button>
                                             <button onClick={paymentHandler}>Pay Now</button>
                                         </div>
                                     </div>
-                                )}
+                                )} */}
                             </div>
                             :
                             <div class="checkout-title">
@@ -711,7 +743,7 @@ function Cart() {
                         }
                     </div>
             }
-        </div>
+        </div >
 
     );
 }
