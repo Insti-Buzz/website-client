@@ -6,6 +6,7 @@ import LoadingPage from "./LoadingPage";
 
 import { isExpired, decodeToken } from "react-jwt";
 import toast from "react-hot-toast";
+import Carousel from 'react-simply-carousel';
 
 const Product = () => {
   const [imageUrl, setImageUrl] = React.useState([]);
@@ -14,6 +15,7 @@ const Product = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [activeSlide, setActiveSlide] = useState(0);
 
   useEffect(() => {
     getProductDetails();
@@ -225,7 +227,7 @@ const Product = () => {
         },
         success: (result) => {
           return "Added to cart";
-        }, 
+        },
         error: (result) => {
           return result.message;
         }
@@ -255,9 +257,11 @@ const Product = () => {
   function imageButton(item, index) {
     // console.log(item)
     return (
-      <button onClick={() => selectImage(item)}>
-        <img src={item} alt="Product image" class="product-img-button" />
-      </button>
+      <>
+        <div className='product-img-button-container' onClick={() => selectImage(item)}>
+          <img src={item[index]} alt="Product image" class="product-img-button" />
+        </div>
+      </>
     );
   }
 
@@ -272,7 +276,74 @@ const Product = () => {
           <div className="product-main-container">
             <div className="product-image-container">
               <img src={selectedImage} alt="Image" className="product-display-img" />
-              <div className="product-all-images">{imageUrl.map(imageButton)}</div>
+              <div className="product-all-images">
+                <Carousel
+                  containerProps={{
+                    style: {
+                      width: "100%",
+                      justifyContent: "space-between",
+                      userSelect: "none"
+                    }
+                  }}
+                  preventScrollOnSwipe
+                  swipeTreshold={60}
+                  infinite={false}
+                  activeSlideIndex={activeSlide}
+                  // activeSlideProps={{
+                  //   style: {
+                  //     border: "1px solid blue"
+                  //   }
+                  // }}
+                  onRequestChange={setActiveSlide}
+                  forwardBtnProps={{
+                    children: ">",
+                    style: {
+                      border: "1px solid #aaaaaa",
+                      width: 30,
+                      height: 60,
+                      borderRadius: 5,
+                      background: "white",
+                      alignSelf: "center"
+                    }
+                  }}
+                  backwardBtnProps={{
+                    children: "<",
+                    style: {
+                      background: "white",
+                      border: "1px solid #aaaaaa",
+                      borderRadius: 5,
+                      width: 30,
+                      height: 60,
+                      alignSelf: "center"
+                    }
+                  }}
+                  dotsNav={{
+                    show: false,
+                    itemBtnProps: {
+                      style: {
+                        height: 16,
+                        width: 16,
+                        borderRadius: "50%",
+                        border: 0
+                      }
+                    },
+                    activeItemBtnProps: {
+                      style: {
+                        height: 16,
+                        width: 16,
+                        borderRadius: "50%",
+                        border: 0,
+                        background: "black"
+                      }
+                    }
+                  }}
+                  itemsToShow={4}
+                  speed={300}
+                // centerMode
+                >
+                  {imageUrl.map(imageButton)}
+                </Carousel>
+              </div>
             </div>
             <div className="product-product-description">
               <div className="product-product-name">

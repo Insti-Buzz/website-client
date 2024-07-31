@@ -87,7 +87,7 @@ function MyAddresses() {
     }
     return (
         <div className='my-addresses'>
-            { addresses ?
+            { addresses.length == 0 ?
                 <>
                     <div className='no-addresses-available'>No addresses available.
                         {/* <a href='/address'>Click here</a> to add an address */}

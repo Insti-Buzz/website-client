@@ -143,11 +143,10 @@ function IndividualOrder({userDetails}) {
                     </div>
               </div> */}
               <div className="delivery-info-container block-2">
-                <div className="delivery-info-header">{order.isHomeDelivery ? "Deliver to address :" : "Pickup from : Saraswati Hostel"}</div>
+                <div className="delivery-info-header">{order.deliveryMethod == 'delivery' ? `Deliver to address:` : order.deliveryMethod == 'hostel' ? `Deliver to hostel:` : "Pickup from Saraswathi Hostel"}</div>
                 <div className="delivery-info-customer-name">Hey {userDetails.name},</div>
-                <div className="delivery-info-customer-address">{order.isHomeDelivery ? order.deliveryAddress : "You'll be notified when your order is ready for pickup !"}</div>
-                {order.isHomeDelivery ?
-                <div className="delivery-info-customer-phone">Phone : {userDetails.phone} </div> : <></>}
+                <div className="delivery-info-customer-address">{order.deliveryMethod == 'delivery' ? order.deliveryAddresses : order.deliveryMethod == 'hostel' ? order.hostelAddress : "You'll be notified when your order is ready for pickup!"}</div>
+                <div className="delivery-info-customer-phone">Phone : {userDetails.phone} </div>
               </div>
               <div className="total-price-info-container block-2">
                   <div className="total-price-info-box-1">

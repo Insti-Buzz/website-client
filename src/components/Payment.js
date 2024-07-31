@@ -170,7 +170,7 @@ function Payment() {
         });
         localStorage.setItem('userEmail', email)
         localStorage.setItem('totalAmount',amount)
-        localStorage.setItem('isHomeDelivery',deliveryMethod)
+        localStorage.setItem('deliveryMethod',deliveryMethod)
         const order = await response.json();
         console.log(order);
         window.location.href = order.link

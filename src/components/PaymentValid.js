@@ -12,7 +12,7 @@ function PaymentValid() {
         const token = localStorage.getItem('token')
         const email=localStorage.getItem('userEmail')
         const totalAmount=localStorage.getItem('totalAmount')
-        const isHomeDelivery=localStorage.getItem('isHomeDelivery')
+        const deliveryMethod=localStorage.getItem('deliveryMethod')
         const id=params.id
         const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/payment/order/validate`, {
 
@@ -21,7 +21,7 @@ function PaymentValid() {
                 id:id,
                 email,
                 totalAmount,
-                isHomeDelivery
+                deliveryMethod
             }),
             headers: {
                 "Content-Type": "application/json",

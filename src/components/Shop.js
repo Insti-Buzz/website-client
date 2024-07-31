@@ -104,37 +104,39 @@ function Shop() {
     function e(item, index) {
         const productId = item.product_id;
         return (
+            <>
+                <div className="shop-product-div">
+                    <button
+                        className="shop-product-card"
+                        onClick={() => productPage(item.product_id, index)}
+                    >
 
-            <div className="shop-product-div">
-                <button
-                    className="shop-product-card"
-                    onClick={() => productPage(item.product_id, index)}
-                >
-                    
-                    <img src={item.imageUrl[0]} className='shop-image' alt="Product" />
-                   
-                    <div className="shop-product-name">
-                        <h2 className='h2-name'>{item.name}</h2>   
-                    </div>
-                    <hr />
-                    <div className='shop-product-style'>
+                        <img src={item.imageUrl[0]} className='shop-image' alt="Product" />
+
+                        <div className="shop-product-name">
+                            <h2 className='h2-name'>{item.name}</h2>
+                        </div>
+                        <hr className='shop-product-card-divider' />
+                        <div className='shop-product-style'>
                             <p className='product-style'>{
-                            (item.style === 'regular') ? "Regular T-Shirt" :
-                            (item.style === 'hoodie') ? "Hoodie" :
-                            "Oversized T-Shirt"}</p>
-                    </div>
+                                (item.style === 'regular') ? "Regular T-Shirt" :
+                                    (item.style === 'hoodie') ? "Hoodie" :
+                                        "Oversized T-Shirt"}</p>
+                        </div>
 
-                    <div className="shop-product-price">
-                        <h3 className='price'><s>₹{item.style === 'hoodie' ? (parseInt(item.price) + 100) : (parseInt(item.price) + 50)}</s> ₹{item.price}</h3>
-                    </div>
-                </button>
-            </div>
+                        <div className="shop-product-price">
+                            <h3 className='price'>₹{item.price}<s>₹{item.style === 'hoodie' ? (parseInt(item.price) + 100) : (parseInt(item.price) + 50)}</s></h3>
+                            <p>Inc. of all taxes</p>
+                        </div>
+                    </button>
+                </div>
+            </>
         );
     }
 
     function ProductCards() {
         const cards = [];
-    
+
         for (let i = 0; i <= 10; i++) {
             cards.push(
                 <div className="shop-product-div" key={i}>
@@ -154,14 +156,14 @@ function Shop() {
                 </div>
             );
         }
-    
+
         return cards;
-    } 
+    }
 
     return (
         <>
             <Helmet>
-                <meta name="title" content="Shop at InstiBuzz"/>
+                <meta name="title" content="Shop at InstiBuzz" />
                 <meta name="description" content="At InstiBuzz, we celebrate the vibrant campus life by offering an exclusive
                 collection of T-shirts that feature Insti slang, taglines, and campus spirit
                 designs. We carefully select each piece in our collections, making sure that it
@@ -172,10 +174,10 @@ function Shop() {
                 <meta charset="utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <meta name="theme-color" content="#000000" />
-                <meta name="robots" content="all"/>
-                
-                <meta name="og:site_name" content="InstiBuzz"/>
-                <meta name="og:title" content="Shop at InstiBuzz"/>
+                <meta name="robots" content="all" />
+
+                <meta name="og:site_name" content="InstiBuzz" />
+                <meta name="og:title" content="Shop at InstiBuzz" />
                 <meta name="og:description" content="At InstiBuzz, we celebrate the vibrant campus life by offering an exclusive
                 collection of T-shirts that feature Insti slang, taglines, and campus spirit
                 designs. We carefully select each piece in our collections, making sure that it
@@ -183,73 +185,76 @@ function Shop() {
                 expertly crafted to fit well, last long and look great. Shop today and experience
                 the campus spirit."/>
                 <meta name="og:url" content="https://www.instibuzz.com/shop" />
-                <meta name="og:image" content="%PUBLIC_URL%/logo192.png"/>
-                <meta name="og:image:alt" content="Official logo of InstiBuzz Pvt Ltd."/>
-                <meta name="author" content="instibuzz" />        
+                <meta name="og:image" content="%PUBLIC_URL%/logo192.png" />
+                <meta name="og:image:alt" content="Official logo of InstiBuzz Pvt Ltd." />
+                <meta name="author" content="instibuzz" />
             </Helmet>
-        <div className='shop'>
-            {
-                // loading ? <LoadingPage /> :
+            <div className='shop'>
+                {
+                    // loading ? <LoadingPage /> :
                     <div>
                         <div className="shop-page-info">
                             <div className="shop-page-banner">
-                                <img src={Banner} alt='Banner for advertising on InstiBuzz Shop page'  className='ban-img loader'/>
+                                <img src={Banner} alt='Banner for advertising on InstiBuzz Shop page' className='ban-img loader' />
                             </div>
                             <div className="shop-page-banner-mobile">
-                                <img src={mobileBanner} alt='Banner for advertsing on Shop page' className='ban-img-mob loader'/>
+                                <img src={mobileBanner} alt='Banner for advertsing on Shop page' className='ban-img-mob loader' />
                             </div>
                         </div>
-                        <div className="shop-navigation-container">
-                            <div className="shop-navigation">
-                                {/* <p className='shop-path'>Shop / <span style={{ color: 'black' }}>Our Products</span></p> */}
-                                {/* <br /> */}
-                                <p className='shop-count'><span style={{ color: 'black' }}>Our Products</span> - {loading ? <div className='p-qty'></div> : activeProducts.length}</p>
+                        <div className='shop-main-container'>
+
+                            <div className="shop-navigation-container">
+                                <div className="shop-navigation">
+                                    {/* <p className='shop-path'>Shop / <span style={{ color: 'black' }}>Our Products</span></p> */}
+                                    {/* <br /> */}
+                                    <p className='shop-count'>home/our products-{loading ? <div className='p-qty'></div> : activeProducts.length}/<span style={{ color: 'black' }}>our products</span></p>
+                                </div>
                             </div>
-                        </div>
-                        <div className="shop-container">
-                            {/* <div className="shop-filter-container">
+                            <div className="shop-container">
+                                {/* <div className="shop-filter-container">
                                 <div className="header">
                                     <p>Filter</p>
                                     <div className="shop-clear-all" onClick={handleClearFilterClick}>Clear</div>
-                                </div>
-                            <div className="filter-bar"> */}
-                            {/* <div className="size-filter">
+                                    </div>
+                                    <div className="filter-bar"> */}
+                                {/* <div className="size-filter">
                             <h3>SIZE</h3>
                             <div className="s-filter sz-fil">S
                                 <Button filterBy="size" value="S" handleClick={handleButtonClick} active={sizeFilter === 'S'} />
-                            </div>
-                            <div className="m-filter sz-fil">M
-                            <Button filterBy="size" value="M" handleClick={handleButtonClick} active={sizeFilter === 'M'} />
-                            </div>
-                            <div className="l-filter sz-fil">L
+                                </div>
+                                <div className="m-filter sz-fil">M
+                                <Button filterBy="size" value="M" handleClick={handleButtonClick} active={sizeFilter === 'M'} />
+                                </div>
+                                <div className="l-filter sz-fil">L
                                 <Button filterBy="size" value="L" handleClick={handleButtonClick} active={sizeFilter === 'L'} />
-                            </div>
-                            <div className="xl-filter sz-fil">XL
+                                </div>
+                                <div className="xl-filter sz-fil">XL
                                 <Button filterBy="size" value="XL" handleClick={handleButtonClick} active={sizeFilter === 'XL'} />
                                 </div>
                                 <div className="xxl-filter sz-fil">XXL
                                 <Button filterBy="size" value="XXL" handleClick={handleButtonClick} active={sizeFilter === 'XXL'} />
                                 </div>
-
-                            </div> */}
-                            {/* <div className="style-filter">
+                                
+                                </div> */}
+                                {/* <div className="style-filter">
                                         <h3>STYLE</h3>
                                         <div className="normal-filter sty-fil">Regular
                                         <Button filterBy="style" value="regular" handleClick={handleButtonClick} active={styleFilter === 'regular'} />
                                         </div>
                                         <div className="oversized-filter sty-fil">OverSized
-                                            <Button filterBy="style" value="oversized" handleClick={handleButtonClick} active={styleFilter === 'oversized'} />
+                                        <Button filterBy="style" value="oversized" handleClick={handleButtonClick} active={styleFilter === 'oversized'} />
                                         </div>
-                                       
-                                    </div> */}
-                            {/* </div>
+                                        
+                                        </div> */}
+                                {/* </div>
                             </div> */}
-                            <div className="shop-products-display" style={loading?{height:"300px", overflow:"hidden"}:{}}>{loading ? ProductCards() : activeProducts.map(e)}</div>
+                                <div className="shop-products-display" style={loading ? { height: "300px", overflow: "hidden" } : {}}>{loading ? ProductCards() : activeProducts.map(e)}</div>
+                            </div>
                         </div>
                     </div>
-            }
-        </div>
-</>
+                }
+            </div>
+        </>
 
 
     )
