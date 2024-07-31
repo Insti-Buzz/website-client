@@ -168,6 +168,9 @@ function Payment() {
                 "Content-Type": "application/json",
             },
         });
+        localStorage.setItem('userEmail', email)
+        localStorage.setItem('totalAmount',amount)
+        localStorage.setItem('isHomeDelivery',deliveryMethod)
         const order = await response.json();
         console.log(order);
         window.location.href = order.link
