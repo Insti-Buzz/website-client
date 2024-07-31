@@ -36,13 +36,13 @@ body {
     border: none;
     aspect-ratio: 3/4;
     cursor: pointer;
-    padding: 0;
+    padding: 0 2.5px;
 }
 
 .product-img-button {
     border-radius: 12px;
     aspect-ratio: 3/4;
-    object-fit: contain;
+    object-fit: cover;
     width: 100%;
 }
 
