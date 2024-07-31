@@ -337,7 +337,7 @@ const Product = () => {
                       }
                     }
                   }}
-                  itemsToShow={4.5}
+                  itemsToShow={4}
                   speed={300}
                 // centerMode
                 >

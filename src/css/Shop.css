@@ -367,6 +367,7 @@
     font-weight: 400;
     margin-bottom: 0;
 }
+
 .shop-product-price .price s {
     font-size: 18px;
     margin-left: 5px;
@@ -430,9 +431,19 @@
     .shop-product-price .price {
         font-size: 14px;
     }
+
+    .shop-product-price .price s {
+        font-size: 12px;
+        margin-left: 5px;
+        color: #858585;
+    }
 }
 
 @media (max-width: 580px) {
+    .shop-product-price p {
+        display: none;
+    }
+
     .shop-products-display {
         margin-top: 50px;
         display: grid;
