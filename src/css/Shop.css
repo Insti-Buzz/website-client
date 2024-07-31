@@ -248,7 +248,7 @@
     display: grid;
     /* flex-wrap: wrap; */
     grid-template-columns: repeat(auto-fill, 250px);
-    row-gap: 50px;
+    row-gap: 30px;
     column-gap: 50px;
     margin-bottom: 1vw;
     height: min-content;
@@ -279,7 +279,7 @@
     width: 100%;
     aspect-ratio: 3/4;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 7px;
     background-color: var(--anim-0);
     animation: flicker 2s linear infinite;
 }
@@ -318,6 +318,9 @@
     margin-top: 10px;
     margin-bottom: 5px;
 
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
     /* background-color: aquamarine; */
 }
 

@@ -259,7 +259,7 @@ const Product = () => {
     return (
       <>
         <div className='product-img-button-container' onClick={() => selectImage(item)}>
-          <img src={item[index]} alt="Product image" class="product-img-button" />
+          <img src={item} alt="Product image" class="product-img-button" />
         </div>
       </>
     );
