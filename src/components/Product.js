@@ -321,8 +321,9 @@ const Product = () => {
     );
 
     result = await result.json();
-    setLoading(false);
+    // console.log(result)
     alert(result.message)
+    setLoading(false);
   }
 
   const proceedSizeUnavailable = () => {
@@ -576,7 +577,7 @@ const Product = () => {
         {
           <>
             {/* <h3></h3> */}
-            <form>
+            <div className="address-form-form">
               <input autoComplete="disabled" type="number" placeholder="Quantity" value={requiredQuantity} onChange={(e) => setRequiredQuantity(e.target.value)} />
               <input autoComplete="disabled" type="text" placeholder="Size" value={requiredSize} onChange={(e) => setRequiredSize(e.target.value)} />
               {isLogin ? <></> :
@@ -585,7 +586,7 @@ const Product = () => {
               }
               <input autoComplete="disabled" type="text" placeholder="Comments" value={comments} onChange={(e) => setComments(e.target.value)} />
               <button onClick={sizeUnavailable}>Send Request</button>
-            </form>
+            </div>
           </>
         }
       </div>}
