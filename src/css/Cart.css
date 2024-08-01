@@ -43,7 +43,7 @@
 
 .checkout-main-container {
     font-weight: 300;
-    padding: 32px 10px;
+    padding: 32px 50px;
     display: flex;
     gap: 30px;
     justify-content: center;
@@ -297,7 +297,7 @@
 @media (max-width: 768px) {
     .checkout-main-container {
         flex-direction: column;
-        padding: 25px 10vw;
+        padding: 25px 15px;
     }
 
     .checkout-my-cart {

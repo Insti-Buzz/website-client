@@ -192,3 +192,55 @@ textarea {
     font-weight: 300;
     cursor: pointer;
 }
+
+.add-address-btn img {
+    height: 14px;
+    margin-right: 15px;
+}
+
+@media (max-width: 600px) {
+    .checkout-address-container h2 {
+        font-size: 20px;
+    }
+
+    .address-card-name h3 {
+        font-size: 20px;
+    }
+
+    .address-card-address p {
+        font-size: 12px;
+    }
+
+    .address-card-phone p {
+        font-size: 12px;
+    }
+
+    .address-card-remove h3 {
+        font-size: 16px;
+    }
+
+    .address-card-edit h3 {
+        font-size: 16px;
+    }
+
+    .address-card-edit {
+        padding: 10px;
+    }
+
+    .address-card-remove {
+        padding: 10px;
+    }
+
+    .address-card label {
+        margin: 15px 20px 0 20px;
+    }
+
+    .add-address-btn img {
+        height: 12px
+    }
+
+    .add-address-btn {
+        padding: 15px;
+        font-size: 16px;
+    }
+}

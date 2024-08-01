@@ -727,10 +727,10 @@ function Cart() {
                                     {
                                         <>
                                             <h3>HOSTEL ADDRESS</h3>
-                                            <form>
+                                            <div className="address-form-form">
                                                 <input autoComplete="disabled" type="text" placeholder="Hostel" value={hostel} onChange={(e) => setHostel(e.target.value)} required></input>
                                                 <button onClick={toPayment}>Proceed to Payment</button>
-                                            </form>
+                                            </div>
                                         </>
                                     }
                                 </div>}

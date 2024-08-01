@@ -747,7 +747,7 @@ function Address() {
                                     {addresses.map(e)}
                                 </div>
 
-                                <div className='add-address-btn' onClick={addressHandler}><img src={addAddressIcon} style={{ height: 14, marginRight: 15 }} />Add Address</div>
+                                <div className='add-address-btn' onClick={addressHandler}><img src={addAddressIcon} />Add Address</div>
                             </div>
 
 
