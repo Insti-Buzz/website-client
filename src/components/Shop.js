@@ -207,7 +207,7 @@ function Shop() {
                                 <div className="shop-navigation">
                                     {/* <p className='shop-path'>Shop / <span style={{ color: 'black' }}>Our Products</span></p> */}
                                     {/* <br /> */}
-                                    <p className='shop-count'>home/our products-{loading ? <div className='p-qty'></div> : activeProducts.length}/<span style={{ color: 'black' }}>our products</span></p>
+                                    <p className='shop-count'>home/<span>our products-{loading ? <div className='p-qty'></div> : activeProducts.length}</span></p>
                                 </div>
                             </div>
                             <div className="shop-container">
@@ -255,11 +255,7 @@ function Shop() {
                 }
             </div>
         </>
-
-
     )
-
-
 }
 
 const Button = ({ filterBy, value, handleClick, active }) => {
