@@ -85,16 +85,18 @@ function Address() {
         }
     }, []);
 
-    const setDeliveryCharges = async () => {
+    const isValidPinCode = async () => {
         const response = await fetch(`https://api.postalpincode.in/pincode/${pinCode}`);
         const data = await response.json();
 
         if (data[0].Status === "Error" || data[0].Status === "404") {
+            alert("Enter a valid pin code");
             setValidPin(false)
-            alert("Enter a valid pin code")
+            return false;
         } else {
             setValidPin(true)
-            const district = data[0].PostOffice[0].District;
+            return true;
+            // const district = data[0].PostOffice[0].District;
             // setDeliveryCharge(99)
             // if (pinCode === "600036") {
             //     setDeliveryCharge(19);
@@ -630,40 +632,22 @@ function Address() {
     }
 
     const editAddress = async () => {
+        const email = localStorage.getItem("userEmail");
+        const token = localStorage.getItem("token");
+
         if (!address1 || !address2 || !pinCode || !city || !state) {
             setError(true);
             throw new Error("Enter Details");
             return false;
         }
-        if (!validPin) {
-            setError(true);
-            alert("Please Enter Valid PinCode")
-            return false;
-        }
-        const email = localStorage.getItem("userEmail");
-        const token = localStorage.getItem("token");
-
-        var result;
         if (email) {
-            try {
-
-
-                setLoading(true);
-                // console.log("trueEmail exists : ", trueEmail);
-                result = await fetch(
+            const isValidPin = await isValidPinCode();
+            if (isValidPin) {
+                let result = await fetch(
                     `${process.env.REACT_APP_server_url}/api/v1/auth/edit-user-address`,
                     {
                         method: "POST",
-                        body: JSON.stringify({
-                            id,
-                            index,
-                            email,
-                            address1,
-                            address2,
-                            pinCode,
-                            city,
-                            state,
-                        }),
+                        body: JSON.stringify({ id, email, index, address1, address2, pinCode, city, state }),
                         headers: {
                             "Content-Type": "application/json",
                             Authorization: `Bearer ${token}`,
@@ -671,33 +655,15 @@ function Address() {
                     },
                 );
                 result = await result.json();
-                // setLoading(false)
-                window.location.reload();
-
-                // console.log(result)
-                // navigate('/address') 
-                // setTimeout(() => {
-                //     setLoading(false)
-                // }, 1000);
-            } catch (error) {
-                alert(error)
+                console.log(result);
+            } else {
+                alert("Enter a valid pin code");
             }
         } else {
             localStorage.removeItem('token');
             localStorage.removeItem('userEmail');
             localStorage.removeItem('name');
             localStorage.removeItem('phone');
-        }
-        if (result.status == 404) {
-            localStorage.removeItem("userEmail");
-            localStorage.removeItem("token");
-            localStorage.removeItem("name");
-            localStorage.removeItem("phone");
-            setLoading(false);
-            navigate("/");
-            window.location.reload();
-        } else {
-            console.log("object")
         }
     }
 
@@ -765,14 +731,23 @@ function Address() {
             {
                 loading ? <LoadingPage /> :
                     <div>
+                        <div className="checkout-navbar">
+                            <div className="checkout-navbar-content">
+                                <p style={{color: "#00C437"}}>CART</p>
+                                <div style={{borderTop: "2px dashed #00C437"}} className="checkout-navbar-line checkout-navbar-line-1"></div>
+                                <p style={{color: "#004FC4"}}>ADDRESS</p>
+                                <div className="checkout-navbar-line checkout-navbar-line-2"></div>
+                                <p>PAYMENT</p>
+                            </div>
+                        </div>
                         <div class="checkout-main-container">
                             <div className="checkout-address-container">
                                 <h2>Select Delivery Address</h2>
                                 <div className="address-container">
                                     {addresses.map(e)}
                                 </div>
-                                
-                                <div className='add-address-btn' onClick={addressHandler}><img src={addAddressIcon} style={{height: 14, marginRight: 15}} />Add Address</div>
+
+                                <div className='add-address-btn' onClick={addressHandler}><img src={addAddressIcon} style={{ height: 14, marginRight: 15 }} />Add Address</div>
                             </div>
 
 
@@ -828,13 +803,13 @@ function Address() {
                                         </IconButton>
                                     </div>
                                     <h3>ADDRESS</h3>
-                                    <form>
+                                    <div className="address-form-form">
                                         <label>Address line 1</label>
                                         <input id={error && !address1 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 1" value={address1} onChange={(e) => setAddress1(e.target.value)} required></input>
                                         <label>Address line 2</label>
                                         <input id={error && !address2 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 2" value={address2} onChange={(e) => setAddress2(e.target.value)} required></input>
                                         <label>Pin code</label>
-                                        <input id={error && !pinCode && "input-error"} autoComplete="disabled" type="text" placeholder="Pin Code" value={pinCode} onBlur={setDeliveryCharges} onChange={(e) => setPinCode(e.target.value)} required></input>
+                                        <input id={error && !pinCode && "input-error"} autoComplete="disabled" type="text" placeholder="Pin Code" value={pinCode} onBlur={isValidPinCode} onChange={(e) => setPinCode(e.target.value)} required></input>
                                         <label>City</label>
                                         <input id={error && !city && "input-error"} autoComplete="disabled" type="text" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} required></input>
                                         <label>State</label>
@@ -843,7 +818,7 @@ function Address() {
                                         {/* <button class="cart-order-btn" onClick={toPaymentPage}>
                                         DELIVER TO THIS ADDRESS
                                     </button> */}
-                                    </form>
+                                    </div>
                                 </div>}
                                 {showEditAddress && <div class="address-form cart-popup">
                                     <div className="cart-popup-close-btn">
@@ -851,14 +826,15 @@ function Address() {
                                             <CloseIcon />
                                         </IconButton>
                                     </div>
-                                    <h3>ADDRESS</h3>
-                                    <form>
+                                    <h3>EDIT ADDRESS</h3>
+                                    {/* <form> */}
+                                    <div className="address-form-form">
                                         <label>Address line 1</label>
                                         <input id={error && !address1 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 1" value={address1} onChange={(e) => setAddress1(e.target.value)} required></input>
                                         <label>Address line 2</label>
                                         <input id={error && !address2 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 2" value={address2} onChange={(e) => setAddress2(e.target.value)} required></input>
                                         <label>Pin code</label>
-                                        <input id={error && !pinCode && "input-error"} autoComplete="disabled" type="text" placeholder="Pin Code" value={pinCode} onBlur={setDeliveryCharges} onChange={(e) => setPinCode(e.target.value)} required></input>
+                                        <input id={error && !pinCode && "input-error"} autoComplete="disabled" type="text" placeholder="Pin Code" value={pinCode} onBlur={isValidPinCode} onChange={(e) => setPinCode(e.target.value)} required></input>
                                         <label>City</label>
                                         <input id={error && !city && "input-error"} autoComplete="disabled" type="text" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} required></input>
                                         <label>State</label>
@@ -867,7 +843,8 @@ function Address() {
                                         {/* <button class="cart-order-btn" onClick={toPaymentPage}>
                                         DELIVER TO THIS ADDRESS
                                     </button> */}
-                                    </form>
+                                        {/* </form> */}
+                                    </div>
                                 </div>}
                                 {
                                     // showPayment && (

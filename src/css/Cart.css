@@ -1,3 +1,46 @@
+.checkout-navbar {
+    position: fixed;
+    background-color: white;
+    height: 11.6vh;
+    box-shadow: 1px 0px 16px 0.1px rgb(185, 183, 183);
+    width: 100%;
+    z-index: 2;
+    margin-top: -11.6vh;
+    display: flex;
+    justify-content: center;
+}
+
+.checkout-navbar-content  {
+    height: 100%;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(12px, 1.25vw, 18px) ;
+}
+
+.checkout-navbar-content {
+    color: #AAAAAA;
+}
+
+.checkout-navbar-line {
+    margin: 0 10px;
+    flex: 1;
+    border-top: 2px dashed #AAAAAA;
+    max-width: 250px;
+}
+
+@media (max-width: 860px) {
+    .checkout-navbar {
+        height: 8vh;
+        margin-top: -8vh;
+    }
+
+    .checkout-navbar-line {
+        margin: 0 5px;
+    }
+}
+
 .checkout-main-container {
     font-weight: 300;
     padding: 32px 10px;

@@ -85,10 +85,11 @@ function MainContainer({profileProps}) {
 
     const { pathname } = useLocation();
     const showFooter = !(pathname=="/change-password" || pathname=="/enter-otp" || pathname === "/forgot-password" || pathname === '/signup' || pathname === '/login' || pathname === '/cart' || pathname === '/address' || pathname === '/ticket' || pathname === '/collabForm' ||  pathname === '/wishlist');
+    const showNavbar = !(pathname=='/cart' || pathname=='/address' || pathname=='/payment');
     return (
         <div className='all-container'>
             <Toaster />
-            <Navbar profileProps={profileProps} navbarRef={navbarRef}/>
+            {showNavbar && <Navbar profileProps={profileProps} navbarRef={navbarRef}/>}
             <div ref={outletRef}><Outlet/></div>
             {showFooter && <Footer/>}
         </div>

@@ -626,6 +626,15 @@ function Cart() {
             {
                 loading ? <LoadingPage /> :
                     <div>
+                        <div className="checkout-navbar">
+                            <div className="checkout-navbar-content">
+                                <p style={{color: "#004FC4"}}>CART</p>
+                                <div className="checkout-navbar-line checkout-navbar-line-1"></div>
+                                <p>ADDRESS</p>
+                                <div className="checkout-navbar-line checkout-navbar-line-2"></div>
+                                <p>PAYMENT</p>
+                            </div>
+                        </div>
                         {products.length != 0 ?
                             <div class="checkout-main-container">
                                 <div class="checkout-my-cart">

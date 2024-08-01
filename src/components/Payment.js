@@ -194,6 +194,15 @@ function Payment() {
             {
                 loading ? <LoadingPage /> :
                     <div>
+                        <div className="checkout-navbar">
+                            <div className="checkout-navbar-content">
+                                <p style={{color: "#00C437"}}>CART</p>
+                                <div style={{borderTop: "2px dashed #00C437"}} className="checkout-navbar-line checkout-navbar-line-1"></div>
+                                <p style={{color: "#00C437"}}>ADDRESS</p>
+                                <div style={{borderTop: "2px dashed #00C437"}} className="checkout-navbar-line checkout-navbar-line-2"></div>
+                                <p style={{color: "#004FC4"}}>PAYMENT</p>
+                            </div>
+                        </div>
                         <div class="checkout-main-container">
                             <div class="checkout-my-cart">
                                 <h2>PAYMENT METHOD</h2>

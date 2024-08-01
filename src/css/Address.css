@@ -6,11 +6,11 @@
     flex: 2;
 }
 
-.address-form form {
+.address-form-form {
     text-align: start;
 }
 
-.address-form form label {
+.address-form label {
     font-size: 12px;
 }
 
@@ -38,7 +38,7 @@
     width: -webkit-fill-available;
 }
 
-.address-form>form>button {
+.address-form-form button {
     -webkit-border-radius: 5;
     -moz-border-radius: 5;
     margin-top: 15px;
