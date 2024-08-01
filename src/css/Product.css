@@ -218,6 +218,21 @@ body {
     margin: 0;
 }
 
+.product-product-inavailable{
+    margin-top: 10px;
+}
+
+.product-product-inavailable a{
+    margin-left: 2px;
+   text-decoration: underline;
+   cursor: pointer;
+   color: blue;
+}
+/* .product-product-inavailable button:hover{
+background: transparent;
+    color: #a6602d;
+} */
+
 @media (min-width: 426px) and (max-width: 680px) {
     .product-main-container {
         margin: 25px;

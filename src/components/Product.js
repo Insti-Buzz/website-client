@@ -7,6 +7,9 @@ import LoadingPage from "./LoadingPage";
 import { isExpired, decodeToken } from "react-jwt";
 import toast from "react-hot-toast";
 import Carousel from 'react-simply-carousel';
+import { IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+
 
 const Product = () => {
   const [imageUrl, setImageUrl] = React.useState([]);
@@ -16,6 +19,9 @@ const Product = () => {
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
+  const [showSizeUnavailable, setShowSizeUnavailable] = useState(false)
+  const [requiredSize, setRequiredSize] = useState('')
+  const [requiredQuantity, setRequiredQuantity] = useState('')
 
   useEffect(() => {
     getProductDetails();
@@ -54,6 +60,8 @@ const Product = () => {
   const params = useParams();
   const [isLogin, setIsLogin] = React.useState(false);
   const [sizesAvailable, setSizesAvailable] = React.useState([]);
+  const [comments, setComments] = React.useState([]);
+  const [requiredEmail, setRequiredEmail] = React.useState([]);
 
   useEffect(() => {
     if (sizesAvailable) {
@@ -269,6 +277,45 @@ const Product = () => {
     return <option value={item.size}>{item.size}</option>;
   }
 
+  const sizeUnavailable = async () => {
+    if (!requiredQuantity || !requiredSize) {
+      alert("Enter Details")
+      return
+    }
+    let email
+    if (isLogin == true) {
+      email = localStorage.getItem("userEmail");
+    }
+    else {
+      if (!email) {
+        alert("Enter Email")
+        return
+      }
+      email = requiredEmail
+    }
+    setLoading(true);
+    // let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/get-product-details/${params.id}`, {
+    // console.log(params)
+    let result = await fetch(
+      `${process.env.REACT_APP_server_url}/api/v1/products/sizeUnavailable/${params.id}`,
+      {
+        method: "POST",
+        body: JSON.stringify({ email, requiredQuantity, requiredSize, comments }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    result = await result.json();
+    setLoading(false);
+    alert(result.message)
+  }
+
+  const proceedSizeUnavailable = () => {
+    setShowSizeUnavailable(true)
+  }
+
   return (
     <div>
       {
@@ -472,6 +519,10 @@ const Product = () => {
               ) : (
                 <></>
               )}
+              <div className="product-product-inavailable">
+                Size Not Available?
+                <a onClick={proceedSizeUnavailable}>Inform Us</a>
+              </div>
               <div className="product-product-details product-product-info">
                 <h4>PRODUCT DESCRIPTION</h4>
                 <p>{description}</p>
@@ -491,8 +542,29 @@ const Product = () => {
               <hr />
             </div>
           </div>
-
       }
+      {showSizeUnavailable && <div class="address-form cart-popup">
+        <div className="">
+          <IconButton onClick={() => setShowSizeUnavailable(false)}>
+            <CloseIcon />
+          </IconButton>
+        </div>
+        {
+          <>
+            {/* <h3></h3> */}
+            <form>
+              <input autoComplete="disabled" type="number" placeholder="Quantity" value={requiredQuantity} onChange={(e) => setRequiredQuantity(e.target.value)} />
+              <input autoComplete="disabled" type="text" placeholder="Size" value={requiredSize} onChange={(e) => setRequiredSize(e.target.value)} />
+              {isLogin ? <></> :
+
+                <input autoComplete="disabled" type="text" placeholder="Your Email" value={requiredEmail} onChange={(e) => setRequiredEmail(e.target.value)} />
+              }
+              <input autoComplete="disabled" type="text" placeholder="Comments" value={comments} onChange={(e) => setComments(e.target.value)} />
+              <button onClick={sizeUnavailable}>Send Request</button>
+            </form>
+          </>
+        }
+      </div>}
     </div>
 
   );

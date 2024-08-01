@@ -95,6 +95,7 @@ function AllOrders() {
                                 </p>
 
                                 <p className='all-orders-content'> {item.subTotal}</p>
+                                <p className='all-orders-content'> {item.deliveryMethod}</p>
                                 {
                                     (item.deliveryAddresses) ?
                                         <div>
