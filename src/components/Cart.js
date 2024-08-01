@@ -109,6 +109,7 @@ function Cart() {
             );
             // console.log("from backeng result: "+result)
             result = await result.json();
+            // console.log(result)
             // console.log("after trueemail: ", result);
             setTimeout(() => {
                 setLoading(false)

@@ -3,6 +3,8 @@ import "../css/Product.css";
 
 import { useNavigate, useParams } from "react-router-dom";
 import LoadingPage from "./LoadingPage";
+import { IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 import { isExpired, decodeToken } from "react-jwt";
 import toast from "react-hot-toast";
@@ -19,6 +21,16 @@ const Product = () => {
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [showSizeChart, setShowSizeChart] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   const [showSizeUnavailable, setShowSizeUnavailable] = useState(false)
   const [requiredSize, setRequiredSize] = useState('')
   const [requiredQuantity, setRequiredQuantity] = useState('')
@@ -54,6 +66,7 @@ const Product = () => {
   const [description, setDescription] = React.useState();
   const [price, setPrice] = React.useState();
   const [details, setDetails] = React.useState();
+  const [style, setStyle] = useState('');
   const [quantity, setQuantity] = React.useState("1");
   const [isCart, setIsCart] = React.useState();
   const navigate = useNavigate();
@@ -139,6 +152,7 @@ const Product = () => {
     setLoading(false);
     setName(result.name);
     setPrice(result.price);
+    setStyle(result.style);
     // setSize(result.sizes)
     setImageUrl(result.imageUrl);
     setDetails(result.details);
@@ -186,7 +200,7 @@ const Product = () => {
     let token = localStorage.getItem("token");
     var selectedSize = document.querySelector('input[name="radios"]:checked');
     if (!selectedSize) {
-      alert("Please Select Size");
+      throw new Error("Select a size");
       return;
     }
     selectedSize = selectedSize.value;
@@ -265,11 +279,10 @@ const Product = () => {
   function imageButton(item, index) {
     // console.log(item)
     return (
-      <>
+      (index == imageUrl.length - 1) ? null :
         <div className='product-img-button-container' onClick={() => selectImage(item)}>
           <img src={item} alt="Product image" class="product-img-button" />
         </div>
-      </>
     );
   }
 
@@ -333,7 +346,7 @@ const Product = () => {
                     }
                   }}
                   preventScrollOnSwipe
-                  swipeTreshold={60}
+                  // swipeTreshold={60}
                   infinite={false}
                   activeSlideIndex={activeSlide}
                   // activeSlideProps={{
@@ -384,7 +397,7 @@ const Product = () => {
                       }
                     }
                   }}
-                  itemsToShow={4}
+                  itemsToShow={windowWidth > 420 ? 4 : 3}
                   speed={300}
                 // centerMode
                 >
@@ -405,6 +418,7 @@ const Product = () => {
               </div>
               <div className="product-product-size">
                 <p>Select Size</p>
+                <a onClick={() => { setShowSizeChart(true) }}>Size Chart</a>
               </div>
               <div className="product-size-input-container">
                 <label>
@@ -541,8 +555,18 @@ const Product = () => {
               </div>
               <hr />
             </div>
+            {showSizeChart && <div className="product-size-chart">
+              <div className="cart-popup-close-btn">
+                <IconButton onClick={() => setShowSizeChart(false)}>
+                  <CloseIcon />
+                </IconButton>
+              </div>
+              <h2>Size Chart: {style == 'regular' ? 'Normal Fit T-Shirt' : style == 'oversized' ? 'Oversized Fit T-Shirt' : 'Hoodie'}</h2>
+              <img src={imageUrl[imageUrl.length - 1]} />
+            </div>}
           </div>
       }
+      
       {showSizeUnavailable && <div class="address-form cart-popup">
         <div className="">
           <IconButton onClick={() => setShowSizeUnavailable(false)}>

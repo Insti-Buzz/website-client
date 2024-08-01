@@ -191,10 +191,13 @@
     text-decoration: none;
 }
 
+.checkout-select-delivery label {
+    margin-bottom: 12px;
+}
+
 .checkout-select-delivery p {
     font-size: 14px;
     margin: 0;
-    margin-bottom: 12px;
 }
 
 .checkout-select-delivery input {
@@ -203,6 +206,7 @@
 
 .checkout-select-delivery label {
     display: flex;
+    cursor: pointer;
     justify-content: space-between;
 }
 

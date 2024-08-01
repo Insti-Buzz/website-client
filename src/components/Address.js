@@ -10,6 +10,7 @@ import LoadingPage from "./LoadingPage";
 import { isExpired, decodeToken } from "react-jwt";
 import MyOrders from "./MyOrders";
 import toast from "react-hot-toast";
+import addAddressIcon from "../assets/Address page/Add icon.png";
 
 
 function Address() {
@@ -27,6 +28,8 @@ function Address() {
     const [email, setEmail] = React.useState("");
     const navigate = useNavigate();
     const location = useLocation();
+    const [id, setId] = useState();
+    const [index, setIndex] = useState();
     const [address1, setAddress1] = useState('');
     const [address2, setAddress2] = useState('');
     const [pinCode, setPinCode] = useState('');
@@ -40,6 +43,7 @@ function Address() {
     const [error, setError] = React.useState(false);
     const [addresses, setAddresses] = React.useState([""])
     const [showAddAddress, setShowAddAddress] = useState(false)
+    const [showEditAddress, setShowEditAddress] = useState(false)
     const [selectedAddressId, setSelectedAddressId] = useState('');
     const [totalMrp, setTotalMrp] = useState(0)
     const [noOfProducts, setNoOfProducts] = useState('')
@@ -61,8 +65,8 @@ function Address() {
             getProducts();
             getAddresses()
 
-            const name = localStorage.getItem('userName');
-            const phone = localStorage.getItem('userPhone');
+            const name = localStorage.getItem('name');
+            const phone = localStorage.getItem('phone');
             const email = localStorage.getItem("userEmail");
             const token = localStorage.getItem("token");
             setEmail(email)
@@ -125,6 +129,7 @@ function Address() {
     }
 
     const setAddressField = (event) => {
+        console.log(event.target.value);
         setSelectedAddressId(event.target.value);
         const index = addresses.findIndex((e) => e.id === event.target.value);
         // console.log(addresses[index]);
@@ -452,7 +457,7 @@ function Address() {
                 }
             );
             result = await result.json();
-            // console.log(result)
+            console.log(result)
             setTimeout(() => {
                 setLoading(false)
             }, 1000);
@@ -485,8 +490,8 @@ function Address() {
     const saveAddress = async () => {
         if (!address1 || !address2 || !pinCode || !city || !state) {
             setError(true);
-            return false;
             throw new Error("Enter Details");
+            return false;
         }
         if (!validPin) {
             setError(true);
@@ -555,6 +560,7 @@ function Address() {
     const removeAddress = async (index) => {
         const email = localStorage.getItem("userEmail");
         const token = localStorage.getItem("token");
+        console.log(index)
 
         var result;
         if (email) {
@@ -602,6 +608,99 @@ function Address() {
         }
     }
 
+    const showEditPopup = (item, index) => {
+        setId(item.id);
+        setIndex(index);
+        setAddress1(item.address1);
+        setAddress2(item.address2);
+        setCity(item.city);
+        setState(item.state);
+        setPinCode(item.pinCode);
+        setShowEditAddress(true);
+    }
+
+    const closeEditPopup = () => {
+        setId('');
+        setAddress1('');
+        setAddress2('');
+        setCity('');
+        setState('');
+        setPinCode('');
+        setShowEditAddress(false);
+    }
+
+    const editAddress = async () => {
+        if (!address1 || !address2 || !pinCode || !city || !state) {
+            setError(true);
+            throw new Error("Enter Details");
+            return false;
+        }
+        if (!validPin) {
+            setError(true);
+            alert("Please Enter Valid PinCode")
+            return false;
+        }
+        const email = localStorage.getItem("userEmail");
+        const token = localStorage.getItem("token");
+
+        var result;
+        if (email) {
+            try {
+
+
+                setLoading(true);
+                // console.log("trueEmail exists : ", trueEmail);
+                result = await fetch(
+                    `${process.env.REACT_APP_server_url}/api/v1/auth/edit-user-address`,
+                    {
+                        method: "POST",
+                        body: JSON.stringify({
+                            id,
+                            index,
+                            email,
+                            address1,
+                            address2,
+                            pinCode,
+                            city,
+                            state,
+                        }),
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${token}`,
+                        },
+                    },
+                );
+                result = await result.json();
+                // setLoading(false)
+                window.location.reload();
+
+                // console.log(result)
+                // navigate('/address') 
+                // setTimeout(() => {
+                //     setLoading(false)
+                // }, 1000);
+            } catch (error) {
+                alert(error)
+            }
+        } else {
+            localStorage.removeItem('token');
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('name');
+            localStorage.removeItem('phone');
+        }
+        if (result.status == 404) {
+            localStorage.removeItem("userEmail");
+            localStorage.removeItem("token");
+            localStorage.removeItem("name");
+            localStorage.removeItem("phone");
+            setLoading(false);
+            navigate("/");
+            window.location.reload();
+        } else {
+            console.log("object")
+        }
+    }
+
     const toPayment = () => {
         if (!selectedAddressId) {
             alert("Select a delivery address");
@@ -627,33 +726,34 @@ function Address() {
 
     function e(item, index) {
         return (
-            <div className='address-card'>
-                <div className="address-card-content">
-                    <span>
-                        <p>{item.address1}</p>
-                        <p> {item.address2}</p>
-                        <p>{item.pinCode}</p>
-                        <div>
-                            <p> {item.city} , {item.state}</p>
-
+            <>
+                <div className="address-card">
+                    <label>
+                        <div className="address-card-content">
+                            <div className="address-card-name">
+                                <h3>{name}</h3>
+                            </div>
+                            <div className="address-card-address">
+                                <p>{item.address1}, {item.address2},</p>
+                                <p>{item.city}, {item.state}, Pin Code-{item.pinCode}</p>
+                            </div>
+                            <div className="address-card-phone">
+                                <p>Mobile: {phone}</p>
+                            </div>
                         </div>
-                        <p> {item.phoneNumber}</p>
-                    </span>
-                    <input
-                        type="radio"
-                        value={item.id}
-                        checked={selectedAddressId === item.id}
-                        onClick={setAddressField}
-                    />
+                        <input type="radio" value={item.id} checked={selectedAddressId == item.id} onClick={setAddressField} />
+                    </label>
+                    <div className="address-card-buttons">
+                        <div className="address-card-remove" onClick={() => removeAddress(index)}>
+                            <h3>Remove</h3>
+                        </div>
+                        <div className="address-card-edit" onClick={() => showEditPopup(item, index)}>
+                            <h3>Edit</h3>
+                        </div>
+                    </div>
                 </div>
-                <button className="address-remove-button"
-                    onClick={() =>
-                        removeAddress(index)
-                    }
-                >
-                    Remove
-                </button>
-            </div>
+
+            </>
         )
     }
     const addressHandler = async (e) => {
@@ -667,11 +767,12 @@ function Address() {
                     <div>
                         <div class="checkout-main-container">
                             <div className="checkout-address-container">
+                                <h2>Select Delivery Address</h2>
                                 <div className="address-container">
-
                                     {addresses.map(e)}
                                 </div>
-                                <button onClick={addressHandler}>Add Address</button>
+                                
+                                <div className='add-address-btn' onClick={addressHandler}><img src={addAddressIcon} style={{height: 14, marginRight: 15}} />Add Address</div>
                             </div>
 
 
@@ -728,12 +829,41 @@ function Address() {
                                     </div>
                                     <h3>ADDRESS</h3>
                                     <form>
-                                        <input id={error && !address1 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 1*" name="address_line1" onChange={(e) => setAddress1(e.target.value)} required></input>
-                                        <input id={error && !address2 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 2*" name="address_line2" onChange={(e) => setAddress2(e.target.value)} required></input>
-                                        <input id={error && !pinCode && "input-error"} autoComplete="disabled" type="text" placeholder="Pin Code*" name="pin_code" onBlur={setDeliveryCharges} onChange={(e) => setPinCode(e.target.value)} required></input>
-                                        <input id={error && !city && "input-error"} autoComplete="disabled" type="text" placeholder="City*" name="city" onChange={(e) => setCity(e.target.value)} required></input>
-                                        <input id={error && !state && "input-error"} autoComplete="disabled" type="text" placeholder="State*" name="state" onChange={(e) => setState(e.target.value)} required></input>
+                                        <label>Address line 1</label>
+                                        <input id={error && !address1 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 1" value={address1} onChange={(e) => setAddress1(e.target.value)} required></input>
+                                        <label>Address line 2</label>
+                                        <input id={error && !address2 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 2" value={address2} onChange={(e) => setAddress2(e.target.value)} required></input>
+                                        <label>Pin code</label>
+                                        <input id={error && !pinCode && "input-error"} autoComplete="disabled" type="text" placeholder="Pin Code" value={pinCode} onBlur={setDeliveryCharges} onChange={(e) => setPinCode(e.target.value)} required></input>
+                                        <label>City</label>
+                                        <input id={error && !city && "input-error"} autoComplete="disabled" type="text" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} required></input>
+                                        <label>State</label>
+                                        <input id={error && !state && "input-error"} autoComplete="disabled" type="text" placeholder="State" value={state} onChange={(e) => setState(e.target.value)} required></input>
                                         <button onClick={saveAddress}>Save Address</button>
+                                        {/* <button class="cart-order-btn" onClick={toPaymentPage}>
+                                        DELIVER TO THIS ADDRESS
+                                    </button> */}
+                                    </form>
+                                </div>}
+                                {showEditAddress && <div class="address-form cart-popup">
+                                    <div className="cart-popup-close-btn">
+                                        <IconButton onClick={closeEditPopup}>
+                                            <CloseIcon />
+                                        </IconButton>
+                                    </div>
+                                    <h3>ADDRESS</h3>
+                                    <form>
+                                        <label>Address line 1</label>
+                                        <input id={error && !address1 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 1" value={address1} onChange={(e) => setAddress1(e.target.value)} required></input>
+                                        <label>Address line 2</label>
+                                        <input id={error && !address2 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 2" value={address2} onChange={(e) => setAddress2(e.target.value)} required></input>
+                                        <label>Pin code</label>
+                                        <input id={error && !pinCode && "input-error"} autoComplete="disabled" type="text" placeholder="Pin Code" value={pinCode} onBlur={setDeliveryCharges} onChange={(e) => setPinCode(e.target.value)} required></input>
+                                        <label>City</label>
+                                        <input id={error && !city && "input-error"} autoComplete="disabled" type="text" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} required></input>
+                                        <label>State</label>
+                                        <input id={error && !state && "input-error"} autoComplete="disabled" type="text" placeholder="State" value={state} onChange={(e) => setState(e.target.value)} required></input>
+                                        <button onClick={editAddress}>Save Address</button>
                                         {/* <button class="cart-order-btn" onClick={toPaymentPage}>
                                         DELIVER TO THIS ADDRESS
                                     </button> */}
