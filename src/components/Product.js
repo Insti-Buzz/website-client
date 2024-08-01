@@ -9,8 +9,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import { isExpired, decodeToken } from "react-jwt";
 import toast from "react-hot-toast";
 import Carousel from 'react-simply-carousel';
-import { IconButton } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
+// import { IconButton } from "@mui/material";
+// import CloseIcon from "@mui/icons-material/Close";
 
 
 const Product = () => {
