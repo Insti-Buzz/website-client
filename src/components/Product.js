@@ -300,7 +300,7 @@ const Product = () => {
       email = localStorage.getItem("userEmail");
     }
     else {
-      if (!email) {
+      if (!requiredEmail) {
         alert("Enter Email")
         return
       }
