@@ -262,6 +262,10 @@
     
 }
 
+.shop-product-img {
+    position: relative;
+}
+
 .shop-product-card {
     background-color: transparent;
     width: 100%;

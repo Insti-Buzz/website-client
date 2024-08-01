@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../css/Wishlist.css';
 import LoadingPage from "./LoadingPage";
-
+import CloseIcon from "@mui/icons-material/Close";
 import { isExpired, decodeToken } from "react-jwt";
+import { IconButton } from "@mui/material";
 
 function Wishlist() {
     const [wishlistedProducts, setWishlistedProducts] = useState([]);
@@ -25,7 +26,7 @@ function Wishlist() {
         const myDecodedToken = decodeToken(token);
         if (myDecodedToken && myDecodedToken.email === email) {
             return myDecodedToken.email;
-        }else {
+        } else {
             // console.log("Unauth Activity");
             localStorage.clear('token');
             localStorage.clear('userEmail');
@@ -40,7 +41,7 @@ function Wishlist() {
                 `${process.env.REACT_APP_server_url}/api/v1/auth/safetyProtocol`,
                 {
                     method: "POST",
-                    body: JSON.stringify({ susEmailId: `${susEmailId}` , component:"Wishlist.js" }),
+                    body: JSON.stringify({ susEmailId: `${susEmailId}`, component: "Wishlist.js" }),
                     headers: {
                         "Content-Type": "application/json",
                     },
@@ -94,6 +95,34 @@ function Wishlist() {
         }, 1000);
     }
 
+    const removeFromWishlist = async (productId) => {
+        setLoading(true)
+        let email = localStorage.getItem("userEmail");
+        let token = localStorage.getItem("token");
+
+        let result = await fetch(
+            `${process.env.REACT_APP_server_url}/api/v1/products/toggleWishlist`,
+            {
+                method: "POST",
+                body: JSON.stringify({ email, productId }),
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
+
+        result = await result.json();
+        setLoading(false)
+        window.location.reload();
+        if (result.status === 404) {
+            alert(result.message);
+            localStorage.removeItem("userEmail");
+            navigate("/");
+            window.location.reload();
+        }
+    }
+
     const productPage = async (productId, index) => {
         navigate(`/product/${productId}`);
     };
@@ -101,28 +130,38 @@ function Wishlist() {
     function e(item, index) {
         const productId = item.product_id;
         return (
-            <div className="shop-product-div">
-                <button
-                    className="shop-product-card"
-                    onClick={() => productPage(item.product_id, index)}
-                    // style={{height:'fit-content'}}
-                >
-                    <img src={item.imageUrl[0]} alt="Image "  style={{height:'35vh',width:'100%',objectFit:'cover'}}/>
-                    <div className="shop-product-name">
-                        <h2>{item.name}</h2>
-                    </div>
-                    <hr />
-                    <div className='shop-product-style'>
-                        <p>{
-                            (item.style === 'regular') ? "Regular T-Shirt" :
-                            (item.style === 'hoodie') ? "Hoodie" :
-                            "Oversized T-Shirt"}</p>
-                    </div>
-                    <div className="shop-product-price">
-                        <h3>₹{item.price}</h3>
-                    </div>
-                </button>
-            </div>
+            <>
+                <div className="shop-product-div">
+                    <button
+                        className="shop-product-card"
+                    >
+                        <div className="shop-product-img">
+                            <div className="wishlist-remove-btn">
+                                <IconButton onClick={() => removeFromWishlist(productId)}>
+                                    <CloseIcon />
+                                </IconButton>
+                            </div>
+                            <img src={item.imageUrl[0]} className='shop-image' alt="Product"
+                                onClick={() => productPage(item.product_id, index)} />
+                        </div>
+                        <div className="shop-product-name">
+                            <h2 className='h2-name'>{item.name}</h2>
+                        </div>
+                        <hr className='shop-product-card-divider' />
+                        <div className='shop-product-style'>
+                            <p className='product-style'>{
+                                (item.style === 'regular') ? "Regular T-Shirt" :
+                                    (item.style === 'hoodie') ? "Hoodie" :
+                                        "Oversized T-Shirt"}</p>
+                        </div>
+
+                        <div className="shop-product-price">
+                            <h3 className='price'>₹{item.price}<s>₹{item.style === 'hoodie' ? (parseInt(item.price) + 100) : (parseInt(item.price) + 50)}</s></h3>
+                            <p>Inc. of all taxes</p>
+                        </div>
+                    </button>
+                </div>
+            </>
         );
     }
 

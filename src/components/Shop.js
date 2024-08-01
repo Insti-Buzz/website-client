@@ -110,7 +110,7 @@ function Shop() {
                         className="shop-product-card"
                         onClick={() => productPage(item.product_id, index)}
                     >
-
+                        
                         <img src={item.imageUrl[0]} className='shop-image' alt="Product" />
 
                         <div className="shop-product-name">
