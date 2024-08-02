@@ -113,7 +113,6 @@ function Wishlist() {
         );
 
         result = await result.json();
-        setLoading(false)
         window.location.reload();
         if (result.status === 404) {
             alert(result.message);

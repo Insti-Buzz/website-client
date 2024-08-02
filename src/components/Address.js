@@ -733,9 +733,9 @@ function Address() {
                     <div>
                         <div className="checkout-navbar">
                             <div className="checkout-navbar-content">
-                                <p style={{color: "#00C437"}}>CART</p>
-                                <div style={{borderTop: "2px dashed #00C437"}} className="checkout-navbar-line checkout-navbar-line-1"></div>
-                                <p style={{color: "#004FC4"}}>ADDRESS</p>
+                                <p style={{ color: "#00C437" }}>CART</p>
+                                <div style={{ borderTop: "2px dashed #00C437" }} className="checkout-navbar-line checkout-navbar-line-1"></div>
+                                <p style={{ color: "#004FC4" }}>ADDRESS</p>
                                 <div className="checkout-navbar-line checkout-navbar-line-2"></div>
                                 <p>PAYMENT</p>
                             </div>
@@ -754,115 +754,118 @@ function Address() {
 
 
                             <div class="checkout-order-summary">
-                                {/* <div class="checkout-delivery-method">
+                                <div className="checkout-order-summary-content">
+                                    {/* <div class="checkout-delivery-method">
                                     <h3>PAYMENT METHOD</h3>
                                     <RadioButtonGroup
                                         selectedOption={paymentMethod}
                                         handleChange={handleChange}
                                     />
                                 </div> */}
-                                {/* <hr /> */}
-                                <div class="checkout-price-details">
-                                    <h3>
-                                        PRICE DETAILS ({noOfProducts}{" "}
-                                        {noOfProducts == 1 ? "item" : "items"})
-                                    </h3>
+                                    {/* <hr /> */}
                                     <div class="checkout-price-details">
-                                        <div class="checkout-summary-details">
-                                            <p>Total MRP</p>
-                                            <p>₹{totalMrp}</p>
+                                        <h3>
+                                            PRICE DETAILS ({noOfProducts}{" "}
+                                            {noOfProducts == 1 ? "item" : "items"})
+                                        </h3>
+                                        <div class="checkout-price-details">
+                                            <div class="checkout-summary-details">
+                                                <p>Total MRP</p>
+                                                <p>₹{totalMrp}</p>
+                                            </div>
+                                            <div class="checkout-summary-details">
+                                                <p>Platform Fee</p>
+                                                <p>FREE</p>
+                                            </div>
+                                            <div class="checkout-summary-details">
+                                                <p>Delivery Charges</p>
+                                                {/* <p>{(deliveryCharge == 0) ? "MAY VARY" : `₹${deliveryCharge}`}</p> */}
+                                                <p>₹{deliveryCharge}</p>
+                                            </div>
                                         </div>
-                                        <div class="checkout-summary-details">
-                                            <p>Platform Fee</p>
-                                            <p>FREE</p>
-                                        </div>
-                                        <div class="checkout-summary-details">
-                                            <p>Delivery Charges</p>
-                                            {/* <p>{(deliveryCharge == 0) ? "MAY VARY" : `₹${deliveryCharge}`}</p> */}
-                                            <p>₹{deliveryCharge}</p>
+                                        <hr />
+                                        <div class="checkout-total-amount">
+                                            <p>Total Amount</p>
+                                            <p>₹{calculateSubtotal()}</p>
                                         </div>
                                     </div>
-                                    <hr />
-                                    <div class="checkout-total-amount">
-                                        <p>Total Amount</p>
-                                        <p>₹{calculateSubtotal()}</p>
+                                    <div className="cart-order-btn-container">
+                                        <button
+                                            class="cart-order-btn"
+                                            onClick={toPayment}
+                                        >
+                                            PROCEED TO PAYMENT
+                                        </button>
                                     </div>
+
+                                    {showAddAddress && <div class="address-form cart-popup">
+                                        <div className="cart-popup-close-btn">
+                                            <IconButton onClick={() => closeAddress()}>
+                                                <CloseIcon />
+                                            </IconButton>
+                                        </div>
+                                        <h3>ADDRESS</h3>
+                                        <div className="address-form-form">
+                                            <label>Address line 1</label>
+                                            <input id={error && !address1 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 1" value={address1} onChange={(e) => setAddress1(e.target.value)} required></input>
+                                            <label>Address line 2</label>
+                                            <input id={error && !address2 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 2" value={address2} onChange={(e) => setAddress2(e.target.value)} required></input>
+                                            <label>Pin code</label>
+                                            <input id={error && !pinCode && "input-error"} autoComplete="disabled" type="text" placeholder="Pin Code" value={pinCode} onBlur={isValidPinCode} onChange={(e) => setPinCode(e.target.value)} required></input>
+                                            <label>City</label>
+                                            <input id={error && !city && "input-error"} autoComplete="disabled" type="text" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} required></input>
+                                            <label>State</label>
+                                            <input id={error && !state && "input-error"} autoComplete="disabled" type="text" placeholder="State" value={state} onChange={(e) => setState(e.target.value)} required></input>
+                                            <button onClick={saveAddress}>Save Address</button>
+                                            {/* <button class="cart-order-btn" onClick={toPaymentPage}>
+                                        DELIVER TO THIS ADDRESS
+                                    </button> */}
+                                        </div>
+                                    </div>}
+                                    {showEditAddress && <div class="address-form cart-popup">
+                                        <div className="cart-popup-close-btn">
+                                            <IconButton onClick={closeEditPopup}>
+                                                <CloseIcon />
+                                            </IconButton>
+                                        </div>
+                                        <h3>EDIT ADDRESS</h3>
+                                        {/* <form> */}
+                                        <div className="address-form-form">
+                                            <label>Address line 1</label>
+                                            <input id={error && !address1 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 1" value={address1} onChange={(e) => setAddress1(e.target.value)} required></input>
+                                            <label>Address line 2</label>
+                                            <input id={error && !address2 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 2" value={address2} onChange={(e) => setAddress2(e.target.value)} required></input>
+                                            <label>Pin code</label>
+                                            <input id={error && !pinCode && "input-error"} autoComplete="disabled" type="text" placeholder="Pin Code" value={pinCode} onBlur={isValidPinCode} onChange={(e) => setPinCode(e.target.value)} required></input>
+                                            <label>City</label>
+                                            <input id={error && !city && "input-error"} autoComplete="disabled" type="text" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} required></input>
+                                            <label>State</label>
+                                            <input id={error && !state && "input-error"} autoComplete="disabled" type="text" placeholder="State" value={state} onChange={(e) => setState(e.target.value)} required></input>
+                                            <button onClick={editAddress}>Save Address</button>
+                                            {/* <button class="cart-order-btn" onClick={toPaymentPage}>
+                                        DELIVER TO THIS ADDRESS
+                                    </button> */}
+                                            {/* </form> */}
+                                        </div>
+                                    </div>}
+                                    {
+                                        // showPayment && (
+                                        //     <div className="cart-popup">
+                                        //         {/* <i className='fa fa-times' aria-hidden='true' onClick={setShowPayment(false)}></i> */}
+                                        //         <IconButton onClick={() => closePayment()}>
+                                        //             <CloseIcon />
+                                        //         </IconButton>
+                                        //         <h1>Confirm Your Order?</h1>
+                                        //         <div className="cart-popup-content">
+                                        //             {/* <button onClick={confirmOrder}>Cash On Delivery</button> */}
+                                        //             {/* <button onClick={cancelOrder}>No</button> */}
+                                        //             <button onClick={paymentHandler}>Pay Now</button>
+                                        //         </div>
+                                        //     </div>
+                                        // )
+                                    }
+
                                 </div>
-                                <button
-                                    class="cart-order-btn"
-                                    onClick={toPayment}
-                                >
-                                    PROCEED TO PAYMENT
-                                </button>
-
-
-                                {showAddAddress && <div class="address-form cart-popup">
-                                    <div className="cart-popup-close-btn">
-                                        <IconButton onClick={() => closeAddress()}>
-                                            <CloseIcon />
-                                        </IconButton>
-                                    </div>
-                                    <h3>ADDRESS</h3>
-                                    <div className="address-form-form">
-                                        <label>Address line 1</label>
-                                        <input id={error && !address1 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 1" value={address1} onChange={(e) => setAddress1(e.target.value)} required></input>
-                                        <label>Address line 2</label>
-                                        <input id={error && !address2 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 2" value={address2} onChange={(e) => setAddress2(e.target.value)} required></input>
-                                        <label>Pin code</label>
-                                        <input id={error && !pinCode && "input-error"} autoComplete="disabled" type="text" placeholder="Pin Code" value={pinCode} onBlur={isValidPinCode} onChange={(e) => setPinCode(e.target.value)} required></input>
-                                        <label>City</label>
-                                        <input id={error && !city && "input-error"} autoComplete="disabled" type="text" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} required></input>
-                                        <label>State</label>
-                                        <input id={error && !state && "input-error"} autoComplete="disabled" type="text" placeholder="State" value={state} onChange={(e) => setState(e.target.value)} required></input>
-                                        <button onClick={saveAddress}>Save Address</button>
-                                        {/* <button class="cart-order-btn" onClick={toPaymentPage}>
-                                        DELIVER TO THIS ADDRESS
-                                    </button> */}
-                                    </div>
-                                </div>}
-                                {showEditAddress && <div class="address-form cart-popup">
-                                    <div className="cart-popup-close-btn">
-                                        <IconButton onClick={closeEditPopup}>
-                                            <CloseIcon />
-                                        </IconButton>
-                                    </div>
-                                    <h3>EDIT ADDRESS</h3>
-                                    {/* <form> */}
-                                    <div className="address-form-form">
-                                        <label>Address line 1</label>
-                                        <input id={error && !address1 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 1" value={address1} onChange={(e) => setAddress1(e.target.value)} required></input>
-                                        <label>Address line 2</label>
-                                        <input id={error && !address2 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 2" value={address2} onChange={(e) => setAddress2(e.target.value)} required></input>
-                                        <label>Pin code</label>
-                                        <input id={error && !pinCode && "input-error"} autoComplete="disabled" type="text" placeholder="Pin Code" value={pinCode} onBlur={isValidPinCode} onChange={(e) => setPinCode(e.target.value)} required></input>
-                                        <label>City</label>
-                                        <input id={error && !city && "input-error"} autoComplete="disabled" type="text" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} required></input>
-                                        <label>State</label>
-                                        <input id={error && !state && "input-error"} autoComplete="disabled" type="text" placeholder="State" value={state} onChange={(e) => setState(e.target.value)} required></input>
-                                        <button onClick={editAddress}>Save Address</button>
-                                        {/* <button class="cart-order-btn" onClick={toPaymentPage}>
-                                        DELIVER TO THIS ADDRESS
-                                    </button> */}
-                                        {/* </form> */}
-                                    </div>
-                                </div>}
-                                {
-                                    // showPayment && (
-                                    //     <div className="cart-popup">
-                                    //         {/* <i className='fa fa-times' aria-hidden='true' onClick={setShowPayment(false)}></i> */}
-                                    //         <IconButton onClick={() => closePayment()}>
-                                    //             <CloseIcon />
-                                    //         </IconButton>
-                                    //         <h1>Confirm Your Order?</h1>
-                                    //         <div className="cart-popup-content">
-                                    //             {/* <button onClick={confirmOrder}>Cash On Delivery</button> */}
-                                    //             {/* <button onClick={cancelOrder}>No</button> */}
-                                    //             <button onClick={paymentHandler}>Pay Now</button>
-                                    //         </div>
-                                    //     </div>
-                                    // )
-                                }
-
                             </div>
                         </div>
                     </div>

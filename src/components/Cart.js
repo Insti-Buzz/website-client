@@ -2,8 +2,8 @@ import React, { useEffect, useState, CSSProperties } from "react";
 import "../css/Cart.css";
 import { useNavigate } from "react-router-dom";
 import { IconButton } from "@mui/material";
-import InstiBuzzLogo from '../assets/Horizontal Logo Transparent.png';
-
+import InstiBuzzLogo from '../assets/973300f3-c585-48d9-9e8c-601a3ae24121.png';
+import emptyCartIllustration from "../assets/Illustrations/No items in cart.png";
 import CloseIcon from "@mui/icons-material/Close";
 import LoadingPage from "./LoadingPage";
 import MyOrders from './MyOrders.js';
@@ -276,60 +276,97 @@ function Cart() {
         const sizesAvailable = item.product.sizeQuantities;
 
         return (
-            <div class="checkout-product-card">
-                <div class="checkout-product-details">
-                    <div class="checkout-product-img-container">
-                        <img src={item.product.imageUrl[0]} alt="" />
+            <div className="checkout-product-card">
+                <div class="checkout-product-content">
+                    <div class="checkout-product-details">
+                        <div class="checkout-product-img-container">
+                            <img src={item.product.imageUrl[0]} alt="" />
+                        </div>
+                        <div class="checkout-product-info">
+                            <h3>{item.product.name}</h3>
+                            <p>
+                                {
+                                    (item.style === 'regular') ? "Regular T-Shirt" :
+                                        (item.style === 'hoodie') ? "Hoodie" :
+                                            "Oversized T-Shirt"
+                                }
+                            </p>
+                            {/* <p>{item.product.details}</p> */}
+                            <div class="checkout-product-input">
+                                <div class="checkout-dropdown checkout-product-size">
+                                    {/* <select id="dropdown" value={selectedSize[index]} onChange={(e => { handleSizeChange(index, e) })}> */}
+                                    <h5>Size:</h5>
+                                    <select id="size-dropdown" value={item.size} onChange={(e) => updateSize(item.orderItem_id, e)}>
+                                        {/* <option value="">{selectedSize}</option> */}
+                                        <option value="XS" id="XS" disabled={isSizeDisabled("XS", sizesAvailable)}>XS</option>
+                                        <option value="S" id="S" disabled={isSizeDisabled("S", sizesAvailable)}>S</option>
+                                        <option value="M" id="M" disabled={isSizeDisabled("M", sizesAvailable)}>M</option>
+                                        <option value="L" id="L" disabled={isSizeDisabled("L", sizesAvailable)}>L</option>
+                                        <option value="XL" id="XL" disabled={isSizeDisabled("XL", sizesAvailable)}>XL</option>
+                                        <option value="2XL" id="2XL" disabled={isSizeDisabled("2XL", sizesAvailable)}>2XL</option>
+                                    </select>
+                                </div>
+                                <div class="checkout-dropdown checkout-product-quantity">
+                                    <h5>Qty:</h5>
+                                    <select
+                                        class="dropdown"
+                                        id="quantity-dropdown"
+                                        value={item.quantity}
+                                        onChange={(e) => updateQuantity(item.orderItem_id, e)}
+                                    >
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="checkout-product-info">
-                        <h3>{item.product.name}</h3>
-                        {/* <p>{item.product.details}</p> */}
-                        <div class="checkout-product-input">
-                            <div class="checkout-product-size">
-                                <h5>Size:</h5>
-                                {/* <select id="dropdown" value={selectedSize[index]} onChange={(e => { handleSizeChange(index, e) })}> */}
-                                <select id="size-dropdown" value={item.size} onChange={(e) => updateSize(item.orderItem_id, e)}>
-                                    {/* <option value="">{selectedSize}</option> */}
-                                    <option value="XS" id="XS" disabled={isSizeDisabled("XS", sizesAvailable)}>XS</option>
-                                    <option value="S" id="S" disabled={isSizeDisabled("S", sizesAvailable)}>S</option>
-                                    <option value="M" id="M" disabled={isSizeDisabled("M", sizesAvailable)}>M</option>
-                                    <option value="L" id="L" disabled={isSizeDisabled("L", sizesAvailable)}>L</option>
-                                    <option value="XL" id="XL" disabled={isSizeDisabled("XL", sizesAvailable)}>XL</option>
-                                    <option value="2XL" id="2XL" disabled={isSizeDisabled("2XL", sizesAvailable)}>2XL</option>
-                                </select>
-                            </div>
-                            <div class="checkout-product-quantity">
-                                <h5>Qty:</h5>
-                                <select
-                                    class="dropdown"
-                                    id="quantity-dropdown"
-                                    value={item.quantity}
-                                    onChange={(e) => updateQuantity(item.orderItem_id, e)}
-                                >
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="checkout-product-price">
-                            <p>₹{item.quantity * item.product.price}</p>
-                        </div>
+                    <div class="checkout-product-price">
+                        <h3>₹{item.quantity * item.product.price}</h3>
+                        <p>MRP inclusive of all taxes</p>
                     </div>
                 </div>
-                <div class="checkout-product-cancel">
-                    <IconButton
+                <div class="checkout-product-button">
+                    <div className="checkout-product-remove" onClick={() => { removeFromCart(item.product.product_id, item.orderItem_id) }}>
+                        <h3>Remove</h3>
+                    </div>
+                    <div className="checkout-product-wishlist" onClick={() => { moveToWishlist(item.product.product_id, item.orderItem_id) }}>
+                        <h3>Move to Wishlist</h3>
+                    </div>
+                    {/* <IconButton
                         onClick={() =>
                             removeFromCart(item.product.product_id, item.orderItem_id)
                         }
                     >
                         <CloseIcon />
-                    </IconButton>
+                    </IconButton> */}
                 </div>
             </div>
         );
+
+    }
+
+    const moveToWishlist = async (productId, orderItem_id) => {
+        const token = localStorage.getItem("token");
+        const email = localStorage.getItem(`userEmail`);
+        setLoading(true)
+        let result = await fetch(
+            `${process.env.REACT_APP_server_url}/api/v1/products/moveToWishlist`,
+            {
+                method: "POST",
+                body: JSON.stringify({ email, productId, orderItem_id }),
+                headers: {
+                    "Content-type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            },
+        );
+        result = await result.json();
+        console.log(result);
+        window.location.reload();
     }
 
     const removeFromCart = async (product_id, orderItem_id) => {
@@ -627,8 +664,9 @@ function Cart() {
                 loading ? <LoadingPage /> :
                     <div>
                         <div className="checkout-navbar">
+                            <img src={InstiBuzzLogo} onClick={() => navigate("/")} />
                             <div className="checkout-navbar-content">
-                                <p style={{color: "#004FC4"}}>CART</p>
+                                <p style={{ color: "#004FC4" }}>CART</p>
                                 <div className="checkout-navbar-line checkout-navbar-line-1"></div>
                                 <p>ADDRESS</p>
                                 <div className="checkout-navbar-line checkout-navbar-line-2"></div>
@@ -642,81 +680,85 @@ function Cart() {
 
                                 </div>
                                 <div class="checkout-order-summary">
-                                    <div class="checkout-delivery-method">
-                                        <h3>DELIVERY METHOD</h3>
-                                        <div class="checkout-select-delivery">
-                                            <label>
-                                                <p>Pickup from Saraswathi.</p>
-                                                <input
-                                                    type="radio"
-                                                    value="pickup"
-                                                    checked={delivery === "pickup"}
-                                                    onClick={handleChange}
-                                                />
-                                            </label>
-                                            <label>
-                                                <p>Deliver to your hostel.</p>
-                                                <input
-                                                    type="radio"
-                                                    value="hostel"
-                                                    checked={delivery === "hostel"}
-                                                    onClick={handleChange}
-                                                />
-                                            </label>
-                                            <label>
-                                                <p>Deliver outside IITM.</p>
-                                                <input
-                                                    type="radio"
-                                                    value="delivery"
-                                                    checked={delivery === "delivery"}
-                                                    onClick={handleChange}
-                                                />
-                                            </label>
+                                    <div className="checkout-order-summary-content">
+                                        <div class="checkout-delivery-method">
+                                            <h3>Delivery Method</h3>
+                                            <div class="checkout-select-delivery">
+                                                <label>
+                                                    <p>Pickup from Saraswathi.</p>
+                                                    <input
+                                                        type="radio"
+                                                        value="pickup"
+                                                        checked={delivery === "pickup"}
+                                                        onClick={handleChange}
+                                                    />
+                                                </label>
+                                                <label>
+                                                    <p>Deliver to your hostel.</p>
+                                                    <input
+                                                        type="radio"
+                                                        value="hostel"
+                                                        checked={delivery === "hostel"}
+                                                        onClick={handleChange}
+                                                    />
+                                                </label>
+                                                <label>
+                                                    <p>Deliver outside IITM.</p>
+                                                    <input
+                                                        type="radio"
+                                                        value="delivery"
+                                                        checked={delivery === "delivery"}
+                                                        onClick={handleChange}
+                                                    />
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <hr />
-                                    <div class="checkout-price-details">
-                                        <h3>
-                                            PRICE DETAILS ({products.length}{" "}
-                                            {products.length == 1 ? "item" : "items"})
-                                        </h3>
+                                        <hr />
                                         <div class="checkout-price-details">
-                                            <div class="checkout-summary-details">
-                                                <p>Total MRP</p>
-                                                <p>₹{calculateMrp()}</p>
-                                            </div>
-                                            <div class="checkout-summary-details">
-                                                <p>Platform Fee</p>
-                                                <p>FREE</p>
-                                            </div>
-                                            <div class="checkout-summary-details">
-                                                <p>Delivery Charges</p>
-                                                <p>{deliveryCharges == 0 ? "FREE" : "₹" + deliveryCharges}</p>
-                                            </div>
-                                            <div class="checkout-summary-details">
-                                                {/* <input className=""
+                                            <h3>
+                                                Price Details ({products.length}{" "}
+                                                {products.length == 1 ? "item" : "items"})
+                                            </h3>
+                                            <div class="checkout-price-details">
+                                                <div class="checkout-summary-details">
+                                                    <p>Total MRP</p>
+                                                    <p>₹{calculateMrp()}</p>
+                                                </div>
+                                                <div class="checkout-summary-details">
+                                                    <p>Platform Fee</p>
+                                                    <p>FREE</p>
+                                                </div>
+                                                <div class="checkout-summary-details">
+                                                    <p>Delivery Charges</p>
+                                                    <p>{deliveryCharges == 0 ? "FREE" : "₹" + deliveryCharges}</p>
+                                                </div>
+                                                <div class="checkout-summary-details">
+                                                    {/* <input className=""
                                                     placeholder="Promo Code"
                                                     value={promoCode}
                                                     onChange={(e) => {
                                                         setPromoCode(e.target.value);
                                                     }}
                                                 /> */}
-                                                {/* <button onClick={applyPromoCode}>Apply</button> */}
+                                                    {/* <button onClick={applyPromoCode}>Apply</button> */}
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <div class="checkout-total-amount">
+                                                <p>Total Amount</p>
+                                                <p class="checkout-total-amount">₹{isDiscount ?
+                                                    <div> <s>{calculateSubtotal()}</s>  {0.9 * calculateSubtotal()}
+                                                    </div>
+                                                    :
+                                                    calculateSubtotal()}</p>
                                             </div>
                                         </div>
-                                        <hr />
-                                        <div class="checkout-total-amount">
-                                            <p>Total Amount</p>
-                                            <p class="checkout-total-amount">₹{isDiscount ?
-                                                <div> <s>{calculateSubtotal()}</s>  {0.9 * calculateSubtotal()}
-                                                </div>
-                                                :
-                                                calculateSubtotal()}</p>
+                                        <div className="cart-order-btn-container">
+                                            <button class="cart-order-btn" onClick={delivery == "pickup" ? toPayment : toAddress}>
+                                                {delivery == "pickup" ? "PROCEED TO PAYMENT" : "CONTINUE"}
+                                            </button>
                                         </div>
                                     </div>
-                                    <button class="cart-order-btn" onClick={delivery == "pickup" ? toPayment : toAddress}>
-                                        {delivery == "pickup" ? "PROCEED TO PAYMENT" : "CONTINUE"}
-                                    </button>
                                 </div>
                                 {showAddAddress && <div class="address-form cart-popup">
                                     <div className="cart-popup-close-btn">
@@ -751,8 +793,13 @@ function Cart() {
                                 )} */}
                             </div>
                             :
-                            <div class="checkout-title">
-                                <h3>Seems like your cart is empty...</h3>
+                            <div class="checkout-empty-main-container">
+                                <div className="checkout-empty-container">
+                                    <h2>Oops! Your Cart is Empty!</h2>
+                                    <p>Time to Go Shopping</p>
+                                    <img src={emptyCartIllustration} alt="" />
+                                    <button onClick={() => { navigate("/shop") }}>SHOP</button>
+                                </div>
                             </div>
                         }
                     </div>

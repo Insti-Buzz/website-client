@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import img from "../assets/photo1709765317.jpeg";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import "../css/ForgotPassword.css";
 import "../css/Login.css";
-import img2 from "../assets/Horizontal Logo Transparent.png";
-
-import LoadingPage from "./LoadingPage";
+import illustration from "../assets/Illustrations/Sign up img.png";
 import toast from "react-hot-toast";
+import logo from "../assets/Horizontal Logo Transparent.png";
 
 function Login() {
   const [email, setEmail] = React.useState();
@@ -75,68 +74,31 @@ function Login() {
     navigate("/signup");
   };
   return (
-    <div>
-      {/* {loading?<LoadingPage/>: */}
-      <div class="login-main-container">
-        <div class="login-content">
-          <div class="login-form">
-            <div class="login-logo-container">
-              <img src={img2} alt="InstiBuzz logo" />
-            </div>
-            <h1>The All-in-One Campus Fashion Brand</h1>
-            <h4>Please Login to your Account</h4>
-            <input
-            aut
-              className="login-input"
-              id={error && !email && "input-error"}
-              type="email"
-              placeholder="Email address"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-            />
-            <div class="password-input">
-              <input
-                className="login-input password-login-input"
-                id={error && !password && "input-error"}
-                type={showPassword ? "text" : "password"}
-                placeholder="Password"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-                onKeyDown={(event) => { if (event.key == "Enter") LoginToast() }}
-              />
-              <i
-                class={showPassword ? "fa fa-eye" : "fa fa-eye-slash"}
-                onClick={() => {
-                  setShowPassword(!showPassword);
-                }}
-                style={{ cursor: "pointer" }}
-              />
-            </div>
-            <div class="forgot-password">
-              <a href="/forgot-password">Forgot password?</a> <br />
-            </div>
-            <div class="login-btn-container">
-              <button className="login-btn" onClick={LoginToast}>
-                Login
-              </button>
-            </div>
-            <h5>OR</h5>
-            <div class="signup-btn-container">
-              <button type="button" class="signup-btn" onClick={toSignup}>
-                Sign Up
-              </button>
+    <div className="forgot-password-main-container">
+      <div className="forgot-password-head">
+        <img src={logo} />
+        <h1>Welcome to InstiBuzz</h1>
+        <h2>The All-In-One Campus Fashion Brand</h2>
+      </div>
+      <div className="forgot-password-container">
+        <div className="forgot-password-display">
+          <div className="forgot-password-img">
+            <img src={illustration} />
+          </div>
+          <div className="forgot-password-content">
+            <h3>Login</h3>
+            <div className="forgot-password-form">
+              <label>Enter your Mail</label>
+              <input className="forgot-password-input change-password-input" type="password" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="instibuzziitm@gmail.com" required />
+              <label>Enter password</label>
+              <input className="forgot-password-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required />
+              <a href="/forgot-password">Forgot Password?</a>
+              <button className="forgot-password-btn" onClick={LoginToast}>Login</ button>
+              <button className="signup-btn" onClick={() => navigate("/signup")}>Signup</ button>
             </div>
           </div>
         </div>
-        <div class="login-img-container">
-          <img src={img} alt="" />
-        </div>
       </div>
-      {/* } */}
     </div>
   );
 }

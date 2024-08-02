@@ -32,7 +32,7 @@ function Payment() {
             setMrp(location.state.mrp);
             setNoOfProducts(location.state.noOfProducts);
             setDeliveryMethod(location.state.deliveryMethod);
-            
+
             if (location.state.hostel) {
                 setHostel(location.state.hostel);
             } else if (location.state.address) {
@@ -145,7 +145,7 @@ function Payment() {
         // console.log(deliveryMethod)
         // console.log(hostel)
         // console.log(state)
-        
+
         const token = localStorage.getItem('token')
         const amount = calculateSubtotal();
         // console.log(totalAmount)
@@ -169,8 +169,8 @@ function Payment() {
             },
         });
         localStorage.setItem('userEmail', email)
-        localStorage.setItem('totalAmount',amount)
-        localStorage.setItem('deliveryMethod',deliveryMethod)
+        localStorage.setItem('totalAmount', amount)
+        localStorage.setItem('deliveryMethod', deliveryMethod)
         const order = await response.json();
         console.log(order);
         window.location.href = order.link
@@ -196,16 +196,16 @@ function Payment() {
                     <div>
                         <div className="checkout-navbar">
                             <div className="checkout-navbar-content">
-                                <p style={{color: "#00C437"}}>CART</p>
-                                <div style={{borderTop: "2px dashed #00C437"}} className="checkout-navbar-line checkout-navbar-line-1"></div>
-                                <p style={{color: "#00C437"}}>ADDRESS</p>
-                                <div style={{borderTop: "2px dashed #00C437"}} className="checkout-navbar-line checkout-navbar-line-2"></div>
-                                <p style={{color: "#004FC4"}}>PAYMENT</p>
+                                <p style={{ color: "#00C437" }}>CART</p>
+                                <div style={{ borderTop: "2px dashed #00C437" }} className="checkout-navbar-line checkout-navbar-line-1"></div>
+                                <p style={{ color: "#00C437" }}>ADDRESS</p>
+                                <div style={{ borderTop: "2px dashed #00C437" }} className="checkout-navbar-line checkout-navbar-line-2"></div>
+                                <p style={{ color: "#004FC4" }}>PAYMENT</p>
                             </div>
                         </div>
                         <div class="checkout-main-container">
-                            <div class="checkout-my-cart">
-                                <h2>PAYMENT METHOD</h2>
+                            <div class="checkout-address-container">
+                                <h2>Payment Method</h2>
                                 <label className='payment-method cod-method'>
                                     <div className='payment-method-text'>
                                         <h3>Cash on Delivery</h3>
@@ -225,7 +225,8 @@ function Payment() {
                                 <h2>Choose Payment Method</h2>
                             </div> */}
                             <div class="checkout-order-summary">
-                                {/* <div class="checkout-delivery-method">
+                                <div className="checkout-order-summary-content">
+                                    {/* <div class="checkout-delivery-method">
                                     <h3>DELIVERY METHOD</h3>
                                     <div class="checkout-select-delivery">
                                         <label>
@@ -258,46 +259,49 @@ function Payment() {
                                     </div>
                                 </div>
                                 <hr /> */}
-                                <div class="checkout-price-details">
-                                    <h3>
-                                        PRICE DETAILS ({noOfProducts}{" "}
-                                        {noOfProducts == 1 ? "item" : "items"})
-                                    </h3>
                                     <div class="checkout-price-details">
-                                        <div class="checkout-summary-details">
-                                            <p>Total MRP</p>
-                                            <p>₹{mrp}</p>
-                                        </div>
-                                        <div class="checkout-summary-details">
-                                            <p>Platform Fee</p>
-                                            <p>FREE</p>
-                                        </div>
-                                        <div class="checkout-summary-details">
-                                            <p>Delivery Charges</p>
-                                            <p>{deliveryCharges == 0 ? "FREE" : "₹" + deliveryCharges}</p>
-                                        </div>
-                                        <div class="checkout-summary-details">
-                                            {/* <input className=""
+                                        <h3>
+                                            PRICE DETAILS ({noOfProducts}{" "}
+                                            {noOfProducts == 1 ? "item" : "items"})
+                                        </h3>
+                                        <div class="checkout-price-details">
+                                            <div class="checkout-summary-details">
+                                                <p>Total MRP</p>
+                                                <p>₹{mrp}</p>
+                                            </div>
+                                            <div class="checkout-summary-details">
+                                                <p>Platform Fee</p>
+                                                <p>FREE</p>
+                                            </div>
+                                            <div class="checkout-summary-details">
+                                                <p>Delivery Charges</p>
+                                                <p>{deliveryCharges == 0 ? "FREE" : "₹" + deliveryCharges}</p>
+                                            </div>
+                                            <div class="checkout-summary-details">
+                                                {/* <input className=""
                                                     placeholder="Promo Code"
                                                     value={promoCode}
                                                     onChange={(e) => {
                                                         setPromoCode(e.target.value);
                                                     }}
                                                 /> */}
-                                            {/* <button onClick={applyPromoCode}>Apply</button> */}
+                                                {/* <button onClick={applyPromoCode}>Apply</button> */}
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="checkout-total-amount">
+                                            <p>Total Amount</p>
+                                            <p class="checkout-total-amount">₹{calculateSubtotal()}</p>
                                         </div>
                                     </div>
-                                    <hr />
-                                    <div class="checkout-total-amount">
-                                        <p>Total Amount</p>
-                                        <p class="checkout-total-amount">₹{calculateSubtotal()}</p>
+                                    <div className="cart-order-btn-container">
+                                        <button class="cart-order-btn" onClick={paymentMethod == 'cod' ? confirmOrder : paymentHandler}>
+                                            {
+                                                paymentMethod == 'cod' ? "PLACE ORDER" : "PAY"
+                                            }
+                                        </button>
                                     </div>
                                 </div>
-                                <button class="cart-order-btn" onClick={ paymentMethod == 'cod' ? confirmOrder : paymentHandler}>
-                                    {
-                                        paymentMethod == 'cod' ? "PLACE ORDER" : "PAY" 
-                                    }
-                                </button>
                             </div>
 
                             {/* {showPayment && (
