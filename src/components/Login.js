@@ -89,9 +89,18 @@ function Login() {
             <h3>Login</h3>
             <div className="forgot-password-form">
               <label>Enter your Mail</label>
-              <input className="forgot-password-input change-password-input" type="password" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="instibuzziitm@gmail.com" required />
+              <input className="forgot-password-input change-password-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="instibuzziitm@gmail.com" required />
               <label>Enter password</label>
-              <input className="forgot-password-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required />
+              <div className="login-password-input">
+                <input type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required />
+                <i
+                  class={showPassword ? "fa fa-eye" : "fa fa-eye-slash"}
+                  onClick={() => {
+                    setShowPassword(!showPassword);
+                  }}
+                  style={{ cursor: "pointer" }}
+                />
+              </div>
               <a href="/forgot-password">Forgot Password?</a>
               <button className="forgot-password-btn" onClick={LoginToast}>Login</ button>
               <button className="signup-btn" onClick={() => navigate("/signup")}>Signup</ button>
