@@ -92,7 +92,7 @@ function Login() {
               <input className="forgot-password-input change-password-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="instibuzziitm@gmail.com" required />
               <label>Enter password</label>
               <div className="login-password-input">
-                <input type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required />
+                <input type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" onKeyDown={(event) => { if (event.key == "Enter") LoginToast() }} required />
                 <i
                   class={showPassword ? "fa fa-eye" : "fa fa-eye-slash"}
                   onClick={() => {
