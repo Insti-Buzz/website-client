@@ -44,12 +44,6 @@ function Ticket() {
 
 
   const Submit = async () => {
-    // console.log(name);
-    // console.log(email);
-    // console.log(number);
-    // console.log(serviceNeeded);
-    // console.log(comment);
-
     if (!name || !email || !number) {
       setError(true);
       throw new Error("Enter Details");

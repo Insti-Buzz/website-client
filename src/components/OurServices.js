@@ -1,13 +1,29 @@
-import React, { useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../css/OurServices.css";
-import manufactureImg from '../assets/Manufacturer.jpg'
-import designImg from '../assets/Desigining.jpg'
-import salesImg from '../assets/Sales.jpg'
-import visibilityImg from '../assets/About us/Visibility.png'
-import { Helmet } from 'react-helmet';
+import manufactureImg from "../assets/Our Services/manufacturing.svg";
+import designImg from "../assets/Our Services/design.svg";
+import salesImg from "../assets/Our Services/sales.svg";
+import visibilityImg from "../assets/Our Services/visibility.svg";
+import manufactureMobileImg from "../assets/Our Services/manufacture_mobile.svg";
+import designMobileImg from "../assets/Our Services/design-mobile.svg";
+import salesMobileImg from "../assets/Our Services/sales_mobile.svg";
+import visibilityMobileImg from "../assets/Our Services/visibility_mobile.svg";
+import { Helmet } from "react-helmet";
+import { IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import decorativeElement from "../assets/Our Services/Decorative element - our services page.png";
+import toast from "react-hot-toast";
 
 function OurServices() {
+  const navigate = useNavigate();
+  const [showServicesPopup, setShowServicesPopup] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [number, setNumber] = useState("");
+  const [comment, setComment] = useState("");
+  const [serviceNeeded, setServiceNeeded] = useState([]);
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -21,46 +37,115 @@ function OurServices() {
   //   navi
   // }
 
-  const navigate = useNavigate();
+  function handleChange(e) {
+    if (e.target.checked) {
+      setServiceNeeded([...serviceNeeded, e.target.value]);
+    } else {
+      setServiceNeeded(serviceNeeded.filter((item) => item !== e.target.value));
+    }
+  }
+
+  const TicketToast = () => {
+    toast.promise(
+      Submit(),
+      {
+        loading: "Sending your request",
+        success: (result) => {
+          return result.message;
+        },
+        error: (result) => {
+          return result.message;
+        },
+      },
+      {
+        id: "loginToast",
+      }
+    );
+  };
+
+  const Submit = async () => {
+    if (!name || !email || !number) {
+      throw new Error("Enter Details");
+      return false;
+    }
+
+    let result = await fetch(
+      `${process.env.REACT_APP_server_url}/api/v1/auth/raiseTicket`,
+      {
+        method: "POST",
+        body: JSON.stringify({ name, email, number, comment, serviceNeeded }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    result = await result.json();
+    console.log(result);
+    if (result.status == 404) {
+      // alert(result.error)
+      throw new Error(result.error);
+    } else {
+      setShowServicesPopup(false);
+      return result;
+    }
+  };
 
   return (
     <>
       <Helmet>
-        <meta name="title" content="Our Services"/>
-        <meta name="description" content="At InstiBuzz, our commitment extends beyond the mere creation of the final product; we deeply value the entire journey from conceptualization to delivery, ensuring excellence in every step." />
-        <meta name="keywords" content="InstiBuzz, instibuzz, IIT Madras, College Fashion, College Culture" />
+        <meta name="title" content="Our Services" />
+        <meta
+          name="description"
+          content="At InstiBuzz, our commitment extends beyond the mere creation of the final product; we deeply value the entire journey from conceptualization to delivery, ensuring excellence in every step."
+        />
+        <meta
+          name="keywords"
+          content="InstiBuzz, instibuzz, IIT Madras, College Fashion, College Culture"
+        />
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
-        <meta name="robots" content="all"/>
-        
-        <meta name="og:site_name" content="InstiBuzz"/>
-        <meta name="og:title" content="Our Services Page"/>
-        <meta name="og:description" content="At InstiBuzz, our commitment extends beyond the mere creation of the final product; we deeply value the entire journey from conceptualization to delivery, ensuring excellence in every step."/>
+        <meta name="robots" content="all" />
+
+        <meta name="og:site_name" content="InstiBuzz" />
+        <meta name="og:title" content="Our Services Page" />
+        <meta
+          name="og:description"
+          content="At InstiBuzz, our commitment extends beyond the mere creation of the final product; we deeply value the entire journey from conceptualization to delivery, ensuring excellence in every step."
+        />
         <meta name="og:url" content="https://www.instibuzz.com/ourServices" />
-        <meta name="og:image" content="%PUBLIC_URL%/logo192.png"/>
-        <meta name="og:image:alt" content="Official logo of InstiBuzz Pvt Ltd."/>
-        <meta name="author" content="instibuzz" />        
+        <meta name="og:image" content="%PUBLIC_URL%/logo192.png" />
+        <meta
+          name="og:image:alt"
+          content="Official logo of InstiBuzz Pvt Ltd."
+        />
+        <meta name="author" content="instibuzz" />
       </Helmet>
-    <div class="services-main-container">
-      <div class="services-title">
-        <h1>Our Services</h1>
-      </div>
-      <div class="services-intro">
-        At InstiBuzz, our commitment extends beyond the mere creation of the
-        final product; we deeply value the entire journey from conceptualization
-        to delivery, ensuring excellence in every step.
-      </div>
-      <div class="services-our-service service-manufacturing">
-        <hr class="services-divider" />
-        {/* <h3>MANUFACTURING</h3> */}
-        <h2 id="services-manufacturing">Manufacturing</h2>
-        <div class="services-our-service-container">
-          <div class="services-our-service-image-container">
-            <img src={manufactureImg} alt="Picture of a stitching machine" />
-          </div>
-          <div class="services-our-service-content">
-            <div class="services-our-service-text">
+      <div class="services-desktop-container">
+        <div className="services-title">
+          <h1>Our Services</h1>
+          <p>
+            At InstiBuzz, our commitment extends beyond the mere creation of the
+            final product; we deeply value the entire journey from
+            conceptualization to delivery, ensuring excellence in every step.
+          </p>
+        </div>
+        <div className="services-container">
+          <img
+            className="services-decorative-element services-decorative-element-1"
+            src={decorativeElement}
+            alt=""
+          />
+          <img
+            className="services-decorative-element services-decorative-element-2"
+            src={decorativeElement}
+            alt=""
+          />
+          <div className="services-section services-manufacturing">
+            <img src={manufactureImg} alt="" />
+            <div className="services-section-content">
+              <h4>MANUFACTURING</h4>
               <p>
                 Starting with the first phase, i.e. Manufacturing, we uphold our
                 unwavering dedication to quality. We meticulously source
@@ -69,27 +154,17 @@ function OurServices() {
                 efficient and seamless manufacturing processes, we breathe life
                 into our captivating taglines and relatable contexts,
                 transforming them into tangible products that resonate with our
-                customers. For us, a piece of clothing is more than just fabric;
-                it's a reflection of our commitment to quality and customer
-                happiness. We prioritize affordability every step of the way,
-                guaranteeing prompt delivery of our tees. It isn't solely about
-                our products; it's about the many customers who trust our
-                production methods.
+                customers. For us, a piece of clothing is a reflection of our
+                commitment to quality and customer happiness. We prioritize
+                affordability every step of the way, guaranteeing prompt
+                delivery of our tees. It isn't solely about our products; it's
+                about the many customers who trust our production methods.
               </p>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="services-our-service service-design">
-        <hr class="services-divider" />
-        {/* <h3>DESIGN</h3> */}
-        <h2 id="services-design">Design</h2>
-        <div class="services-our-service-container">
-          <div class="services-our-service-image-container">
-            <img src={designImg} alt="Picture depicting the creation of design " />
-          </div>
-          <div class="services-our-service-content">
-            <div class="services-our-service-text">
+          <div className="services-section services-design">
+            <div className="services-section-content">
+              <h4>DESIGN</h4>
               <p>
                 The second aspect is Design. At InstiBuzz, our products go
                 beyond mere fashion - they embody the vibrant essence of college
@@ -98,25 +173,18 @@ function OurServices() {
                 fashion trends. Moreover, we extend our design services to
                 various campus organizations such as clubs, societies, and event
                 committees. By understanding their unique visions and themes, we
-                tailor-make t-shirts that perfectly align with their identity
-                and purpose. By infusing stylish aesthetics with the essence of
-                campus experiences, our t-shirts serve as wearable expressions
-                of student life.
+                tailor-make merchandise that perfectly aligns with their
+                identity and purpose. By infusing stylish aesthetics with the
+                essence of campus experiences, our t-shirts serve as wearable
+                expressions of student life.
               </p>
             </div>
+            <img src={designImg} alt="" />
           </div>
-        </div>
-      </div>
-      <div class="services-our-service service-sales">
-        <hr class="services-divider" />
-        {/* <h3>SALES</h3> */}
-        <h2 id="services-sales">Sales</h2>
-        <div class="services-our-service-container">
-          <div class="services-our-service-image-container">
-            <img src={salesImg} alt="Clipart depicting progress and growth" />
-          </div>
-          <div class="services-our-service-content">
-            <div class="services-our-service-text">
+          <div className="services-section services-sales">
+            <img src={salesImg} alt="" />
+            <div className="services-section-content">
+              <h4>SALES</h4>
               <p>
                 Next is the Sales. Our website is a dynamic platform that
                 captures the essence of college life. By seamlessly integrating
@@ -132,18 +200,9 @@ function OurServices() {
               </p>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="services-our-service service-visibility">
-        <hr class="services-divider" />
-        {/* <h3>DESIGN</h3> */}
-        <h2 id="services-visibility">Visibility</h2>
-        <div class="services-our-service-container">
-          <div class="services-our-service-image-container">
-            <img src={visibilityImg} alt="Clipart depicting the use of social media to reach out to a large number of audience" />
-          </div>
-          <div class="services-our-service-content">
-            <div class="services-our-service-text">
+          <div className="services-section services-design">
+            <div className="services-section-content">
+              <h4>VISIBILITY</h4>
               <p>
                 Lastly comes Visibility. We actively support Insti clubs and
                 societies by helping them market their events. This involves
@@ -154,14 +213,291 @@ function OurServices() {
                 expanding their outreach within our communities.
               </p>
             </div>
+            <img src={visibilityImg} alt="" />
           </div>
+          <div className="services-btn">
+            <button onClick={() => setShowServicesPopup(true)}>
+              GET OUR SERVICES
+            </button>
+          </div>
+          {showServicesPopup && (
+            <div className="services-popup">
+              <div className="services-popup-close-btn">
+                <IconButton onClick={() => setShowServicesPopup(false)}>
+                  <CloseIcon />
+                </IconButton>
+              </div>
+              <h3>Get Our Services</h3>
+              <div className="our-services-form">
+                <div class="service-input-parameter">
+                  <label for="name">Name</label> <br />
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Name"
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                  />
+                </div>
+                <div class="service-input-parameter">
+                  <label for="ph-number">Contact number</label> <br />
+                  <input
+                    type="tel"
+                    id="ph-number"
+                    name="ph-number"
+                    placeholder="Contact Number"
+                    onChange={(e) => setNumber(e.target.value)}
+                    required
+                  />
+                </div>
+                <div class="service-input-parameter">
+                  <label for="email-id">Email</label> <br />
+                  <input
+                    type="email"
+                    id="email-id"
+                    name="email-id"
+                    placeholder="instibuzziitm@gmail.com"
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+                <div class="service-checkbox">
+                  <p>Services needed</p>
+                  <div class="service-services-input">
+                    <div>
+                      <input
+                        type="checkbox"
+                        id="manufacturing"
+                        name="service"
+                        value="manufacturing"
+                        onChange={handleChange}
+                      />
+                      <label for="service">Manufacturing</label> <br />
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        id="design"
+                        name="service"
+                        value="design"
+                        onChange={handleChange}
+                      />
+                      <label for="service">Design</label> <br />
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        id="sales"
+                        name="service"
+                        value="sales"
+                        onChange={handleChange}
+                      />
+                      <label for="service">Sales</label> <br />
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        id="visibility"
+                        name="service"
+                        value="visibility"
+                        onChange={handleChange}
+                      />
+                      <label for="service">Visibility</label> <br />
+                    </div>
+                  </div>
+                </div>
+                <div class="service-input-parameter">
+                  <label for="requirement">Message</label> <br />
+                  <textarea
+                    name="requirement"
+                    id="requirement"
+                    rows="3"
+                    placeholder="Type your message here"
+                    onChange={(e) => setComment(e.target.value)}
+                    required
+                  ></textarea>
+                </div>
+                <div className="services-btn">
+                  <button onClick={TicketToast}>SUBMIT</button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
-      <div class="services-contact-btn-container">
-        <button className="contact-btn" onClick={() => {navigate('/ticket')}}>Contact Us</button>
+      <div className="services-mobile-container">
+        <div className="services-title">
+          <h1>Our Services</h1>
+          <p>
+            At InstiBuzz, our commitment extends beyond the mere creation of the
+            final product; we deeply value the entire journey from
+            conceptualization to delivery, ensuring excellence in every step.
+          </p>
+        </div>
+        <div className="services-container">
+          <img
+            className="services-decorative-element services-decorative-element-1"
+            src={decorativeElement}
+            alt=""
+          />
+          <img
+            className="services-decorative-element services-decorative-element-2"
+            src={decorativeElement}
+            alt=""
+          />
+          <div className="services-section">
+            <h4>MANUFACTURING</h4>
+            <p>
+              In the Manufacturing phase, we source high-quality fabrics from
+              Tirupur and ensure efficient production, prioritizing
+              affordability, quality, and prompt delivery to maintain customer
+              trust and satisfaction.
+            </p>
+            <img src={manufactureMobileImg} alt="" />
+          </div>
+          <div className="services-section">
+            <h4>DESIGN</h4>
+            <p>
+              At InstiBuzz, our designs capture the vibrant essence of college
+              life, blending modern trends with campus spirit, and offering
+              custom t-shirts for campus organizations to reflect their unique
+              identities and experiences.
+            </p>
+            <img src={designMobileImg} alt="" />
+          </div>
+          <div className="services-section">
+            <h4>SALES</h4>
+            <p>
+              Our website is a dynamic platform where college clubs and
+              organizations can showcase and sell their tees year-round,
+              fostering collaboration and capturing the vibrant essence of
+              campus life.
+            </p>
+            <img src={salesMobileImg} alt="" />
+          </div>
+          <div className="services-section">
+            <h4>VISIBILITY</h4>
+            <p>
+              We enhance the visibility of insti clubs and societies by
+              marketing their events on our website and social media, thereby
+              expanding their outreach and engagement within the campus
+              community.
+            </p>
+            <img src={visibilityMobileImg} alt="" />
+          </div>
+          <div className="services-btn">
+            <button onClick={() => setShowServicesPopup(true)}>
+              GET OUR SERVICES
+            </button>
+          </div>
+          {showServicesPopup && (
+            <div className="services-popup">
+              <div className="services-popup-close-btn">
+                <IconButton onClick={() => setShowServicesPopup(false)}>
+                  <CloseIcon />
+                </IconButton>
+              </div>
+              <h3>Get Our Services</h3>
+              <div className="our-services-form">
+                <div class="service-input-parameter">
+                  <label for="name">Name</label> <br />
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Name"
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                  />
+                </div>
+                <div class="service-input-parameter">
+                  <label for="ph-number">Contact number</label> <br />
+                  <input
+                    type="tel"
+                    id="ph-number"
+                    name="ph-number"
+                    placeholder="Contact Number"
+                    onChange={(e) => setNumber(e.target.value)}
+                    required
+                  />
+                </div>
+                <div class="service-input-parameter">
+                  <label for="email-id">Email</label> <br />
+                  <input
+                    type="email"
+                    id="email-id"
+                    name="email-id"
+                    placeholder="instibuzziitm@gmail.com"
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+                <div class="service-checkbox">
+                  <p>Services needed</p>
+                  <div class="service-services-input">
+                    <div>
+                      <input
+                        type="checkbox"
+                        id="manufacturing"
+                        name="service"
+                        value="manufacturing"
+                        onChange={handleChange}
+                      />
+                      <label for="service">Manufacturing</label> <br />
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        id="design"
+                        name="service"
+                        value="design"
+                        onChange={handleChange}
+                      />
+                      <label for="service">Design</label> <br />
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        id="sales"
+                        name="service"
+                        value="sales"
+                        onChange={handleChange}
+                      />
+                      <label for="service">Sales</label> <br />
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        id="visibility"
+                        name="service"
+                        value="visibility"
+                        onChange={handleChange}
+                      />
+                      <label for="service">Visibility</label> <br />
+                    </div>
+                  </div>
+                </div>
+                <div class="service-input-parameter">
+                  <label for="requirement">Message</label> <br />
+                  <textarea
+                    name="requirement"
+                    id="requirement"
+                    rows="3"
+                    placeholder="Type your message here"
+                    onChange={(e) => setComment(e.target.value)}
+                    required
+                  ></textarea>
+                </div>
+                <div className="services-btn">
+                  <button onClick={TicketToast}>SUBMIT</button>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
-  </>
+    </>
   );
 }
 
