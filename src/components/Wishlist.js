@@ -5,6 +5,8 @@ import LoadingPage from "./LoadingPage";
 import CloseIcon from "@mui/icons-material/Close";
 import { isExpired, decodeToken } from "react-jwt";
 import { IconButton } from "@mui/material";
+import emptyWishlistIllustration from "../assets/Illustrations/No items in wishlist.png";
+import IllustrationPage from "./IllustrationPage";
 
 function Wishlist() {
     const [wishlistedProducts, setWishlistedProducts] = useState([]);
@@ -166,19 +168,26 @@ function Wishlist() {
 
     return (
         <div>
-            {loading ? <LoadingPage /> :
-                <div class="wishlist-main-container">
-                    <h1>Wishlist</h1>
-                    {
-                        (wishlistedProducts.length != 0)
-                            ?
+            {loading ? <LoadingPage /> : <>
+                {
+                    (wishlistedProducts.length != 0)
+                        ?
+                        <div className="wishlist-main-container">
+                            <h1>Wishlist</h1>
                             <div className="shop-products-display">
                                 {wishlistedProducts.map(e)}
                             </div>
-                            :
-                            <div><h2>There are no items in your wishlist...</h2></div>
-                    }
-                </div>
+                        </div>
+                        :
+                        <IllustrationPage
+                            heading="Your Wishlist Awaits!"
+                            subheading="Time to Add Some Wishes"
+                            img={emptyWishlistIllustration}
+                            btnText="SHOP"
+                            btnNavigate="/shop"
+                        />
+                }
+            </>
             }
         </div>
     );

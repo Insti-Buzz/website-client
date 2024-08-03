@@ -1,34 +1,61 @@
-.exchange-title {
-    height: max(25vw, 240px);
+.exchange-policy-title {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(255, 226, 128, 1);
+    padding-top: 20px;
 }
 
-.exchange-title h1 {
-    font-size: max(3.854125vw, 42px);
-    font-weight: 300;
+.exchange-policy-title h1 {
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    margin-bottom: 0;
+    font-size: max(2.36vw, 34px);
+    font-weight: 600;
 }
 
-.exchange-main-container {
-    padding: 5vw 15vw;
+.exchange-policy-main-container {
+    padding: 40px 11.6vw;
 }
 
-.exchange-container {
+.exchange-policy-container {
     margin-bottom: 3.21vw;
 }
 
-.exchange-container h2 {
-    font-size: 2.65625vw;
+.exchange-policy-container h2 {
+    font-size: max(1.67vw, 24px);
+    font-family: "Poppins", sans-serif;
     margin: 0;
-    margin-bottom: 1.56vw;
-    font-weight: 300;
+    margin-bottom: 0.6vw;
+    font-weight: 600;
 }
 
-.exchange-container p {
+.exchange-policy-container p {
     font-size: 16px;
     margin: 0;
-    line-height: 1.58;
-    font-weight: 200;
+    color: #555555;
+    line-height: 1.35;
+    font-weight: 400;
+}
+
+@media (max-width: 600px) {
+    .exchange-policy-title {
+        padding-top: 10px;
+    }
+
+    .exchange-policy-title h1 {
+        font-size: 24px;
+    }
+
+    .exchange-policy-main-container {
+        padding: 20px;
+    }
+
+    .exchange-policy-container p {
+        font-size: 14px;
+    }
+
+    .exchange-policy-container h2 {
+        font-size: 18px;
+        font-weight: 500;
+    }
 }

@@ -1,18 +1,20 @@
 .shipping-title {
-    height: max(25vw, 240px);
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(255, 226, 128, 1);
+    padding-top: 20px;
 }
 
 .shipping-title h1 {
-    font-size: max(3.854125vw, 42px);
-    font-weight: 400;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    margin-bottom: 0;
+    font-size: max(2.36vw, 34px);
+    font-weight: 600;
 }
 
 .shipping-main-container {
-    padding: 5vw 15vw;
+    padding: 40px 11.6vw;
 }
 
 .shipping-container {
@@ -20,15 +22,40 @@
 }
 
 .shipping-container h2 {
-    font-size: 2.65625vw;
+    font-size: max(1.67vw, 24px);
+    font-family: "Poppins", sans-serif;
     margin: 0;
-    margin-bottom: 1.56vw;
-    font-weight: 100;
+    margin-bottom: 0.6vw;
+    font-weight: 600;
 }
 
 .shipping-container p {
     font-size: 16px;
     margin: 0;
-    line-height: 1.58;
-    font-weight: 200;
+    color: #555555;
+    line-height: 1.35;
+    font-weight: 400;
+}
+
+@media (max-width: 600px) {
+    .shipping-title {
+        padding-top: 10px;
+    }
+
+    .shipping-title h1 {
+        font-size: 24px;
+    }
+
+    .shipping-main-container {
+        padding: 20px;
+    }
+
+    .shipping-container p {
+        font-size: 14px;
+    }
+
+    .shipping-container h2 {
+        font-size: 18px;
+        font-weight: 500;
+    }
 }

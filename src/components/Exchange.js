@@ -4,11 +4,11 @@ import "../css/Exchange.css";
 function Exchange() {
   return (
     <div>
-      <div class="exchange-title">
+      <div class="exchange-policy-title">
         <h1>Exchange Policy</h1>
       </div>
-      <div class="exchange-main-container">
-        <div class="exchange-container">
+      <div class="exchange-policy-main-container">
+        <div class="exchange-policy-container">
           <p>
             InstiBuzz Exchange Policy allows you to exchange your products
             purchased from InstiBuzz for valid reasons within 10 days from 

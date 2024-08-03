@@ -9,6 +9,7 @@ import LoadingPage from "./LoadingPage";
 import MyOrders from './MyOrders.js';
 
 import { isExpired, decodeToken } from "react-jwt";
+import IllustrationPage from "./IllustrationPage.js";
 
 function Cart() {
     const [products, setProducts] = React.useState([]);
@@ -793,14 +794,13 @@ function Cart() {
                                 )} */}
                             </div>
                             :
-                            <div class="checkout-empty-main-container">
-                                <div className="checkout-empty-container">
-                                    <h2>Oops! Your Cart is Empty!</h2>
-                                    <p>Time to Go Shopping</p>
-                                    <img src={emptyCartIllustration} alt="" />
-                                    <button onClick={() => { navigate("/shop") }}>SHOP</button>
-                                </div>
-                            </div>
+                            <IllustrationPage
+                                heading="Oops! Your Cart is Empty"
+                                subheading="Time to Go Shopping"
+                                btnNavigate="/shop"
+                                btnText="SHOP"
+                                img={emptyCartIllustration}
+                            />
                         }
                     </div>
             }

@@ -1,19 +1,20 @@
 .terms-title {
-    height: max(25vw, 240px);
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(255, 226, 128, 1);
+    padding-top: 20px;
 }
 
 .terms-title h1 {
     text-align: center;
-    font-size: max(3.854125vw, 42px);
-    font-weight: 300;
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    font-size: max(2.36vw, 34px);
+    font-weight: 600;
 }
 
 .terms-main-container {
-    padding: 5vw 15vw;
+    padding: 40px 11.6vw;
 }
 
 .terms-container {
@@ -21,15 +22,40 @@
 }
 
 .terms-container h2 {
-    font-size: max(2.1vw, 24px);
+    font-size: max(1.67vw, 24px);
+    font-family: "Poppins", sans-serif;
     margin: 0;
     margin-bottom: 0.6vw;
-    font-weight: 300;
+    font-weight: 600;
 }
 
 .terms-container p {
     font-size: 16px;
     margin: 0;
-    line-height: 1.58;
-    font-weight: 200;
+    color: #555555;
+    line-height: 1.35;
+    font-weight: 400;
+}
+
+@media (max-width: 600px) {
+    .terms-title {
+        padding-top: 10px;
+    }
+
+    .terms-title h1 {
+        font-size: 24px;
+    }
+
+    .terms-main-container {
+        padding: 20px;
+    }
+
+    .terms-container p {
+        font-size: 14px;
+    }
+
+    .terms-container h2 {
+        font-size: 18px;
+        font-weight: 500;
+    }
 }
