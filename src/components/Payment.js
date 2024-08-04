@@ -173,6 +173,12 @@ function Payment() {
         localStorage.setItem('userEmail', email)
         localStorage.setItem('totalAmount', amount)
         localStorage.setItem('deliveryMethod', deliveryMethod)
+        localStorage.setItem('hostelAddress', hostel)
+        localStorage.setItem('address1', address1)
+        localStorage.setItem('address2', address2)
+        localStorage.setItem('pinCode', pincode)
+        localStorage.setItem('city', city)
+        localStorage.setItem('state', state)
         const order = await response.json();
         console.log(order);
         window.location.href = order.link

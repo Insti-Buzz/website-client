@@ -13,6 +13,12 @@ function PaymentValid() {
         const email=localStorage.getItem('userEmail')
         const amount=localStorage.getItem('totalAmount')
         const deliveryMethod=localStorage.getItem('deliveryMethod')
+        const hostel = localStorage.getItem('hostelAddress')
+        const address1 = localStorage.getItem('address1')
+        const address2 = localStorage.getItem('address2')
+        const pinCode = localStorage.getItem('pinCode')
+        const city = localStorage.getItem('city')
+        const state = localStorage.getItem('state')
         const id=params.id
         const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/payment/order/validate`, {
 
@@ -21,7 +27,13 @@ function PaymentValid() {
                 id:id,
                 email,
                 amount,
-                deliveryMethod
+                deliveryMethod,
+                hostel,
+                address1,
+                address2,
+                city,
+                state,
+                pinCode
             }),
             headers: {
                 "Content-Type": "application/json",
