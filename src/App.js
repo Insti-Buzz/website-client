@@ -37,6 +37,7 @@ import ExchangeProduct from "./components/ExchangeProduct.js";
 import ForgotPassword from "./components/ForgotPassword.js";
 import EnterOTP from "./components/EnterOTP.js";
 import ChangePassword from "./components/ChangePassword.js";
+import IllustrationPage from "./components/IllustrationPage.js";
 
 function App() {
 
@@ -142,7 +143,8 @@ function App() {
             <Route path="my-addresses" element={<MyAddresses userDetails={userDetails} />} />
             {/* <Route path="my-orders/exchange-product/:id" element={<ExchangeProduct userDetails={userDetails} /> } /> */}
           </Route>
-          <Route path="*" element={<Navigate to='/' replace/>}></Route>
+          {/* <Route path="*" element={<Navigate to='/' replace/>}></Route> */}
+          <Route path="*" element={<IllustrationPage heading="Oops!" subheading="You Are Lost" img={"sasa"} btnText="HOME" btnNavigate="/"/>}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
