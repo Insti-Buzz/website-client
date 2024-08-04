@@ -161,7 +161,7 @@ function MyOrders({ userDetails}) {
                 </div>
             <div className="available-action block"
               style={((!item1.isCancellable && !item1.isDelivered) || (!item1.isExchangable && item1.isDelivered)) ?
-                        { justifyContent: 'start', fontSize: '14px' } : {}}>
+                        { justifyContent: 'start', fontSize: '13px' } : {}}>
                             {
                             item.transactionId?
                     <div style={{fontFamily:'lato',cursor:'default'}}>Transaction Id: {item.transactionId}</div>

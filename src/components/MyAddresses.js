@@ -2,7 +2,9 @@ import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import '../css/MyAddresses.css'
 
-function MyAddresses() {
+function MyAddresses({ userDetails }) {
+    
+    console.log(userDetails)
 
     const [addresses, setAddresses] = React.useState([])
     const [loading, setLoading] = React.useState()
@@ -69,16 +71,34 @@ function MyAddresses() {
 
     function e(item,index){
         return(
-            <div className='my-addresses-card'>
-                <p>{item.address1}</p>
-                <p> {item.address2}</p>
-                <p>{item.pinCode}</p>
-                <div>
-                <p> {item.city} , {item.state}</p>
-                
+            <>
+            <div className="my-address-card">
+                <label>
+                    <div className="my-address-card-content">
+                        <div className="my-address-card-name">
+                            <h3>{userDetails.name}</h3>
+                        </div>
+                        <div className="my-address-card-address">
+                            <p>{item.address1}, {item.address2},</p>
+                            <p>{item.city}, {item.state}, Pin Code-{item.pinCode}</p>
+                        </div>
+                        <div className="my-address-card-phone">
+                            <p>Mobile: {userDetails.phone}</p>
+                        </div>
+                    </div>
+                    {/* <input type="radio" value={item.id} checked={selectedAddressId == item.id} onClick={setAddressField} /> */}
+                </label>
+                <div className="my-address-card-buttons">
+                    <div className="my-address-card-remove" >
+                        <h3>Remove</h3>
+                    </div>
+                    <div className="my-address-card-edit" >
+                        <h3>Edit</h3>
+                    </div>
                 </div>
-                <p> {item.phoneNumber}</p>
             </div>
+
+        </>
         )
     }
 

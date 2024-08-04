@@ -139,7 +139,7 @@ function App() {
             <Route path="" element={<Profile userDetails={userDetails} />} />
             <Route path="my-orders" element={<MyOrders />} />
             <Route path="my-orders/:id" element={<IndividualOrder userDetails={userDetails} />} />
-            <Route path="my-addresses" element={<MyAddresses />} />
+            <Route path="my-addresses" element={<MyAddresses userDetails={userDetails} />} />
             {/* <Route path="my-orders/exchange-product/:id" element={<ExchangeProduct userDetails={userDetails} /> } /> */}
           </Route>
           <Route path="*" element={<Navigate to='/' replace/>}></Route>
