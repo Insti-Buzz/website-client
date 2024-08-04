@@ -84,7 +84,7 @@ function MainContainer({profileProps}) {
 
 
     const { pathname } = useLocation();
-    const showFooter = !(pathname==" " || pathname=="/change-password" || pathname=="/enter-otp" || pathname === "/forgot-password" || pathname === '/signup' || pathname === '/login' || pathname === '/cart' || pathname === '/address' || pathname === '/ticket' || pathname === '/collabForm' ||  pathname === '/wishlist');
+    const showFooter = !(pathname=="/payment" || pathname=="/change-password" || pathname=="/enter-otp" || pathname === "/forgot-password" || pathname === '/signup' || pathname === '/login' || pathname === '/cart' || pathname === '/address' || pathname === '/ticket' || pathname === '/collabForm' ||  pathname === '/wishlist');
     const showNavbar = !(pathname=='/cart' || pathname=='/address' || pathname=='/payment');
     return (
         <div className='all-container'>

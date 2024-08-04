@@ -19,7 +19,7 @@ function Payment() {
     const [pinCode, setPinCode] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
-    const [hostel, setHostel] = useState();
+    const [hostel, setHostel] = useState('');
     const [name, setName] = React.useState("");
     const [phone, setPhone] = React.useState("");
     const [paymentMethod, setPaymentMethod] = useState('upi');
@@ -45,6 +45,7 @@ function Payment() {
             }
 
             console.log(location.state)
+            // console.log(hostel)
 
             switch (location.state.deliveryMethod) {
                 case 'pickup':

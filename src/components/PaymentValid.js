@@ -11,7 +11,7 @@ function PaymentValid() {
     const paymentValidator = async (e) => {
         const token = localStorage.getItem('token')
         const email=localStorage.getItem('userEmail')
-        const totalAmount=localStorage.getItem('totalAmount')
+        const amount=localStorage.getItem('totalAmount')
         const deliveryMethod=localStorage.getItem('deliveryMethod')
         const id=params.id
         const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/payment/order/validate`, {
@@ -20,7 +20,7 @@ function PaymentValid() {
             body: JSON.stringify({
                 id:id,
                 email,
-                totalAmount,
+                amount,
                 deliveryMethod
             }),
             headers: {
