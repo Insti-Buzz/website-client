@@ -89,7 +89,7 @@ function Login() {
             <h3>Login</h3>
             <div className="forgot-password-form">
               <label>Enter your Mail</label>
-              <input className="forgot-password-input change-password-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="instibuzziitm@gmail.com" required />
+              <input className="forgot-password-input change-password-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="example@instibuzz.com" required />
               <label>Enter password</label>
               <div className="login-password-input">
                 <input type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" onKeyDown={(event) => { if (event.key == "Enter") LoginToast() }} required />

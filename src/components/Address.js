@@ -3,7 +3,7 @@ import "../css/Address.css";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { IconButton } from "@mui/material";
-import InstiBuzzLogo from '../assets/Horizontal Logo Transparent.png';
+import InstiBuzzLogo from '../assets/973300f3-c585-48d9-9e8c-601a3ae24121.png';
 import { isEqual } from "lodash";
 import CloseIcon from "@mui/icons-material/Close";
 import LoadingPage from "./LoadingPage";
@@ -643,6 +643,7 @@ function Address() {
         if (email) {
             const isValidPin = await isValidPinCode();
             if (isValidPin) {
+                setLoading(true);
                 let result = await fetch(
                     `${process.env.REACT_APP_server_url}/api/v1/auth/edit-user-address`,
                     {
@@ -655,7 +656,7 @@ function Address() {
                     },
                 );
                 result = await result.json();
-                console.log(result);
+                window.location.reload()
             } else {
                 alert("Enter a valid pin code");
             }
@@ -732,6 +733,7 @@ function Address() {
                 loading ? <LoadingPage /> :
                     <div>
                         <div className="checkout-navbar">
+                            <img src={InstiBuzzLogo} onClick={() => navigate("/")} />
                             <div className="checkout-navbar-content">
                                 <p style={{ color: "#00C437" }}>CART</p>
                                 <div style={{ borderTop: "2px dashed #00C437" }} className="checkout-navbar-line checkout-navbar-line-1"></div>
@@ -798,56 +800,6 @@ function Address() {
                                         </button>
                                     </div>
 
-                                    {showAddAddress && <div class="address-form cart-popup">
-                                        <div className="cart-popup-close-btn">
-                                            <IconButton onClick={() => closeAddress()}>
-                                                <CloseIcon />
-                                            </IconButton>
-                                        </div>
-                                        <h3>ADDRESS</h3>
-                                        <div className="address-form-form">
-                                            <label>Address line 1</label>
-                                            <input id={error && !address1 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 1" value={address1} onChange={(e) => setAddress1(e.target.value)} required></input>
-                                            <label>Address line 2</label>
-                                            <input id={error && !address2 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 2" value={address2} onChange={(e) => setAddress2(e.target.value)} required></input>
-                                            <label>Pin code</label>
-                                            <input id={error && !pinCode && "input-error"} autoComplete="disabled" type="text" placeholder="Pin Code" value={pinCode} onBlur={isValidPinCode} onChange={(e) => setPinCode(e.target.value)} required></input>
-                                            <label>City</label>
-                                            <input id={error && !city && "input-error"} autoComplete="disabled" type="text" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} required></input>
-                                            <label>State</label>
-                                            <input id={error && !state && "input-error"} autoComplete="disabled" type="text" placeholder="State" value={state} onChange={(e) => setState(e.target.value)} required></input>
-                                            <button onClick={saveAddress}>Save Address</button>
-                                            {/* <button class="cart-order-btn" onClick={toPaymentPage}>
-                                        DELIVER TO THIS ADDRESS
-                                    </button> */}
-                                        </div>
-                                    </div>}
-                                    {showEditAddress && <div class="address-form cart-popup">
-                                        <div className="cart-popup-close-btn">
-                                            <IconButton onClick={closeEditPopup}>
-                                                <CloseIcon />
-                                            </IconButton>
-                                        </div>
-                                        <h3>EDIT ADDRESS</h3>
-                                        {/* <form> */}
-                                        <div className="address-form-form">
-                                            <label>Address line 1</label>
-                                            <input id={error && !address1 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 1" value={address1} onChange={(e) => setAddress1(e.target.value)} required></input>
-                                            <label>Address line 2</label>
-                                            <input id={error && !address2 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 2" value={address2} onChange={(e) => setAddress2(e.target.value)} required></input>
-                                            <label>Pin code</label>
-                                            <input id={error && !pinCode && "input-error"} autoComplete="disabled" type="text" placeholder="Pin Code" value={pinCode} onBlur={isValidPinCode} onChange={(e) => setPinCode(e.target.value)} required></input>
-                                            <label>City</label>
-                                            <input id={error && !city && "input-error"} autoComplete="disabled" type="text" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} required></input>
-                                            <label>State</label>
-                                            <input id={error && !state && "input-error"} autoComplete="disabled" type="text" placeholder="State" value={state} onChange={(e) => setState(e.target.value)} required></input>
-                                            <button onClick={editAddress}>Save Address</button>
-                                            {/* <button class="cart-order-btn" onClick={toPaymentPage}>
-                                        DELIVER TO THIS ADDRESS
-                                    </button> */}
-                                            {/* </form> */}
-                                        </div>
-                                    </div>}
                                     {
                                         // showPayment && (
                                         //     <div className="cart-popup">
@@ -868,6 +820,65 @@ function Address() {
                                 </div>
                             </div>
                         </div>
+                        {showAddAddress && (
+                            <div className="cart-popup-background">
+                                <div class="address-form cart-popup">
+                                    <div className="cart-popup-close-btn">
+                                        <IconButton onClick={() => closeAddress()}>
+                                            <CloseIcon />
+                                        </IconButton>
+                                    </div>
+                                    <h3>ADDRESS</h3>
+                                    <div className="address-form-form">
+                                        <label>Address line 1</label>
+                                        <input id={error && !address1 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 1" value={address1} onChange={(e) => setAddress1(e.target.value)} required></input>
+                                        <label>Address line 2</label>
+                                        <input id={error && !address2 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 2" value={address2} onChange={(e) => setAddress2(e.target.value)} required></input>
+                                        <label>Pin code</label>
+                                        <input id={error && !pinCode && "input-error"} autoComplete="disabled" type="text" placeholder="Pin Code" value={pinCode} onBlur={isValidPinCode} onChange={(e) => setPinCode(e.target.value)} required></input>
+                                        <label>City</label>
+                                        <input id={error && !city && "input-error"} autoComplete="disabled" type="text" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} required></input>
+                                        <label>State</label>
+                                        <input id={error && !state && "input-error"} autoComplete="disabled" type="text" placeholder="State" value={state} onChange={(e) => setState(e.target.value)} required></input>
+                                        <button onClick={saveAddress}>Save Address</button>
+                                        {/* <button class="cart-order-btn" onClick={toPaymentPage}>
+                                            DELIVER TO THIS ADDRESS
+                                        </button> */}
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                        {showEditAddress && (
+                            <div className="cart-popup-background">
+
+                                <div class="address-form cart-popup">
+                                    <div className="cart-popup-close-btn">
+                                        <IconButton onClick={closeEditPopup}>
+                                            <CloseIcon />
+                                        </IconButton>
+                                    </div>
+                                    <h3>EDIT ADDRESS</h3>
+                                    {/* <form> */}
+                                    <div className="address-form-form">
+                                        <label>Address line 1</label>
+                                        <input id={error && !address1 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 1" value={address1} onChange={(e) => setAddress1(e.target.value)} required></input>
+                                        <label>Address line 2</label>
+                                        <input id={error && !address2 && "input-error"} autoComplete="disabled" type="text" placeholder="Address line 2" value={address2} onChange={(e) => setAddress2(e.target.value)} required></input>
+                                        <label>Pin code</label>
+                                        <input id={error && !pinCode && "input-error"} autoComplete="disabled" type="text" placeholder="Pin Code" value={pinCode} onBlur={isValidPinCode} onChange={(e) => setPinCode(e.target.value)} required></input>
+                                        <label>City</label>
+                                        <input id={error && !city && "input-error"} autoComplete="disabled" type="text" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} required></input>
+                                        <label>State</label>
+                                        <input id={error && !state && "input-error"} autoComplete="disabled" type="text" placeholder="State" value={state} onChange={(e) => setState(e.target.value)} required></input>
+                                        <button onClick={editAddress}>Save Address</button>
+                                        {/* <button class="cart-order-btn" onClick={toPaymentPage}>
+                                            DELIVER TO THIS ADDRESS
+                                        </button> */}
+                                        {/* </form> */}
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </div>
             }
         </div>

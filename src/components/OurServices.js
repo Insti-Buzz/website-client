@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/OurServices.css";
+import "../css/Cart.css";
 import manufactureImg from "../assets/Our Services/manufacturing.svg";
 import designImg from "../assets/Our Services/design.svg";
 import salesImg from "../assets/Our Services/sales.svg";
@@ -221,6 +222,7 @@ function OurServices() {
             </button>
           </div>
           {showServicesPopup && (
+            <div className="services-popup-background">
             <div className="services-popup">
               <div className="services-popup-close-btn">
                 <IconButton onClick={() => setShowServicesPopup(false)}>
@@ -323,6 +325,7 @@ function OurServices() {
                 </div>
               </div>
             </div>
+            </div>
           )}
         </div>
       </div>
@@ -392,105 +395,107 @@ function OurServices() {
             </button>
           </div>
           {showServicesPopup && (
-            <div className="services-popup">
-              <div className="services-popup-close-btn">
-                <IconButton onClick={() => setShowServicesPopup(false)}>
-                  <CloseIcon />
-                </IconButton>
-              </div>
-              <h3>Get Our Services</h3>
-              <div className="our-services-form">
-                <div class="service-input-parameter">
-                  <label for="name">Name</label> <br />
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Name"
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                  />
+            <div className="services-popup-background">
+              <div className="services-popup">
+                <div className="services-popup-close-btn">
+                  <IconButton onClick={() => setShowServicesPopup(false)}>
+                    <CloseIcon />
+                  </IconButton>
                 </div>
-                <div class="service-input-parameter">
-                  <label for="ph-number">Contact number</label> <br />
-                  <input
-                    type="tel"
-                    id="ph-number"
-                    name="ph-number"
-                    placeholder="Contact Number"
-                    onChange={(e) => setNumber(e.target.value)}
-                    required
-                  />
-                </div>
-                <div class="service-input-parameter">
-                  <label for="email-id">Email</label> <br />
-                  <input
-                    type="email"
-                    id="email-id"
-                    name="email-id"
-                    placeholder="instibuzziitm@gmail.com"
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </div>
-                <div class="service-checkbox">
-                  <p>Services needed</p>
-                  <div class="service-services-input">
-                    <div>
-                      <input
-                        type="checkbox"
-                        id="manufacturing"
-                        name="service"
-                        value="manufacturing"
-                        onChange={handleChange}
-                      />
-                      <label for="service">Manufacturing</label> <br />
-                    </div>
-                    <div>
-                      <input
-                        type="checkbox"
-                        id="design"
-                        name="service"
-                        value="design"
-                        onChange={handleChange}
-                      />
-                      <label for="service">Design</label> <br />
-                    </div>
-                    <div>
-                      <input
-                        type="checkbox"
-                        id="sales"
-                        name="service"
-                        value="sales"
-                        onChange={handleChange}
-                      />
-                      <label for="service">Sales</label> <br />
-                    </div>
-                    <div>
-                      <input
-                        type="checkbox"
-                        id="visibility"
-                        name="service"
-                        value="visibility"
-                        onChange={handleChange}
-                      />
-                      <label for="service">Visibility</label> <br />
+                <h3>Get Our Services</h3>
+                <div className="our-services-form">
+                  <div class="service-input-parameter">
+                    <label for="name">Name</label> <br />
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      placeholder="Name"
+                      onChange={(e) => setName(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div class="service-input-parameter">
+                    <label for="ph-number">Contact number</label> <br />
+                    <input
+                      type="tel"
+                      id="ph-number"
+                      name="ph-number"
+                      placeholder="Contact Number"
+                      onChange={(e) => setNumber(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div class="service-input-parameter">
+                    <label for="email-id">Email</label> <br />
+                    <input
+                      type="email"
+                      id="email-id"
+                      name="email-id"
+                      placeholder="instibuzziitm@gmail.com"
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div class="service-checkbox">
+                    <p>Services needed</p>
+                    <div class="service-services-input">
+                      <div>
+                        <input
+                          type="checkbox"
+                          id="manufacturing"
+                          name="service"
+                          value="manufacturing"
+                          onChange={handleChange}
+                        />
+                        <label for="service">Manufacturing</label> <br />
+                      </div>
+                      <div>
+                        <input
+                          type="checkbox"
+                          id="design"
+                          name="service"
+                          value="design"
+                          onChange={handleChange}
+                        />
+                        <label for="service">Design</label> <br />
+                      </div>
+                      <div>
+                        <input
+                          type="checkbox"
+                          id="sales"
+                          name="service"
+                          value="sales"
+                          onChange={handleChange}
+                        />
+                        <label for="service">Sales</label> <br />
+                      </div>
+                      <div>
+                        <input
+                          type="checkbox"
+                          id="visibility"
+                          name="service"
+                          value="visibility"
+                          onChange={handleChange}
+                        />
+                        <label for="service">Visibility</label> <br />
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="service-input-parameter">
-                  <label for="requirement">Message</label> <br />
-                  <textarea
-                    name="requirement"
-                    id="requirement"
-                    rows="3"
-                    placeholder="Type your message here"
-                    onChange={(e) => setComment(e.target.value)}
-                    required
-                  ></textarea>
-                </div>
-                <div className="services-btn">
-                  <button onClick={TicketToast}>SUBMIT</button>
+                  <div class="service-input-parameter">
+                    <label for="requirement">Message</label> <br />
+                    <textarea
+                      name="requirement"
+                      id="requirement"
+                      rows="3"
+                      placeholder="Type your message here"
+                      onChange={(e) => setComment(e.target.value)}
+                      required
+                    ></textarea>
+                  </div>
+                  <div className="services-btn">
+                    <button onClick={TicketToast}>SUBMIT</button>
+                  </div>
                 </div>
               </div>
             </div>

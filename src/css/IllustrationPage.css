@@ -2,6 +2,9 @@
     display: flex;
     justify-content: center;
     padding: 40px;
+    /* background-color: red; */
+    height: 88.25vh;
+    box-sizing: border-box;
 }
 
 .illustration-container {
@@ -65,5 +68,10 @@
         font-size: 14px;
         padding: 10px 0;
         width: 200px;
+    }
+}
+@media (max-width: 860px) {
+    .illustration-main-container {
+        height: 92vh;
     }
 }

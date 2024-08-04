@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import "../css/Payment.css";
 import LoadingPage from './LoadingPage';
 import { useState } from 'react';
+import InstiBuzzLogo from '../assets/973300f3-c585-48d9-9e8c-601a3ae24121.png';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 function Payment() {
@@ -195,6 +196,7 @@ function Payment() {
                 loading ? <LoadingPage /> :
                     <div>
                         <div className="checkout-navbar">
+                            <img src={InstiBuzzLogo} onClick={() => navigate("/")} />
                             <div className="checkout-navbar-content">
                                 <p style={{ color: "#00C437" }}>CART</p>
                                 <div style={{ borderTop: "2px dashed #00C437" }} className="checkout-navbar-line checkout-navbar-line-1"></div>

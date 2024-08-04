@@ -39,6 +39,8 @@ import EnterOTP from "./components/EnterOTP.js";
 import ChangePassword from "./components/ChangePassword.js";
 import IllustrationPage from "./components/IllustrationPage.js";
 
+import notFoundIllustration from "./assets/Illustrations/404 error.png";
+
 function App() {
 
   const [profileDropDownHeight, setProfileDropDownHeight] = useState({ height: '0', display: 'none', open: false });
@@ -144,7 +146,7 @@ function App() {
             {/* <Route path="my-orders/exchange-product/:id" element={<ExchangeProduct userDetails={userDetails} /> } /> */}
           </Route>
           {/* <Route path="*" element={<Navigate to='/' replace/>}></Route> */}
-          <Route path="*" element={<IllustrationPage heading="Oops!" subheading="You Are Lost" img={"sasa"} btnText="HOME" btnNavigate="/"/>}></Route>
+          <Route path="*" element={<IllustrationPage heading="Oops!" subheading="You Are Lost" img={notFoundIllustration} btnText="HOME" btnNavigate="/"/>}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

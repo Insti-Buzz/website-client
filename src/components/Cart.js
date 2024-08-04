@@ -761,22 +761,26 @@ function Cart() {
                                         </div>
                                     </div>
                                 </div>
-                                {showAddAddress && <div class="address-form cart-popup">
-                                    <div className="cart-popup-close-btn">
-                                        <IconButton onClick={() => closeAddress()}>
-                                            <CloseIcon />
-                                        </IconButton>
-                                    </div>
-                                    {
-                                        <>
-                                            <h3>HOSTEL ADDRESS</h3>
-                                            <div className="address-form-form">
-                                                <input autoComplete="disabled" type="text" placeholder="Hostel" value={hostel} onChange={(e) => setHostel(e.target.value)} required></input>
-                                                <button onClick={toPayment}>Proceed to Payment</button>
+                                {showAddAddress && (
+                                    <div className="cart-popup-background">
+                                        <div class="address-form cart-popup">
+                                            <div className="cart-popup-close-btn">
+                                                <IconButton onClick={() => closeAddress()}>
+                                                    <CloseIcon />
+                                                </IconButton>
                                             </div>
-                                        </>
-                                    }
-                                </div>}
+                                            {
+                                                <>
+                                                    <h3>HOSTEL ADDRESS</h3>
+                                                    <div className="address-form-form">
+                                                        <input autoComplete="disabled" type="text" placeholder="Hostel" value={hostel} onChange={(e) => setHostel(e.target.value)} required></input>
+                                                        <button onClick={toPayment}>Proceed to Payment</button>
+                                                    </div>
+                                                </>
+                                            }
+                                        </div>
+                                    </div>
+                                )}
 
                                 {/* {showPayment && (
                                     <div className="cart-popup">
