@@ -246,9 +246,9 @@ function Navbar({profileProps,navbarRef }) {
                         <div className="nav-intro-container">
                             
                             <div style={{ color: '#FF7F50', fontSize: '18px', marginBottom: '5px', fontWeight: 'bold' , textWrap:'nowrap' }}>
-                                WELCOME {isLogin ? localStorage.getItem('name').split(" ")[0].toUpperCase()   : "GUEST"}
+                                WELCOME {isLogin && localStorage.getItem('name') ? localStorage.getItem('name').split(" ")[0].toUpperCase()   : "GUEST"}
                             </div>
-                            {isLogin ? <span>{localStorage.getItem('phone')}</span> : <a href='/login' className='nav-intro-login-button' onClick={loginPage}>Login/Signup</a>}
+                            {isLogin && localStorage.getItem('phone') ? <span>{localStorage.getItem('phone')}</span> : <a href='/login' className='nav-intro-login-button' onClick={loginPage}>Login/Signup</a>}
 
                         </div>
                         <div className="nav-instibuzz-container">

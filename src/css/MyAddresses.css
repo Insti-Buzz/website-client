@@ -31,3 +31,90 @@
     height: 60vh;
     width: 80%;
 }
+
+.my-address-card {
+    border: 1px solid #aaaaaa;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: white;
+}
+
+.my-address-card-name h3 {
+    margin: 0;
+    font-weight: 400;
+    font-size: 24px;
+}
+
+.my-address-card-name {
+    margin-bottom: 10px;
+}
+
+.my-address-card-address {
+    margin-bottom: 20px;
+}
+
+.my-address-card-address p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    color: #555555;
+}
+
+.my-address-card-phone {
+    margin-bottom: 20px;
+}
+
+.my-address-card-phone p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    color: #555555;
+}
+
+.my-address-card label {
+    margin: 20px 30px 0 30px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.my-address-card-buttons {
+    display: flex;
+    border-top: 1px solid #aaaaaa;
+}
+
+.my-address-card-remove {
+    border-right: 1px solid #aaaaaa;
+    text-align: center;
+    flex: 1;
+    cursor: pointer;
+    padding: 14px 0;
+}
+
+.my-address-card-remove h3 {
+    color: #818181;
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.my-address-card-edit h3 {
+    color: #818181;
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.my-address-card-edit {
+    cursor: pointer;
+    flex: 1;
+    text-align: center;
+    padding: 14px 0;
+}
+
+.my-address-card input {
+    margin-top: 25px;
+    cursor: pointer;
+    align-self: start;
+    accent-color: #a6602d;
+}

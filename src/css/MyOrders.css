@@ -70,6 +70,7 @@
     flex-direction: column;
     height: 100%;
     cursor:default;
+    /* background-color: chocolate; */
 }
 
 .user-info .status-indicator-container{
@@ -348,12 +349,90 @@
 
 
 
-@media screen and (max-width:768px)
+@media screen and (max-width:560px)
 {
-    .orders-card
-    {
-        /* transform: scale(0.9); */
+    /* .order-my-order{
+        width: 100%;
+    } */
+    .container{
+        width: 100%;
+        background-color: white;
+        padding: 0;
     }
 
+    .status-text{
+        /* color: ; */
+        /* font-size: clamp(14px,2vw,18px); */
+        
+    }
+    
+}
+
+@media screen and (max-width:400px)
+{
+
+
+    .status-text{
+        /* color: ; */
+        font-size: 16px;
+    }
+
+    .status-date{
+        font-size: 10px;
+    }
+
+    .status-img-container{
+        height: 35px;
+        width: 35px;
+    }
+    .sub-block .name-style-container h2{
+        /* color: pink; */
+        font-size: 16px;
+    }
+
+    .sub-block .name-style-container p{
+        font-size: 12px;
+    }
+
+    .myorders-sm-text{
+        font-size: 10px;
+    }
+
+    .product-info .info img{
+        height: 69px;
+    }
+
+    .product-info .info .sub-block{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        height: 67px;
+    }
+    .orders-card .block{
+        padding: 6px 2px 5px 6px;
+    }
+
+    .product-info .info {
+        width: fit-content;
+        height: 100%;
+        display: flex;
+        gap: 15px;
+        align-items: center;
+    }
+
+    .orders-card {
+        border-radius: 5px;
+    }
+    .dikshant-ka-idea{
+        background-color: #cacaca;
+        margin-bottom: 10px;
+        width: 96%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+        border-radius: 8px;
+        padding: 4px;
+    }
     
 }
