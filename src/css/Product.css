@@ -255,8 +255,15 @@ body {
 }
 
 .product-btn:hover {
-    scale: 1.01;
+    background-color: #FFB800;
+    box-shadow: 0 0 4px 0 #FFB800;
 }
+
+/* .product-btn:active {
+    background-color: #FFB800;
+    box-shadow: 0 0 4px 0 #FFB800;
+    border: 1px solid #E0A100;
+} */
 
 .product-wishlist-btn {
     -webkit-border-radius: 5;

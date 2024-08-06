@@ -302,7 +302,8 @@
 }
 
 .cart-order-btn:hover {
-    scale: 1.01;
+    background-color: #FFB800;
+    box-shadow: 0 0 4px 0 #FFB800;
 }
 
 .checkout-select-delivery p {

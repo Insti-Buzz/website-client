@@ -446,5 +446,6 @@
     transition: 400ms;
   }
   .all-form-submit-button:hover{
-    scale: 1.02;
+    background-color: #FFB800;
+    box-shadow: 0 0 4px 0 #FFB800;
   }
