@@ -9,6 +9,9 @@ import CloseIcon from "@mui/icons-material/Close";
 import { isExpired, decodeToken } from "react-jwt";
 import toast from "react-hot-toast";
 import Carousel from 'react-simply-carousel';
+import securePayment from "../assets/Product/securePayment.svg"
+import genuineProduct from "../assets/Product/genuineProduct.svg"
+import easyExchange from "../assets/Product/easyExchange.svg"
 // import { IconButton } from "@mui/material";
 // import CloseIcon from "@mui/icons-material/Close";
 
@@ -69,6 +72,7 @@ const Product = () => {
   const [style, setStyle] = useState('');
   const [quantity, setQuantity] = React.useState("1");
   const [isCart, setIsCart] = React.useState();
+  const [tags, setTags] = useState([]);
   const navigate = useNavigate();
   const params = useParams();
   const [isLogin, setIsLogin] = React.useState(false);
@@ -158,6 +162,7 @@ const Product = () => {
     setDetails(result.details);
     setDescription(result.description);
     setSizesAvailable(result.sizeQuantities);
+    setTags(result.tags);
     // console.log(sizesAvailable);
   };
 
@@ -330,6 +335,14 @@ const Product = () => {
     setShowSizeUnavailable(true)
   }
 
+  const tagCard = (item, index) => {
+    return (
+      <div className="tag-card-container">
+        <p>{item}</p>
+      </div>
+    )
+  }
+
   return (
     <div>
       {
@@ -409,16 +422,17 @@ const Product = () => {
             <div className="product-product-description">
               <div className="product-product-name">
                 <h2>{name}</h2>
-                <i class={isWishlisted ? "fa fa-heart" : "fa fa-heart-o"} onClick={toggleWishlist}></i>
               </div>
               <div className="product-product-detail">
                 <p>{details}</p>
               </div>
+              <hr />
               <div className="product-product-price">
-                <h3>₹{price}</h3>
+                <h3>₹{price}.00</h3>
+                <p>MRP inclusive of all taxes</p>
               </div>
               <div className="product-product-size">
-                <p>Select Size</p>
+                <h3>Select Size</h3>
                 <a onClick={() => { setShowSizeChart(true) }}>Size Chart</a>
               </div>
               <div className="product-size-input-container">
@@ -495,7 +509,7 @@ const Product = () => {
                   <span>2XL</span>
                 </label>
               </div>
-              <div className="product-product-quantity">
+              {/* <div className="product-product-quantity">
                 <p>Quantity</p>
                 <input
                   type="number"
@@ -508,17 +522,22 @@ const Product = () => {
                     setQuantity(e.target.value);
                   }}
                 />
-              </div>
+              </div> */}
               {isLogin ? (
-                isCart ? (
-                  <button onClick={toCart} className="product-btn">
-                    Go to Cart
+                <div className="product-btns">
+                  {isCart ? (
+                    <button onClick={toCart} className="product-btn">
+                      GO TO CART
+                    </button>
+                  ) : (
+                    <button className="product-btn" disabled={isDisabled} onClick={addToCartToast}>
+                      ADD TO CART
+                    </button>
+                  )}
+                  <button onClick={toggleWishlist} className="product-wishlist-btn">
+                    <i style={{ marginRight: 10 }} class={isWishlisted ? "fa fa-heart" : "fa fa-heart-o"}></i>{isWishlisted ? "WISHLISTED" : "WISHLIST"}
                   </button>
-                ) : (
-                  <button className="product-btn" disabled={isDisabled} onClick={addToCartToast}>
-                    Add to Cart
-                  </button>
-                )
+                </div>
               ) : (
                 <>
                   <button onClick={toLogin} className="product-btn">
@@ -538,23 +557,43 @@ const Product = () => {
                 Size Not Available?
                 <a onClick={proceedSizeUnavailable}>Inform Us</a>
               </div>
+              <hr />
               <div className="product-product-details product-product-info">
-                <h4>PRODUCT DESCRIPTION</h4>
+                <h3>Product Description</h3>
                 <p>{description}</p>
+                <div className="product-product-tags">
+                  {
+                    tags.map(tagCard)
+                  }
+                </div>
               </div>
               <hr />
               <div className="product-product-details product-shipping-policy">
-                <h4>SHIPPING POLICY</h4>
+                <h3>Shipping Policy</h3>
                 <p>
-                  Your product will be delivered within 15 days of placing the order.
+                  Your product will be delivered within <span style={{ color: "#2b2b2b" }}>15 days</span> of placing the order.
                 </p>
               </div>
               <hr />
               <div className="product-product-details product-return-refund-policy">
-                <h4>EXCHANGE POLICY</h4>
-                <p>Easy exchange up to 7 days of delivery.</p>
+                <h3>Exchange Policy</h3>
+                <p>Easy exchange up to <span style={{ color: "#2b2b2b" }}>7 days</span> of delivery.</p>
               </div>
               <hr />
+              <div className="product-product-details product-product-icons">
+                <div className="product-icon">
+                  <img src={securePayment} />
+                  <p>100% SECURE <br /> PAYMENTS</p>
+                </div>
+                <div className="product-icon">
+                  <img src={easyExchange} />
+                  <p>EASY EXCHANGE & <br /> RETURNS</p>
+                </div>
+                <div className="product-icon">
+                  <img src={genuineProduct} />
+                  <p>100% GENUINE <br /> PRODUCTS</p>
+                </div>
+              </div>
             </div>
             {showSizeChart && <div className="product-size-chart">
               <div className="cart-popup-close-btn">
@@ -567,7 +606,7 @@ const Product = () => {
             </div>}
           </div>
       }
-      
+
       {showSizeUnavailable && <div class="address-form cart-popup">
         <div className="">
           <IconButton onClick={() => setShowSizeUnavailable(false)}>

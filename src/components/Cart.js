@@ -375,6 +375,7 @@ function Cart() {
         const email = localStorage.getItem(`userEmail`);
         const productId = product_id;
         console.log('called')
+        setLoading(true);
         const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/removeFromCart`, {
             method: "POST",
             body: JSON.stringify({

@@ -136,7 +136,7 @@ function App() {
           <Route path="shipping" element={<Shipping />} />
           <Route path="privacy" element={<Privacy />} />
           <Route path="ourServices" element={<OurServices />} />
-          <Route path="collab" element={<Collab />} />
+          {/* <Route path="collab" element={<Collab />} /> */}
           <Route path="collabForm" element={<CollabForm />} />
           <Route path="profile/" element={<Settings getAndStoreUserDetails={getAndStoreUserDetails} profileProps={profileProps} />} >
             <Route path="" element={<Profile userDetails={userDetails} />} />
