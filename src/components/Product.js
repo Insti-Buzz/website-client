@@ -539,11 +539,11 @@ const Product = () => {
                   </button>
                 </div>
               ) : (
-                <>
+                <div className="product-btns">
                   <button onClick={toLogin} className="product-btn">
                     Login to Proceed
                   </button>
-                </>
+                </div>
               )}
 
               {isAdmin ? (
