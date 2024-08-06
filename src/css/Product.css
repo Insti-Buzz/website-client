@@ -505,7 +505,7 @@ color: #a6602d;
     }
 }
 
-@media (min-width: 680px) and (max-width: 980px) {
+@media (min-width: 680px) and (max-width: 1110px) {
     .product-product-tags {
         display: grid;
         grid-template-columns: 1fr 1fr;
