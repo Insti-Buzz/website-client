@@ -32,6 +32,8 @@ function Cart() {
     const [showAddAddress, setShowAddAddress] = useState(false);
     const [hostel, setHostel] = useState();
     const [isDiscount, setIsDiscount] = useState(false)
+    const [isCollabProduct, setIsCollabProduct] = useState(false)
+    const [isInstibuzzProduct, setIsInstibuzzProduct] = useState(false)
 
     useEffect(() => {
         // const name = localStorage.getItem('userName')
@@ -123,7 +125,28 @@ function Cart() {
                 window.location.reload();
             } else {
                 // console.log("Fetched Successfully");
+                let isCollabProduct = false;
+                let isInstibuzzProduct = false;
                 setProducts(result.products);
+                for (let i = 0; i < result.products.length; i++) {
+                    // console.log(products[i].product.isInstibuzz)
+                    if (result.products[i].product.isInstibuzz == false) {
+                        isCollabProduct = true;
+                        setIsCollabProduct(true);
+                        setDeliveryCharges(0)
+                        setDelivery("delivery")
+                    }
+                    if (result.products[i].product.isInstibuzz == true) {
+                        isInstibuzzProduct = true;
+                        setIsInstibuzzProduct(true);
+                    }
+                }
+
+                if (isCollabProduct == true && isInstibuzzProduct == true) {
+                    setDeliveryCharges(99)
+                } else if (isCollabProduct) {
+                    setDeliveryCharges(0)
+                }
             }
 
 
@@ -276,6 +299,7 @@ function Cart() {
     function e(item, index) {
         const sizesAvailable = item.product.sizeQuantities;
 
+        console.log(item)
         return (
             <div className="checkout-product-card">
                 <div class="checkout-product-content">
@@ -285,13 +309,16 @@ function Cart() {
                         </div>
                         <div class="checkout-product-info">
                             <h3>{item.product.name}</h3>
+
                             <p>
                                 {
                                     (item.style === 'regular') ? "Regular T-Shirt" :
                                         (item.style === 'hoodie') ? "Hoodie" :
-                                            "Oversized T-Shirt"
+                                            (item.style === 'sponsered') ? "Sponsered" :
+                                                "Oversized T-Shirt"
                                 }
                             </p>
+
                             {/* <p>{item.product.details}</p> */}
                             <div class="checkout-product-input">
                                 <div class="checkout-dropdown checkout-product-size">
@@ -323,6 +350,10 @@ function Cart() {
                                     </select>
                                 </div>
                             </div>
+                            {item.teeName?
+                            <>
+                            <p>Tee Name: {item.teeName}</p>
+                            <p>Insti Name: {item.instiName}</p></>:<></>}
                         </div>
                     </div>
                     <div class="checkout-product-price">
@@ -612,21 +643,40 @@ function Cart() {
     // }
 
     function handleChange(event) {
-        console.log(event.target.value);
-        setDelivery(event.target.value);
-        switch (event.target.value) {
-            case 'pickup':
-                setDeliveryCharges(0);
-                break;
-            case 'hostel':
-                setDeliveryCharges(19);
-                break;
-            case 'delivery':
-                setDeliveryCharges(99);
-                break;
-            default:
-                setDeliveryCharges(0);
-                break;
+        if (isCollabProduct) {
+            switch (event.target.value) {
+                case 'pickup':
+                    // setDeliveryCharges(0);
+                    alert("Only home delivery for sponsered products");
+                    break;
+                case 'hostel':
+                    alert("Only home delivery for sponsered products");
+                    break;
+                case 'delivery':
+                    setDeliveryCharges(99);
+                    break;
+                default:
+                    setDeliveryCharges(99);
+                    break;
+            }
+        } else {
+
+            // console.log(event.target.value);
+            setDelivery(event.target.value);
+            switch (event.target.value) {
+                case 'pickup':
+                    setDeliveryCharges(0);
+                    break;
+                case 'hostel':
+                    setDeliveryCharges(19);
+                    break;
+                case 'delivery':
+                    setDeliveryCharges(99);
+                    break;
+                default:
+                    setDeliveryCharges(0);
+                    break;
+            }
         }
     }
 
@@ -643,6 +693,7 @@ function Cart() {
             navigate("/address",
                 {
                     state: {
+                        deliveryCharge: deliveryCharges,
                         deliveryMethod: delivery,
                         mrp: isDiscount ? 0.9 * calculateMrp() : calculateMrp(),
                         noOfProducts: products.length,

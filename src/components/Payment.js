@@ -33,6 +33,7 @@ function Payment() {
             setMrp(location.state.mrp);
             setNoOfProducts(location.state.noOfProducts);
             setDeliveryMethod(location.state.deliveryMethod);
+            setDeliveryCharges(location.state.deliveryCharge);
 
             if (location.state.hostel) {
                 setHostel(location.state.hostel);
@@ -47,20 +48,20 @@ function Payment() {
             console.log(location.state)
             // console.log(hostel)
 
-            switch (location.state.deliveryMethod) {
-                case 'pickup':
-                    setDeliveryCharges(0);
-                    break;
-                case 'hostel':
-                    setDeliveryCharges(19);
-                    break;
-                case 'delivery':
-                    setDeliveryCharges(99);
-                    break;
-                default:
-                    setDeliveryCharges(0);
-                    break;
-            }
+            // switch (location.state.deliveryMethod) {
+            //     case 'pickup':
+            //         setDeliveryCharges(0);
+            //         break;
+            //     case 'hostel':
+            //         setDeliveryCharges(19);
+            //         break;
+            //     case 'delivery':
+            //         setDeliveryCharges(99);
+            //         break;
+            //     default:
+            //         setDeliveryCharges(0);
+            //         break;
+            // }
 
             if (location.state.hostel) {
                 setHostel(location.state.hostel);
@@ -179,6 +180,7 @@ function Payment() {
         localStorage.setItem('pinCode', pinCode)
         localStorage.setItem('city', city)
         localStorage.setItem('state', state)
+        localStorage.setItem('deliveryCharges', deliveryCharges)
         const order = await response.json();
         console.log(order);
         window.location.href = order.link

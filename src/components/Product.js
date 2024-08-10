@@ -26,6 +26,10 @@ const Product = () => {
   const [activeSlide, setActiveSlide] = useState(0);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [showSizeChart, setShowSizeChart] = useState(false);
+  const [teeName, setTeeName] = useState("")
+  const [showTeeName, setShowTeeName] = useState(false);
+  const [instiName, setInstiName] = useState("");
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -79,6 +83,7 @@ const Product = () => {
   const [sizesAvailable, setSizesAvailable] = React.useState([]);
   const [comments, setComments] = React.useState([]);
   const [requiredEmail, setRequiredEmail] = React.useState([]);
+  const [isCollabProduct, setIsCollabProduct] = useState(false)
 
   useEffect(() => {
     if (sizesAvailable) {
@@ -162,8 +167,9 @@ const Product = () => {
     setDetails(result.details);
     setDescription(result.description);
     setSizesAvailable(result.sizeQuantities);
-    setTags(result.tags);
-    // console.log(sizesAvailable);
+    setTags(result.tags)
+    let isCollab = !result.isInstibuzz
+    setIsCollabProduct(isCollab);
   };
 
   const toggleWishlist = async () => {
@@ -208,6 +214,16 @@ const Product = () => {
       throw new Error("Select a size");
       return;
     }
+    if(isCollabProduct){
+
+      if (!teeName) {
+        throw new Error("Enter Name");
+        return;
+      }
+      if(!instiName){
+        throw new Error("Enter Institutuion Name");
+      }
+    }
     selectedSize = selectedSize.value;
     // console.log(token)
     if (!email) {
@@ -222,7 +238,7 @@ const Product = () => {
       `${process.env.REACT_APP_server_url}/api/v1/products/addToCart`,
       {
         method: "POST",
-        body: JSON.stringify({ email, productId, quantity, selectedSize }),
+        body: JSON.stringify({ email, productId, quantity, selectedSize,teeName,instiName }),
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -241,6 +257,7 @@ const Product = () => {
       // navigate('/cart')
       // window.location.reload();
     }
+    setShowTeeName(false)
     setIsDisabled(false);
     setIsCart(true);
   };
@@ -333,6 +350,20 @@ const Product = () => {
 
   const proceedSizeUnavailable = () => {
     setShowSizeUnavailable(true)
+  }
+
+  const openTeeName = () => {
+    var selectedSize = document.querySelector('input[name="radios"]:checked');
+    console.log(selectedSize);
+    if (!selectedSize) {
+      alert("Select a size");
+      return;
+    }
+    setShowTeeName(true);
+  }
+
+  const closeTeeName = () => {
+    setShowTeeName(false)
   }
 
   const tagCard = (item, index) => {
@@ -530,9 +561,13 @@ const Product = () => {
                       GO TO CART
                     </button>
                   ) : (
-                    <button className="product-btn" disabled={isDisabled} onClick={addToCartToast}>
+                    isCollabProduct?
+                    <button className="product-btn" disabled={isDisabled} onClick={openTeeName}>
                       ADD TO CART
-                    </button>
+                    </button>:
+                    <button className="product-btn" disabled={isDisabled} onClick={addToCartToast}>
+                    ADD TO CART
+                  </button>
                   )}
                   <button onClick={toggleWishlist} className="product-wishlist-btn">
                     <i style={{ marginRight: 10 }} class={isWishlisted ? "fa fa-heart" : "fa fa-heart-o"}></i>{isWishlisted ? "WISHLISTED" : "WISHLIST"}
@@ -629,6 +664,27 @@ const Product = () => {
           </>
         }
       </div>}
+      {showTeeName && (
+        <div className="cart-popup-background">
+          <div class="address-form cart-popup">
+            <div className="cart-popup-close-btn">
+              <IconButton onClick={() => closeTeeName()}>
+                <CloseIcon />
+              </IconButton>
+            </div>
+            {
+              <>
+                <h3>Name on Tee</h3>
+                <div className="address-form-form">
+                  <input autoComplete="disabled" type="text" placeholder="TeeName" value={teeName} onChange={(e) => setTeeName(e.target.value)} required></input>
+                  <input autoComplete="disabled" type="text" placeholder="InstitutionName" value={instiName} onChange={(e) => setInstiName(e.target.value)} required></input>
+                  <button onClick={addToCartToast}>Add To Cart</button>
+                </div>
+              </>
+            }
+          </div>
+        </div>
+      )}
     </div>
 
   );

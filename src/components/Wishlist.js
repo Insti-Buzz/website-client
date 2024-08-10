@@ -153,6 +153,7 @@ function Wishlist() {
                             <p className='product-style'>{
                                 (item.style === 'regular') ? "Regular T-Shirt" :
                                     (item.style === 'hoodie') ? "Hoodie" :
+                                    (item.style === 'sponsered') ? "Sponsered" :
                                         "Oversized T-Shirt"}</p>
                         </div>
 

@@ -61,6 +61,7 @@ function Address() {
             setTotalMrp(location.state.mrp);
             setNoOfProducts(location.state.noOfProducts);
             setDelivery(location.state.deliveryMethod);
+            setDeliveryCharge(location.state.deliveryCharge)
 
             getProducts();
             getAddresses()
@@ -75,11 +76,6 @@ function Address() {
             if (!email || !token) {
                 alert("Please Login");
                 navigate("/");
-            }
-            if (location.state.deliveryMethod == 'hostel') {
-                setDeliveryCharge(19);
-            } else if (location.state.deliveryMethod == 'delivery') {
-                setDeliveryCharge(99);
             }
             // console.log(totalMrp)
         }
@@ -676,6 +672,7 @@ function Address() {
                 {
                     state: {
                         mrp: totalMrp,
+                        deliveryCharge: deliveryCharge,
                         deliveryMethod: delivery,
                         noOfProducts: noOfProducts,
                         address: {
@@ -782,7 +779,7 @@ function Address() {
                                             <div class="checkout-summary-details">
                                                 <p>Delivery Charges</p>
                                                 {/* <p>{(deliveryCharge == 0) ? "MAY VARY" : `₹${deliveryCharge}`}</p> */}
-                                                <p>₹{deliveryCharge}</p>
+                                                <p>{deliveryCharge == 0 ? "FREE" : "₹" + deliveryCharge}</p>
                                             </div>
                                         </div>
                                         <hr />

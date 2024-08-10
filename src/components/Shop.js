@@ -110,7 +110,7 @@ function Shop() {
                         className="shop-product-card"
                         onClick={() => productPage(item.product_id, index)}
                     >
-                        
+
                         <img src={item.imageUrl[0]} className='shop-image' alt="Product" />
 
                         <div className="shop-product-name">
@@ -121,7 +121,8 @@ function Shop() {
                             <p className='product-style'>{
                                 (item.style === 'regular') ? "Regular T-Shirt" :
                                     (item.style === 'hoodie') ? "Hoodie" :
-                                        "Oversized T-Shirt"}</p>
+                                        (item.style === 'sponsered') ? "Sponsered" :
+                                            "Oversized T-Shirt"}</p>
                         </div>
 
                         <div className="shop-product-price">
