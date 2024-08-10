@@ -143,14 +143,14 @@ function IndividualOrder({ userDetails }) {
                     </div>
               </div> */}
           <div className="delivery-info-container block-2">
-            <div className="delivery-info-header">{order.deliveryMethod == 'delivery' ? `Deliver to address:` : order.deliveryMethod == 'hostel' ? `Deliver to hostel:` : "Pickup from Saraswathi Hostel"}</div>
+            <div className="delivery-info-header">{order.deliveryMethod == 'delivery' ? `Deliver to address:${orderItem.deliveryAddresses}` : order.deliveryMethod == 'hostel' ? `Deliver to hostel:` : "Pickup from Saraswathi Hostel"}</div>
             <div className="delivery-info-customer-name">Hey {userDetails.name},</div>
             {
               orderItem.isDelivered ? <>
                 <div className="delivery-info-customer-address">{"Your Order is delivered Successfully!"}</div>
 
               </> :
-                <div className="delivery-info-customer-address">{order.deliveryMethod == 'delivery' ? order.deliveryAddresses : order.deliveryMethod == 'hostel' ? order.hostelAddress : "You'll be notified when your order is ready for pickup!"}</div>
+                <div className="delivery-info-customer-address">{order.deliveryMethod == 'delivery' ? `${order.deliveryAddresses.address1}, ${order.deliveryAddresses.address2}, ${order.deliveryAddresses.city}, ${order.deliveryAddresses.state}, Pin Code: ${order.deliveryAddresses.pinCode}` : order.deliveryMethod == 'hostel' ? order.hostelAddress : "You'll be notified when your order is ready for pickup!"}</div>
             }
             <div className="delivery-info-customer-phone">Phone : {userDetails.phone} </div>
           </div>

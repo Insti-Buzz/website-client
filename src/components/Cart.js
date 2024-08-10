@@ -312,9 +312,9 @@ function Cart() {
 
                             <p>
                                 {
-                                    (item.style === 'regular') ? "Regular T-Shirt" :
-                                        (item.style === 'hoodie') ? "Hoodie" :
-                                            (item.style === 'sponsered') ? "Sponsered" :
+                                    (item.product.style === 'regular') ? "Regular T-Shirt" :
+                                        (item.product.style === 'hoodie') ? "Hoodie" :
+                                            (item.product.style === 'sponsered') ? "Sponsored" :
                                                 "Oversized T-Shirt"
                                 }
                             </p>
