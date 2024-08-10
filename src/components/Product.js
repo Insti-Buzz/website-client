@@ -636,7 +636,7 @@ const Product = () => {
                   <CloseIcon />
                 </IconButton>
               </div>
-              <h2>Size Chart: {style == 'regular' ? 'Normal Fit T-Shirt' : style == 'oversized' ? 'Oversized Fit T-Shirt' : 'Hoodie'}</h2>
+              <h2>Size Chart: {style == 'regular' ? 'Normal Fit T-Shirt' : style == 'oversized' ? 'Oversized Fit T-Shirt' :style == 'sponsered' ? 'Normal Fit T-Shirt' : 'Hoodie'}</h2>
               <img src={imageUrl[imageUrl.length - 1]} />
             </div>}
           </div>
