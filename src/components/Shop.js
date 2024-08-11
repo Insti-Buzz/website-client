@@ -22,8 +22,6 @@ function Shop() {
     const navigate = useNavigate();
 
     const productPage = async (productId, productLink, index) => {
-        // var slug;
-        // slug = getSlug(productLink);
         navigate(`/${getSlug(productLink)}/${productId}`);
     };
 
