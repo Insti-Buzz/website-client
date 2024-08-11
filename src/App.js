@@ -123,7 +123,7 @@ function App() {
           <Route path="" element={<Home />} />
           <Route path="wishlist" element={<Wishlist />} />
           <Route path="shop" element={<Shop />} />
-          <Route path="/:prodLink" element={<Product />} />
+          <Route path="/:prodLink/:id" element={<Product />} />
           <Route path="cart" element={<Cart/>} />
           <Route path="paymentValid/:id" element={<PaymentValid />} />
           <Route path="address" element={<Address />} />

@@ -152,7 +152,7 @@ const Product = () => {
     // let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/get-product-details/${params.id}`, {
     // console.log(params)
     let result = await fetch(
-      `${process.env.REACT_APP_server_url}/api/v1/products/get-product-details/${location.state.id}`,
+      `${process.env.REACT_APP_server_url}/api/v1/products/get-product-details/${params.id}`,
       {
         method: "POST",
       }
