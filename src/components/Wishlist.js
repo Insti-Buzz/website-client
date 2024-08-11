@@ -126,7 +126,7 @@ function Wishlist() {
     }
 
     const productPage = async (productId, productLink, index) => {
-        navigate(`/${getSlug(productLink)}/${productId}`);
+        navigate(`/${getSlug(productLink)}`, {state:{id:productId}});
     };
 
     function e(item, index) {

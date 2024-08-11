@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../css/Product.css";
 
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams ,useLocation } from "react-router-dom";
 import LoadingPage from "./LoadingPage";
 import { IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
@@ -79,6 +79,7 @@ const Product = () => {
   const [tags, setTags] = useState([]);
   const navigate = useNavigate();
   const params = useParams();
+  const location = useLocation();
   const [isLogin, setIsLogin] = React.useState(false);
   const [sizesAvailable, setSizesAvailable] = React.useState([]);
   const [comments, setComments] = React.useState([]);
@@ -151,7 +152,7 @@ const Product = () => {
     // let result = await fetch(`${process.env.REACT_APP_server_url}/api/v1/products/get-product-details/${params.id}`, {
     // console.log(params)
     let result = await fetch(
-      `${process.env.REACT_APP_server_url}/api/v1/products/get-product-details/${params.id}`,
+      `${process.env.REACT_APP_server_url}/api/v1/products/get-product-details/${location.state.id}`,
       {
         method: "POST",
       }
