@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../css/Product.css";
 
-import { useNavigate, useParams ,useLocation } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import LoadingPage from "./LoadingPage";
 import { IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
@@ -160,17 +160,21 @@ const Product = () => {
 
     result = await result.json();
     setLoading(false);
-    setName(result.name);
-    setPrice(result.price);
-    setStyle(result.style);
-    // setSize(result.sizes)
-    setImageUrl(result.imageUrl);
-    setDetails(result.details);
-    setDescription(result.description);
-    setSizesAvailable(result.sizeQuantities);
-    setTags(result.tags)
-    let isCollab = !result.isInstibuzz
-    setIsCollabProduct(isCollab);
+    if (result.status == 404) {
+      navigate("/productNotFound");
+    } else {
+      setName(result.name);
+      setPrice(result.price);
+      setStyle(result.style);
+      // setSize(result.sizes)
+      setImageUrl(result.imageUrl);
+      setDetails(result.details);
+      setDescription(result.description);
+      setSizesAvailable(result.sizeQuantities);
+      setTags(result.tags)
+      let isCollab = !result.isInstibuzz
+      setIsCollabProduct(isCollab);
+    }
   };
 
   const toggleWishlist = async () => {
@@ -215,13 +219,13 @@ const Product = () => {
       throw new Error("Select a size");
       return;
     }
-    if(isCollabProduct){
+    if (isCollabProduct) {
 
       if (!teeName) {
         throw new Error("Enter Name");
         return;
       }
-      if(!instiName){
+      if (!instiName) {
         throw new Error("Enter Institutuion Name");
       }
     }
@@ -239,7 +243,7 @@ const Product = () => {
       `${process.env.REACT_APP_server_url}/api/v1/products/addToCart`,
       {
         method: "POST",
-        body: JSON.stringify({ email, productId, quantity, selectedSize,teeName,instiName }),
+        body: JSON.stringify({ email, productId, quantity, selectedSize, teeName, instiName }),
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -562,13 +566,13 @@ const Product = () => {
                       GO TO CART
                     </button>
                   ) : (
-                    isCollabProduct?
-                    <button className="product-btn" disabled={isDisabled} onClick={openTeeName}>
-                      ADD TO CART
-                    </button>:
-                    <button className="product-btn" disabled={isDisabled} onClick={addToCartToast}>
-                    ADD TO CART
-                  </button>
+                    isCollabProduct ?
+                      <button className="product-btn" disabled={isDisabled} onClick={openTeeName}>
+                        ADD TO CART
+                      </button> :
+                      <button className="product-btn" disabled={isDisabled} onClick={addToCartToast}>
+                        ADD TO CART
+                      </button>
                   )}
                   <button onClick={toggleWishlist} className="product-wishlist-btn">
                     <i style={{ marginRight: 10 }} class={isWishlisted ? "fa fa-heart" : "fa fa-heart-o"}></i>{isWishlisted ? "WISHLISTED" : "WISHLIST"}
@@ -637,7 +641,7 @@ const Product = () => {
                   <CloseIcon />
                 </IconButton>
               </div>
-              <h2>Size Chart: {style == 'regular' ? 'Normal Fit T-Shirt' : style == 'oversized' ? 'Oversized Fit T-Shirt' :style == 'sponsered' ? 'Normal Fit T-Shirt' : 'Hoodie'}</h2>
+              <h2>Size Chart: {style == 'regular' ? 'Normal Fit T-Shirt' : style == 'oversized' ? 'Oversized Fit T-Shirt' : style == 'sponsered' ? 'Normal Fit T-Shirt' : 'Hoodie'}</h2>
               <img src={imageUrl[imageUrl.length - 1]} />
             </div>}
           </div>
