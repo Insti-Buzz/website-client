@@ -22,7 +22,7 @@ function Shop() {
     const navigate = useNavigate();
 
     const productPage = async (productId, productLink, index) => {
-        navigate(`/${getSlug(productLink)}/${productId}`);
+        navigate(`/products/${getSlug(productLink)}/${productId}`);
     };
 
     useEffect(() => {

@@ -12,6 +12,7 @@ import Carousel from 'react-simply-carousel';
 import securePayment from "../assets/Product/securePayment.svg"
 import genuineProduct from "../assets/Product/genuineProduct.svg"
 import easyExchange from "../assets/Product/easyExchange.svg"
+import getSlug from "speakingurl";
 // import { IconButton } from "@mui/material";
 // import CloseIcon from "@mui/icons-material/Close";
 
@@ -160,7 +161,9 @@ const Product = () => {
 
     result = await result.json();
     setLoading(false);
-    if (result.status == 404) {
+    console.log(getSlug(result.details))
+    console.log(params.prodLink)
+    if (getSlug(result.details) != params.prodLink || result.status == 404) {
       navigate("/productNotFound");
     } else {
       setName(result.name);
