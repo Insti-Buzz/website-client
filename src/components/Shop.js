@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Banner from '../assets/Shop-Banner.jpg'
 import mobileBanner from '../assets/Shop-mobile-banner.jpg'
 import { Helmet } from 'react-helmet';
+var getSlug = require('speakingurl');
 
 function Shop() {
     useEffect(() => {
@@ -20,8 +21,10 @@ function Shop() {
     const [loading, setLoading] = useState(true)
     const navigate = useNavigate();
 
-    const productPage = async (productId, index) => {
-        navigate(`/product/${productId}`);
+    const productPage = async (productId, productLink, index) => {
+        // var slug;
+        // slug = getSlug(productLink);
+        navigate(`/${getSlug(productLink)}/${productId}`);
     };
 
     useEffect(() => {
@@ -108,7 +111,7 @@ function Shop() {
                 <div className="shop-product-div">
                     <button
                         className="shop-product-card"
-                        onClick={() => productPage(item.product_id, index)}
+                        onClick={() => productPage(item.product_id, item.details, index)}
                     >
 
                         <img src={item.imageUrl[0]} className='shop-image' alt="Product" />

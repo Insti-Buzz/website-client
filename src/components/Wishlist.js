@@ -7,6 +7,7 @@ import { isExpired, decodeToken } from "react-jwt";
 import { IconButton } from "@mui/material";
 import emptyWishlistIllustration from "../assets/Illustrations/No items in wishlist.png";
 import IllustrationPage from "./IllustrationPage";
+var getSlug = require('speakingurl');
 
 function Wishlist() {
     const [wishlistedProducts, setWishlistedProducts] = useState([]);
@@ -124,8 +125,8 @@ function Wishlist() {
         }
     }
 
-    const productPage = async (productId, index) => {
-        navigate(`/product/${productId}`);
+    const productPage = async (productId, productLink, index) => {
+        navigate(`/${getSlug(productLink)}/${productId}`);
     };
 
     function e(item, index) {
@@ -143,7 +144,7 @@ function Wishlist() {
                                 </IconButton>
                             </div>
                             <img src={item.imageUrl[0]} className='shop-image' alt="Product"
-                                onClick={() => productPage(item.product_id, index)} />
+                                onClick={() => productPage(item.product_id, item.details, index)} />
                         </div>
                         <div className="shop-product-name">
                             <h2 className='h2-name'>{item.name}</h2>

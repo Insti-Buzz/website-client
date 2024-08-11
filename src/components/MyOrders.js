@@ -143,7 +143,7 @@ function MyOrders({ userDetails}) {
                         </div>
                     </div>  
                 </div>
-                <div className="block product-info" onClick={() => navigate(`/profile/my-orders/${item1.orderItem_id}`,{state:{id: item.order_id}})} style={{cursor:'pointer'}}>
+                <div className="block product-info" onClick={() => navigate(`/profile/my-orders/${item1.orderItem_id}`, {state:{id: item.order_id}})} style={{cursor:'pointer'}}>
                     <div className="info ">
                         <img src={item1.product.imageUrl[0]} alt="ordered product info" />
                         <div className='sub-block'>
