@@ -131,7 +131,7 @@ function IndividualOrder({ userDetails }) {
 
               <div className="status status-three">
                 <span className="delivered" style={orderItem.isDelivered ? {} : { color: 'grey' }}>Delivered</span>
-                <span className="order-placed-date" style={orderItem.isDelivered ? {} : { color: 'grey' }}>{new Date(parseInt(orderItem.deliveredDate) ? parseInt(orderItem.deliveredDate) : (parseInt(order.date) + 604800000)).toLocaleDateString(undefined, options)}</span>
+                <span className="order-placed-date" style={orderItem.isDelivered ? {} : { color: 'grey' }}>{new Date(parseInt(orderItem.deliveredDate) ? parseInt(orderItem.deliveredDate) : <></>)}</span>
               </div>
             </div>
           </div>
