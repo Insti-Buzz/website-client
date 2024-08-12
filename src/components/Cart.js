@@ -279,10 +279,12 @@ function Cart() {
             alert("Enter hostel name");
             return;
         }
+        
         navigate("/payment",
             {
                 state: {
                     mrp: calculateMrp(),
+                    deliveryCharge: deliveryCharges,
                     deliveryMethod: delivery,
                     noOfProducts: products.length,
                     hostel: hostel
