@@ -6,23 +6,12 @@ import InstiBuzzLogo from '../assets/973300f3-c585-48d9-9e8c-601a3ae24121.png';
 import emptyCartIllustration from "../assets/Illustrations/No items in cart.png";
 import CloseIcon from "@mui/icons-material/Close";
 import LoadingPage from "./LoadingPage";
-import MyOrders from './MyOrders.js';
 
 import { isExpired, decodeToken } from "react-jwt";
 import IllustrationPage from "./IllustrationPage.js";
 
 function Cart() {
     const [products, setProducts] = React.useState([]);
-    // const [quantity, setQuantity] = useState(Array(products.length).fill(''));
-    // const [quantity, setQuantity] = useState(Array.from({ length: products.length }, () => 1));
-    // const [quantity, setQuantity] = useState(Array(products.length).fill(1));
-    const [quantity, setQuantity] = useState("1");
-    // const [selectedSize, setSelectedSize] = useState(Array(products.length).fill());
-    const [totalAmount, setTotalAmount] = React.useState();
-    // const [showDetails, setShowDetails] = React.useState(false)
-    const [showPayment, setShowPayment] = React.useState(false);
-    const [name, setName] = React.useState('')
-    const [phone, setPhone] = React.useState('')
     const [email, setEmail] = React.useState("");
     const navigate = useNavigate("");
     const [loading, setLoading] = useState(false);
@@ -36,13 +25,9 @@ function Cart() {
     const [isInstibuzzProduct, setIsInstibuzzProduct] = useState(false)
 
     useEffect(() => {
-        // const name = localStorage.getItem('userName')
-        // const phone = localStorage.getItem('userPhone')
         const email = localStorage.getItem("userEmail");
         const token = localStorage.getItem("token");
         setEmail(email)
-        // setName(name)
-        // setPhone(phone)
         if (!email || !token) {
             alert("Please Login");
             navigate("/");
@@ -151,25 +136,12 @@ function Cart() {
 
 
         } else {
-            // alert('drfrefr');
             localStorage.clear()
-            // localStorage.removeItem('token');
-            // localStorage.removeItem('userEmail');
-            // localStorage.removeItem('name');
-            // localStorage.removeItem('phone');
-            // result = {status: 404};
         }
-
-
-        // for (let i = 0; i < result.length; i++) {
-        //     const updatedProducts = result.filter(item => item._id === localStorage.getItem(`product${item._id}`));
-        //     setProducts(updatedProducts);
-        // }
 
     };
 
     const updateSize = async (id, e) => {
-        // setLoading(true);
         const email = localStorage.getItem(`userEmail`);
         const token = localStorage.getItem("token");
         const trueEmail = checkAuth(email, token);
@@ -231,16 +203,9 @@ function Cart() {
 
     const calculateMrp = () => {
         let total = 0;
-
-        // Iterate through the products array
         products.forEach((item, index) => {
-            // Convert quantity to a number
-            // const quantityValue = parseInt(quantity[index]);
             const quantityValue = item.quantity;
-
-            // Check if quantity is a valid number
             if (!isNaN(quantityValue)) {
-                // Calculate the subtotal for the current product and add it to the total
                 total += quantityValue * item.price;
             }
         });
@@ -253,26 +218,6 @@ function Cart() {
         return subtotal;
     };
 
-    // const proceedPayment = () => {
-    //     // console.log(quantity)
-    //     // console.log(selectedSize)
-    //     const subtotal = calculateSubtotal();
-    //     setTotalAmount(subtotal);
-    //     // setShowDetails(false)
-    //     if (subtotal == 0) {
-    //         alert("Pls add products in cart");
-    //         return;
-    //     }
-    //     // if (!selectedSize) {
-    //     //     alert("Please Select Size")
-    //     //     return
-    //     // }
-    //     setShowPayment(true);
-    // };
-
-    // const closePayment = () => {
-    //     setShowPayment(false);
-    // };
 
     const toPayment = () => {
         if (delivery == 'hostel' && !hostel) {
@@ -370,13 +315,6 @@ function Cart() {
                     <div className="checkout-product-wishlist" onClick={() => { moveToWishlist(item.product.product_id, item.orderItem_id) }}>
                         <h3>Move to Wishlist</h3>
                     </div>
-                    {/* <IconButton
-                        onClick={() =>
-                            removeFromCart(item.product.product_id, item.orderItem_id)
-                        }
-                    >
-                        <CloseIcon />
-                    </IconButton> */}
                 </div>
             </div>
         );
@@ -530,119 +468,6 @@ function Cart() {
     //     e.preventDefault();
     // };
 
-
-    /////////////////////////////////PHONEPAY////////////////////////////////////////////
-
-    var amount = calculateSubtotal();
-
-    const paymentHandler = async (e) => {
-        const token = localStorage.getItem('token')
-        if (isDiscount) {
-            amount = 0.9 * amount
-        }
-        setShowPayment(false)
-        const isHomeDelivery = false
-        localStorage.setItem("isHomeDelivery", isHomeDelivery)
-        localStorage.setItem("totalAmount", amount)
-        const response = await fetch(`${process.env.REACT_APP_server_url}/api/v1/payment/order`, {
-
-            method: "POST",
-            body: JSON.stringify({
-                email,
-                amount,
-                isHomeDelivery,
-            }),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-        const order = await response.json();
-        window.location.href = order.link
-        // console.log(order)
-
-        if (order.status == 404) {
-            alert(order.message)
-            localStorage.removeItem("userEmail")
-            navigate('/')
-            window.location.reload();
-        }
-    };
-
-    /////////////////////////////////PHONEPAY////////////////////////////////////////////
-
-    var amount = calculateSubtotal();
-    const confirmOrder = async () => {
-        setLoading(true);
-        if (isDiscount) {
-            amount = 0.9 * amount
-            // console.log(amount)
-        }
-        const email = localStorage.getItem("userEmail");
-        const token = localStorage.getItem("token");
-        const isHomeDelivery = delivery == "delivery" ? true : false;
-        const response = await fetch(
-            `${process.env.REACT_APP_server_url}/api/v1/payment/confirm`,
-            {
-                method: "POST",
-                body: JSON.stringify({
-                    email,
-                    amount,
-                    isHomeDelivery,
-                    // quantity,
-                    // selectedSize
-                }),
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-            }
-        );
-        // console.log(response.body);
-        setTimeout(() => {
-            setLoading(false)
-        }, 1000);
-        // console.log(response)
-        if (response.status == 404) {
-            alert(response.message)
-            localStorage.removeItem("userEmail")
-            navigate('/')
-            window.location.reload();
-        } else {
-            alert('Your order is Placed Successfully');
-            // chooseComp(MyOrders, "My Orders");
-            // window.location.reload();
-            navigate('/profile/my-orders')
-        }
-    };
-
-    const cancelOrder = () => {
-        setShowPayment(false);
-    };
-
-    // function RadioButtonGroup(props) {
-    //     return (
-    //         <div class="checkout-select-delivery">
-    //             <label>
-    //                 <p>Deliver at your doorstep.</p>
-    //                 <input
-    //                     type="radio"
-    //                     value="delivery"
-    //                     checked={props.selectedOption === "delivery"}
-    //                     onClick={props.handleChange}
-    //                 />
-    //             </label>
-    //             <label>
-    //                 <p>Pickup from Saraswati.</p>
-    //                 <input
-    //                     type="radio"
-    //                     value="pickup"
-    //                     checked={props.selectedOption === "pickup"}
-    //                     onClick={props.handleChange}
-    //                 />
-    //             </label>
-    //         </div>
-    //     );
-    // }
 
     function handleChange(event) {
         if (isCollabProduct) {
@@ -835,21 +660,6 @@ function Cart() {
                                         </div>
                                     </div>
                                 )}
-
-                                {/* {showPayment && (
-                                    <div className="cart-popup">
-                                        <i className='fa fa-times' aria-hidden='true' onClick={setShowPayment(false)}></i>
-                                        <IconButton onClick={() => closePayment()}>
-                                            <CloseIcon />
-                                        </IconButton>
-                                        <h1>Confirm Your Order?</h1>
-                                        <div className="cart-popup-content">
-                                            <button onClick={confirmOrder}>Cash On Delivery</button>
-                                            <button onClick={cancelOrder}>No</button>
-                                            <button onClick={paymentHandler}>Pay Now</button>
-                                        </div>
-                                    </div>
-                                )} */}
                             </div>
                             :
                             <IllustrationPage
