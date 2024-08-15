@@ -42,7 +42,7 @@ function EnterOTP() {
             result = await result.json();
             console.log(result)
             if (result.status == 200) {
-                navigate("/change-password", { state: { email: email } });
+                navigate("/change-password", { state: { email: email, otp: otp } });
             } else {
                 setOtp('');
                 throw new Error(result.error);

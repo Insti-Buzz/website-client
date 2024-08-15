@@ -26,6 +26,7 @@ function ChangePassword() {
 
     const changePassword = async () => {
         const email = location.state.email;
+        const otp = location.state.otp;
 
         if (password.length < 7) {
             setError("Password must be at least 7 characters long")
@@ -37,7 +38,7 @@ function ChangePassword() {
                     `${process.env.REACT_APP_server_url}/api/v1/auth/resetPassword`,
                     {
                         method: "POST",
-                        body: JSON.stringify({ email, password }),
+                        body: JSON.stringify({ email, password, otp }),
                         headers: {
                             "Content-type": "application/json",
                         },
