@@ -106,7 +106,7 @@ function MyOrders({ userDetails}) {
   
     const e1 = (item) => (item1, index) => {
       const currentDate = Date.now();
-        const options = { year: "numeric", month: "long", day: "numeric" }
+        const options = { year: "numeric", month: "short", day: "numeric" }
         
       const allowedTimeToCancelTheOrder = 30000; //in millisecond. Define same value in IndividualOrder.js too
         item1.isCancellable = (currentDate - item.date) < allowedTimeToCancelTheOrder;
