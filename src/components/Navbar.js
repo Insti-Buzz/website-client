@@ -10,7 +10,7 @@ import MyAddresses from './MyAddresses';
 
 // import toast, { Toaster } from 'react-hot-toast';
 import '../css/Navbar.css';
-import InstiBuzzLogo from '../assets/973300f3-c585-48d9-9e8c-601a3ae24121.png';
+import InstiBuzzLogo from '../assets/Horizontal Logo Transparent.png';
 import logoutSvg from '../assets/vectors/Logout.svg'
 // import { resolveConfig } from 'vite';
 
@@ -152,7 +152,6 @@ function Navbar({profileProps,navbarRef }) {
                 </div>
                 <a className="nav-top-left" href='/'>
                     <img src={InstiBuzzLogo} alt="InstiBuzz Logo" className="nav-instibuzz-logo"/>
-                    <p className="nav-instibuzz-title">InstiBuzz</p>
                 </a>
 
                 <div className="nav-center">

@@ -30,12 +30,12 @@ fa{
     align-items: center;    
     z-index: 5;
     flex: 1;
-    cursor: pointer;
     text-decoration: none;
     /* background-color: #ddddcc; */
 }
 .nav-instibuzz-logo{
     height: 98%;
+    cursor: pointer;
 }
 .nav-instibuzz-title{
     height: 100%;
@@ -261,7 +261,6 @@ fa{
         width: 64%;
     }
     .nav-navbar .nav-top-left .nav-instibuzz-logo{
-        width: 36%;
         height: 80%;
     }
     
@@ -281,7 +280,6 @@ fa{
     }
 
     .nav-instibuzz-logo{
-        width: 36%;
         height: 70%;
     }
     
@@ -519,7 +517,6 @@ fa{
 
 @media screen and  (max-width: 780px){
     .nav-instibuzz-logo{
-        width: 36%;
         height: 50%;
     }
     .nav-instibuzz-title{
@@ -530,7 +527,6 @@ fa{
 @media screen and (max-width:560px) {
     
     .nav-navbar .nav-top-left .nav-instibuzz-logo{
-        width: 40%;
         object-fit:cover;
         scale: 0.9;
     }

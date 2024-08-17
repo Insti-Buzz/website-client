@@ -23,6 +23,7 @@
     "react-simply-carousel": "^9.1.4",
     "react-spinners": "^0.13.8",
     "speakingurl": "^14.0.1",
+    "swiper": "^11.1.9",
     "uuid": "^9.0.1",
     "web-vitals": "^2.1.4"
   },
