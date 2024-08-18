@@ -85,6 +85,7 @@
 
 .home-what-we-offer-card:hover {
     background-color: #FFA180;
+    cursor: pointer;
 }
 
 .home-what-we-offer-grid .home-what-we-offer-card:nth-child(1) {

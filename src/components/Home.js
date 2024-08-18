@@ -268,7 +268,7 @@ function Home() {
         <div className="home-what-we-offer">
           <h2>What We Offer?</h2>
           <div className="home-what-we-offer-grid">
-            <div className="home-what-we-offer-card">
+            <div onClick={() => navigate("/ourServices")} className="home-what-we-offer-card">
               <img src={integrationImg} alt="ClipArt for integration" />
               <h3>Manufacturing</h3>
               <p>
@@ -277,7 +277,7 @@ function Home() {
                 their superior quality fabrics knitted with utmost care...
               </p>
             </div>
-            <div className="home-what-we-offer-card">
+            <div onClick={() => navigate("/ourServices")} className="home-what-we-offer-card">
               <img src={communityImg} alt="ClipArt for integration" />
               <h3>Design</h3>
               <p>
@@ -287,7 +287,7 @@ function Home() {
                 campus life with modern fashion trends...
               </p>
             </div>
-            <div className="home-what-we-offer-card">
+            <div onClick={() => navigate("/ourServices")} className="home-what-we-offer-card">
               <img src={cultureImg} alt="ClipArt for integration" />
               <h3>Sales</h3>
               <p>
@@ -298,7 +298,7 @@ function Home() {
                 entire Insti audience...
               </p>
             </div>
-            <div className="home-what-we-offer-card">
+            <div onClick={() => navigate("/ourServices")} className="home-what-we-offer-card">
               <img src={visibilityImg} alt="ClipArt for integration" />
               <h3>Visibility</h3>
               <p>
@@ -342,7 +342,7 @@ function Home() {
                 will fit just right in, apply right away!
               </p>
               <div className="home-collab-btn-container">
-                <button className="home-collab-btn">View Details</button>
+                <button onClick={() => navigate("/collabForm")} className="home-collab-btn">View Details</button>
               </div>
             </div>
             <div className="home-collab-img">
@@ -519,7 +519,7 @@ function Home() {
               will fit just right in, apply right away!
             </p>
             <div className="home-collab-btn">
-              <button>View details</button>
+              <button onClick={() => navigate("/collabForm")}>View details</button>
             </div>
           </div>
         </div>

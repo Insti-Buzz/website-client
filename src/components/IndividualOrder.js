@@ -150,7 +150,7 @@ function IndividualOrder({ userDetails }) {
                 <div className="delivery-info-customer-address">{"Your Order is delivered Successfully!"}</div>
 
               </> :
-                <div className="delivery-info-customer-address">{order.deliveryMethod == 'delivery' ? `${order.deliveryAddresses.address1}, ${order.deliveryAddresses.address2}, ${order.deliveryAddresses.city}, ${order.deliveryAddresses.state}, Pin Code: ${order.deliveryAddresses.pinCode}` : order.deliveryMethod == 'hostel' ? order.hostelAddress : "You'll be notified when your order is ready for pickup!"}</div>
+                <div className="delivery-info-customer-address">{order.deliveryMethod == 'delivery' ? `${order.deliveryAddresses.address1}, ${order.deliveryAddresses.address2}, ${order.deliveryAddresses.city}, ${order.deliveryAddresses.state}, Pin Code: ${order.deliveryAddresses.pinCode} <br/> You'll be notified when your order is shipped` : order.deliveryMethod == 'hostel' ? order.hostelAddress : "You'll be notified when your order is ready for pickup!"}</div>
             }
             <div className="delivery-info-customer-phone">Phone : {userDetails.phone} </div>
           </div>
