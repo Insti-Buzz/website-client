@@ -191,6 +191,10 @@ body {
     color: #FF7F50;
 }
 
+.product-product-size a:hover {
+    text-decoration: underline;
+}
+
 .product-size-chart {
     position: fixed;
     width: 500px;

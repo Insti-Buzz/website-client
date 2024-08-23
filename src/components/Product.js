@@ -85,13 +85,17 @@ const Product = () => {
   const [sizesAvailable, setSizesAvailable] = React.useState([]);
   const [comments, setComments] = React.useState([]);
   const [requiredEmail, setRequiredEmail] = React.useState([]);
-  const [isCollabProduct, setIsCollabProduct] = useState(false)
+  const [isCollabProduct, setIsCollabProduct] = useState(false);
+  const [isOutOfStock, setIsOutOfStock] = useState(true);
 
   useEffect(() => {
     if (sizesAvailable) {
       sizesAvailable.forEach((element) => {
         if (element.quantity === 0) {
           document.getElementById(element.size).disabled = true;
+        }
+        if (element.quantity != 0) {
+          setIsOutOfStock(false);
         }
       });
     }
@@ -564,19 +568,21 @@ const Product = () => {
               </div> */}
               {isLogin ? (
                 <div className="product-btns">
-                  {isCart ? (
-                    <button onClick={toCart} className="product-btn">
-                      GO TO CART
-                    </button>
-                  ) : (
-                    isCollabProduct ?
-                      <button className="product-btn" disabled={isDisabled} onClick={openTeeName}>
-                        ADD TO CART
-                      </button> :
-                      <button className="product-btn" disabled={isDisabled} onClick={addToCartToast}>
-                        ADD TO CART
+                  {isOutOfStock ?
+                    <button className="product-wishlist-btn" style={{cursor: "default"}} disabled>OUT OF STOCK</button> :
+                    (isCart ? (
+                      <button onClick={toCart} className="product-btn">
+                        GO TO CART
                       </button>
-                  )}
+                    ) : (
+                      isCollabProduct ?
+                        <button className="product-btn" disabled={isDisabled} onClick={openTeeName}>
+                          ADD TO CART
+                        </button> :
+                        <button className="product-btn" disabled={isDisabled} onClick={addToCartToast}>
+                          ADD TO CART
+                        </button>
+                    ))}
                   <button onClick={toggleWishlist} className="product-wishlist-btn">
                     <i style={{ marginRight: 10 }} class={isWishlisted ? "fa fa-heart" : "fa fa-heart-o"}></i>{isWishlisted ? "WISHLISTED" : "WISHLIST"}
                   </button>
