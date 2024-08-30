@@ -21,3 +21,14 @@
     padding: 8px;
 
 }
+
+.allFilters{
+    display: inline-flex;
+    width: 100%;
+    justify-content: space-around;
+    /* align-items: end; */
+}
+
+/* .allFilters div{
+    padding-left: 20px;
+} */

@@ -5,7 +5,9 @@ import { useNavigate } from 'react-router-dom'
 import { X } from '@mui/icons-material'
 function AllOrders() {
     const [orders, setOrders] = React.useState([])
-    const [filter, setFilter] = React.useState('all'); 
+    const [deliveryFilter, setDeliveryFilter] = React.useState('all'); // Delivery filter state
+    const [isInstibuzzFilter, setIsInstibuzzFilter] = React.useState('all'); // Instibuzz filter state
+    const [sortByDate, setSortByDate] = React.useState('newestFirst');
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -70,7 +72,7 @@ function AllOrders() {
 
             <div>
                 {
-                    item.user.email == 'instibuzziitm@gmail.com'||item.user.email =='radhakorba1@gmail.com' ||item.user.email=='anantuspai@gmail.com'||item.user.email=='dalmiapiyush5@gmail.com'||item.user.email=='pshadalmia@gmail.com'? <></> :
+                    item.user.email == 'instibuzziitm@gmail.com' || item.user.email == 'radhakorba1@gmail.com' || item.user.email == 'anantuspai@gmail.com' || item.user.email == 'dalmiapiyush5@gmail.com' || item.user.email == 'pshadalmia@gmail.com' ? <></> :
                         <div>
                             <hr />
 
@@ -147,9 +149,19 @@ function AllOrders() {
     }
 
     const filteredOrders = orders.filter(order => {
-        if (filter === 'delivered') return order.productsOrdered.every(product => product.isDelivered);
-        if (filter === 'notDelivered') return order.productsOrdered.some(product => !product.isDelivered);
-        return true; // 'all' filter
+        const isDelivered = order.productsOrdered.every(product => product.isDelivered);
+        const isNotDelivered = order.productsOrdered.some(product => !product.isDelivered);
+        const hasInstibuzz = order.productsOrdered.some(product => product.product.isInstibuzz);
+
+        // Apply delivery filter
+        if (deliveryFilter === 'delivered' && !isDelivered) return false;
+        if (deliveryFilter === 'notDelivered' && !isNotDelivered) return false;
+
+        // Apply isInstibuzz filter
+        if (isInstibuzzFilter === 'true' && !hasInstibuzz) return false;
+        if (isInstibuzzFilter === 'false' && hasInstibuzz) return false;
+
+        return true; // Pass all filters
     });
 
     // function e(item, index) {
@@ -252,16 +264,34 @@ function AllOrders() {
 
         <div class="">
 
-            <div class="">
+            <div>
                 <h1>My Orders</h1>
                 <hr />
-                <div>
-                    <button onClick={() => setFilter('all')}>All Products</button>
-                    <button onClick={() => setFilter('delivered')}>Delivered</button>
-                    <button onClick={() => setFilter('notDelivered')}>Not Delivered</button>
+                <div className="allFilters">
+                    <div>
+                        <p>Delivery Status</p>
+                        <button style={deliveryFilter === 'all' ? { backgroundColor: 'green' } : {}} onClick={() => setDeliveryFilter('all')}>All Products</button>
+                        <button style={deliveryFilter === 'delivered' ? { backgroundColor: 'green' } : {}} onClick={() => setDeliveryFilter('delivered')}>Delivered</button>
+                        <button style={deliveryFilter === 'notDelivered' ? { backgroundColor: 'green' } : {}} onClick={() => setDeliveryFilter('notDelivered')}>Not Delivered</button>
+                    </div>
+                    <br />
+                    <div>
+                        <p>isInstibuzz Status</p>
+                        <button style={isInstibuzzFilter === 'all' ? { backgroundColor: 'green' } : {}} onClick={() => setIsInstibuzzFilter('all')}>All</button>
+                        <button style={isInstibuzzFilter === 'true' ? { backgroundColor: 'green' } : {}} onClick={() => setIsInstibuzzFilter('true')}>Instibuzz Products</button>
+                        <button style={isInstibuzzFilter === 'false' ? { backgroundColor: 'green' } : {}} onClick={() => setIsInstibuzzFilter('false')}>Non-Instibuzz Products</button>
+                    </div>
+                    <div>
+                        <p>Sort by Date</p>
+                        <button style={sortByDate === 'newestFirst' ? { backgroundColor: 'green' } : {}} onClick={() => setSortByDate('newestFirst')}>Newest First</button>
+                        <button style={sortByDate === 'oldestFirst' ? { backgroundColor: 'green' } : {}} onClick={() => setSortByDate('oldestFirst')}>Oldest First</button>
+                    </div>
                 </div>
-                {
-                    filteredOrders.map(e)
+                <hr />
+                {sortByDate === 'newestFirst' ?
+                    filteredOrders.sort((a, b) => b.date - a.date).map(e)
+                    :
+                    filteredOrders.sort((a, b) => a.date - b.date).map(e)
                 }
             </div>
         </div>
