@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { X } from '@mui/icons-material'
 function AllOrders() {
     const [orders, setOrders] = React.useState([])
+    const [filter, setFilter] = React.useState('all'); 
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -145,6 +146,12 @@ function AllOrders() {
         )
     }
 
+    const filteredOrders = orders.filter(order => {
+        if (filter === 'delivered') return order.productsOrdered.every(product => product.isDelivered);
+        if (filter === 'notDelivered') return order.productsOrdered.some(product => !product.isDelivered);
+        return true; // 'all' filter
+    });
+
     // function e(item, index) {
     //     const orderId = item.order_id
 
@@ -248,8 +255,13 @@ function AllOrders() {
             <div class="">
                 <h1>My Orders</h1>
                 <hr />
+                <div>
+                    <button onClick={() => setFilter('all')}>All Products</button>
+                    <button onClick={() => setFilter('delivered')}>Delivered</button>
+                    <button onClick={() => setFilter('notDelivered')}>Not Delivered</button>
+                </div>
                 {
-                    orders.map(e)
+                    filteredOrders.map(e)
                 }
             </div>
         </div>
