@@ -91,7 +91,7 @@ const Product = () => {
   useEffect(() => {
     if (sizesAvailable) {
       sizesAvailable.forEach((element) => {
-        if (element.quantity === 0) {
+        if (element.quantity === 0||element.quantity < 0) {
           document.getElementById(element.size).disabled = true;
         }
         if (element.quantity != 0) {
