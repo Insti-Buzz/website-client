@@ -213,12 +213,12 @@ function AboutUs() {
           <h2>Meet the Team</h2>
           <div class="about-team-grid">
            <div class="about-team-member-card">
-              <img src={Ashrith} alt="Addandi Ashrith Reddy: Director" />
+              <img src={ashrith} alt="Addandi Ashrith Reddy: Director" />
               <h2>Addandi Ashrith Reddy</h2>
               <h3>Director</h3>
             </div>
            <div class="about-team-member-card">
-              <img src={Snuhith} alt="Addandi Snuhith Reddy: Director" />
+              <img src={snuhith} alt="Addandi Snuhith Reddy: Director" />
               <h2>Addandi Snuhith Reddy</h2>
               <h3>Director</h3>
             </div>
