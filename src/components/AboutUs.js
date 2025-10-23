@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import "../css/AboutUs.css";
 import ourStory from "../assets/About us/ourStory.svg";
-import Ashrith from "../assets/Ashrith.jpeg";
-import Snuhith from "../assets/Snuhith.jpeg";
+import Ashrith from "../assets/Ashrith.jpg";
+import Snuhith from "../assets/Snuhith.jpg";
 import anshu from "../assets/anshu.jpg";
 import yashika from "../assets/yashiika.jpg";
 import radha from "../assets/radha.jpg";
