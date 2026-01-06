@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import "../css/AboutUs.css";
 import ourStory from "../assets/About us/ourStory.svg";
-import ashrith from "../assets/ashrith.jpg";
 import snuhith from "../assets/snuhith.jpg";
 import anshu from "../assets/anshu.jpg";
 import yashika from "../assets/yashiika.jpg";
@@ -213,14 +212,9 @@ function AboutUs() {
           <h2>Meet the Team</h2>
           <div class="about-team-grid">
             <div class="about-team-member-card">
-              <img src={ashrith} alt="Addandi Ashrith Reddy: Director" />
-              <h2>Addandi Ashrith Reddy</h2>
-              <h3>Director</h3>
-            </div>
-            <div class="about-team-member-card">
-              <img src={snuhith} alt="Addandi Snuhith Reddy: Director" />
+              <img src={snuhith} alt="Addandi Snuhith Reddy:Managing Director" />
               <h2>Addandi Snuhith Reddy</h2>
-              <h3>Director</h3>
+              <h3>Managing Director</h3>
             </div>
             <div class="about-team-member-card">
               <img src={parth} alt="Parth Bajpai: Chief Executive Officer" />
