@@ -1,16 +1,7 @@
 import React, { useEffect } from "react";
 import "../css/AboutUs.css";
 import ourStory from "../assets/About us/ourStory.svg";
-import snuhith from "../assets/Snuhith.jpg";
-import anshu from "../assets/anshu.jpg";
-import yashika from "../assets/yashiika.jpg";
-import radha from "../assets/radha.jpg";
-import dikshant from "../assets/dikshant.jpg";
-import anantu from "../assets/anantu.jpg";
-import aayush from "../assets/aayush.jpg";
-import piyush from "../assets/piyush.jpg";
-import jujhar from "../assets/jujhar.jpg";
-import parth from "../assets/parth.jpg";
+import ashrith from "../assets/Ashrith.jpg";
 import cultureImg from '../assets/About us/Culture.png';
 import integrationImg from '../assets/About us/Integration.png';
 import visibilityImg from '../assets/About us/Visibility.png';
@@ -212,54 +203,9 @@ function AboutUs() {
           <h2>Meet the Team</h2>
           <div class="about-team-grid">
             <div class="about-team-member-card">
-              <img src={Snuhith} alt="Addandi Snuhith Reddy:Managing Director" />
-              <h2>Addandi Snuhith Reddy</h2>
-              <h3>Managing Director</h3>
-            </div>
-            <div class="about-team-member-card">
-              <img src={parth} alt="Parth Bajpai: Chief Executive Officer" />
-              <h2>Parth Bajpai</h2>
-              <h3>Chief Executive Officer</h3>
-            </div>
-            <div class="about-team-member-card">
-              <img src={radha} alt="Radha Agrawal: Chief Strategy Officer" />
-              <h2>Radha Agrawal</h2>
-              <h3>Chief Strategy Officer</h3>
-            </div>
-            <div class="about-team-member-card">
-              <img src={piyush} alt="Piyush Dalmia: Chief Operations Officer" />
-              <h2>Piyush Dalmia</h2>
-              <h3>Chief Operations Officer</h3>
-            </div>
-            <div class="about-team-member-card">
-              <img src={anshu} alt="Anshu Patel: Operations Head" />
-              <h2>Anshu Patel</h2>
-              <h3>Operations Head </h3>
-            </div>
-            <div class="about-team-member-card">
-              <img src={yashika} alt="Yashika Sahu: Design Head" />
-              <h2>Yashika Sahu</h2>
-              <h3>Design Head</h3>
-            </div>
-            <div class="about-team-member-card">
-              <img src={dikshant} alt="Dikshant Aggarwal: Chief Technical Officer" />
-              <h2>Dikshant Aggarwal</h2>
-              <h3>Chief Technical Officer</h3>
-            </div>
-            <div class="about-team-member-card">
-              <img src={aayush} alt="Aayush Chodhary: Chief Marketing Officer" />
-              <h2>Aayush Chodhary</h2>
-              <h3>Chief Marketing Officer</h3>
-            </div>
-            <div class="about-team-member-card">
-              <img src={anantu} alt="Anantu S Pai: Technical Head" />
-              <h2>Anantu S Pai</h2>
-              <h3>Technical Head</h3>
-            </div>
-            <div class="about-team-member-card">
-              <img src={jujhar} alt="Jujhar Singh Channa: Technical Head" />
-              <h2>Jujhar Singh Channa</h2>
-              <h3>Technical Head</h3>
+              <img src={ashrith} alt="Addandi Ashrith Reddy: Co-Founder" />
+              <h2>Addandi Ashrith Reddy</h2>
+              <h3>Co-Founder</h3>
             </div>
           </div>
         </div>
