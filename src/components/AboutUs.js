@@ -203,9 +203,9 @@ function AboutUs() {
           <h2>Meet the Team</h2>
           <div class="about-team-grid">
             <div class="about-team-member-card">
-              <img src={snuhith} alt="Addandi Snuhith Reddy: Managing Director" />
-              <h2>Addandi Snuhith Reddy</h2>
-              <h3>Managing Director</h3>
+              <img src={ashrith} alt="Addandi Ashrith Reddy: Co-Founder" />
+              <h2>Addandi Ashrith Reddy</h2>
+              <h3>Co-Founder</h3>
             </div>
           </div>
         </div>
