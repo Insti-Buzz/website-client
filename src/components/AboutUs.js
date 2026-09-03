@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "../css/AboutUs.css";
 import ourStory from "../assets/About us/ourStory.svg";
-import ashrith from "../assets/ashrith.jpg";
+import Ashrith from "../assets/Ashrith.jpg";
 import cultureImg from '../assets/About us/Culture.png';
 import integrationImg from '../assets/About us/Integration.png';
 import visibilityImg from '../assets/About us/Visibility.png';
@@ -203,7 +203,7 @@ function AboutUs() {
           <h2>Meet the Team</h2>
           <div class="about-team-grid">
             <div class="about-team-member-card">
-              <img src={ashrith} alt="Addandi Ashrith Reddy: Co-Founder" />
+              <img src={Ashrith} alt="Addandi Ashrith Reddy: Co-Founder" />
               <h2>Addandi Ashrith Reddy</h2>
               <h3>Co-Founder</h3>
             </div>
