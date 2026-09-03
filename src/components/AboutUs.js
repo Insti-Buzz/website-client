@@ -2,6 +2,16 @@ import React, { useEffect } from "react";
 import "../css/AboutUs.css";
 import ourStory from "../assets/About us/ourStory.svg";
 import ashrith from "../assets/ashrith.jpg";
+import snuhith from "../assets/snuhith.jpg";
+import anshu from "../assets/anshu.jpg";
+import yashika from "../assets/yashiika.jpg";
+import radha from "../assets/radha.jpg";
+import dikshant from "../assets/dikshant.jpg";
+import anantu from "../assets/anantu.jpg";
+import aayush from "../assets/aayush.jpg";
+import piyush from "../assets/piyush.jpg";
+import jujhar from "../assets/jujhar.jpg";
+import parth from "../assets/parth.jpg";
 import cultureImg from '../assets/About us/Culture.png';
 import integrationImg from '../assets/About us/Integration.png';
 import visibilityImg from '../assets/About us/Visibility.png';
@@ -16,7 +26,7 @@ function AboutUs() {
   useEffect(() => {
     window.scrollTo({
       top: 0,
-      behavior: "auto",
+      behavior: "instant",
     });
     // const scrollToTop = () => {
     // }
@@ -41,15 +51,15 @@ function AboutUs() {
         <meta name="og:image:alt" content="Official logo of InstiBuzz Pvt Ltd." />
         <meta name="author" content="instibuzz" />
       </Helmet>
-      <div className="about-main-container">
-        <div className="about-title">
+      <div class="about-main-container">
+        <div class="about-title">
           <h1>About Us</h1>
           <p>
             Welcome to the ‘About Us’ page. Thank you for taking out your valuable
             time and trying to learn about our journey.
           </p>
         </div>
-        <div className="about-our-story about-section">
+        <div class="about-our-story about-section">
           {/* <hr class="about-divider" /> */}
           {/* <div class="about-our-story-title">
           <h2>Our Story</h2>
@@ -59,14 +69,14 @@ function AboutUs() {
         </div>
         <div class="about-our-story-text">
       </div> */}
-          <div className="about-our-story-container">
-            <div className="about-our-story-content">
+          <div class="about-our-story-container">
+            <div class="about-our-story-content">
               <div className="about-section-title">
                 <div className="about-section-title-design"></div>
                 <p>OUR STORY</p>
                 <div className="about-section-title-design"></div>
               </div>
-              <div className="about-our-story-text">
+              <div class="about-our-story-text">
                 <h2>The Beginning of Our Journey</h2>
                 <div className="about-our-story-text-desktop">
                   <p>
@@ -94,10 +104,10 @@ function AboutUs() {
                 </div>
               </div>
             </div>
-            <div className="about-our-story-image-container">
+            <div class="about-our-story-image-container">
               <img src={ourStory} alt="Silhouette of multiple people during sunset" />
             </div>
-            <div className="about-our-story-text about-our-story-text-mobile">
+            <div class="about-our-story-text about-our-story-text-mobile">
               <p>
                 The idea of InstiBuzz was born on 16th January 2024 in the minds
                 of a bunch of people who vibe and love to live their college
@@ -123,15 +133,15 @@ function AboutUs() {
             </div>
           </div>
         </div>
-        <div className="about-creating-impact about-section">
+        <div class="about-creating-impact about-section">
           <div className="about-section-title">
             <div className="about-section-title-design"></div>
             <p>CREATING IMPACT</p>
             <div className="about-section-title-design"></div>
           </div>
           <h2>Why Us?</h2>
-          <div className="about-creating-impact-card-container">
-            <div className="about-creating-impact-card">
+          <div class="about-creating-impact-card-container">
+            <div class="about-creating-impact-card">
               <img src={integrationImg} alt="ClipArt for integration" />
               <h3>
                 Integrated <br /> Solution
@@ -142,7 +152,7 @@ function AboutUs() {
                 distribution, offering a seamless experience for our customers.
               </p>
             </div>
-            <div className="about-creating-impact-card">
+            <div class="about-creating-impact-card">
               <img src={cultureImg} alt="clipart for unity and education" />
               <h3>Fostering Campus <br /> Culture</h3>
               <p>
@@ -151,7 +161,7 @@ function AboutUs() {
                 their collegiate experience.
               </p>
             </div>
-            <div className="about-creating-impact-card">
+            <div class="about-creating-impact-card">
               <img src={communityImg} alt="ClipArt for connecting people" />
               <h3>Build Fashion <br /> Communities</h3>
               <p>
@@ -161,7 +171,7 @@ function AboutUs() {
                 and honor the essence of each college's cultural identity.
               </p>
             </div>
-            <div className="about-creating-impact-card">
+            <div class="about-creating-impact-card">
               <img src={visibilityImg} alt="clipart for e-advertising " />
               <h3>Enhancing <br /> Visiblity</h3>
               <p>
@@ -172,7 +182,7 @@ function AboutUs() {
             </div>
           </div>
         </div>
-        <div className="about-in-numbers">
+        <div class="about-in-numbers">
           <div className="about-in-numbers-content">
             <img src={team} />
             <h4>Team</h4>
@@ -194,23 +204,68 @@ function AboutUs() {
         <h3>TESTIMONIALS</h3>
         <h2>Why People Choose Us</h2>
       </div> */}
-        <div className="about-our-team about-section">
+        <div class="about-our-team about-section">
           <div className="about-section-title">
             <div className="about-section-title-design"></div>
             <p>OUR TEAM</p>
             <div className="about-section-title-design"></div>
           </div>
           <h2>Meet the Team</h2>
-          <div className="about-team-grid">
-            <div className="about-team-member-card">
-              <img src={ashrith} alt="Addandi Ashrith Reddy: Co-Founder" />
-              <h2>Addandi Ashrith Reddy</h2>
-              <h3>Co-Founder</h3>
+          <div class="about-team-grid">
+            <div class="about-team-member-card">
+              <img src={snuhith} alt="Addandi Snuhith Reddy: Managing Director" />
+              <h2>Addandi Snuhith Reddy</h2>
+              <h3>Managing Director</h3>
+            </div>
+            <div class="about-team-member-card">
+              <img src={parth} alt="Parth Bajpai: Chief Executive Officer" />
+              <h2>Parth Bajpai</h2>
+              <h3>Chief Executive Officer</h3>
+            </div>
+            <div class="about-team-member-card">
+              <img src={radha} alt="Radha Agrawal: Chief Strategy Officer" />
+              <h2>Radha Agrawal</h2>
+              <h3>Chief Strategy Officer</h3>
+            </div>
+            <div class="about-team-member-card">
+              <img src={piyush} alt="Piyush Dalmia: Chief Operations Officer" />
+              <h2>Piyush Dalmia</h2>
+              <h3>Chief Operations Officer</h3>
+            </div>
+            <div class="about-team-member-card">
+              <img src={anshu} alt="Anshu Patel: Operations Head" />
+              <h2>Anshu Patel</h2>
+              <h3>Operations Head </h3>
+            </div>
+            <div class="about-team-member-card">
+              <img src={yashika} alt="Yashika Sahu: Design Head" />
+              <h2>Yashika Sahu</h2>
+              <h3>Design Head</h3>
+            </div>
+            <div class="about-team-member-card">
+              <img src={dikshant} alt="Dikshant Aggarwal: Chief Technical Officer" />
+              <h2>Dikshant Aggarwal</h2>
+              <h3>Chief Technical Officer</h3>
+            </div>
+            <div class="about-team-member-card">
+              <img src={aayush} alt="Aayush Chodhary: Chief Marketing Officer" />
+              <h2>Aayush Chodhary</h2>
+              <h3>Chief Marketing Officer</h3>
+            </div>
+            <div class="about-team-member-card">
+              <img src={anantu} alt="Anantu S Pai: Technical Head" />
+              <h2>Anantu S Pai</h2>
+              <h3>Technical Head</h3>
+            </div>
+            <div class="about-team-member-card">
+              <img src={jujhar} alt="Jujhar Singh Channa: Technical Head" />
+              <h2>Jujhar Singh Channa</h2>
+              <h3>Technical Head</h3>
             </div>
           </div>
         </div>
-     </div>
-   </>
+      </div >
+    </>
   );
 }
 
