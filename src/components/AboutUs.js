@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import "../css/AboutUs.css";
 import ourStory from "../assets/About us/ourStory.svg";
-import Ashrith from "../assets/Ashrith.jpg";
-import cultureImg from '../assets/About us/Culture.png';
-import integrationImg from '../assets/About us/Integration.png';
-import visibilityImg from '../assets/About us/Visibility.png';
-import communityImg from '../assets/About us/Community.png';
+import Ashrith from "../assets/About us/Ashrith.jpg";
+import cultureImg from "../assets/About us/Culture.png";
+import integrationImg from "../assets/About us/Integration.png";
+import visibilityImg from "../assets/About us/Visibility.png";
+import communityImg from "../assets/About us/Community.png";
 import team from "../assets/About us/Team.png";
 import founded from "../assets/About us/Founded.png";
 import shipment from "../assets/About us/shipment.png";
@@ -26,8 +26,14 @@ function AboutUs() {
     <>
       <Helmet>
         <meta name="title" content="About Us" />
-        <meta name="description" content="Welcome to the About Us page. Thank you for taking out your valuable time and trying to learn about our journey." />
-        <meta name="keywords" content="InstiBuzz, instibuzz, IIT Madras, College Fashion, College Culture" />
+        <meta
+          name="description"
+          content="Welcome to the About Us page. Thank you for taking out your valuable time and trying to learn about our journey."
+        />
+        <meta
+          name="keywords"
+          content="InstiBuzz, instibuzz, IIT Madras, College Fashion, College Culture"
+        />
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
@@ -35,18 +41,24 @@ function AboutUs() {
 
         <meta name="og:site_name" content="InstiBuzz" />
         <meta name="og:title" content="About Us" />
-        <meta name="og:description" content="Welcome to the About Us page. Thank you for taking out your valuable time and trying to learn about our journey." />
+        <meta
+          name="og:description"
+          content="Welcome to the About Us page. Thank you for taking out your valuable time and trying to learn about our journey."
+        />
         <meta name="og:url" content="https://www.instibuzz.com/about" />
         <meta name="og:image" content="%PUBLIC_URL%/logo192.png" />
-        <meta name="og:image:alt" content="Official logo of InstiBuzz Pvt Ltd." />
+        <meta
+          name="og:image:alt"
+          content="Official logo of InstiBuzz Pvt Ltd."
+        />
         <meta name="author" content="instibuzz" />
       </Helmet>
       <div class="about-main-container">
         <div class="about-title">
           <h1>About Us</h1>
           <p>
-            Welcome to the ‘About Us’ page. Thank you for taking out your valuable
-            time and trying to learn about our journey.
+            Welcome to the ‘About Us’ page. Thank you for taking out your
+            valuable time and trying to learn about our journey.
           </p>
         </div>
         <div class="about-our-story about-section">
@@ -70,32 +82,37 @@ function AboutUs() {
                 <h2>The Beginning of Our Journey</h2>
                 <div className="about-our-story-text-desktop">
                   <p>
-                    The idea of InstiBuzz was born on 16th January 2024 in the minds
-                    of a bunch of people who vibe and love to live their college
-                    life. As explorers, we started with the thought of coalescing
-                    their campus stories with fashion. Soon we shaped this entire
-                    idea in the form of InstiBuzz and started infusing campus
-                    essence, hostel slang, and college memories, in the form of
-                    trendy and captivating styles for their college. A set of
-                    designs bound to resonate with the college vibes.
+                    The idea of InstiBuzz was born on 16th January 2024 in the
+                    minds of a bunch of people who vibe and love to live their
+                    college life. As explorers, we started with the thought of
+                    coalescing their campus stories with fashion. Soon we shaped
+                    this entire idea in the form of InstiBuzz and started
+                    infusing campus essence, hostel slang, and college memories,
+                    in the form of trendy and captivating styles for their
+                    college. A set of designs bound to resonate with the college
+                    vibes.
                     <br />
                     <br />
-                    We set out to get the ideal tees for college fests, inter-hostel
-                    events, college clubs, and personalized clothing that represents
-                    the culture of each college. Our journey began with a simple
-                    question: "Why not?”.
+                    We set out to get the ideal tees for college fests,
+                    inter-hostel events, college clubs, and personalized
+                    clothing that represents the culture of each college. Our
+                    journey began with a simple question: "Why not?”.
                     <br />
                     <br />
-                    We aim to build InstiBuzz not just like any other brand, but a
-                    vibrant community of creative minds dedicated to bringing your
-                    fashion dreams to life. From conceptualization to production and
-                    sales, InstiBuzz is your all-in-one campus-based fashion hub.
+                    We aim to build InstiBuzz not just like any other brand, but
+                    a vibrant community of creative minds dedicated to bringing
+                    your fashion dreams to life. From conceptualization to
+                    production and sales, InstiBuzz is your all-in-one
+                    campus-based fashion hub.
                   </p>
                 </div>
               </div>
             </div>
             <div class="about-our-story-image-container">
-              <img src={ourStory} alt="Silhouette of multiple people during sunset" />
+              <img
+                src={ourStory}
+                alt="Silhouette of multiple people during sunset"
+              />
             </div>
             <div class="about-our-story-text about-our-story-text-mobile">
               <p>
@@ -138,22 +155,27 @@ function AboutUs() {
               </h3>
               <p>
                 We're developing a one-stop online platform where we oversee the
-                entire process, from product design and manufacturing to sales and
-                distribution, offering a seamless experience for our customers.
+                entire process, from product design and manufacturing to sales
+                and distribution, offering a seamless experience for our
+                customers.
               </p>
             </div>
             <div class="about-creating-impact-card">
               <img src={cultureImg} alt="clipart for unity and education" />
-              <h3>Fostering Campus <br /> Culture</h3>
+              <h3>
+                Fostering Campus <br /> Culture
+              </h3>
               <p>
                 Building an environment where every student feels a sense of
-                belonging to their college and treasures the memories made during
-                their collegiate experience.
+                belonging to their college and treasures the memories made
+                during their collegiate experience.
               </p>
             </div>
             <div class="about-creating-impact-card">
               <img src={communityImg} alt="ClipArt for connecting people" />
-              <h3>Build Fashion <br /> Communities</h3>
+              <h3>
+                Build Fashion <br /> Communities
+              </h3>
               <p>
                 Our goal is to cultivate a vibrant community that celebrates
                 college cultures through fashion. Moreover, we're dedicated to
@@ -163,7 +185,9 @@ function AboutUs() {
             </div>
             <div class="about-creating-impact-card">
               <img src={visibilityImg} alt="clipart for e-advertising " />
-              <h3>Enhancing <br /> Visiblity</h3>
+              <h3>
+                Enhancing <br /> Visiblity
+              </h3>
               <p>
                 Collaborating with various college clubs, festivals, and events,
                 showcasing them on our website to boost their footfall and drive
@@ -209,7 +233,7 @@ function AboutUs() {
             </div>
           </div>
         </div>
-      </div >
+      </div>
     </>
   );
 }
