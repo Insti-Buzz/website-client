@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "../css/AboutUs.css";
 import ourStory from "../assets/About us/ourStory.svg";
-import Ashrith from "../assets/About us/Ashrith.jpg";
+import Ashrith from "../assets/Ashrith.jpg";
 import cultureImg from "../assets/About us/Culture.png";
 import integrationImg from "../assets/About us/Integration.png";
 import visibilityImg from "../assets/About us/Visibility.png";
