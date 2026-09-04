@@ -1,6 +1,7 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import MainContainer from "./components/MainContainer";
 import Product from "./components/Product";
 import Shop from "./components/Shop";
@@ -149,6 +150,7 @@ function App() {
           <Route path="*" element={<IllustrationPage heading="Oops!" subheading="You Are Lost" img={notFoundIllustration} btnText="HOME" btnNavigate="/"/>}></Route>
         </Route>
       </Routes>
+      <SpeedInsights />
     </BrowserRouter>
   );
 }
